@@ -1,5 +1,5 @@
-import 'package:carshop_mobile/api_request.dart';
-import 'package:carshop_mobile/request_error.dart';
+import 'package:carshop_mobile/utilities/api_request.dart';
+import 'package:carshop_mobile/utilities/request_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user_model.dart';
 
