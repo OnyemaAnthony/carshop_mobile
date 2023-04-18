@@ -8,8 +8,9 @@ class UserRepository {
   Future<Either<RequestError, UserModel>> signUp(UserModel user) async {
     ApiRequest request = ApiRequest();
     try {
-      UserModel response = await request.post('url') as UserModel;
-      return Right(response);
+      final response = await request.post('url',body: user.toJson());
+
+      return Right(UserModel.fromJson(response));
     } catch (e) {
       return Left(RequestError(e));
     }
