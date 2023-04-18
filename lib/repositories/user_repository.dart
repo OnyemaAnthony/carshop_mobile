@@ -4,9 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user_model.dart';
 
 class UserRepository {
+  final ApiRequest request;
+  UserRepository(this.request);
 
   Future<Either<RequestError, UserModel>> signUp(UserModel user) async {
-    ApiRequest request = ApiRequest();
     try {
       final response = await request.post('url',body: user.toJson());
 
