@@ -1,3 +1,4 @@
+import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,19 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:const  HomeScreen(),
+      home:const LoginScreen(),
     );
   }
 }
-class HomeScreen  extends StatelessWidget {
-  const HomeScreen ({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
