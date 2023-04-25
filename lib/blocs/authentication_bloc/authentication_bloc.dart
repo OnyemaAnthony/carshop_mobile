@@ -14,6 +14,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   AuthenticationBloc({this.repository}) : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
     on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
+    on<AppStartedEvent>(_mapAppStartedEventToState);
   }
 
   FutureOr<void> _mapSignUpEventToState(SignUpEvent event, Emitter<AuthenticationState> emit)async {
@@ -36,5 +37,19 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }, (user) {
       emit(Authenticated(user));
     });
+  }
+
+  FutureOr<void> _mapAppStartedEventToState(AppStartedEvent event, Emitter<AuthenticationState> emit)async {
+    try {
+      bool? isSignedIn = repository!.isSignedIn();
+      print('object $isSignedIn');
+      if (isSignedIn!) {
+        emit(Authenticated(UserModel(id: '1')));
+      } else {
+        emit((UnAuthenticated()));
+      }
+    } catch (e) {
+      emit(UnAuthenticated());
+    }
   }
 }

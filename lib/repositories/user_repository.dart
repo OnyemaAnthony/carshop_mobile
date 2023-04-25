@@ -8,6 +8,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class UserRepository {
   final ApiRequest request;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+
   UserRepository(this.request);
 
   Future<Either<RequestError, UserModel>> signUp(UserModel user) async {
@@ -18,6 +21,11 @@ class UserRepository {
     } catch (e) {
       return Left(RequestError(e));
     }
+  }
+
+  bool? isSignedIn() {
+    var currentUser = firebaseAuth.currentUser;
+    return currentUser != null;
   }
 
   Future<Either<RequestError, UserModel>>signInWithGoogle()async{

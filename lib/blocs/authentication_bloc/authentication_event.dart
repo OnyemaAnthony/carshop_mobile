@@ -15,3 +15,6 @@ class SignInWithGoogleEvent extends AuthenticationEvent{
 
 }
 
+class AppStartedEvent extends AuthenticationEvent{
+
+}
