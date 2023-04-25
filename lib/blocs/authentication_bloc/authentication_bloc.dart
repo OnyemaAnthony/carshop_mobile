@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:logger/logger.dart';
 import 'package:bloc/bloc.dart';
 import 'package:carshop_mobile/models/user_model.dart';
 import 'package:equatable/equatable.dart';
@@ -13,6 +13,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   UserRepository? repository;
   AuthenticationBloc({this.repository}) : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
+    on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
   }
 
   FutureOr<void> _mapSignUpEventToState(SignUpEvent event, Emitter<AuthenticationState> emit)async {
@@ -21,9 +22,19 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       response.fold((l) {
         //implement error here
       }, (r) {
-        //implement success
         emit(Authenticated(r));
       });
 
+  }
+
+  FutureOr<void> _mapSignInWithGoogleEventToState(SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async{
+    final logger = Logger();
+    emit(AuthenticationLoadingState());
+    final response =await repository!.signInWithGoogle();
+    response.fold((l) {
+      emit(AuthenticationErrorState(l.message));
+    }, (user) {
+      emit(Authenticated(user));
+    });
   }
 }

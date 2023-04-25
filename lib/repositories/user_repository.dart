@@ -2,6 +2,8 @@ import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/request_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserRepository {
   final ApiRequest request;
@@ -16,4 +18,43 @@ class UserRepository {
       return Left(RequestError(e));
     }
   }
-}
+
+  Future<Either<RequestError, UserModel>>signInWithGoogle()async{
+
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      User? user;
+
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      googleSignIn.signOut();
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+        final UserCredential userCredential = await auth.signInWithCredential(credential);
+        print('id token ${ await userCredential.user!.getIdToken()}');
+
+        user = userCredential.user;
+
+        print('i am here ${user!.uid}');
+        print('i am aaaa ${user.displayName}');
+
+        return Right(UserModel(id: user.uid));
+      }
+
+      return Right(UserModel());
+    }catch(e){
+      print('the errror is ${e.toString()}');
+      return Left(RequestError(e));
+    }
+   }
+  }

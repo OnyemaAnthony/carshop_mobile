@@ -1,13 +1,103 @@
+import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:carshop_mobile/repositories/user_repository.dart';
+import 'package:carshop_mobile/screens/welcome_screen.dart';
+import 'package:carshop_mobile/utilities/api_request.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  late AuthenticationBloc authenticationBloc;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-          body: const Center(child: Text('Login'),),
-    );
+    return BlocProvider(
+      create: (BuildContext context) =>
+          AuthenticationBloc(repository: UserRepository(ApiRequest())),
+      child: Scaffold(
+        backgroundColor: const Color(0xFF2C384A),
+        body: Builder(builder: (BuildContext context) {
+          authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
+          return BlocConsumer<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+              if (state is Authenticated) {
+                UiUtilities.pushReplacement(context, const WelcomeScreen());
+              }
+            },
+            builder: (context, state) {
+              return Column(mainAxisSize: MainAxisSize.max, children: [
+                Row(),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      SizedBox(height: 20),
+                      Text(
+                        'Carshop',
+                        style: TextStyle(
+                          color: Color(0xFFFFCA28),
+                          fontSize: 40,
+                        ),
+                      ),
+                      Text(
+                        'Authentication',
+                        style: TextStyle(
+                          color: Color(0xFFF57C00),
+                          fontSize: 40,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      print('abkj');
+                      authenticationBloc.add(SignInWithGoogleEvent());
 
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Image(
+                            image: AssetImage('assets/images/google_logo.png'),
+                            height: 35.0,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Sign in with Google',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ]);
+            },
+          );
+        }),
+      ),
+    );
   }
 }

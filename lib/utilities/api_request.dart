@@ -3,12 +3,17 @@ class ApiRequest {
   String defaultUri = "https://";
   late final Dio dio;
   ApiRequest() {
+
     var options = BaseOptions(
+
         baseUrl: defaultUri,
+        connectTimeout: 5000,
+        receiveTimeout: 3000,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         });
+
 
     dio = Dio(options);
   }

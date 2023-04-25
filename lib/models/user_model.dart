@@ -1,16 +1,16 @@
 class UserModel {
-  String id;
-  String firstName;
-  String lastName;
-  String sensitiveInfo;
-  DateTime createdAt;
+  String? id;
+  String? firstName;
+  String? lastName;
+  String? sensitiveInfo;
+  DateTime? createdAt;
 
   UserModel({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.sensitiveInfo,
-    required this.createdAt,
+     this.id,
+     this.firstName,
+     this.lastName,
+     this.sensitiveInfo,
+     this.createdAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -29,7 +29,7 @@ class UserModel {
     data['firstName'] = this.firstName;
     data['lastName'] = this.lastName;
     data['sensitiveInfo'] = this.sensitiveInfo;
-    data['createdAt'] = this.createdAt.toIso8601String();
+    data['createdAt'] = this.createdAt!.toIso8601String();
     return data;
   }
 }
