@@ -1,3 +1,4 @@
+import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/request_error.dart';
 import 'package:dartz/dartz.dart';
@@ -41,14 +42,12 @@ class UserRepository {
           idToken: googleSignInAuthentication.idToken,
         );
         final UserCredential userCredential = await auth.signInWithCredential(credential);
-        print('id token ${ await userCredential.user!.getIdToken()}');
+        UserModel userModel = UserModel(code: await userCredential.user!.getIdToken() );
+        print(userModel.toGoogleJson());
+       final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson() );
+       print('the response is ${response}');
 
-        user = userCredential.user;
-
-        print('i am here ${user!.uid}');
-        print('i am aaaa ${user.displayName}');
-
-        return Right(UserModel(id: user.uid));
+        return Right(UserModel(id: user!.uid));
       }
 
       return Right(UserModel());

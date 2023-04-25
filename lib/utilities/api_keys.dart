@@ -1,3 +1,3 @@
 class ApiKeys{
-  //for epoints urls
+  static const String baseUrl= 'http://20.203.118.196';
 }

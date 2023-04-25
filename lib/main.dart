@@ -1,7 +1,7 @@
+import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: BottomNavigationBarScreen(),
     );
   }
 }

@@ -4,6 +4,7 @@ class UserModel {
   String? lastName;
   String? sensitiveInfo;
   DateTime? createdAt;
+  String? code;
 
   UserModel({
      this.id,
@@ -11,6 +12,7 @@ class UserModel {
      this.lastName,
      this.sensitiveInfo,
      this.createdAt,
+    this.code
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -24,12 +26,18 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['sensitiveInfo'] = this.sensitiveInfo;
-    data['createdAt'] = this.createdAt!.toIso8601String();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['sensitiveInfo'] = sensitiveInfo;
+    data['createdAt'] = createdAt!.toIso8601String();
+    return data;
+  }
+
+  Map<String, dynamic> toGoogleJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
     return data;
   }
 }
