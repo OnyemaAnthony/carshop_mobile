@@ -42,9 +42,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   FutureOr<void> _mapAppStartedEventToState(AppStartedEvent event, Emitter<AuthenticationState> emit)async {
     try {
       bool? isSignedIn = repository!.isSignedIn();
-      print('object $isSignedIn');
       if (isSignedIn!) {
-        emit(Authenticated(UserModel(id: '1')));
+        //emit(Authenticated(UserModel(id: '1')));
+        emit(UnAuthenticated());
       } else {
         emit((UnAuthenticated()));
       }
