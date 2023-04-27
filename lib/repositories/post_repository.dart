@@ -19,4 +19,15 @@ class PostRepository{
       }
 
   }
+
+
+  Future<Either<RequestError,PostModel>> savePost(PostModel postModel)async{
+    try {
+      final response = await request.post('url',body: postModel.toJson());
+      return Right(PostModel.fromJson(response));
+    } catch (e) {
+      return Left(RequestError(e));
+    }
+
+  }
 }
