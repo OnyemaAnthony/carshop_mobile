@@ -28,6 +28,11 @@ class UserRepository {
     return currentUser != null;
   }
 
+  Future<void>signOut()async{
+    firebaseAuth.signOut();
+
+  }
+
   Future<Either<RequestError, UserModel>>signInWithGoogle()async{
 
     try {
@@ -53,8 +58,6 @@ class UserRepository {
         UserModel userModel = UserModel(code: await userCredential.user!.getIdToken() );
         print(userModel.toGoogleJson());
        final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson() );
-       print('the response is ${response}');
-
         return Right(UserModel(id: user!.uid));
       }
 
@@ -64,4 +67,5 @@ class UserRepository {
       return Left(RequestError(e));
     }
    }
+
   }
