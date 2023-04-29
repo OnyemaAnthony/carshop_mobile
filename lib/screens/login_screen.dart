@@ -63,7 +63,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      print('abkj');
                       authenticationBloc.add(SignInWithGoogleEvent());
 
                     },

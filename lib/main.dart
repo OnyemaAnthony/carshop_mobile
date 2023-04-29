@@ -1,7 +1,6 @@
 import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
-import 'package:carshop_mobile/screens/welcome_screen.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

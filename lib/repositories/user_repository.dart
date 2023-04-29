@@ -57,7 +57,7 @@ class UserRepository {
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         UserModel userModel = UserModel(code: await userCredential.user!.getIdToken() );
         print(userModel.toGoogleJson());
-       final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson() );
+       //final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson() );
         return Right(UserModel(id: user!.uid));
       }
 

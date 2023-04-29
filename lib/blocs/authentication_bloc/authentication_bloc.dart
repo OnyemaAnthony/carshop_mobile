@@ -43,8 +43,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     try {
       bool? isSignedIn = repository!.isSignedIn();
       if (isSignedIn!) {
-        //emit(Authenticated(UserModel(id: '1')));
-        emit(UnAuthenticated());
+        emit(Authenticated(UserModel(id: '1')));
       } else {
         emit((UnAuthenticated()));
       }
