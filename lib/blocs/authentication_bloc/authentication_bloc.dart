@@ -15,6 +15,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<SignUpEvent>(_mapSignUpEventToState);
     on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
     on<AppStartedEvent>(_mapAppStartedEventToState);
+    on<SignOutEvent>(_mapSignOutEventToState);
   }
 
   FutureOr<void> _mapSignUpEventToState(SignUpEvent event, Emitter<AuthenticationState> emit)async {
@@ -49,6 +50,17 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       }
     } catch (e) {
       emit(UnAuthenticated());
+    }
+  }
+
+  FutureOr<void> _mapSignOutEventToState(SignOutEvent event, Emitter<AuthenticationState> emit) async{
+    try{
+      await repository!.signOut();
+      emit(UnAuthenticated());
+
+    }catch(e){
+      emit(UnAuthenticated());
+
     }
   }
 }
