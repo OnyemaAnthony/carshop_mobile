@@ -15,7 +15,7 @@ void main()async {
       MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (BuildContext context) => AuthenticationBloc(repository: UserRepository(ApiRequest()))..add(AppStartedEvent()),
+              create: (BuildContext context) => AuthenticationBloc(repository: UserRepository(ApiRequest())),
             ),
           ], child: const MyApp())
 
@@ -40,7 +40,8 @@ class MyApp extends StatelessWidget {
             }else if (state is AuthenticationErrorState){
               return const Center(child: Text('Something went wrong try again later'),);
             }
-            return const Center(child: CircularProgressIndicator(),);
+            //return const Center(child: CircularProgressIndicator(),);
+            return LoginScreen();
           }),
 
     );

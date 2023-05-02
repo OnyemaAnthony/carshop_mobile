@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
 
 class UserRepository {
   final ApiRequest request;
@@ -56,8 +57,11 @@ class UserRepository {
         );
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         UserModel userModel = UserModel(code: await userCredential.user!.getIdToken() );
-        print(userModel.toGoogleJson());
-       //final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson() );
+        final log = Logger();
+        log.d(await userCredential.user!.getIdToken());
+       final response =  await request.post('http://localhost:8080/auth/oauth/google',body:userModel.toGoogleJson());
+
+       print('${response}');
         return Right(UserModel(id: user!.uid));
       }
 
