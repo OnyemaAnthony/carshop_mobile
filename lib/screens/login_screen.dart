@@ -71,14 +71,14 @@ class LoginScreen extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Image(
+                        children:  [
+                          const Image(
                             image: AssetImage('assets/images/google_logo.png'),
                             height: 35.0,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: state is AuthenticationLoadingState ?const CircularProgressIndicator():const Text(
                               'Sign in with Google',
                               style: TextStyle(
                                 fontSize: 20,

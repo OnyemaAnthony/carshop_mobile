@@ -1,8 +1,9 @@
+import 'package:carshop_mobile/models/user/user_response.dart';
 import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/request_error.dart';
 import 'package:dartz/dartz.dart';
-import 'package:carshop_mobile/models/user_model.dart';
+import 'package:carshop_mobile/models/user/user_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
@@ -10,15 +11,17 @@ import 'package:logger/logger.dart';
 class UserRepository {
   final ApiRequest request;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
 
 
   UserRepository(this.request);
 
-  Future<Either<RequestError, UserModel>> signUp(UserModel user) async {
+  Future<Either<RequestError, UserResponse>> signUp(UserRequest user) async {
     try {
       final response = await request.post('url',body: user.toJson());
 
-      return Right(UserModel.fromJson(response));
+      return Right(UserResponse.fromJson(response));
     } catch (e) {
       return Left(RequestError(e));
     }
@@ -30,18 +33,17 @@ class UserRepository {
   }
 
   Future<void>signOut()async{
+    googleSignIn.signOut();
     firebaseAuth.signOut();
 
   }
 
-  Future<Either<RequestError, UserModel>>signInWithGoogle()async{
+  Future<Either<RequestError, UserResponse>>signInWithGoogle()async{
+
 
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
       User? user;
-
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      googleSignIn.signOut();
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
 
@@ -56,18 +58,14 @@ class UserRepository {
           idToken: googleSignInAuthentication.idToken,
         );
         final UserCredential userCredential = await auth.signInWithCredential(credential);
-        UserModel userModel = UserModel(code: await userCredential.user!.getIdToken() );
-        final log = Logger();
-        log.d(await userCredential.user!.getIdToken());
-       final response =  await request.post('http://localhost:8080/auth/oauth/google',body:userModel.toGoogleJson());
-
-       print('${response}');
-        return Right(UserModel(id: user!.uid));
+        UserRequest userModel = UserRequest(code: await userCredential.user!.getIdToken() );
+        final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson());
+        print('rest$response');
+        return Right(UserResponse.fromJson(response));
       }
 
-      return Right(UserModel());
+      return Right(UserResponse());
     }catch(e){
-      print('the errror is ${e.toString()}');
       return Left(RequestError(e));
     }
    }

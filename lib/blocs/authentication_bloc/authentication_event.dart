@@ -6,7 +6,7 @@ abstract class AuthenticationEvent extends Equatable {
   const AuthenticationEvent();
 }
 class SignUpEvent extends AuthenticationEvent {
-  final UserModel userModel;
+  final UserRequest userModel;
 
   const SignUpEvent(this.userModel);
 }

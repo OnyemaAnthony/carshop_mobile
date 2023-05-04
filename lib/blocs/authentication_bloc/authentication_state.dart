@@ -10,7 +10,7 @@ class AuthenticationInitial extends AuthenticationState {
 
 }
 class Authenticated extends AuthenticationState{
-  final UserModel? userModel;
+  final UserResponse? userModel;
 
   const Authenticated(this.userModel);
 

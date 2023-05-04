@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'package:carshop_mobile/models/user/user_response.dart';
 import 'package:logger/logger.dart';
 import 'package:bloc/bloc.dart';
-import 'package:carshop_mobile/models/user_model.dart';
+import 'package:carshop_mobile/models/user/user_request.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../repositories/user_repository.dart';
@@ -34,6 +35,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     emit(AuthenticationLoadingState());
     final response =await repository!.signInWithGoogle();
     response.fold((l) {
+      print('errror ${l.error}');
       emit(AuthenticationErrorState(l.message));
     }, (user) {
       emit(Authenticated(user));
@@ -44,7 +46,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     try {
       bool? isSignedIn = repository!.isSignedIn();
       if (isSignedIn!) {
-        emit(Authenticated(UserModel(id: '1')));
+        emit(Authenticated(UserResponse()));
       } else {
         emit((UnAuthenticated()));
       }
