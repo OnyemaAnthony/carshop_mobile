@@ -7,8 +7,6 @@ class ApiRequest {
     var options = BaseOptions(
 
         baseUrl: defaultUri,
-        // connectTimeout: 5000,
-        // receiveTimeout: 3000,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -30,9 +28,7 @@ class ApiRequest {
   }
 
   Future<Map<String, dynamic>> post(String path,{Map<String, dynamic> body = const {},Map<String, dynamic> headers = const {}}) async {
-    print('before req');
     final response = await dio.post(path,data: body);
-    print('after req');
     return process(response);
   }
 
