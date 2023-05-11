@@ -31,11 +31,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   FutureOr<void> _mapSignInWithGoogleEventToState(SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async{
-    final logger = Logger();
     emit(AuthenticationLoadingState());
     final response =await repository!.signInWithGoogle();
     response.fold((l) {
-      print('errror ${l.error}');
       emit(AuthenticationErrorState(l.message));
     }, (user) {
       emit(Authenticated(user));
@@ -44,7 +42,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   FutureOr<void> _mapAppStartedEventToState(AppStartedEvent event, Emitter<AuthenticationState> emit)async {
     try {
-      bool? isSignedIn = repository!.isSignedIn();
+      bool? isSignedIn = await repository!.isSignedIn();
       if (isSignedIn!) {
         emit(Authenticated(UserResponse()));
       } else {

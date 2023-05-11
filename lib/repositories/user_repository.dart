@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/models/user/user_response.dart';
 import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
+import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:carshop_mobile/utilities/request_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user/user_request.dart';
@@ -27,9 +28,14 @@ class UserRepository {
     }
   }
 
-  bool? isSignedIn() {
+  Future<bool?> isSignedIn() async{
     var currentUser = firebaseAuth.currentUser;
-    return currentUser != null;
+    String token = await LocalStorage.getString('token');
+    if(currentUser != null && token.isNotEmpty){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   Future<void>signOut()async{
@@ -60,8 +66,9 @@ class UserRepository {
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         UserRequest userModel = UserRequest(code: await userCredential.user!.getIdToken() );
         final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson());
-        print('rest$response');
-        return Right(UserResponse.fromJson(response));
+        UserResponse userResponse = UserResponse.fromJson(response);
+        LocalStorage.saveString(key: 'token', value: userResponse.data!.auth!.accessToken!);
+        return Right(userResponse);
       }
 
       return Right(UserResponse());
