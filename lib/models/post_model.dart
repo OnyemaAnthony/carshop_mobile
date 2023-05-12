@@ -1,20 +1,20 @@
 class PostModel {
-  String postId;
-  String ownerId;
-  String latestContentId;
-  DateTime createdAt;
+  String? postId;
+  String? ownerId;
+  String? latestContentId;
+  DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? deletedAt;
-  Coordination location;
+  Coordination? location;
 
   PostModel({
-    required this.postId,
-    required this.ownerId,
-    required this.latestContentId,
-    required this.createdAt,
+     this.postId,
+     this.ownerId,
+     this.latestContentId,
+     this.createdAt,
     this.updatedAt,
     this.deletedAt,
-    required this.location,
+     this.location,
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
@@ -38,14 +38,14 @@ class PostModel {
     data['postId'] = this.postId;
     data['ownerId'] = this.ownerId;
     data['latestContentId'] = this.latestContentId;
-    data['createdAt'] = this.createdAt.toIso8601String();
+    data['createdAt'] = this.createdAt!.toIso8601String();
     if (this.updatedAt != null) {
       data['updatedAt'] = this.updatedAt!.toIso8601String();
     }
     if (this.deletedAt != null) {
       data['deletedAt'] = this.deletedAt!.toIso8601String();
     }
-    data['location'] = this.location.toJson();
+    data['location'] = this.location!.toJson();
     return data;
   }
 }
