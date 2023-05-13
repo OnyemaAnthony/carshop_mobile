@@ -15,6 +15,12 @@ class Authenticated extends AuthenticationState{
   const Authenticated(this.userModel);
 
 }
+class UserLoadedState extends AuthenticationState{
+  final UserResponse? userModel;
+
+  const UserLoadedState(this.userModel);
+
+}
 
 class AuthenticationLoadingState extends AuthenticationState{
 

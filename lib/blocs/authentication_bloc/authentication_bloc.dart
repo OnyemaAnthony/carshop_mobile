@@ -15,8 +15,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   AuthenticationBloc({this.repository}) : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
     on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
+    on<GetUserEvent>(_mapGetUserEventToState);
+    on<UpdateUserEvent>(_mapUpdateUserEventToState);
+    on<DeactivateEvent>(_mapDeactivateEventToState);
     on<AppStartedEvent>(_mapAppStartedEventToState);
-    on<SignOutEvent>(_mapSignOutEventToState);
+    on<SignOutEvent>(_mapSignOutEventToState);//getuser,update,dea,signout
   }
 
   FutureOr<void> _mapSignUpEventToState(SignUpEvent event, Emitter<AuthenticationState> emit)async {
@@ -62,5 +65,36 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       emit(UnAuthenticated());
 
     }
+  }
+
+  FutureOr<void> _mapGetUserEventToState(GetUserEvent event, Emitter<AuthenticationState> emit)async {
+    emit(AuthenticationLoadingState());
+    final response =await repository!.getUser();
+    response.fold((l) {
+      emit(AuthenticationErrorState(l.message));
+    }, (user) {
+      emit(UserLoadedState(user));
+    });
+
+  }
+
+  FutureOr<void> _mapUpdateUserEventToState(UpdateUserEvent event, Emitter<AuthenticationState> emit)async {
+    emit(AuthenticationLoadingState());
+    final response =await repository!.updateUser(event.userRequest);
+    response.fold((l) {
+      emit(AuthenticationErrorState(l.message));
+    }, (user) {
+      emit(UserLoadedState(user));
+    });
+  }
+
+  FutureOr<void> _mapDeactivateEventToState(DeactivateEvent event, Emitter<AuthenticationState> emit) async{
+    emit(AuthenticationLoadingState());
+    final response =await repository!.deactivateUser();
+    response.fold((l) {
+      emit(AuthenticationErrorState(l.message));
+    }, (user) {
+      emit(UnAuthenticated());
+    });
   }
 }

@@ -14,8 +14,6 @@ class UserRepository {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-
-
   UserRepository(this.request);
 
   Future<Either<RequestError, UserResponse>> signUp(UserRequest user) async {
@@ -28,6 +26,26 @@ class UserRepository {
     }
   }
 
+  Future<Either<RequestError,UserResponse>> updateUser(UserRequest userRequest)async{
+    try {
+      final response = await request.patch('${ApiKeys.baseUrl}/users',body: userRequest.toJson());
+      return Right(UserResponse.fromJson(response));
+    } catch (e) {
+      return Left(RequestError(e));
+    }
+
+  }
+  Future<Either<RequestError,UserResponse>> getUser()async{
+    try {
+      final response = await request.get('${ApiKeys.baseUrl}/users');
+      return Right(UserResponse.fromJson(response));
+    } catch (e) {
+      return Left(RequestError(e));
+    }
+
+  }
+
+
   Future<bool?> isSignedIn() async{
     var currentUser = firebaseAuth.currentUser;
     String token = await LocalStorage.getString('token');
@@ -38,18 +56,31 @@ class UserRepository {
     }
   }
 
-  Future<void>signOut()async{
-    googleSignIn.signOut();
-    firebaseAuth.signOut();
-
+  Future<Either<RequestError,void>> signOut()async {
+    try {
+      googleSignIn.signOut();
+      firebaseAuth.signOut();
+      await request.post('${ApiKeys.baseUrl}/auth/logout');
+      return const Right(null);
+    } catch (e) {
+      return Left(RequestError(e));
+    }
   }
+  Future<Either<RequestError,void>> deactivateUser()async {
+    try {
+      await request.post('${ApiKeys.baseUrl}/auth/deactivate');
+      return const Right(null);
+    } catch (e) {
+      return Left(RequestError(e));
+    }
+  }
+
 
   Future<Either<RequestError, UserResponse>>signInWithGoogle()async{
 
 
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
-      User? user;
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
 
