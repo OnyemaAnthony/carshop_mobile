@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../models/post_model.dart';
+import '../../models/post/post_model.dart';
 import '../../repositories/post_repository.dart';
 
 part 'post_event.dart';
