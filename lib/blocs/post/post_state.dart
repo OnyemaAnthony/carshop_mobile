@@ -20,9 +20,37 @@ class PostLoadedState extends PostState{
   const PostLoadedState(this.posts);
 
 }
+class DeliveryPostLoadedState extends PostState{
+  final List<DeliveryPost> deliveryPost;
+
+  const DeliveryPostLoadedState(this.deliveryPost);
+}
+class DeliveryPostLoadingState extends PostState{
+
+}
+class PostedState extends PostState{
+
+}
+class PostDeliveredState extends PostState{
+  final DeliveryPost deliveryPost;
+
+  const PostDeliveredState(this.deliveryPost);
+}
 
 class PostErrorState extends PostState{
   final String errorMessage;
 
  const PostErrorState(this.errorMessage);
+}
+
+class PostLoadState extends PostState{
+  final PostModel postModel;
+
+  const PostLoadState(this.postModel);
+}
+
+class DeliveryPostLoadState extends PostState{
+  final DeliveryPost deliveryPost;
+
+  const DeliveryPostLoadState(this.deliveryPost);
 }

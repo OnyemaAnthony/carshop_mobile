@@ -63,6 +63,7 @@ class PostRepository{
     }
   }
 
+
   Future<Either<RequestError,void>> deletePost(String  postId)async {
     try {
       await request.delete('${ApiKeys.baseUrl}/posts/$postId');
@@ -83,6 +84,7 @@ class PostRepository{
       return Left(RequestError(e));
     }
   }
+
 
   Future<Either<RequestError,List<DeliveryPost>>> getMyDeliveryPost(String creatorsId)async{
     List<DeliveryPost> myPosts = [];
