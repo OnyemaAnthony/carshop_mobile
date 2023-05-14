@@ -48,10 +48,6 @@ class ApiRequest {
     return process(response);
   }
 
-  Future<String> deletePush(String path,{Map<String, dynamic> headers = const {}}) async {
-    final response = await dio.delete(path);
-    return response.toString();
-  }
 
   Map<String, dynamic> process(Response<dynamic> response) {
     return Map<String, dynamic>.from(response.data);

@@ -1,7 +1,6 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
-import 'package:carshop_mobile/screens/welcome_screen.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          AuthenticationBloc(repository: UserRepository(ApiRequest())),
+      create: (BuildContext context) => AuthenticationBloc(repository: UserRepository(ApiRequest())),
       child: Scaffold(
         backgroundColor: const Color(0xFF2C384A),
         body: Builder(builder: (BuildContext context) {

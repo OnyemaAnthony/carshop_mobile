@@ -16,7 +16,6 @@ class PostRepository{
       try {
         final response = await request.getList('${ApiKeys.baseUrl}/posts');
         posts = response.map((post) =>PostModel.fromJson(post) ).toList();
-
         return Right(posts);
       } catch (e) {
         return Left(RequestError(e));
