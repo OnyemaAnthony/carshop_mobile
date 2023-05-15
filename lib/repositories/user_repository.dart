@@ -7,7 +7,6 @@ import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user/user_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logger/logger.dart';
 
 class UserRepository {
   final ApiRequest request;
