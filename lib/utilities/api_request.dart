@@ -11,8 +11,6 @@ class ApiRequest {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         });
-
-
     dio = Dio(options);
   }
 

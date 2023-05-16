@@ -19,14 +19,13 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<UpdateUserEvent>(_mapUpdateUserEventToState);
     on<DeactivateEvent>(_mapDeactivateEventToState);
     on<AppStartedEvent>(_mapAppStartedEventToState);
-    on<SignOutEvent>(_mapSignOutEventToState);//getuser,update,dea,signout
+    on<SignOutEvent>(_mapSignOutEventToState);
   }
 
   FutureOr<void> _mapSignUpEventToState(SignUpEvent event, Emitter<AuthenticationState> emit)async {
     emit(AuthenticationLoadingState());
       final response = await repository!.signUp(event.userModel);
       response.fold((l) {
-        //implement error here
       }, (r) {
         emit(Authenticated(r));
       });

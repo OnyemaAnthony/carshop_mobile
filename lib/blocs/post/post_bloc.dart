@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:carshop_mobile/models/post/delivery_post.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../models/post/post_model.dart';
 import '../../repositories/post_repository.dart';
 
