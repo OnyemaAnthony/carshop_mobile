@@ -1,10 +1,13 @@
 import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
+import 'package:carshop_mobile/screens/map_screen.dart';
+import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 
@@ -31,20 +34,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
-          builder: (context, state) {
-            if(state is Authenticated){
-              return const BottomNavigationBarScreen();
-            }else if(state is UnAuthenticated){
-              return  LoginScreen();
-            }else if (state is AuthenticationErrorState){
-              return const Center(child: Text('Something went wrong try again later'),);
-            }
-            return const Center(child: CircularProgressIndicator(),);
-            //return LoginScreen();
-          }),
+        home: MapWidget(
 
-    );
+            resourceOptions: ResourceOptions(accessToken: ApiKeys.accessToken)));
+    //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
+    //       builder: (context, state) {
+    //         if(state is Authenticated){
+    //           return const BottomNavigationBarScreen();
+    //         }else if(state is UnAuthenticated){
+    //           return  LoginScreen();
+    //         }else if (state is AuthenticationErrorState){
+    //           return const Center(child: Text('Something went wrong try again later'),);
+    //         }
+    //         return const Center(child: CircularProgressIndicator(),);
+    //         //return LoginScreen();
+    //       }),
+    //
+    // );
   }
 }
 
