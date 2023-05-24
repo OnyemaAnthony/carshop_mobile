@@ -34,9 +34,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-        home: MapWidget(
+    home: MapScreen(),
 
-            resourceOptions: ResourceOptions(accessToken: ApiKeys.accessToken)));
     //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
     //       builder: (context, state) {
     //         if(state is Authenticated){
@@ -51,6 +50,7 @@ class MyApp extends StatelessWidget {
     //       }),
     //
     // );
+    );
   }
 }
 
