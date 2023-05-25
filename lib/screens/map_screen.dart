@@ -1,6 +1,8 @@
+
 import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart'as geo;
 
@@ -26,11 +28,53 @@ class MapScreenState extends State<MapScreen> {
      longitude = position.longitude;
      print('lat$latitude long $longitude');
    });
-   print('lat $latitude');
   }
 
   MapboxMap? mapboxMap;
   var isLight = true;
+
+  void loadHeatMap()async{
+    var data = await rootBundle.loadString('assets/hitmap.geojson');
+    print('the data $data');
+    await mapboxMap!.style.addSource(GeoJsonSource(id: "heatmap", data: data));
+
+    // await mapboxMap!.style.addLayer(LineLayer(
+    //     id: "line_layer",
+    //     sourceId: "line",
+    //     lineJoin: LineJoin.ROUND,
+    //     lineCap: LineCap.ROUND,
+    //     lineOpacity: 0.7,
+    //     lineColor: Colors.red.value,
+    //     lineWidth: 8.0));
+    // final data = await rootBundle.loadString('assets/hitmap.geojson');
+    // await mapboxMap?.style
+    //     .addSource(GeoJsonSource(id: 'heatmap', data: data));
+    //
+    //
+    await mapboxMap?.style.addLayer(
+      HeatmapLayer(
+        heatmapRadius: 5.0,
+        heatmapWeight: 4.0,
+        heatmapIntensity: 3.0,
+        minZoom: 1.0,
+        maxZoom: 5.0,
+        id: 'heatmap_layer',
+        sourceId: 'heatmap',
+        heatmapColor:  0xff00ff00,
+        heatmapOpacity: 0.5,
+      ),
+    );
+    //
+    // await mapboxMap?.style.addLayer(
+    //   LineLayer(
+    //     lineWidth: 20,
+    //     minZoom: 10.7,
+    //     id: 'line_layer',
+    //     sourceId: 'heatmap',
+    //     lineColor: 0xffff0000,
+    //   ),
+    // );
+  }
 
   _onMapCreated(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
@@ -51,10 +95,11 @@ class MapScreenState extends State<MapScreen> {
   CameraOptions camera = CameraOptions(
       center: Point(
           coordinates: Position(
-            7.416827398513871,
-            6.865317876737976,
+            37.832632,
+            -122.489876
+
           )).toJson(),
-      zoom: 13.0);
+      zoom: 2.0);
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +112,15 @@ class MapScreenState extends State<MapScreen> {
               FloatingActionButton(
                   heroTag: null,
                   onPressed: () {
-                    setState(
-                          () => isLight = !isLight,
-                    );
-                    if (isLight) {
-                      mapboxMap?.loadStyleURI(MapboxStyles.LIGHT);
-                    } else {
-                      mapboxMap?.loadStyleURI(MapboxStyles.DARK);
-                    }
+                    loadHeatMap();
+                    // setState(
+                    //       () => isLight = !isLight,
+                    // );
+                    // if (isLight) {
+                    //   mapboxMap?.loadStyleURI(MapboxStyles.LIGHT);
+                    // } else {
+                    //   mapboxMap?.loadStyleURI(MapboxStyles.DARK);
+                    // }
                   },
                   child: const Icon(Icons.swap_horiz)),
               const SizedBox(height: 10),
@@ -86,12 +132,20 @@ class MapScreenState extends State<MapScreen> {
         //   43.70908256335716,
         // )).toJson(),
         body: MapWidget(
-
           key: const ValueKey("mapWidget"),
           resourceOptions: ResourceOptions(accessToken: ApiKeys.accessToken),
           cameraOptions:camera,
           styleUri: MapboxStyles.LIGHT,
           textureView: true,
+          onMapLoadErrorListener: (map){
+            print('errrorrrrr is ${map.message}');
+            print('errrorrrrr is ${map.sourceId}');
+            print('errrorrrrr is ${map.tileId}');
+            print('errrorrrrr is ${map.type}');
+            print('errrorrrrr is ${map.begin}');
+            print('errrorrrrr is ${map.type.name}');
+
+          },
           onMapCreated: _onMapCreated,
         ));
   }
