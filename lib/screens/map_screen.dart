@@ -35,7 +35,6 @@ class MapScreenState extends State<MapScreen> {
 
   void loadHeatMap()async{
     var data = await rootBundle.loadString('assets/hitmap.geojson');
-    print('the data $data');
     await mapboxMap!.style.addSource(GeoJsonSource(id: "heatmap", data: data));
 
     // await mapboxMap!.style.addLayer(LineLayer(
@@ -54,13 +53,13 @@ class MapScreenState extends State<MapScreen> {
     await mapboxMap?.style.addLayer(
       HeatmapLayer(
         heatmapRadius: 5.0,
-        heatmapWeight: 4.0,
-        heatmapIntensity: 3.0,
-        minZoom: 1.0,
-        maxZoom: 5.0,
+        heatmapWeight: 3.0,
+        //heatmapIntensity: 3.0,
+        minZoom: 0.0,
+        maxZoom: 4.0,
         id: 'heatmap_layer',
         sourceId: 'heatmap',
-        heatmapColor:  0xff00ff00,
+        heatmapColor:  Colors.red.value,
         heatmapOpacity: 0.5,
       ),
     );
@@ -137,13 +136,8 @@ class MapScreenState extends State<MapScreen> {
           cameraOptions:camera,
           styleUri: MapboxStyles.LIGHT,
           textureView: true,
+
           onMapLoadErrorListener: (map){
-            print('errrorrrrr is ${map.message}');
-            print('errrorrrrr is ${map.sourceId}');
-            print('errrorrrrr is ${map.tileId}');
-            print('errrorrrrr is ${map.type}');
-            print('errrorrrrr is ${map.begin}');
-            print('errrorrrrr is ${map.type.name}');
 
           },
           onMapCreated: _onMapCreated,
