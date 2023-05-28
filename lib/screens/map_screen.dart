@@ -36,25 +36,10 @@ class MapScreenState extends State<MapScreen> {
   void loadHeatMap()async{
     var data = await rootBundle.loadString('assets/hitmap.geojson');
     await mapboxMap!.style.addSource(GeoJsonSource(id: "heatmap", data: data));
-
-    // await mapboxMap!.style.addLayer(LineLayer(
-    //     id: "line_layer",
-    //     sourceId: "line",
-    //     lineJoin: LineJoin.ROUND,
-    //     lineCap: LineCap.ROUND,
-    //     lineOpacity: 0.7,
-    //     lineColor: Colors.red.value,
-    //     lineWidth: 8.0));
-    // final data = await rootBundle.loadString('assets/hitmap.geojson');
-    // await mapboxMap?.style
-    //     .addSource(GeoJsonSource(id: 'heatmap', data: data));
-    //
-    //
     await mapboxMap?.style.addLayer(
       HeatmapLayer(
         heatmapRadius: 5.0,
         heatmapWeight: 3.0,
-        //heatmapIntensity: 3.0,
         minZoom: 0.0,
         maxZoom: 4.0,
         id: 'heatmap_layer',
@@ -64,15 +49,15 @@ class MapScreenState extends State<MapScreen> {
       ),
     );
     //
-    // await mapboxMap?.style.addLayer(
-    //   LineLayer(
-    //     lineWidth: 20,
-    //     minZoom: 10.7,
-    //     id: 'line_layer',
-    //     sourceId: 'heatmap',
-    //     lineColor: 0xffff0000,
-    //   ),
-    // );
+      // await mapboxMap?.style.addLayer(
+      //   LineLayer(
+      //     lineWidth: 20,
+      //     minZoom: 10.7,
+      //     id: 'line_layer',
+      //     sourceId: 'heatmap',
+      //     lineColor: 0xffff0000,
+      //   ),
+      // );
   }
 
   _onMapCreated(MapboxMap mapboxMap) {
@@ -85,7 +70,6 @@ class MapScreenState extends State<MapScreen> {
   }
 
   _eventObserver(Event event) {
-    print("Receive event, type: ${event.type}, data: ${event.data}");
   }
 
 
@@ -126,10 +110,6 @@ class MapScreenState extends State<MapScreen> {
             ],
           ),
         ),
-        // coordinates: Position(
-        //   6.0033416748046875,
-        //   43.70908256335716,
-        // )).toJson(),
         body: MapWidget(
           key: const ValueKey("mapWidget"),
           resourceOptions: ResourceOptions(accessToken: ApiKeys.accessToken),
