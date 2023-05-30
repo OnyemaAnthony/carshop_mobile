@@ -60,6 +60,7 @@ dev_dependencies:
   connectivity_plus: ^4.0.0
   mapbox_maps_flutter: ^0.4.3
   geolocator: ^9.0.2
+  appinio_swiper: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the
