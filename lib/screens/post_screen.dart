@@ -60,19 +60,15 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   void _swipe(int index, AppinioSwiperDirection direction) {
-    debugPrint('swipped');
   }
 
   void _unswipe(bool unswiped) {
     if (unswiped) {
-      debugPrint('SUCCESS: card was unswiped');
     } else {
-      debugPrint("FAIL: no card left to unswipe");
     }
   }
 
   void _onEnd() {
-    debugPrint("end reached!");
   }
 }
 class ExampleCandidateModel {
