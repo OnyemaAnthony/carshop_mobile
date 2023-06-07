@@ -106,7 +106,7 @@ class PostRepository{
 
   Future<Either<RequestError,DeliveryPost>> updateDeliveryPost(DeliveryPost deliveryPost)async{
     try {
-      final response = await request.patch('${ApiKeys.baseUrl}/delivery-posts/${deliveryPost.postId}',body: deliveryPost.toJson());
+      final response = await request.patch('${ApiKeys.baseUrl}/delivery-posts/${deliveryPost.i}',body: deliveryPost.toJson());
       return Right(DeliveryPost.fromJson(response));
     } catch (e) {
       return Left(RequestError(e));

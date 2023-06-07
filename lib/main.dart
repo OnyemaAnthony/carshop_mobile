@@ -1,5 +1,6 @@
 import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
+import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/screens/map_screen.dart';
 import 'package:carshop_mobile/screens/post_screen.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-    home: PostScreen(),
+    home: CreateDeliveryPostScreen(),
 
     //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
     //       builder: (context, state) {

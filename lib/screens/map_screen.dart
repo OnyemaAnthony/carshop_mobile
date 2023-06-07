@@ -96,14 +96,6 @@ class MapScreenState extends State<MapScreen> {
                   heroTag: null,
                   onPressed: () {
                     loadHeatMap();
-                    // setState(
-                    //       () => isLight = !isLight,
-                    // );
-                    // if (isLight) {
-                    //   mapboxMap?.loadStyleURI(MapboxStyles.LIGHT);
-                    // } else {
-                    //   mapboxMap?.loadStyleURI(MapboxStyles.DARK);
-                    // }
                   },
                   child: const Icon(Icons.swap_horiz)),
               const SizedBox(height: 10),
