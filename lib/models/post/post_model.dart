@@ -1,75 +1,27 @@
 class PostModel {
+  String? title;
+  String? content;
+  double? lat;
+  double? long;
   String? postId;
-  String? ownerId;
-  String? latestContentId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? deletedAt;
-  Coordination? location;
 
-  PostModel({
-     this.postId,
-     this.ownerId,
-     this.latestContentId,
-     this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
-     this.location,
-  });
+  PostModel({this.title, this.content, this.lat, this.long});
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
-      postId: json['postId'],
-      ownerId: json['ownerId'],
-      latestContentId: json['latestContentId'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'])
-          : null,
-      deletedAt: json['deletedAt'] != null
-          ? DateTime.parse(json['deletedAt'])
-          : null,
-      location: Coordination.fromJson(json['location']),
+      title: json['title'],
+      content: json['content'],
+      lat: json['lat'].toDouble(),
+      long: json['long'].toDouble(),
     );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['postId'] = this.postId;
-    data['ownerId'] = this.ownerId;
-    data['latestContentId'] = this.latestContentId;
-    data['createdAt'] = this.createdAt!.toIso8601String();
-    if (this.updatedAt != null) {
-      data['updatedAt'] = this.updatedAt!.toIso8601String();
-    }
-    if (this.deletedAt != null) {
-      data['deletedAt'] = this.deletedAt!.toIso8601String();
-    }
-    data['location'] = this.location!.toJson();
-    return data;
-  }
-}
-
-class Coordination {
-  double lat;
-  double lng;
-
-  Coordination({
-    required this.lat,
-    required this.lng,
-  });
-
-  factory Coordination.fromJson(Map<String, dynamic> json) {
-    return Coordination(
-      lat: json['lat'],
-      lng: json['lng'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
-    return data;
+    return {
+      'title': title,
+      'content': content,
+      'lat': lat,
+      'long': long,
+    };
   }
 }

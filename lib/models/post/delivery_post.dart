@@ -1,4 +1,5 @@
 class DeliveryPost {
+  String? id;
   String productName;
   num reward;
   DateTime startDate;

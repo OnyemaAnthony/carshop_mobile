@@ -2,10 +2,12 @@ import 'package:carshop_mobile/models/post/delivery_post.dart';
 import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/models/post/post_model.dart';
+import 'package:carshop_mobile/utilities/services.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import '../utilities/request_error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 
 class PostRepository{
   final ApiRequest request;
@@ -36,6 +38,10 @@ class PostRepository{
 
   Future<Either<RequestError,PostModel>> savePost(PostModel postModel)async{
     try {
+      Services service = Services();
+      Position position = await service.getUserCoordinate();
+      postModel.lat = position.latitude;
+       postModel.long = position.longitude;
       final response = await request.post('${ApiKeys.baseUrl}/posts',body: postModel.toJson());
       return Right(PostModel.fromJson(response));
     } catch (e) {
@@ -106,7 +112,7 @@ class PostRepository{
 
   Future<Either<RequestError,DeliveryPost>> updateDeliveryPost(DeliveryPost deliveryPost)async{
     try {
-      final response = await request.patch('${ApiKeys.baseUrl}/delivery-posts/${deliveryPost.i}',body: deliveryPost.toJson());
+      final response = await request.patch('${ApiKeys.baseUrl}/delivery-posts/${deliveryPost.id}',body: deliveryPost.toJson());
       return Right(DeliveryPost.fromJson(response));
     } catch (e) {
       return Left(RequestError(e));

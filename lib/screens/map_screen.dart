@@ -22,7 +22,8 @@ class MapScreenState extends State<MapScreen> {
     super.initState();
   }
   void getLocation()async{
-    geo.Position position =  await UiUtilities.determinePosition();
+    dynamic position;
+    // geo.Position position =  await UiUtilities.determinePosition();
    setState(() {
      latitude = position.latitude;
      longitude = position.longitude;

@@ -23,5 +23,7 @@ class UiUtilities{
   static void pushReplacement(BuildContext context,Widget screen){
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>screen));
   }
-
+ static showLoader(){
+    return const Center(child: CircularProgressIndicator(),);
+ }
 }
