@@ -11,6 +11,8 @@ import 'package:geolocator/geolocator.dart';
 
 class PostRepository{
   final ApiRequest request;
+  Services service = Services();
+
 
   PostRepository(this.request);
   Future<Either<RequestError,List<PostModel>>> fetchPosts()async{
@@ -38,7 +40,6 @@ class PostRepository{
 
   Future<Either<RequestError,PostModel>> savePost(PostModel postModel)async{
     try {
-      Services service = Services();
       Position position = await service.getUserCoordinate();
       postModel.lat = position.latitude;
        postModel.long = position.longitude;
@@ -83,6 +84,8 @@ class PostRepository{
 
   Future<Either<RequestError,DeliveryPost>> saveDeliveryPost(DeliveryPost deliveryPost)async{
     try {
+      Position position = await service.getUserCoordinate();
+      deliveryPost.startLocation = Coordination(latitude: position.latitude, longitude: position.longitude);
       final response = await request.post('${ApiKeys.baseUrl}/delivery-posts',body: deliveryPost.toJson());
       return Right(DeliveryPost.fromJson(response));
     } catch (e) {

@@ -5,7 +5,7 @@ class DeliveryPost {
   DateTime startDate;
   DateTime endDate;
   Coordination destination;
-  Coordination startLocation;
+  Coordination? startLocation;
 
 
   DeliveryPost({
@@ -14,7 +14,7 @@ class DeliveryPost {
     required this.startDate,
     required this.endDate,
     required this.destination,
-    required this.startLocation,
+     this.startLocation,
   });
 
   factory DeliveryPost.fromJson(Map<String, dynamic> json) {
@@ -35,7 +35,7 @@ class DeliveryPost {
       'startDate': startDate.toIso8601String(),
       'endDate': endDate.toIso8601String(),
       'destination': destination.toJson(),
-      'startLocation': startLocation.toJson(),
+      'startLocation': startLocation!.toJson(),
     };
   }
 }

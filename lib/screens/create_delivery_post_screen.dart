@@ -1,4 +1,5 @@
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
+import 'package:carshop_mobile/models/post/delivery_post.dart';
 import 'package:carshop_mobile/models/post/post_model.dart';
 import 'package:carshop_mobile/repositories/post_repository.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
@@ -73,8 +74,6 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
 
                               pickDate('Select End Date', endDateController, startDate),
                               const SizedBox(height: 20,),
-
-
                               SubmitButton(onPress:submit,),
 
                             ],
@@ -92,7 +91,9 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
   }
 
   void submit(){
+    DeliveryPost deliveryPost = DeliveryPost(productName: productNameController.text, reward: int.parse(rewardController.text), startDate: startDate, endDate: endDate, destination: Coordination(latitude: 10,longitude: 10),);
     if(_formKey.currentState!.validate()){
+      postBloc.add(SaveDeliveryPostEvent(deliveryPost));
 
     }
 
@@ -128,6 +129,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: TextFormField(
+
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
