@@ -2,6 +2,7 @@ import 'package:carshop_mobile/blocs/post/post_bloc.dart';
 import 'package:carshop_mobile/models/post/post_model.dart';
 import 'package:carshop_mobile/repositories/post_repository.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           postBloc = BlocProvider.of<PostBloc>(context);
           return BlocBuilder<PostBloc, PostState>(
   builder: (context, state) {
+    if(state is PostLoadingState){
+      return UiUtilities.showLoader();
+    }
     return SafeArea(
             child:SingleChildScrollView(
               child: Container(

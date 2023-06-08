@@ -7,6 +7,7 @@ class DeliveryPost {
   Coordination destination;
   Coordination startLocation;
 
+
   DeliveryPost({
     required this.productName,
     required this.reward,
