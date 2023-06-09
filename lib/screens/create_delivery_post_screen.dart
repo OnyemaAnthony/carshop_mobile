@@ -26,13 +26,6 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
 
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
-  // String? id;
-  // String productName;
-  // num reward;
-  // DateTime startDate;
-  // DateTime endDate;
-  // Coordination destination;
-  // Coordination startLocation;
   final _formKey = GlobalKey<FormState>();
   late PostBloc postBloc;
   @override
@@ -94,10 +87,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
     DeliveryPost deliveryPost = DeliveryPost(productName: productNameController.text, reward: int.parse(rewardController.text), startDate: startDate, endDate: endDate, destination: Coordination(latitude: 10,longitude: 10),);
     if(_formKey.currentState!.validate()){
       postBloc.add(SaveDeliveryPostEvent(deliveryPost));
-
     }
-
-
   }
 
   Future<Null> _selectDate(BuildContext context,TextEditingController controller,DateTime dateTime) async {
@@ -118,7 +108,6 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
 
   Container pickDate(String hint,TextEditingController controller,DateTime dateTime) {
     return Container(
-     // height: 55,
       padding: const EdgeInsets.only(top: 5,bottom: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -129,7 +118,6 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: TextFormField(
-
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
