@@ -1,6 +1,5 @@
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
 import 'package:carshop_mobile/models/post/delivery_post.dart';
-import 'package:carshop_mobile/models/post/post_model.dart';
 import 'package:carshop_mobile/repositories/post_repository.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
@@ -62,10 +61,10 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
 
                               TextFieldForm(validateError: 'End Location is required',hintText: 'End Location',controller: rewardController,),
                               const SizedBox(height: 20,),
-                              pickDate('Select Start Date', startDateController, startDate),
+                              selectDate('Select Start Date', startDateController, startDate),
                               const SizedBox(height: 20,),
 
-                              pickDate('Select End Date', endDateController, startDate),
+                              selectDate('Select End Date', endDateController, startDate),
                               const SizedBox(height: 20,),
                               SubmitButton(onPress:submit,),
 
@@ -106,7 +105,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
     });
   }
 
-  Container pickDate(String hint,TextEditingController controller,DateTime dateTime) {
+  Container selectDate(String hint,TextEditingController controller,DateTime dateTime) {
     return Container(
       padding: const EdgeInsets.only(top: 5,bottom: 5),
       decoration: BoxDecoration(
