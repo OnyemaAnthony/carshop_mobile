@@ -18,12 +18,12 @@ class GoogleButton extends StatelessWidget {
           ),
         ),
         onPressed: onPress,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: const Padding(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children:  const [
+            children:  [
               Image(
                 image: AssetImage('assets/images/google_logo.png'),
                 height: 35.0,

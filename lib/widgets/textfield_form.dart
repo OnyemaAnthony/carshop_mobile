@@ -9,7 +9,7 @@ class TextFieldForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return    TextFormField(
+    return  TextFormField(
       validator: (input)=> input!.isEmpty?validateError:null,
       controller: controller,
       maxLines:maxLine ,
