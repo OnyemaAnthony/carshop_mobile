@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 class GoogleButton extends StatelessWidget {
   final Function()? onPress;
   final dynamic state;
-   GoogleButton({Key? key,this.onPress,this.state}) : super(key: key);
+   const GoogleButton({Key? key,this.onPress,this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

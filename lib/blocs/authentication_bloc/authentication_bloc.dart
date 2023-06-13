@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:carshop_mobile/models/user/user_response.dart';
-import 'package:logger/logger.dart';
 import 'package:bloc/bloc.dart';
 import 'package:carshop_mobile/models/user/user_request.dart';
 import 'package:equatable/equatable.dart';

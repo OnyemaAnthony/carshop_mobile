@@ -1,9 +1,7 @@
 class Address{
   String? addressId;
 
-  Address.fromJson(Map<String,dynamic> data){
-
-  }
+  Address.fromJson(Map<String,dynamic> data);
 
 
 

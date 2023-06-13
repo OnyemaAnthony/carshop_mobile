@@ -1,16 +1,9 @@
 import 'package:carshop_mobile/repositories/user_repository.dart';
-import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
-import 'package:carshop_mobile/screens/create_post_screen.dart';
-import 'package:carshop_mobile/screens/login_screen.dart';
-import 'package:carshop_mobile/screens/map_screen.dart';
-import 'package:carshop_mobile/screens/post_screen.dart';
-import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 
@@ -37,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-    home: CreateDeliveryPostScreen(),
+    home: const CreateDeliveryPostScreen(),
 
     //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
     //       builder: (context, state) {

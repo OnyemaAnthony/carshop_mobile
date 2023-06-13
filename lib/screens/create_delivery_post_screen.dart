@@ -89,7 +89,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
     }
   }
 
-  Future<Null> _selectDate(BuildContext context,TextEditingController controller,DateTime dateTime) async {
+  Future<void> _selectDate(BuildContext context,TextEditingController controller,DateTime dateTime) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime(2022, 1, 1),

@@ -26,12 +26,12 @@ class LoginScreen extends StatelessWidget {
             },
             builder: (context, state) {
               return Column(mainAxisSize: MainAxisSize.max, children: [
-                Row(),
-                Expanded(
+                const Row(),
+                const Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       SizedBox(height: 20),
                       Text(
                         'Carshop',

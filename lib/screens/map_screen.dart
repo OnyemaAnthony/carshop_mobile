@@ -1,12 +1,12 @@
 
 import 'package:carshop_mobile/utilities/api_keys.dart';
-import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart'as geo;
 
 class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
+
 
   @override
   State createState() => MapScreenState();
