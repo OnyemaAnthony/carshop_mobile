@@ -1,9 +1,10 @@
 class CommentRequest {
   String? parentId;
   String? content;
+  String? commentId;
   Location? location;
 
-  CommentRequest({this.parentId, this.content, this.location});
+  CommentRequest({this.parentId, this.content, this.location,this.commentId});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

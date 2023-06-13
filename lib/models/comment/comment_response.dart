@@ -46,7 +46,7 @@ class CommentResponse {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['offset'] = offset;
     data['limit'] = limit;
-    data['parentId'] = parentId;
+   // data['parentId'] = parentId;
 
     return data;
   }
