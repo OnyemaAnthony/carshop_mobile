@@ -1,5 +1,7 @@
 
 import 'package:bloc/bloc.dart';
+import 'package:carshop_mobile/models/comment/comment_request.dart';
+import 'package:carshop_mobile/models/comment/comment_response.dart';
 import 'package:equatable/equatable.dart';
 
 part 'comment_event.dart';
