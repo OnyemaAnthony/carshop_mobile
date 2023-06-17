@@ -5,6 +5,7 @@ class PostModel {
   double? long;
   String? postId;
 
+
   PostModel({this.title, this.content, this.lat, this.long});
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
