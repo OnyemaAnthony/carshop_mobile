@@ -23,7 +23,6 @@ class MapScreenState extends State<MapScreen> {
   }
   void getLocation()async{
     dynamic position;
-    // geo.Position position =  await UiUtilities.determinePosition();
    setState(() {
      latitude = position.latitude;
      longitude = position.longitude;
@@ -49,16 +48,6 @@ class MapScreenState extends State<MapScreen> {
         heatmapOpacity: 0.5,
       ),
     );
-    //
-      // await mapboxMap?.style.addLayer(
-      //   LineLayer(
-      //     lineWidth: 20,
-      //     minZoom: 10.7,
-      //     id: 'line_layer',
-      //     sourceId: 'heatmap',
-      //     lineColor: 0xffff0000,
-      //   ),
-      // );
   }
 
   _onMapCreated(MapboxMap mapboxMap) {
