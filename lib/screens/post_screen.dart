@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 
 class PostScreen extends StatefulWidget {
-  const PostScreen({Key? key}) : super(key: key);
+  const  PostScreen({Key? key}) : super(key: key);
 
   @override
   State<PostScreen> createState() => _PostScreenState();
