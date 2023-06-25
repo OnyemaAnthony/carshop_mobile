@@ -17,9 +17,10 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     on<SaveAddressEvent>(_mapSaveAddressEventEventToState);
   }
 
-  FutureOr<void> _mapGetAllAddressEventToState(GetAllAddressEvent event, Emitter<AddressState> emit)async {
+  FutureOr<void> _mapGetAllAddressEventToState(
+      GetAllAddressEvent event, Emitter<AddressState> emit) async {
     emit(AddressLoadingState());
-    final response =await repository!.getAllAddress();
+    final response = await repository!.getAllAddress();
     response.fold((l) {
       emit(AddressErrorState(l.message));
     }, (addresses) {
@@ -27,9 +28,10 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     });
   }
 
-  FutureOr<void> _mapDeleteAddressEventEventToState(DeleteAddressEvent event, Emitter<AddressState> emit)async {
+  FutureOr<void> _mapDeleteAddressEventEventToState(
+      DeleteAddressEvent event, Emitter<AddressState> emit) async {
     emit(AddressLoadingState());
-    final response =await repository!.deleteAddress(event.addressId);
+    final response = await repository!.deleteAddress(event.addressId);
     response.fold((l) {
       emit(AddressErrorState(l.message));
     }, (r) {
@@ -37,19 +39,10 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     });
   }
 
-  FutureOr<void> _mapUpdateAddressEventEventToState(UpdateAddressEvent event, Emitter<AddressState> emit) async{
+  FutureOr<void> _mapUpdateAddressEventEventToState(
+      UpdateAddressEvent event, Emitter<AddressState> emit) async {
     emit(AddressLoadingState());
-    final response =await repository!.updateAddress(event.address);
-    response.fold((l) {
-      emit(AddressErrorState(l.message));
-    }, (address) {
-      emit(AddressLoadState(address));
-      });
-  }
-
-  FutureOr<void> _mapGetSingleAddressEventEventToState(GetSingleAddressEvent event, Emitter<AddressState> emit) async{
-    emit(AddressLoadingState());
-    final response =await repository!.getSingleAddress(event.addressId);
+    final response = await repository!.updateAddress(event.address);
     response.fold((l) {
       emit(AddressErrorState(l.message));
     }, (address) {
@@ -57,9 +50,21 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     });
   }
 
-  FutureOr<void> _mapSaveAddressEventEventToState(SaveAddressEvent event, Emitter<AddressState> emit) async{
+  FutureOr<void> _mapGetSingleAddressEventEventToState(
+      GetSingleAddressEvent event, Emitter<AddressState> emit) async {
     emit(AddressLoadingState());
-    final response =await repository!.saveAddress(event.address);
+    final response = await repository!.getSingleAddress(event.addressId);
+    response.fold((l) {
+      emit(AddressErrorState(l.message));
+    }, (address) {
+      emit(AddressLoadState(address));
+    });
+  }
+
+  FutureOr<void> _mapSaveAddressEventEventToState(
+      SaveAddressEvent event, Emitter<AddressState> emit) async {
+    emit(AddressLoadingState());
+    final response = await repository!.saveAddress(event.address);
     response.fold((l) {
       emit(AddressErrorState(l.message));
     }, (address) {

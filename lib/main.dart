@@ -1,5 +1,6 @@
 import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
+import 'package:carshop_mobile/screens/map_screen.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,18 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-      MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (BuildContext context) => AuthenticationBloc(repository: UserRepository(ApiRequest()))..add(AppStartedEvent()),
-            ),
-          ], child: const MyApp())
-
-  );
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (BuildContext context) =>
+          AuthenticationBloc(repository: UserRepository(ApiRequest()))
+            ..add(AppStartedEvent()),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,23 +29,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-    home: const CreateDeliveryPostScreen(),
+      home: const MapScreen(),
 
-    //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
-    //       builder: (context, state) {
-    //         if(state is Authenticated){
-    //           return const BottomNavigationBarScreen();
-    //         }else if(state is UnAuthenticated){
-    //           return  LoginScreen();
-    //         }else if (state is AuthenticationErrorState){
-    //           return const Center(child: Text('Something went wrong try again later'),);
-    //         }
-    //         return const Center(child: CircularProgressIndicator(),);
-    //         //return LoginScreen();
-    //       }),
-    //
-    // );
+      //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
+      //       builder: (context, state) {
+      //         if(state is Authenticated){
+      //           return const BottomNavigationBarScreen();
+      //         }else if(state is UnAuthenticated){
+      //           return  LoginScreen();
+      //         }else if (state is AuthenticationErrorState){
+      //           return const Center(child: Text('Something went wrong try again later'),);
+      //         }
+      //         return const Center(child: CircularProgressIndicator(),);
+      //         //return LoginScreen();
+      //       }),
+      //
+      // );
     );
   }
 }
-
