@@ -39,11 +39,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  google_maps_flutter:
-    git:
-      url: https://github.com/flutter/packages.git
-      ref: google-maps-heatmaps
-      path: packages/google_maps_flutter/google_maps_flutter
+#  google_maps_flutter:
+#    git:
+#      url: https://github.com/flutter/packages.git
+#      ref: google-maps-heatmaps
+#      path: packages/google_maps_flutter/google_maps_flutter
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

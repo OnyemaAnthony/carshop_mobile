@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
 import 'package:carshop_mobile/screens/map_screen.dart';
+import 'package:carshop_mobile/screens/post_screen.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MapScreen(),
+      home: const PostScreen(),
 
       //   home: BlocBuilder<AuthenticationBloc,AuthenticationState>(
       //       builder: (context, state) {
