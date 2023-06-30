@@ -1,4 +1,6 @@
-class DeliveryPost {
+import 'package:carshop_mobile/models/post/post_model.dart';
+
+class DeliveryPost extends PostModel {
   String? id;
   String productName;
   num reward;
@@ -7,15 +9,16 @@ class DeliveryPost {
   Coordination destination;
   Coordination? startLocation;
 
-
   DeliveryPost({
+    required title,
+    required content,
     required this.productName,
     required this.reward,
     required this.startDate,
     required this.endDate,
     required this.destination,
-     this.startLocation,
-  });
+    this.startLocation,
+  }) : super(title: title, content: content);
 
   factory DeliveryPost.fromJson(Map<String, dynamic> json) {
     return DeliveryPost(
@@ -25,6 +28,8 @@ class DeliveryPost {
       endDate: DateTime.parse(json['endDate']),
       destination: Coordination.fromJson(json['destination']),
       startLocation: Coordination.fromJson(json['startLocation']),
+      title: json['title'],
+      content: json['content'],
     );
   }
 
@@ -36,10 +41,11 @@ class DeliveryPost {
       'endDate': endDate.toIso8601String(),
       'destination': destination.toJson(),
       'startLocation': startLocation!.toJson(),
+      'title': title,
+      'content': content,
     };
   }
 }
-
 
 class Coordination {
   double latitude;
