@@ -56,3 +56,4 @@ jobs:
         packageName: com.carshop.carshop
         releaseFiles: app-release.aab
         track: internal
+        status: draft
