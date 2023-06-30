@@ -35,62 +35,40 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
           title: const Text('Create Delivery post'),
           centerTitle: true,
         ),
-        body: Builder(builder: (BuildContext context) {
-          postBloc = BlocProvider.of<PostBloc>(context);
-          return BlocBuilder<PostBloc, PostState>(
-            builder: (context, state) {
-              if (state is PostLoadingState) {
-                return UiUtilities.showLoader();
-              }
-              return SafeArea(
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFieldForm(
-                            validateError: 'Product name is required',
-                            hintText: 'Product name',
-                            controller: productNameController,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFieldForm(
-                            validateError: 'Reward is required',
-                            hintText: 'Reward',
-                            controller: rewardController,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFieldForm(
-                            validateError: 'End Location is required',
-                            hintText: 'End Location',
-                            controller: rewardController,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          selectDate('Select Start Date', startDateController,
-                              startDate),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          selectDate(
-                              'Select End Date', endDateController, startDate),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          SubmitButton(
-                            onPress: submit,
-                          ),
-                        ],
+
+        body: Builder(
+            builder: (BuildContext context) {
+              postBloc = BlocProvider.of<PostBloc>(context);
+              return BlocBuilder<PostBloc, PostState>(
+                builder: (context, state) {
+                  if(state is PostLoadingState){
+                    return UiUtilities.showLoader();
+                  }
+                  return SafeArea(
+                    child:SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 20,),
+                              TextFieldForm(validateError: 'Product name is required',hintText: 'Product name',controller: productNameController,),
+                              const SizedBox(height: 20,),
+
+                              TextFieldForm(validateError: 'Reward is required',hintText: 'Reward',controller: rewardController,),
+                              const SizedBox(height: 20,),
+
+                              TextFieldForm(validateError: 'End Location is required',hintText: 'End Location',controller: endDateController,),
+                              const SizedBox(height: 20,),
+                              selectDate('Select Start Date', startDateController, startDate),
+                              const SizedBox(height: 20,),
+
+                              selectDate('Select End Date', endDateController, startDate),
+                              const SizedBox(height: 20,),
+                              SubmitButton(onPress:submit,),
+
+                            ],
                       ),
                     ),
                   ),

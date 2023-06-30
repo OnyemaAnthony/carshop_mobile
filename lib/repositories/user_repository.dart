@@ -81,6 +81,7 @@ class UserRepository {
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      googleSignIn.signOut();
 
 
 
@@ -94,10 +95,12 @@ class UserRepository {
           idToken: googleSignInAuthentication.idToken,
         );
         final UserCredential userCredential = await auth.signInWithCredential(credential);
-        UserRequest userModel = UserRequest(code: await userCredential.user!.getIdToken() );
-        final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson());
-        UserResponse userResponse = UserResponse.fromJson(response);
-        LocalStorage.saveString(key: 'token', value: userResponse.data!.auth!.accessToken!);
+        UserRequest userModel = UserRequest(code: await userCredential.user!.getIdToken());
+        //final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google/dev',body:userModel.toGoogleJson());
+        //UserResponse userResponse = UserResponse.fromJson(response);
+
+        UserResponse userResponse = UserResponse(data:Data(user: UserModel(firstName: 'Anthony',lastName: 'Chibuike',email: 'Anthonychibuike246@gmail.com')) );
+        LocalStorage.saveString(key: 'token', value:'Access_token');
         return Right(userResponse);
       }
 

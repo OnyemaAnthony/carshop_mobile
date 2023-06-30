@@ -35,6 +35,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     emit(AuthenticationLoadingState());
     final response =await repository!.signInWithGoogle();
     response.fold((l) {
+      print('the error is ${l.message}');
+      print('the error is ${l.error}');
       emit(AuthenticationErrorState(l.message));
     }, (user) {
       emit(Authenticated(user));

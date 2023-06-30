@@ -1,4 +1,8 @@
+import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
+import 'package:carshop_mobile/screens/create_post_screen.dart';
 import 'package:carshop_mobile/screens/home_screen.dart';
+import 'package:carshop_mobile/screens/map_screen.dart';
+import 'package:carshop_mobile/screens/post_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
@@ -11,9 +15,9 @@ class BottomNavigationBarScreen extends StatefulWidget {
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _screens = <Widget>[
-    HomeScreen(),
-    Scaffold(),
-    Scaffold(),
+    MapScreen(),
+    CreateDeliveryPostScreen(),
+    CreatePostScreen(),
 
   ];
 
@@ -29,7 +33,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     return Scaffold(
       appBar: AppBar(
           title: const Text('Carshop posts'),
-          backgroundColor: Colors.green
+         // backgroundColor: Colors.green
       ),
       body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -37,17 +41,17 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
-                backgroundColor: Colors.green
+                backgroundColor: Colors.blue
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
-                backgroundColor: Colors.green
+                backgroundColor: Colors.blue
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
-              backgroundColor: Colors.green,
+              //backgroundColor: Colors.green,
             ),
           ],
           type: BottomNavigationBarType.shifting,
