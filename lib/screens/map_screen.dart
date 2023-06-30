@@ -1,114 +1,8 @@
-//
-// import 'package:carshop_mobile/utilities/api_keys.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
-//
-// class MapScreen extends StatefulWidget {
-//   const MapScreen({super.key});
-//
-//
-//   @override
-//   State createState() => MapScreenState();
-// }
-//
-// class MapScreenState extends State<MapScreen> {
-//
-//    num? latitude=6.865317876737976;
-//    num? longitude=7.416827398513871;
-//   @override
-//   void initState() {
-//     getLocation();
-//     super.initState();
-//   }
-//   void getLocation()async{
-//     dynamic position;
-//    setState(() {
-//      latitude = position.latitude;
-//      longitude = position.longitude;
-//      print('lat$latitude long $longitude');
-//    });
-//   }
-//
-//   MapboxMap? mapboxMap;
-//   var isLight = true;
-//
-//   void loadHeatMap()async{
-//     var data = await rootBundle.loadString('assets/hitmap.geojson');
-//     await mapboxMap!.style.addSource(GeoJsonSource(id: "heatmap", data: data));
-//     await mapboxMap?.style.addLayer(
-//       HeatmapLayer(
-//         heatmapRadius: 5.0,
-//         heatmapWeight: 3.0,
-//         minZoom: 0.0,
-//         maxZoom: 4.0,
-//         id: 'heatmap_layer',
-//         sourceId: 'heatmap',
-//         heatmapColor:  Colors.red.value,
-//         heatmapOpacity: 0.5,
-//       ),
-//     );
-//   }
-//
-//   _onMapCreated(MapboxMap mapboxMap) {
-//     this.mapboxMap = mapboxMap;
-//     mapboxMap.subscribe(_eventObserver, [
-//       MapEvents.STYLE_LOADED,
-//       MapEvents.MAP_LOADED,
-//       MapEvents.MAP_IDLE,
-//     ]);
-//   }
-//
-//   _eventObserver(Event event) {
-//   }
-//
-//
-//
-//
-//   CameraOptions camera = CameraOptions(
-//       center: Point(
-//           coordinates: Position(
-//             37.832632,
-//             -122.489876
-//
-//           )).toJson(),
-//       zoom: 2.0);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         floatingActionButton: Padding(
-//           padding: const EdgeInsets.all(15.0),
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.end,
-//             children: <Widget>[
-//               FloatingActionButton(
-//                   heroTag: null,
-//                   onPressed: () {
-//                     loadHeatMap();
-//                   },
-//                   child: const Icon(Icons.swap_horiz)),
-//               const SizedBox(height: 10),
-//             ],
-//           ),
-//         ),
-//         body: MapWidget(
-//           key: const ValueKey("mapWidget"),
-//           resourceOptions: ResourceOptions(accessToken: ApiKeys.accessToken),
-//           cameraOptions:camera,
-//           styleUri: MapboxStyles.LIGHT,
-//           textureView: true,
-//
-//           onMapLoadErrorListener: (map){
-//
-//           },
-//           onMapCreated: _onMapCreated,
-//         ));
-//   }
-//
-// }
+import 'dart:async';
+import 'package:carshop_mobile/utilities/services.dart';
 import 'package:flutter/material.dart';
-
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
@@ -117,11 +11,50 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  String mapKey ='AIzaSyDZ-RIkzqnwqK403BN7sxWUqdgCqMBMLWQ';
+  getLocation()async{
+    Services service = Services();
+   Position position =  await service.getUserCoordinate();
+   print('the lat is ${position.latitude} long is ${position.longitude}');
+  }
+  @override
+  void initState() {
+
+    super.initState();
+    getLocation();
+  }
+  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+    final CameraPosition _kGooglePlex = const CameraPosition(
+    target: LatLng(6.866825682560999, 7.411526295850305),
+    zoom: 10,
+  );
+
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('hello')),
+      body: GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label:  Text('To the lake!'),
+        icon: Icon(Icons.add),
+      ),
     );
   }
+
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
 }
+

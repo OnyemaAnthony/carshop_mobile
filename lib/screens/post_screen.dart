@@ -24,7 +24,7 @@ class _PostScreenState extends State<PostScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height ,
               child: AppinioSwiper(
-                swipeOptions: AppinioSwipeOptions.horizontal,
+                swipeOptions: const AppinioSwipeOptions.all(),
                 unlimitedUnswipe: true,
                 controller: controller,
                 unswipe: _unswipe,
