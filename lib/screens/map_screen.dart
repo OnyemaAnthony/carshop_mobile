@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:carshop_mobile/screens/post_swipe_screen.dart';
 import 'package:carshop_mobile/utilities/services.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../models/post/delivery_post.dart';
+import '../models/post/post_model.dart';
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
@@ -14,6 +18,45 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  final List<PostModel> posts = [
+    PostModel(title: "title", content: "content", lat: 10, long: 5),
+    PostModel(title: "best post", content: "helooooooooo", lat: 10, long: 5),
+    DeliveryPost(
+        title: "Delivery Post",
+        content: "Delivery Post Content",
+        productName: "Food",
+        reward: 20,
+        startDate: DateTime.now(),
+        endDate: DateTime.now().add(const Duration(days: 1)),
+        destination: Coordination(latitude: 5, longitude: 19)),
+    PostModel(
+        title: "boring post",
+        content: "longest text ever bla bla bla",
+        lat: 10,
+        long: 5),
+    DeliveryPost(
+        title: "Delivery Post",
+        content: "Delivery Post Content",
+        productName: "Car",
+        reward: 10,
+        startDate: DateTime.now(),
+        endDate: DateTime.now().add(const Duration(days: 1)),
+        destination: Coordination(latitude: 5, longitude: 19)),
+    PostModel(
+        title: "trend post",
+        content: "trenddddddddddddy lets go",
+        lat: 10,
+        long: 5),
+    PostModel(title: "boring again", content: "oh crap", lat: 10, long: 5),
+    DeliveryPost(
+        title: "Delivery Post",
+        content: "Delivery Post Content",
+        productName: "Tooth Brush",
+        reward: 30,
+        startDate: DateTime.now(),
+        endDate: DateTime.now().add(const Duration(days: 1)),
+        destination: Coordination(latitude: 5, longitude: 19)),
+  ];
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   double? latitude = 0;
   double? longitude = 0;
@@ -22,6 +65,7 @@ class _MapScreenState extends State<MapScreen> {
   getLocation()async{
     Services service = Services();
    Position position =  await service.getUserCoordinate();
+   print('latitude ${position.latitude}, longitude ${position.longitude}');
    setState(() {
      latitude = position.latitude;
      longitude = position.longitude;
@@ -36,10 +80,10 @@ class _MapScreenState extends State<MapScreen> {
     getLocation();
   }
   final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
-    final CameraPosition _kGooglePlex =  CameraPosition(
-    target: LatLng(6.866825682560999, 7.411526295850305),
+    final CameraPosition _kGooglePlex =  const CameraPosition(
+    target: LatLng(37.4219983, -122.084),
    // target: LatLng(latitude!, longitude!),
-    zoom: 10,
+    zoom: 14,
   );
 
   static const CameraPosition _kLake = CameraPosition(
@@ -54,7 +98,8 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       body: GoogleMap(
         onTap: (position){
-          UiUtilities.showToast(message: 'codinates copied', toast: Toast.LENGTH_LONG);
+          UiUtilities.push(context, PostSwipeScreen(posts: posts,));
+          UiUtilities.showToast(message: 'coordinates copied', toast: Toast.LENGTH_LONG);
           loger.d('the location ${position.longitude}   ${position.latitude}');
 
         },
@@ -75,14 +120,14 @@ class _MapScreenState extends State<MapScreen> {
           );
 
           setState(() {
-            markers[MarkerId('place_name')] = marker;
+            markers[const MarkerId('place_name')] = marker;
           });
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
-        label:  Text('To the lake!'),
-        icon: Icon(Icons.add),
+        label:  const Text('To the lake!'),
+        icon: const Icon(Icons.add),
       ),
     );
   }
@@ -93,40 +138,7 @@ class _MapScreenState extends State<MapScreen> {
     await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 
-  Future<void> _moveCamera() async {
-    final GoogleMapController controller = await _controller.future;
 
-    await controller.moveCamera(CameraUpdate.newCameraPosition(_kGooglePlex));
-  }
-
-
-
-
-
-  // Map<MarkerId, Marker> markers = <MarkerId, Marker>{}; // CLASS MEMBER, MAP OF MARKS
-  //
-  // void _add() {
-  //   var markerIdVal = MyWayToGenerateId();
-  //   final MarkerId markerId = MarkerId(markerIdVal);
-  //
-  //   // creating a new MARKER
-  //   final Marker marker = Marker(
-  //     markerId: markerId,
-  //     position: LatLng(
-  //       center.latitude + sin(_markerIdCounter * pi / 6.0) / 20.0,
-  //       center.longitude + cos(_markerIdCounter * pi / 6.0) / 20.0,
-  //     ),
-  //     infoWindow: InfoWindow(title: markerIdVal, snippet: '*'),
-  //     onTap: () {
-  //       _onMarkerTapped(markerId);
-  //     },
-  //   );
-  //
-  //   setState(() {
-  //     // adding a new marker to map
-  //     markers[markerId] = marker;
-  //   });
-  // }
 
 }
 

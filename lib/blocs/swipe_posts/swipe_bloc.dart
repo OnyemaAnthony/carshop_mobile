@@ -16,13 +16,10 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
         (event, state) => _mapSwipeEventToState(event, state, left: false));
   }
 
-  FutureOr<void> _mapSwipeEventToState(
-      SwipePostEvent event, Emitter<SwipePostState> emit,
-      {bool left = false}) async {
+  FutureOr<void> _mapSwipeEventToState(SwipePostEvent event, Emitter<SwipePostState> emit, {bool left = false}) async {
     int selectedPost = state.selectedPost;
 
-    selectedPost = max(
-        0, min(state.posts.length, left ? selectedPost + 1 : selectedPost - 1));
+    selectedPost = max(0, min(state.posts.length, left ? selectedPost + 1 : selectedPost - 1));
 
     emit(SwipePostLoadedState(
         state.posts, state.selectedPost, state.swiperController));
