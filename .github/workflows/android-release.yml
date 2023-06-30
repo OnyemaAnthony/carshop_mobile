@@ -7,7 +7,7 @@ jobs:
   build-bundle:
     runs-on: ubuntu-latest
     steps:
-
+      - uses: actions/checkout@v3
       - name: Download Android keystore
         id: android_keystore
         uses: timheuer/base64-to-file@v1.0.3
@@ -16,8 +16,7 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE_BASE64 }}
       - name: Create key.properties
         run: |
-          touch android/key.properties
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" >> android/key.properties
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
           echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
@@ -41,6 +40,7 @@ jobs:
           name: android-release
           path: build/app/outputs/bundle/release/app-release.aab
   release-internal-track:
+    needs: build-bundle 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
