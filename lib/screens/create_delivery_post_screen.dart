@@ -31,10 +31,10 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
       create: (BuildContext context) =>
           PostBloc(repository: PostRepository(ApiRequest())),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Create Delivery post'),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   title: const Text('Create Delivery post'),
+        //   centerTitle: true,
+        // ),
 
         body: Builder(
             builder: (BuildContext context) {

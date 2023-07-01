@@ -86,11 +86,7 @@ class _MapScreenState extends State<MapScreen> {
     zoom: 14,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+
 
   @override
   Widget build(BuildContext context) {
@@ -109,30 +105,37 @@ class _MapScreenState extends State<MapScreen> {
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
-          final marker = Marker(
-            markerId: const MarkerId('place_name'),
-            position: LatLng(latitude!, longitude!),
-            // icon: BitmapDescriptor.,
-            infoWindow: const InfoWindow(
-              title: 'title',
-              snippet: 'address',
-            ),
-          );
 
-          setState(() {
-            markers[const MarkerId('place_name')] = marker;
-          });
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
-        label:  const Text('To the lake!'),
+        label:  const Text('Go to my location'),
         icon: const Icon(Icons.add),
       ),
     );
   }
 
   Future<void> _goToTheLake() async {
+    Position position =await Services().getUserCoordinate();
+     final CameraPosition _kLake = CameraPosition(
+        bearing: 192.8334901395799,
+        target: LatLng(position.latitude,position.longitude),
+        tilt: 59.440717697143555,
+        zoom: 14);
+    final marker = Marker(
+      markerId: const MarkerId('place_name'),
+      position: LatLng(latitude!, longitude!),
+      // icon: BitmapDescriptor.,
+      infoWindow: const InfoWindow(
+        title: 'This is your current location',
+        snippet: 'address',
+      ),
+    );
+
+    setState(() {
+      markers[const MarkerId('place_name')] = marker;
+    });
     final GoogleMapController controller = await _controller.future;
 
     await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));

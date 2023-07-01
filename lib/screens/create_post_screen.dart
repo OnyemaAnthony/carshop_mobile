@@ -25,10 +25,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     return  BlocProvider(
   create: (BuildContext context) => PostBloc(repository: PostRepository(ApiRequest())),
   child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Create post'),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Create post'),
+      //   centerTitle: true,
+      // ),
       body: Builder(
         builder: (BuildContext context) {
           postBloc = BlocProvider.of<PostBloc>(context);
