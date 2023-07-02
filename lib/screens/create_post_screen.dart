@@ -36,6 +36,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   builder: (context, state) {
     if(state is PostLoadingState){
       return UiUtilities.showLoader();
+    }else if(state is PostErrorState){
+      return const  Center(child: Text('There is an error'),);
     }
     return SafeArea(
             child:SingleChildScrollView(
