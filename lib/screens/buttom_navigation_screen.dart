@@ -1,18 +1,24 @@
+import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
 import 'package:carshop_mobile/screens/create_post_screen.dart';
 import 'package:carshop_mobile/screens/home_screen.dart';
+import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/screens/map_screen.dart';
 import 'package:carshop_mobile/screens/post_screen.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({Key? key}) : super(key: key);
 
   @override
-  State<BottomNavigationBarScreen> createState() => _BottomNavigationBarScreenState();
+  State<BottomNavigationBarScreen> createState() =>
+      _BottomNavigationBarScreenState();
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
+  late AuthenticationBloc authenticationBloc;
   int _selectedIndex = 0;
   static const List<Widget> _screens = <Widget>[
     MapScreen(),
@@ -32,8 +38,28 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Carshop posts'),
-         // backgroundColor: Colors.green
+        title: const Text('Carshop posts'),
+        actions: [
+
+          ///Temporary add logout button
+          Padding(
+            padding: const EdgeInsets.only(top: 20, right: 20),
+            child: GestureDetector(
+                onTap: () {
+                  authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
+                  authenticationBloc.add(SignOutEvent());
+                },
+                child: BlocListener<AuthenticationBloc, AuthenticationState>(
+                  listener: (context, state) {
+                    if(state is SignedOutState){
+                      UiUtilities.pushReplacement(context, LoginScreen());
+                    }
+                  },
+                  child: const Text('Logout', style: TextStyle(fontSize: 20),),
+                )),
+          ),
+        ],
+        // backgroundColor: Colors.green
       ),
       body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(

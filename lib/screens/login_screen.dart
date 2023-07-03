@@ -10,8 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
    late AuthenticationBloc authenticationBloc;
-   ///blocbuilder, blocklitener blockprovider
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -27,6 +25,9 @@ class LoginScreen extends StatelessWidget {
               }
             },
             builder: (context, state) {
+              if(state is AuthenticationLoadingState){
+                return UiUtilities.showLoader();
+              }
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 const Row(),
                 const Expanded(
@@ -67,19 +68,19 @@ class LoginScreen extends StatelessWidget {
                       authenticationBloc.add(SignInWithGoogleEvent());
 
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:  [
-                          const Image(
+                          Image(
                             image: AssetImage('assets/images/google_logo.png'),
                             height: 35.0,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: state is AuthenticationLoadingState ?const CircularProgressIndicator():const Text(
+                            padding: EdgeInsets.only(left: 10),
+                            child:Text(
                               'Sign in with Google',
                               style: TextStyle(
                                 fontSize: 20,

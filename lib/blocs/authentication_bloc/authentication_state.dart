@@ -36,3 +36,6 @@ class AuthenticationErrorState extends AuthenticationState{
 class UnAuthenticated extends AuthenticationState{
 
 }
+class SignedOutState extends AuthenticationState{
+
+}

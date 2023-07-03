@@ -57,10 +57,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   FutureOr<void> _mapSignOutEventToState(SignOutEvent event, Emitter<AuthenticationState> emit) async{
     try{
       await repository!.signOut();
-      emit(UnAuthenticated());
-
+      emit(SignedOutState());
     }catch(e){
-      emit(UnAuthenticated());
+      emit(SignedOutState());
 
     }
   }

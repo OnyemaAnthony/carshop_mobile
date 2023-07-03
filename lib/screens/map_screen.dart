@@ -62,28 +62,9 @@ class _MapScreenState extends State<MapScreen> {
   double? longitude = 0;
   final loger = Logger();
 
-  getLocation()async{
-    Services service = Services();
-   Position position =  await service.getUserCoordinate();
-   print('latitude ${position.latitude}, longitude ${position.longitude}');
-   setState(() {
-     latitude = position.latitude;
-     longitude = position.longitude;
-   });
-  }
-
-  @override
-  void initState() {
-
-    super.initState();
-
-    getLocation();
-  }
   final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
     final CameraPosition _kGooglePlex =  const CameraPosition(
-    target: LatLng(37.4219983, -122.084),
-   // target: LatLng(latitude!, longitude!),
-    zoom: 14,
+    target: LatLng(37.4219983, -122.084), zoom: 14,
   );
 
 
@@ -96,8 +77,6 @@ class _MapScreenState extends State<MapScreen> {
         onTap: (position){
           UiUtilities.push(context, PostSwipeScreen(posts: posts,));
           UiUtilities.showToast(message: 'coordinates copied', toast: Toast.LENGTH_LONG);
-          loger.d('the location ${position.longitude}   ${position.latitude}');
-
         },
         mapToolbarEnabled: true,
         markers: markers.values.toSet(),
@@ -126,7 +105,6 @@ class _MapScreenState extends State<MapScreen> {
     final marker = Marker(
       markerId: const MarkerId('place_name'),
       position: LatLng(latitude!, longitude!),
-      // icon: BitmapDescriptor.,
       infoWindow: const InfoWindow(
         title: 'This is your current location',
         snippet: 'address',

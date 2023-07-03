@@ -47,8 +47,9 @@ class UserRepository {
 
   Future<bool?> isSignedIn() async{
     var currentUser = firebaseAuth.currentUser;
-    String token = await LocalStorage.getString('token');
-    if(currentUser != null && token.isNotEmpty){
+
+    String token = await LocalStorage.getString('Access_token');
+    if(currentUser != null && token.isEmpty){
       return true;
     }else{
       return false;
@@ -59,7 +60,7 @@ class UserRepository {
     try {
       googleSignIn.signOut();
       firebaseAuth.signOut();
-      await request.post('${ApiKeys.baseUrl}/auth/logout');
+      LocalStorage.clear();
       return const Right(null);
     } catch (e) {
       return Left(RequestError(e));
@@ -76,12 +77,9 @@ class UserRepository {
 
 
   Future<Either<RequestError, UserResponse>>signInWithGoogle()async{
-
-
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-      googleSignIn.signOut();
 
 
 
