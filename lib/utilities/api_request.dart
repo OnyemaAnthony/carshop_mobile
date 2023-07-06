@@ -1,8 +1,9 @@
+import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:dio/dio.dart';
 class ApiRequest {
   String defaultUri = "https://";
   late final Dio dio;
-  ApiRequest() {
+  ApiRequest(){
 
     var options = BaseOptions(
 
@@ -15,33 +16,38 @@ class ApiRequest {
   }
 
   Future<Map<String, dynamic>> get(String path, {Map<String, dynamic> query = const {}, Map<String, dynamic> headers = const {}}) async {
+    dio.options.headers['x-access-token']= await getToken();
     final response = await dio.get(path,queryParameters: query);
     return process(response);
   }
 
-  Future<List> getList(String path, {Map<String, dynamic> query = const {},
-    Map<String, dynamic> headers = const {}}) async {
+  Future<List> getList(String path, {Map<String, dynamic> query = const {}, Map<String, dynamic> headers = const {}}) async {
+    dio.options.headers['x-access-token']= await getToken();
     final response = await dio.get(path,queryParameters: query);
     return (response.data as List);
   }
 
   Future<Map<String, dynamic>> post(String path,{Map<String, dynamic> body = const {},Map<String, dynamic> headers = const {}}) async {
+    dio.options.headers['x-access-token']= await getToken();
     final response = await dio.post(path,data: body);
     return process(response);
   }
 
   Future<Map<String, dynamic>> patch(String path, {Map<String, dynamic> body = const {},Map<String, dynamic> headers = const {}}) async {
+    dio.options.headers['x-access-token']= await getToken();
     final response = await dio.patch(path, data: body);
     return process(response);
   }
 
-  Future<Map<String, dynamic>> put(String path, {Map<String, dynamic> body = const {},
-        Map<String, dynamic> headers = const {}}) async {
+  Future<Map<String, dynamic>> put(String path, {Map<String, dynamic> body = const {}, Map<String, dynamic> headers = const {}}) async {
+    dio.options.headers['x-access-token']= await getToken();
+
     final response = await dio.put(path,data: body);
     return process(response);
   }
 
   Future<Map<String, dynamic>> delete(String path, {Map<String, dynamic> headers = const {}}) async {
+    dio.options.headers['x-access-token']= await getToken();
     final response = await dio.delete(path);
     return process(response);
   }
@@ -49,6 +55,11 @@ class ApiRequest {
 
   Map<String, dynamic> process(Response<dynamic> response) {
     return Map<String, dynamic>.from(response.data);
+  }
+  
+ Future<String> getToken()async{
+    String token = await LocalStorage.getString('access_token');
+    return token;
   }
 
 }

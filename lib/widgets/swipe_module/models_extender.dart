@@ -14,3 +14,4 @@ extension DeliveryPostSwipeExtension on DeliveryPost {
     return DeliverySwiperItem(deliveryPost: this);
   }
 }
+

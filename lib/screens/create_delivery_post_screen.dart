@@ -42,6 +42,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
               return BlocBuilder<PostBloc, PostState>(
                 builder: (context, state) {
                   if(state is PostLoadingState){
+                    print('start');
                     return UiUtilities.showLoader();
                   }
                   return SafeArea(
@@ -64,7 +65,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
                               selectDate('Select Start Date', startDateController, startDate),
                               const SizedBox(height: 20,),
 
-                              selectDate('Select End Date', endDateController, startDate),
+                              selectDate('Select End Date', endDateController, endDate),
                               const SizedBox(height: 20,),
                               SubmitButton(onPress:submit,),
 
@@ -137,5 +138,13 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    productNameController.dispose();
+    startDateController.dispose();
+    endDateController.dispose();
+    rewardController.dispose();
+    super.dispose();
   }
 }

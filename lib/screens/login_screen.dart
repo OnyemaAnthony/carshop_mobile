@@ -6,7 +6,6 @@ import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
    late AuthenticationBloc authenticationBloc;

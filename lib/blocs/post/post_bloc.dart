@@ -87,9 +87,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   FutureOr<void> _mapSaveDeliveryPostEventToState(SaveDeliveryPostEvent event, Emitter<PostState> emit)async {
-    emit(DeliveryPostLoadingState());
+    emit(PostLoadingState());
     final response =await repository!.saveDeliveryPost(event.deliveryPost);
     response.fold((l) {
+      print('errror ${l.error}');
+      print('errror ${l.message}');
       emit(PostErrorState(l.message));
     }, (deliveryPost) {
       emit(PostDeliveredState(deliveryPost));

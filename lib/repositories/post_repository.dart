@@ -41,8 +41,8 @@ class PostRepository{
   Future<Either<RequestError,PostModel>> savePost(PostModel postModel)async{
     try {
       Position position = await service.getUserCoordinate();
-      postModel.lat = position.latitude;
-       postModel.long = position.longitude;
+      PostLocation location = PostLocation(lat: position.latitude,lng: position.longitude);
+       postModel.location = location;
       final response = await request.post('${ApiKeys.baseUrl}/posts',body: postModel.toJson());
       return Right(PostModel.fromJson(response));
     } catch (e) {
@@ -86,6 +86,7 @@ class PostRepository{
     try {
       Position position = await service.getUserCoordinate();
       deliveryPost.startLocation = Coordination(latitude: position.latitude, longitude: position.longitude);
+      print('the json is ${deliveryPost.toJson()}');
       final response = await request.post('${ApiKeys.baseUrl}/delivery-posts',body: deliveryPost.toJson());
       return Right(DeliveryPost.fromJson(response));
     } catch (e) {

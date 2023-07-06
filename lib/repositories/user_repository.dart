@@ -3,6 +3,7 @@ import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:carshop_mobile/utilities/request_error.dart';
+import 'package:carshop_mobile/widgets/swipe_module/models_extender.dart';
 import 'package:dartz/dartz.dart';
 import 'package:carshop_mobile/models/user/user_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,8 +19,8 @@ class UserRepository {
   Future<Either<RequestError, UserResponse>> signUp(UserRequest user) async {
     try {
       final response = await request.post('url',body: user.toJson());
-
       return Right(UserResponse.fromJson(response));
+
     } catch (e) {
       return Left(RequestError(e));
     }
@@ -48,8 +49,8 @@ class UserRepository {
   Future<bool?> isSignedIn() async{
     var currentUser = firebaseAuth.currentUser;
 
-    String token = await LocalStorage.getString('Access_token');
-    if(currentUser != null && token.isEmpty){
+    String token = await LocalStorage.getString('access_token');
+    if(currentUser != null && token.isNotEmpty){
       return true;
     }else{
       return false;
@@ -81,17 +82,10 @@ class UserRepository {
       FirebaseAuth auth = FirebaseAuth.instance;
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
-
-
       if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+        final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
 
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken,
-        );
+        final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken);
         final UserCredential userCredential = await auth.signInWithCredential(credential);
 
         UserRequest userModel = UserRequest(code: await userCredential.user!.getIdToken());
@@ -99,7 +93,7 @@ class UserRepository {
         final response =  await request.post('${ApiKeys.baseUrl}/auth/oauth/google',body:userModel.toGoogleJson());
 
         UserResponse userResponse = UserResponse.fromJson(response);
-        LocalStorage.saveString(key: userResponse.data!.auth!.accessToken!, value:'Access_token');
+        LocalStorage.saveString(value: userResponse.data!.auth!.accessToken!, key:'access_token');
         return Right(userResponse);
       }
 

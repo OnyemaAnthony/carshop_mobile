@@ -55,15 +55,15 @@ class Coordination {
 
   factory Coordination.fromJson(Map<String, dynamic> json) {
     return Coordination(
-      latitude: json['latitude'],
-      longitude: json['longitude'],
+      latitude: json['lat'],
+      longitude: json['lng'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'latitude': latitude,
-      'longitude': longitude,
+      'lat': latitude,
+      'lng': longitude,
     };
   }
 }

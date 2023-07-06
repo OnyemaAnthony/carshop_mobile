@@ -5,7 +5,6 @@ import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 
 void main() async {
@@ -39,7 +38,6 @@ class MyApp extends StatelessWidget {
                 return const Center(child: Text('Something went wrong try again later'),);
               }
               return const Center(child: CircularProgressIndicator(),);
-              //return LoginScreen();
             }),
 
       );

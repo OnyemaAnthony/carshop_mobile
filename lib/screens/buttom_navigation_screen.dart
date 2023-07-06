@@ -1,10 +1,8 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
 import 'package:carshop_mobile/screens/create_post_screen.dart';
-import 'package:carshop_mobile/screens/home_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/screens/map_screen.dart';
-import 'package:carshop_mobile/screens/post_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +11,7 @@ class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({Key? key}) : super(key: key);
 
   @override
-  State<BottomNavigationBarScreen> createState() =>
-      _BottomNavigationBarScreenState();
+  State<BottomNavigationBarScreen> createState() => _BottomNavigationBarScreenState();
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
@@ -41,7 +38,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         title: const Text('Carshop posts'),
         actions: [
 
-          ///Temporary add logout button
+          ///TODO Temporary add logout button
           Padding(
             padding: const EdgeInsets.only(top: 20, right: 20),
             child: GestureDetector(

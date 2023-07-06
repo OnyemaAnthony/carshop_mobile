@@ -15,7 +15,9 @@ class CreatePostScreen extends StatefulWidget {
   State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
+
 class _CreatePostScreenState extends State<CreatePostScreen> {
+
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -25,10 +27,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     return  BlocProvider(
   create: (BuildContext context) => PostBloc(repository: PostRepository(ApiRequest())),
   child: Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Create post'),
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        title: const Text('Create post'),
+        centerTitle: true,
+      ),
       body: Builder(
         builder: (BuildContext context) {
           postBloc = BlocProvider.of<PostBloc>(context);
@@ -69,7 +71,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     ),
 );
   }
-
+  @override
+  void dispose() {
+    titleController.dispose();
+    contentController.dispose();
+    super.dispose();
+  }
    submit(PostState state){
     PostModel post = PostModel(title: titleController.text,content: contentController.text);
     if(_formKey.currentState!.validate()){

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
+import 'package:carshop_mobile/screens/create_post_screen.dart';
 import 'package:carshop_mobile/screens/post_swipe_screen.dart';
 import 'package:carshop_mobile/utilities/services.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
@@ -19,8 +21,8 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final List<PostModel> posts = [
-    PostModel(title: "title", content: "content", lat: 10, long: 5),
-    PostModel(title: "best post", content: "helooooooooo", lat: 10, long: 5),
+    PostModel(title: "title", content: "content",location: PostLocation( lat: 10, lng: 5)),
+    PostModel(title: "best post", content: "helooooooooo",location: PostLocation( lat: 10, lng: 5)),
     DeliveryPost(
         title: "Delivery Post",
         content: "Delivery Post Content",
@@ -31,9 +33,8 @@ class _MapScreenState extends State<MapScreen> {
         destination: Coordination(latitude: 5, longitude: 19)),
     PostModel(
         title: "boring post",
-        content: "longest text ever bla bla bla",
-        lat: 10,
-        long: 5),
+        content: "longest text ever bla bla bla",location: PostLocation( lat: 10,
+        lng: 5)),
     DeliveryPost(
         title: "Delivery Post",
         content: "Delivery Post Content",
@@ -44,10 +45,9 @@ class _MapScreenState extends State<MapScreen> {
         destination: Coordination(latitude: 5, longitude: 19)),
     PostModel(
         title: "trend post",
-        content: "trenddddddddddddy lets go",
-        lat: 10,
-        long: 5),
-    PostModel(title: "boring again", content: "oh crap", lat: 10, long: 5),
+        content: "trenddddddddddddy lets go",location: PostLocation(lat: 10,
+  lng: 5)),
+    PostModel(title: "boring again", content: "oh crap", location: PostLocation(lat: 10, lng: 5)),
     DeliveryPost(
         title: "Delivery Post",
         content: "Delivery Post Content",
@@ -88,7 +88,10 @@ class _MapScreenState extends State<MapScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
+        onPressed: (){
+          UiUtilities.push(context, CreateDeliveryPostScreen());
+        },
+       // onPressed: _goToTheLake,
         label:  const Text('Go to my location'),
         icon: const Icon(Icons.add),
       ),
