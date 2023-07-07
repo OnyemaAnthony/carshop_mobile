@@ -8,11 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-   late AuthenticationBloc authenticationBloc;
+  late AuthenticationBloc authenticationBloc;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AuthenticationBloc(repository: UserRepository(ApiRequest())),
+      create: (BuildContext context) =>
+          AuthenticationBloc(repository: UserRepository(ApiRequest())),
       child: Scaffold(
         backgroundColor: const Color(0xFF2C384A),
         body: Builder(builder: (BuildContext context) {
@@ -20,11 +21,12 @@ class LoginScreen extends StatelessWidget {
           return BlocConsumer<AuthenticationBloc, AuthenticationState>(
             listener: (context, state) {
               if (state is Authenticated) {
-                UiUtilities.pushReplacement(context, const BottomNavigationBarScreen());
+                UiUtilities.pushReplacement(
+                    context, const BottomNavigationBarScreen());
               }
             },
             builder: (context, state) {
-              if(state is AuthenticationLoadingState){
+              if (state is AuthenticationLoadingState) {
                 return UiUtilities.showLoader();
               }
               return Column(mainAxisSize: MainAxisSize.max, children: [
@@ -65,21 +67,20 @@ class LoginScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       authenticationBloc.add(SignInWithGoogleEvent());
-
                     },
                     child: const Padding(
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children:  [
+                        children: [
                           Image(
                             image: AssetImage('assets/images/google_logo.png'),
                             height: 35.0,
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 10),
-                            child:Text(
+                            child: Text(
                               'Sign in with Google',
                               style: TextStyle(
                                 fontSize: 20,

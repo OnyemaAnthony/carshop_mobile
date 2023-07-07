@@ -15,76 +15,89 @@ class CreatePostScreen extends StatefulWidget {
   State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
-
 class _CreatePostScreenState extends State<CreatePostScreen> {
-
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late PostBloc postBloc;
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-  create: (BuildContext context) => PostBloc(repository: PostRepository(ApiRequest())),
-  child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Create post'),
-        centerTitle: true,
-      ),
-      body: Builder(
-        builder: (BuildContext context) {
+    return BlocProvider(
+      create: (BuildContext context) =>
+          PostBloc(repository: PostRepository(ApiRequest())),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Create post'),
+          centerTitle: true,
+        ),
+        body: Builder(builder: (BuildContext context) {
           postBloc = BlocProvider.of<PostBloc>(context);
           return BlocBuilder<PostBloc, PostState>(
-  builder: (context, state) {
-    if(state is PostLoadingState){
-      return UiUtilities.showLoader();
-    }else if(state is PostErrorState){
-      return const  Center(child: Text('There is an error'),);
-    }
-    return SafeArea(
-            child:SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20,),
-                      TextFieldForm(validateError: 'Title is required',hintText: 'Title',controller: titleController,),
-                      const SizedBox(height: 20,),
-
-                      TextFieldForm(validateError: 'Content is required',hintText: 'Content',controller: contentController,maxLine: 10,),
-                      const SizedBox(height: 20,),
-
-                      SubmitButton(onPress: ()=>submit(state),),
-
-                    ],
+            builder: (context, state) {
+              if (state is PostLoadingState) {
+                return UiUtilities.showLoader();
+              } else if (state is PostErrorState) {
+                return const Center(
+                  child: Text('There is an error'),
+                );
+              }
+              return SafeArea(
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFieldForm(
+                            validateError: 'Title is required',
+                            hintText: 'Title',
+                            controller: titleController,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFieldForm(
+                            validateError: 'Content is required',
+                            hintText: 'Content',
+                            controller: contentController,
+                            maxLine: 10,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SubmitButton(
+                            text: "createPost",
+                            onPress: () => submit(state),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           );
-  },
-);
-        }
+        }),
       ),
-    ),
-);
+    );
   }
+
   @override
   void dispose() {
     titleController.dispose();
     contentController.dispose();
     super.dispose();
   }
-   submit(PostState state){
-    PostModel post = PostModel(title: titleController.text,content: contentController.text);
-    if(_formKey.currentState!.validate()){
+
+  submit(PostState state) {
+    PostModel post =
+        PostModel(title: titleController.text, content: contentController.text);
+    if (_formKey.currentState!.validate()) {
       postBloc.add(SavePostEvent(post));
-
     }
-
-
   }
-
 }

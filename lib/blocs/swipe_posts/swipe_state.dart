@@ -3,7 +3,7 @@ part of 'swipe_bloc.dart';
 abstract class SwipePostState extends Equatable {
   const SwipePostState(this.posts, this.selectedPost, this.swiperController);
 
-  final List<PostModel> posts;
+  final List<dynamic> posts;
   final int selectedPost;
   final AppinioSwiperController swiperController;
 
@@ -12,7 +12,7 @@ abstract class SwipePostState extends Equatable {
 }
 
 class SwipePostLoadingState extends SwipePostState {
-  const SwipePostLoadingState(List<PostModel> posts, int selectedPost,
+  const SwipePostLoadingState(List<NormalPost> posts, int selectedPost,
       AppinioSwiperController swiperController)
       : super(posts, selectedPost, swiperController);
 }
@@ -20,13 +20,13 @@ class SwipePostLoadingState extends SwipePostState {
 class SwipePostErrorState extends SwipePostState {
   final String errorMessage;
 
-  const SwipePostErrorState(this.errorMessage, List<PostModel> posts,
+  const SwipePostErrorState(this.errorMessage, List<NormalPost> posts,
       int selectedPost, AppinioSwiperController swiperController)
       : super(posts, selectedPost, swiperController);
 }
 
 class SwipePostLoadedState extends SwipePostState {
-  const SwipePostLoadedState(List<PostModel> posts, int selectedPost,
+  const SwipePostLoadedState(List<dynamic> posts, int selectedPost,
       AppinioSwiperController swiperController)
       : super(posts, selectedPost, swiperController);
 }
