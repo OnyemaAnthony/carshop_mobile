@@ -9,7 +9,8 @@ import '../../repositories/user_repository.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
   UserRepository? repository;
   AuthenticationBloc({this.repository}) : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
@@ -21,27 +22,30 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<SignOutEvent>(_mapSignOutEventToState);
   }
 
-  FutureOr<void> _mapSignUpEventToState(SignUpEvent event, Emitter<AuthenticationState> emit)async {
+  FutureOr<void> _mapSignUpEventToState(
+      SignUpEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-      final response = await repository!.signUp(event.userModel);
-      response.fold((l) {
-      }, (r) {
-        emit(Authenticated(r));
-      });
-
+    final response = await repository!.signUp(event.userModel);
+    response.fold((l) {}, (r) {
+      emit(Authenticated(r));
+    });
   }
 
-  FutureOr<void> _mapSignInWithGoogleEventToState(SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async{
+  FutureOr<void> _mapSignInWithGoogleEventToState(
+      SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response =await repository!.signInWithGoogle();
+    final response = await repository!.signInWithGoogle();
     response.fold((l) {
+      print(l.message);
       emit(AuthenticationErrorState(l.message));
     }, (user) {
+      print(user);
       emit(Authenticated(user));
     });
   }
 
-  FutureOr<void> _mapAppStartedEventToState(AppStartedEvent event, Emitter<AuthenticationState> emit)async {
+  FutureOr<void> _mapAppStartedEventToState(
+      AppStartedEvent event, Emitter<AuthenticationState> emit) async {
     try {
       bool? isSignedIn = await repository!.isSignedIn();
       if (isSignedIn!) {
@@ -54,30 +58,20 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
   }
 
-  FutureOr<void> _mapSignOutEventToState(SignOutEvent event, Emitter<AuthenticationState> emit) async{
-    try{
+  FutureOr<void> _mapSignOutEventToState(
+      SignOutEvent event, Emitter<AuthenticationState> emit) async {
+    try {
       await repository!.signOut();
       emit(SignedOutState());
-    }catch(e){
+    } catch (e) {
       emit(SignedOutState());
-
     }
   }
 
-  FutureOr<void> _mapGetUserEventToState(GetUserEvent event, Emitter<AuthenticationState> emit)async {
+  FutureOr<void> _mapGetUserEventToState(
+      GetUserEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response =await repository!.getUser();
-    response.fold((l) {
-      emit(AuthenticationErrorState(l.message));
-    }, (user) {
-      emit(UserLoadedState(user));
-    });
-
-  }
-
-  FutureOr<void> _mapUpdateUserEventToState(UpdateUserEvent event, Emitter<AuthenticationState> emit)async {
-    emit(AuthenticationLoadingState());
-    final response =await repository!.updateUser(event.userRequest);
+    final response = await repository!.getUser();
     response.fold((l) {
       emit(AuthenticationErrorState(l.message));
     }, (user) {
@@ -85,9 +79,21 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     });
   }
 
-  FutureOr<void> _mapDeactivateEventToState(DeactivateEvent event, Emitter<AuthenticationState> emit) async{
+  FutureOr<void> _mapUpdateUserEventToState(
+      UpdateUserEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response =await repository!.deactivateUser();
+    final response = await repository!.updateUser(event.userRequest);
+    response.fold((l) {
+      emit(AuthenticationErrorState(l.message));
+    }, (user) {
+      emit(UserLoadedState(user));
+    });
+  }
+
+  FutureOr<void> _mapDeactivateEventToState(
+      DeactivateEvent event, Emitter<AuthenticationState> emit) async {
+    emit(AuthenticationLoadingState());
+    final response = await repository!.deactivateUser();
     response.fold((l) {
       emit(AuthenticationErrorState(l.message));
     }, (user) {

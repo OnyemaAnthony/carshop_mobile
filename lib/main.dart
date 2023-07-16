@@ -29,22 +29,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
-      // home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      //     builder: (context, state) {
-      //   if (state is Authenticated) {
-      //     return const BottomNavigationBarScreen();
-      //   } else if (state is UnAuthenticated) {
-      //     return LoginScreen();
-      //   } else if (state is AuthenticationErrorState) {
-      //     return const Center(
-      //       child: Text('Something went wrong try again later'),
-      //     );
-      //   }
-      //   return const Center(
-      //     child: CircularProgressIndicator(),
-      //   );
-      // }),
+      //home: LoginPage(),
+      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) {
+        if (state is Authenticated) {
+          return const BottomNavigationBarScreen();
+        } else if (state is UnAuthenticated) {
+          return LoginScreen();
+        } else if (state is AuthenticationErrorState) {
+          return const Center(
+            child: Text('Something went wrong try again later'),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }),
     );
   }
 }
