@@ -1,8 +1,6 @@
-import 'package:carshop_mobile/repositories/user_repository.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
-import 'package:carshop_mobile/screens/login_screen2.dart';
-import 'package:carshop_mobile/utilities/api_request.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +12,7 @@ void main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
       create: (BuildContext context) =>
-          AuthenticationBloc(repository: UserRepository(ApiRequest()))
-            ..add(AppStartedEvent()),
+          AuthenticationBloc()..add(AppStartedEvent()),
     ),
   ], child: const MyApp()));
 }

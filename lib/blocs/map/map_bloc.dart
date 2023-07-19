@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
+import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:carshop_mobile/utilities/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,9 +17,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   FutureOr<void> _mapFetchPostsEventToState(
       FetchPostsEvent event, Emitter<MapState> emit) async {
-    var sdk = CarshopClientSdk.create(
-        baseUrl: Uri.parse('http://carshop-dev.uaenorth.cloudapp.azure.com/'));
-    var posts = await sdk.normalPostsGet(
+    var client = CarshopSDK().client;
+    var posts = await client.normalPostsGet(
         body: GetManyPostsDto(location: state.currentLocation));
 
     if (posts.body != null) {

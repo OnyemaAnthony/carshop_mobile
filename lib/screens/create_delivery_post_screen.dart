@@ -1,7 +1,5 @@
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
-import 'package:carshop_mobile/models/post/delivery_post.dart';
-import 'package:carshop_mobile/repositories/post_repository.dart';
-import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
@@ -28,8 +26,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          PostBloc(repository: PostRepository(ApiRequest())),
+      create: (BuildContext context) => PostBloc(),
       child: Scaffold(
         // appBar: AppBar(
         //   title: const Text('Create Delivery post'),
@@ -107,15 +104,16 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
   }
 
   void submit() {
-    DeliveryPost deliveryPost = DeliveryPost(
-      title: "mock title",
-      content: "mock content",
-      productName: productNameController.text,
-      reward: int.parse(rewardController.text),
-      startDate: startDate,
-      endDate: endDate,
-      destination: Coordination(latitude: 10, longitude: 10),
-    );
+    CreateDeliveryPostDto deliveryPost = CreateDeliveryPostDto(
+        title: "mock title",
+        content: "mock content",
+        location: Coordination(lat: 10, lng: 10),
+        productName: productNameController.text,
+        reward: int.parse(rewardController.text).toDouble(),
+        startDate: startDate,
+        endDate: endDate,
+        destination: Coordination(lat: 10, lng: 10),
+        startLocation: Coordination(lat: 10, lng: 10));
     if (_formKey.currentState!.validate()) {
       postBloc.add(SaveDeliveryPostEvent(deliveryPost));
     }

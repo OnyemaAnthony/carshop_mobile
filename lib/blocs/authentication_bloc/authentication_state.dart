@@ -6,36 +6,28 @@ abstract class AuthenticationState extends Equatable {
   const AuthenticationState();
 }
 
-class AuthenticationInitial extends AuthenticationState {
+class AuthenticationInitial extends AuthenticationState {}
 
-}
-class Authenticated extends AuthenticationState{
-  final UserResponse? userModel;
+class Authenticated extends AuthenticationState {
+  final AuthenticationResponseDto? userModel;
 
   const Authenticated(this.userModel);
-
 }
-class UserLoadedState extends AuthenticationState{
-  final UserResponse? userModel;
+
+class UserLoadedState extends AuthenticationState {
+  final UserResponseDto? userModel;
 
   const UserLoadedState(this.userModel);
-
 }
 
-class AuthenticationLoadingState extends AuthenticationState{
+class AuthenticationLoadingState extends AuthenticationState {}
 
-}
-
-class AuthenticationErrorState extends AuthenticationState{
+class AuthenticationErrorState extends AuthenticationState {
   final String errorMessage;
 
   const AuthenticationErrorState(this.errorMessage);
-
 }
 
-class UnAuthenticated extends AuthenticationState{
+class UnAuthenticated extends AuthenticationState {}
 
-}
-class SignedOutState extends AuthenticationState{
-
-}
+class SignedOutState extends AuthenticationState {}

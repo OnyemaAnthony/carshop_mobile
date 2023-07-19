@@ -1,7 +1,5 @@
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
-import 'package:carshop_mobile/models/post/post_model.dart';
-import 'package:carshop_mobile/repositories/post_repository.dart';
-import 'package:carshop_mobile/utilities/api_request.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
@@ -23,8 +21,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          PostBloc(repository: PostRepository(ApiRequest())),
+      create: (BuildContext context) => PostBloc(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Create post'),
@@ -94,9 +91,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   submit(PostState state) {
-    PostModel post =
-        PostModel(title: titleController.text, content: contentController.text);
     if (_formKey.currentState!.validate()) {
+      CreatePostDto post = CreatePostDto(
+          title: titleController.text,
+          content: contentController.text,
+          location: Coordination(lat: 10, lng: 10));
       postBloc.add(SavePostEvent(post));
     }
   }

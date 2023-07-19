@@ -1,16 +1,14 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
-import 'package:carshop_mobile/models/post/delivery_post.dart';
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
-import '../../models/post/post_model.dart';
-import '../../repositories/post_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
-  final PostRepository? repository;
-  PostBloc({this.repository}) : super(PostInitial()) {
+  PostBloc() : super(PostInitial()) {
     on<FetchPostsEvent>(_mapFetchPostsEventToState);
     on<DeletePostEvent>(_mapDeletePostEventToState);
     on<LikePostEvent>(_mapLikePostEventToState);
@@ -27,126 +25,153 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   FutureOr<void> _mapFetchPostsEventToState(
       FetchPostsEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
-    final response = await repository!.fetchPosts();
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (addresses) {
-      emit(PostLoadedState(addresses));
-    });
+
+    //TODO: pass location to the body
+    GetManyPostsDto body = GetManyPostsDto();
+
+    var client = CarshopSDK().client;
+    final response = await client.normalPostsGet(body: body);
+    var result = response.body;
+    if (result != null) {
+      emit(PostLoadedState(result));
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapDeletePostEventToState(
       DeletePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
-    final response = await repository!.deletePost(event.postId);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (r) {
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.normalPostsIdDelete(id: event.postId);
+
+    if (response.statusCode == 200) {
       emit(PostDeletedState());
-    });
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapLikePostEventToState(
       LikePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
-    final response = await repository!.likePost(event.postId);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (r) {
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.likesAggTotalTypeGet(
+        type: LikesAggTotalTypeGetType.post, contentIds: event.postId);
+
+    if (response.statusCode == 200) {
       emit(PostedState());
-    });
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapUnlikePostEventToState(
       UnlikePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
-    final response = await repository!.unlikePost(event.postId);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (r) {
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.likesTypeContentIdDelete(
+        contentId: event.postId, type: LikesTypeContentIdDeleteType.post);
+
+    if (response.statusCode == 200) {
       emit(PostedState());
-    });
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapSavePostEventToState(
       SavePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
 
-    final response = await repository!.savePost(event.postModel);
-    response.fold((l) {
-      print(l.message);
-      emit(PostErrorState(l.message));
-    }, (post) {
-      emit(PostLoadState(post));
-    });
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.normalPostsPost(
+      body: event.createDto,
+    );
+
+    if (response.statusCode == 200) {
+      emit(PostedState());
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapUpdatePostEventToState(
       UpdatePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
-    final response = await repository!.updatePost(event.postModel);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (post) {
-      emit(PostLoadState(post));
-    });
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.normalPostsIdPatch(
+        id: event.id, body: event.updatePostDto);
+    if (response.statusCode == 200) {
+      emit(PostedState());
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapSaveDeliveryPostEventToState(
       SaveDeliveryPostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
-    final response = await repository!.saveDeliveryPost(event.deliveryPost);
-    response.fold((l) {
-      print('errror ${l.error}');
-      print('errror ${l.message}');
-      emit(PostErrorState(l.message));
-    }, (deliveryPost) {
-      emit(PostDeliveredState(deliveryPost));
-    });
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.deliveryPostsPost(body: event.createDPDto);
+
+    if (response.statusCode == 200) {
+      emit(PostDeliveredState(response.body!));
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapGetMyDeliveryPostEventToState(
       GetMyDeliveryPostEvent event, Emitter<PostState> emit) async {
     emit(DeliveryPostLoadingState());
-    final response = await repository!.getMyDeliveryPost(event.creatorId);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (deliveryPosts) {
-      emit(DeliveryPostLoadedState(deliveryPosts));
-    });
+
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.deliveryPostsMyGet();
+    if (response.statusCode == 200) {
+      emit(DeliveryPostLoadedState(response.body!));
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapGetSingleDeliveryPostEventToState(
       GetSingleDeliveryPostEvent event, Emitter<PostState> emit) async {
     emit(DeliveryPostLoadingState());
-    final response =
-        await repository!.getSingleDeliveryPost(event.deliveryPostId);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (deliveryPost) {
-      emit(PostDeliveredState(deliveryPost));
-    });
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.deliveryPostsIdGet(id: event.deliveryPostId);
+
+    if (response.statusCode == 200) {
+      emit(PostDeliveredState(response.body!));
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapUpdateDeliveryPostEventToState(
       UpdateDeliveryPostEvent event, Emitter<PostState> emit) async {
     emit(DeliveryPostLoadingState());
-    final response = await repository!.updateDeliveryPost(event.deliveryPost);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (deliveryPost) {
-      emit(PostDeliveredState(deliveryPost));
-    });
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.deliveryPostsIdPatch(
+        id: event.id, body: event.updateDPDto);
+    if (response.statusCode == 200) {
+      emit(DeliveryPostLoadState(response.body!));
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapDeleteDeliveryPostEventToState(
       DeleteDeliveryPostEvent event, Emitter<PostState> emit) async {
     emit(DeliveryPostLoadingState());
-    final response = await repository!.deleteDeliveryPost(event.deliveryPostId);
-    response.fold((l) {
-      emit(PostErrorState(l.message));
-    }, (r) {
+    CarshopClientSdk client = CarshopSDK().client;
+    final response =
+        await client.deliveryPostsIdDelete(id: event.deliveryPostId);
+
+    if (response.statusCode == 200) {
       emit(PostedState());
-    });
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
   }
 }

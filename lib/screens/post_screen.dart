@@ -1,19 +1,15 @@
-import 'package:carshop_mobile/screens/comment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 
 class PostScreen extends StatefulWidget {
-  const  PostScreen({Key? key}) : super(key: key);
+  const PostScreen({Key? key}) : super(key: key);
 
   @override
   State<PostScreen> createState() => _PostScreenState();
 }
 
 class _PostScreenState extends State<PostScreen> {
-
-
-
   final AppinioSwiperController controller = AppinioSwiperController();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +18,7 @@ class _PostScreenState extends State<PostScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height ,
+              height: MediaQuery.of(context).size.height,
               child: AppinioSwiper(
                 swipeOptions: const AppinioSwipeOptions.all(),
                 unlimitedUnswipe: true,
@@ -64,18 +60,16 @@ class _PostScreenState extends State<PostScreen> {
     );
   }
 
-  void _swipe(int index, AppinioSwiperDirection direction) {
-  }
+  void _swipe(int index, AppinioSwiperDirection direction) {}
 
   void _unswipe(bool unswiped) {
     if (unswiped) {
-    } else {
-    }
+    } else {}
   }
 
-  void _onEnd() {
-  }
+  void _onEnd() {}
 }
+
 class ExampleCandidateModel {
   String? name;
   String? job;
@@ -113,7 +107,7 @@ List<ExampleCandidateModel> candidates = [
     name: 'Five, 5',
     job: 'Manager',
     city: 'Town',
-   // color: gradientRed,
+    // color: gradientRed,
   ),
   ExampleCandidateModel(
     name: 'Four, 4',
@@ -131,7 +125,7 @@ List<ExampleCandidateModel> candidates = [
     name: 'Two, 2',
     job: 'Manager',
     city: 'Town',
-   // color: gradientPurple,
+    // color: gradientPurple,
   ),
   ExampleCandidateModel(
     name: 'One, 1',
@@ -186,14 +180,13 @@ const LinearGradient kNewFeedCardColorsIdentityGradient = LinearGradient(
   ],
 );
 
-
 class ExampleCard extends StatelessWidget {
   void _showModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(30),
-            )),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        top: Radius.circular(30),
+      )),
       context: context,
       isScrollControlled: true,
       builder: (_) {
@@ -225,13 +218,13 @@ class ExampleCard extends StatelessWidget {
         );
       },
     );
-
   }
 
-  String d = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+  String d =
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   final ExampleCandidateModel candidate;
 
-   ExampleCard({
+  ExampleCard({
     Key? key,
     required this.candidate,
   }) : super(key: key);
@@ -251,7 +244,7 @@ class ExampleCard extends StatelessWidget {
               padding: EdgeInsets.all(10),
               decoration: const BoxDecoration(
                 color: Colors.grey,
-               // gradient: candidate.color,
+                // gradient: candidate.color,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
@@ -261,33 +254,35 @@ class ExampleCard extends StatelessWidget {
                 //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(d,style: TextStyle(color: Colors.black,fontSize: 20),),
-
+                  Text(
+                    d,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
                   Expanded(
                     child: Container(
-                      child:    Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(
-
-                            Icons.thumb_up,size: 50,),
+                            Icons.thumb_up,
+                            size: 50,
+                          ),
                           GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 _showModalBottomSheet(context);
                               },
-                              child: Icon(Icons.comment,size: 50,))
+                              child: Icon(
+                                Icons.comment,
+                                size: 50,
+                              ))
                         ],
                       ),
                     ),
                   )
-
                 ],
               ),
             ),
           ),
-
-
-
 
           // Container(
           //   padding: const EdgeInsets.all(15),

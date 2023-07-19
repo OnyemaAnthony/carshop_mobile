@@ -3,75 +3,69 @@ part of 'post_bloc.dart';
 abstract class PostEvent extends Equatable {
   const PostEvent();
   @override
-  List<Object?> get props =>[];
-
+  List<Object?> get props => [];
 }
-class DeletePostEvent extends PostEvent{
+
+class DeletePostEvent extends PostEvent {
   final String postId;
 
   const DeletePostEvent(this.postId);
-
 }
-class LikePostEvent extends PostEvent{
+
+class LikePostEvent extends PostEvent {
   final String postId;
 
   const LikePostEvent(this.postId);
-
 }
-class UnlikePostEvent extends PostEvent{
+
+class UnlikePostEvent extends PostEvent {
   final String postId;
 
   const UnlikePostEvent(this.postId);
-
-}
-class SavePostEvent extends PostEvent{
-  final PostModel postModel;
-
-  const SavePostEvent(this.postModel);
-
-}
-class UpdatePostEvent extends PostEvent{
-  final PostModel postModel;
-
-  const UpdatePostEvent(this.postModel);
-
 }
 
-class FetchPostsEvent extends PostEvent{
+class SavePostEvent extends PostEvent {
+  final CreatePostDto createDto;
 
+  const SavePostEvent(this.createDto);
 }
-class PostDeletedState extends PostState{
 
+class UpdatePostEvent extends PostEvent {
+  final String id;
+  final UpdatePostDto updatePostDto;
+
+  const UpdatePostEvent(this.updatePostDto, this.id);
 }
 
-class SaveDeliveryPostEvent extends PostEvent{
-  final DeliveryPost deliveryPost;
+class FetchPostsEvent extends PostEvent {}
 
-  const SaveDeliveryPostEvent(this.deliveryPost);
+class PostDeletedState extends PostState {}
 
+class SaveDeliveryPostEvent extends PostEvent {
+  final CreateDeliveryPostDto createDPDto;
+
+  const SaveDeliveryPostEvent(this.createDPDto);
 }
-class GetMyDeliveryPostEvent extends PostEvent{
-  final String creatorId;
 
- const GetMyDeliveryPostEvent(this.creatorId);
-
+class GetMyDeliveryPostEvent extends PostEvent {
+  const GetMyDeliveryPostEvent();
 }
-class GetSingleDeliveryPostEvent extends PostEvent{
+
+class GetSingleDeliveryPostEvent extends PostEvent {
   final String deliveryPostId;
 
   const GetSingleDeliveryPostEvent(this.deliveryPostId);
-
 }
-class UpdateDeliveryPostEvent extends PostEvent{
-  final DeliveryPost deliveryPost;
 
-  const UpdateDeliveryPostEvent(this.deliveryPost);
+class UpdateDeliveryPostEvent extends PostEvent {
+  final UpdateDeliveryPostDto updateDPDto;
+  final String id;
 
+  const UpdateDeliveryPostEvent(this.updateDPDto, this.id);
 }
-class DeleteDeliveryPostEvent extends PostEvent{
+
+class DeleteDeliveryPostEvent extends PostEvent {
   final String deliveryPostId;
 
   const DeleteDeliveryPostEvent(this.deliveryPostId);
-
 }
-

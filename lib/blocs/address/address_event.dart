@@ -5,29 +5,29 @@ abstract class AddressEvent extends Equatable {
   List<Object?> get props => [];
   const AddressEvent();
 }
-class SaveAddressEvent extends AddressEvent{
-  final Address address;
 
-  const SaveAddressEvent(this.address);
+class SaveAddressEvent extends AddressEvent {
+  final CreateAddressDto createAddressDto;
+
+  const SaveAddressEvent(this.createAddressDto);
 }
 
-class GetAllAddressEvent extends AddressEvent{
+class GetAllAddressEvent extends AddressEvent {}
 
+class GetSingleAddressEvent extends AddressEvent {
+  final String id;
+
+  const GetSingleAddressEvent(this.id);
 }
 
-class GetSingleAddressEvent extends AddressEvent{
-  final String addressId;
+class UpdateAddressEvent extends AddressEvent {
+  final UpdateAddressDto updateAddressDto;
+  final String id;
 
-  const GetSingleAddressEvent(this.addressId);
+  const UpdateAddressEvent(this.id, this.updateAddressDto);
 }
 
-class UpdateAddressEvent extends AddressEvent{
-  final Address address;
-
-  const UpdateAddressEvent(this.address);
-}
-
-class DeleteAddressEvent extends AddressEvent{
+class DeleteAddressEvent extends AddressEvent {
   final String addressId;
 
   const DeleteAddressEvent(this.addressId);

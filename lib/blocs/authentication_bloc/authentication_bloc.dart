@@ -1,18 +1,17 @@
 import 'dart:async';
-import 'package:carshop_mobile/models/user/user_response.dart';
-import 'package:bloc/bloc.dart';
-import 'package:carshop_mobile/models/user/user_request.dart';
-import 'package:equatable/equatable.dart';
 
-import '../../repositories/user_repository.dart';
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  UserRepository? repository;
-  AuthenticationBloc({this.repository}) : super(AuthenticationInitial()) {
+  AuthenticationBloc() : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
     on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
     on<GetUserEvent>(_mapGetUserEventToState);
@@ -25,79 +24,86 @@ class AuthenticationBloc
   FutureOr<void> _mapSignUpEventToState(
       SignUpEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response = await repository!.signUp(event.userModel);
-    response.fold((l) {}, (r) {
-      emit(Authenticated(r));
-    });
+    var client = CarshopSDK().client;
+    final response = await client.authOauthGooglePost(body: event.authDto);
+
+    if (response.statusCode == 200) {
+      emit(Authenticated(response.body));
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapSignInWithGoogleEventToState(
       SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response = await repository!.signInWithGoogle();
-    response.fold((l) {
-      print(l.message);
-      emit(AuthenticationErrorState(l.message));
-    }, (user) {
-      print(user);
-      emit(Authenticated(user));
-    });
+    var client = CarshopSDK().client;
+    final response = await client.authOauthGooglePost(body: event.authDto);
+
+    if (response.statusCode == 200) {
+      emit(Authenticated(response.body));
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapAppStartedEventToState(
       AppStartedEvent event, Emitter<AuthenticationState> emit) async {
-    try {
-      bool? isSignedIn = await repository!.isSignedIn();
-      if (isSignedIn!) {
-        emit(Authenticated(UserResponse()));
-      } else {
-        emit((UnAuthenticated()));
-      }
-    } catch (e) {
-      emit(UnAuthenticated());
-    }
+    //TODO: check token expiration date. it doesn't need a call to the server
+    var client = CarshopSDK().client;
+    final response = await client.authDetailsGet();
+    if (response.statusCode == 200) {}
+
+    emit(UnAuthenticated());
   }
 
   FutureOr<void> _mapSignOutEventToState(
       SignOutEvent event, Emitter<AuthenticationState> emit) async {
-    try {
-      await repository!.signOut();
+    var client = CarshopSDK().client;
+    final response = await client.authLogoutPost();
+    if (response.statusCode == 200) {
       emit(SignedOutState());
-    } catch (e) {
-      emit(SignedOutState());
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
     }
   }
 
   FutureOr<void> _mapGetUserEventToState(
       GetUserEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response = await repository!.getUser();
-    response.fold((l) {
-      emit(AuthenticationErrorState(l.message));
-    }, (user) {
-      emit(UserLoadedState(user));
-    });
+    var client = CarshopSDK().client;
+    final response = await client.usersGet();
+
+    if (response.statusCode == 200) {
+      emit(UserLoadedState(response.body));
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapUpdateUserEventToState(
       UpdateUserEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response = await repository!.updateUser(event.userRequest);
-    response.fold((l) {
-      emit(AuthenticationErrorState(l.message));
-    }, (user) {
-      emit(UserLoadedState(user));
-    });
+    var client = CarshopSDK().client;
+    final response = await client.usersPatch(body: event.userUpdateDto);
+
+    if (response.statusCode == 200) {
+      emit(UserLoadedState(response.body));
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
+    }
   }
 
   FutureOr<void> _mapDeactivateEventToState(
       DeactivateEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
-    final response = await repository!.deactivateUser();
-    response.fold((l) {
-      emit(AuthenticationErrorState(l.message));
-    }, (user) {
+    var client = CarshopSDK().client;
+    final response = await client.authDeactivatePost();
+
+    if (response.statusCode == 200) {
       emit(UnAuthenticated());
-    });
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
+    }
   }
 }
