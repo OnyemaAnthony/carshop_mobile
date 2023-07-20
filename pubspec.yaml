@@ -57,7 +57,7 @@ dependencies:
   carshop_clientsdk:
     git:
       url: https://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@github.com/Hasankanso/carshop_client_sdk.git
-      ref: 3d663cd9672c850a031f4400693c5a2d7be0aa5d
+      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
 
 dev_dependencies:
   flutter_test:
