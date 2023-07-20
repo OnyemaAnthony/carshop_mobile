@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:logger/logger.dart';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
@@ -27,7 +27,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           currentLocation: event.location,
           markers: state.markers!));
     } else {
-      print("No Posts Found in this location ${event.location}");
+      final logger = Logger();
       emit(CurrLocationUpdated(
           currentLocation: state.currentLocation!, markers: state.markers!));
     }

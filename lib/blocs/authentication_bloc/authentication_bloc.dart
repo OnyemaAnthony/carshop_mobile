@@ -3,6 +3,7 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -34,11 +35,14 @@ class AuthenticationBloc
 
   FutureOr<void> _mapSignInWithGoogleEventToState(
       SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async {
+    final logger = Logger();
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
     final response = await client.authOauthGooglePost(body: event.authDto);
 
     if (response.statusCode == 200) {
+      logger.d(response.body);
+
       emit(Authenticated(response.body));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));

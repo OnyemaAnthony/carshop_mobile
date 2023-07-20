@@ -8,13 +8,13 @@ abstract class CommentEvent extends Equatable {
 }
 
 class GetAllPostEvent extends CommentEvent {
-  final Comment comment;
+  final dynamic comment;
 
   const GetAllPostEvent(this.comment);
 }
 
 class GetCommentHistoryEvent extends CommentEvent {
-  final Comment comment;
+  final dynamic comment;
 
   const GetCommentHistoryEvent(this.comment);
 }
@@ -25,14 +25,15 @@ class DeleteCommentEvent extends CommentEvent {
   const DeleteCommentEvent(this.commentId);
 }
 
+
 class UpdateCommentEvent extends CommentEvent {
-  final Comment comment;
+  final dynamic comment;
 
   const UpdateCommentEvent(this.comment);
 }
 
 class SaveComment extends CommentEvent {
-  final Comment comment;
+  final dynamic comment;
 
   const SaveComment(this.comment);
 }
