@@ -57,7 +57,6 @@ class MapScreen extends StatelessWidget {
               ),
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
-                  print(state.runtimeType);
                   _goToLocation(state.currentLocation!);
                 },
                 // onPressed: _goToTheLake,

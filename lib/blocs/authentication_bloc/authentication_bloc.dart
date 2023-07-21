@@ -64,7 +64,6 @@ class AuthenticationBloc
     if( isLoggedIn){
       var client = CarshopSDK().client;
       final response = await client.authDetailsGet();
-      logger.d(response.statusCode);
       if (response.statusCode == 200) {
         AuthenticationResponseDto authResponse = AuthenticationResponseDto(data: response.body!.data);
         emit(Authenticated(authResponse));

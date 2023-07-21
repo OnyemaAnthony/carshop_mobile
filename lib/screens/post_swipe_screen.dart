@@ -48,8 +48,7 @@ class PostSwipeScreen extends StatelessWidget {
         }));
   }
 
-  void _swipe(
-      int index, AppinioSwiperDirection direction, BuildContext context) {
+  void _swipe(int index, AppinioSwiperDirection direction, BuildContext context) {
     if (direction == AppinioSwiperDirection.left) {
       BlocProvider.of<SwipeBloc>(context).add(const SwipeLeft());
     } else {

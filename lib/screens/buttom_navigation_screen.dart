@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
+import 'package:carshop_mobile/screens/account_screen.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
 import 'package:carshop_mobile/screens/create_post_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
@@ -25,8 +26,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   int _selectedIndex = 0;
   static final List<Widget> _screens = <Widget>[
     MapScreen(),
-    const CreateDeliveryPostScreen(),
-    const CreatePostScreen(),
+    const AccountScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -128,12 +128,12 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.search),
-        title: ("Search"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
+      // PersistentBottomNavBarItem(
+      //   icon: const Icon(CupertinoIcons.search),
+      //   title: ("Search"),
+      //   activeColorPrimary: CupertinoColors.activeBlue,
+      //   inactiveColorPrimary: CupertinoColors.systemGrey,
+      // ),
 
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.person),
