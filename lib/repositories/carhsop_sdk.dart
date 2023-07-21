@@ -23,7 +23,7 @@ class CarshopSDK {
           (Request request) async => request.copyWith(headers: {
                 'Accept': "application/json",
                 'Content-type': "application/json",
-                'Authorization': await LocalStorage.getString('access_token'),
+                'x-access-token': await LocalStorage.getString('access_token'),
               }),
         ]);
   }

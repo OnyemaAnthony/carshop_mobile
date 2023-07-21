@@ -26,4 +26,10 @@ class UiUtilities{
  static showLoader(){
     return const Center(child: CircularProgressIndicator(),);
  }
+
+  static  Widget showMainLoader(){
+    return  const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
+    );
+  }
 }

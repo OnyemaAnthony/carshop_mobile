@@ -55,6 +55,7 @@ dependencies:
   google_maps_flutter: ^2.3.1
   http: ^1.1.0
   persistent_bottom_nav_bar: ^5.0.2
+  jwt_decode: ^0.3.1
   carshop_clientsdk:
     git:
       url: https://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@github.com/Hasankanso/carshop_client_sdk.git

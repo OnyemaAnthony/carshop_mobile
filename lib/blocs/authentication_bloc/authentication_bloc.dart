@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
+import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:logger/logger.dart';
 
 part 'authentication_event.dart';
@@ -27,6 +31,7 @@ class AuthenticationBloc
     final response = await client.authOauthGooglePost(body: event.authDto);
 
     if (response.statusCode == 200) {
+
       emit(Authenticated(response.body));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
@@ -41,22 +46,37 @@ class AuthenticationBloc
     final response = await client.authOauthGooglePost(body: event.authDto);
 
     if (response.statusCode == 200) {
-      logger.d(response.body);
-
+     final token = (response.body!.data as Map<String,dynamic>)['auth']['accessToken'];
+      LocalStorage.saveString(key: "access_token", value:token );
       emit(Authenticated(response.body));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
   }
 
-  FutureOr<void> _mapAppStartedEventToState(
-      AppStartedEvent event, Emitter<AuthenticationState> emit) async {
-    //TODO: check token expiration date. it doesn't need a call to the server
-    var client = CarshopSDK().client;
-    final response = await client.authDetailsGet();
-    if (response.statusCode == 200) {}
+  FutureOr<void> _mapAppStartedEventToState(AppStartedEvent event, Emitter<AuthenticationState> emit) async {
+    emit(AuthenticationLoadingState());
+    Logger logger = Logger();
+    FirebaseAuth auth = FirebaseAuth.instance;
+    
+    String token = await LocalStorage.getString('access_token');
+    bool isLoggedIn = token.isNotEmpty && !Jwt.isExpired(token) && auth.currentUser!=null;
+    if( isLoggedIn){
+      var client = CarshopSDK().client;
+      final response = await client.authDetailsGet();
+      logger.d(response.statusCode);
+      if (response.statusCode == 200) {
+        AuthenticationResponseDto authResponse = AuthenticationResponseDto(data: response.body!.data);
+        emit(Authenticated(authResponse));
+      }else{
+        emit(UnAuthenticated());
+      }
 
-    emit(UnAuthenticated());
+    }else{
+      emit(UnAuthenticated());
+
+    }
+
   }
 
   FutureOr<void> _mapSignOutEventToState(

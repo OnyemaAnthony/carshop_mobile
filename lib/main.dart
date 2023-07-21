@@ -1,18 +1,25 @@
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
-
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/authentication_bloc/authentication_bloc.dart';
+import 'blocs/map/map_bloc.dart';
+import 'blocs/map/map_events.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiBlocProvider(providers: [
+
     BlocProvider(
-      create: (BuildContext context) =>
-          AuthenticationBloc()..add(AppStartedEvent()),
+      create: (context) => MapBloc()..add(GetCurrentLocationEvent()),
+    ),
+    BlocProvider(
+
+      create: (BuildContext context) => AuthenticationBloc()..add(AppStartedEvent()),
     ),
   ], child: const MyApp()));
 }
@@ -29,6 +36,7 @@ class MyApp extends StatelessWidget {
       //home: LoginPage(),
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) {
+            print("loger ${state}");
         if (state is Authenticated) {
           return const BottomNavigationBarScreen();
         } else if (state is UnAuthenticated) {
@@ -37,10 +45,10 @@ class MyApp extends StatelessWidget {
           return const Center(
             child: Text('Something went wrong try again later'),
           );
+        }else if(state is AuthenticationLoadingState){
+          return  UiUtilities.showMainLoader();
         }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        return  UiUtilities.showMainLoader();
       }),
     );
   }

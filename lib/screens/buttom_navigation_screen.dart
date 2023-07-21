@@ -24,10 +24,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   late AuthenticationBloc authenticationBloc;
   int _selectedIndex = 0;
   static final List<Widget> _screens = <Widget>[
-    BlocProvider(
-      create: (context) => MapBloc()..add(GetCurrentLocationEvent()),
-      child: MapScreen(),
-    ),
+    MapScreen(),
     const CreateDeliveryPostScreen(),
     const CreatePostScreen(),
   ];
