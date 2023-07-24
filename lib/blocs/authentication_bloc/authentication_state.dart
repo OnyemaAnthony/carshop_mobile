@@ -9,13 +9,13 @@ abstract class AuthenticationState extends Equatable {
 class AuthenticationInitial extends AuthenticationState {}
 
 class Authenticated extends AuthenticationState {
-  final AuthenticationResponseDto? userModel;
+  final GoogleAuthResponse? userModel;
 
   const Authenticated(this.userModel);
 }
 
 class UserLoadedState extends AuthenticationState {
-  final UserResponseDto? userModel;
+  final UpdateUserResponse? userModel;
 
   const UserLoadedState(this.userModel);
 }

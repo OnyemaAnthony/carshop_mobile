@@ -9,7 +9,7 @@ class DeliveryPostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Swipe Page'),
+        title: const Text('Swipe Page'),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -29,7 +29,7 @@ class DeliveryPostPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 post.postContent?.title ?? 'No title',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -44,64 +44,64 @@ class DeliveryPostPage extends StatelessWidget {
                   children: [
                     Text(
                       'Product Name: ${post.deliveryPostContent?.productName}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'Reward: ${post.deliveryPostContent?.reward}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'Start Date: ${post.deliveryPostContent?.deliveryStartDate}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'End Date: ${post.deliveryPostContent?.deliveryEndDate}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'Destination: ${post.deliveryPostContent?.destination}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     if (post.deliveryPostContent?.startLocation != null)
                       Text(
                         'Start Location: ${post.deliveryPostContent?.startLocation}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () {
                         _showBottomSheet(context, post);
                       },
-                      child: Text(
+                      child: const Text(
                         'Show Bottom Sheet',
                         style: TextStyle(
                           fontSize: 16,
@@ -119,13 +119,13 @@ class DeliveryPostPage extends StatelessWidget {
     );
   }
 
-  void _showBottomSheet(BuildContext context, DeliveryPost post) {
+  Future<void> _showBottomSheet(BuildContext context, DeliveryPost post) async {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
         return Container(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[

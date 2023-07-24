@@ -3,10 +3,13 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
+import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
+import 'package:carshop_mobile/screens/create_post_screen.dart';
 import 'package:carshop_mobile/screens/post_swipe_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -42,6 +45,7 @@ class MapScreen extends StatelessWidget {
           case LocationLoading:
           case CurrLocationUpdated:
             return Scaffold(
+
               body: GoogleMap(
                 onTap: (position) {
                   bloc.add(FetchPostsEvent(
@@ -55,14 +59,28 @@ class MapScreen extends StatelessWidget {
                   _controller = controller;
                 },
               ),
-              floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
-                  _goToLocation(state.currentLocation!);
-                },
-                // onPressed: _goToTheLake,
-                label: const Text('Go to my location'),
-                icon: const Icon(Icons.add),
+              floatingActionButton: SpeedDial(
+                icon: Icons.add,
+                children: [
+                  SpeedDialChild(
+                    label: "Create normal post",
+                    onTap: ()=>UiUtilities.push(context, const CreatePostScreen()),
+                  ),
+                  SpeedDialChild(
+                    label: "Create Delivery post",
+                    onTap: ()=>UiUtilities.push(context, const CreateDeliveryPostScreen()),
+
+                  )
+                ],
               ),
+              // floatingActionButton: FloatingActionButton.extended(
+              //   onPressed: () {
+              //     _goToLocation(state.currentLocation!);
+              //   },
+              //   // onPressed: _goToTheLake,
+              //   label: const Text('Go to my location'),
+              //   icon: const Icon(Icons.add),
+              // ),
             );
           case PostsReady:
             return const Scaffold(

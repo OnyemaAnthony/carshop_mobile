@@ -15,8 +15,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<GetCurrentLocationEvent>(_getCurrentLocationEventToState);
   }
 
-  FutureOr<void> _mapFetchPostsEventToState(
-      FetchPostsEvent event, Emitter<MapState> emit) async {
+  FutureOr<void> _mapFetchPostsEventToState(FetchPostsEvent event, Emitter<MapState> emit) async {
+    final logger = Logger();
     var client = CarshopSDK().client;
     var posts = await client.normalPostsGet(
         body: GetManyPostsDto(location: state.currentLocation));

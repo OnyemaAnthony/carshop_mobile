@@ -46,8 +46,8 @@ class AuthenticationBloc
     final response = await client.authOauthGooglePost(body: event.authDto);
 
     if (response.statusCode == 200) {
-     final token = (response.body!.data as Map<String,dynamic>)['auth']['accessToken'];
-      LocalStorage.saveString(key: "access_token", value:token );
+      LocalStorage.saveString(key: 'cached_user', googleAuthResponse: response.body,isCached: true);
+      LocalStorage.saveString(key: "access_token", value:response.body!.data.auth!.accessToken! );
       emit(Authenticated(response.body));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
@@ -62,18 +62,10 @@ class AuthenticationBloc
     String token = await LocalStorage.getString('access_token');
     bool isLoggedIn = token.isNotEmpty && !Jwt.isExpired(token) && auth.currentUser!=null;
     if( isLoggedIn){
-      var client = CarshopSDK().client;
-      final response = await client.authDetailsGet();
-      if (response.statusCode == 200) {
-        AuthenticationResponseDto authResponse = AuthenticationResponseDto(data: response.body!.data);
-        emit(Authenticated(authResponse));
-      }else{
-        emit(UnAuthenticated());
-      }
-
-    }else{
+      GoogleAuthResponse? user = await LocalStorage.fetchCachedUser();
+      emit(Authenticated(user));
+     }else{
       emit(UnAuthenticated());
-
     }
 
   }

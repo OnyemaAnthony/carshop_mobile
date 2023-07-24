@@ -5,6 +5,7 @@ import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -65,8 +66,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () async {
+                      final logger = Logger();
                       String? code = await FirebaseService().signInWithGoogle();
-
                       if (code != null) {
                         AuthenticateBodyDto auth = AuthenticateBodyDto(
                           code: code,
