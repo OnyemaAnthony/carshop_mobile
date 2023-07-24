@@ -59,18 +59,35 @@ class MapScreen extends StatelessWidget {
                   _controller = controller;
                 },
               ),
-              floatingActionButton: SpeedDial(
-                icon: Icons.add,
+              floatingActionButton: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SpeedDialChild(
-                    label: "Create normal post",
-                    onTap: ()=>UiUtilities.push(context, const CreatePostScreen()),
-                  ),
-                  SpeedDialChild(
-                    label: "Create Delivery post",
-                    onTap: ()=>UiUtilities.push(context, const CreateDeliveryPostScreen()),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: FloatingActionButton.extended(
+                        label: const Text('Go to my location'),
 
-                  )
+                        onPressed: (){
+                          _goToLocation(state.currentLocation!);
+
+                        }),
+                  ),
+                  SpeedDial(
+                    icon: Icons.add,
+                    children: [
+                      SpeedDialChild(
+                        label: "Create normal post",
+                        onTap: ()=>UiUtilities.push(context, const CreatePostScreen()),
+                      ),
+                      SpeedDialChild(
+                        label: "Create Delivery post",
+                        onTap: ()=>UiUtilities.push(context, const CreateDeliveryPostScreen()),
+
+                      ),
+
+                    ],
+                  ),
+
                 ],
               ),
               // floatingActionButton: FloatingActionButton.extended(
