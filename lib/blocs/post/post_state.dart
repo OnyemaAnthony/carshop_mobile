@@ -6,50 +6,45 @@ abstract class PostState extends Equatable {
   List<Object> get props => [];
 }
 
-class PostInitial extends PostState {
+class PostInitial extends PostState {}
 
-}
+class PostLoadingState extends PostState {}
 
-class PostLoadingState extends PostState{
-
-}
-
-class PostLoadedState extends PostState{
-  final List<PostModel> posts;
+class PostLoadedState extends PostState {
+  final List<NormalPost> posts;
 
   const PostLoadedState(this.posts);
-
 }
-class DeliveryPostLoadedState extends PostState{
+
+class DeliveryPostLoadedState extends PostState {
   final List<DeliveryPost> deliveryPost;
 
   const DeliveryPostLoadedState(this.deliveryPost);
 }
-class DeliveryPostLoadingState extends PostState{
 
-}
-class PostedState extends PostState{
+class DeliveryPostLoadingState extends PostState {}
 
-}
-class PostDeliveredState extends PostState{
+class PostedState extends PostState {}
+
+class PostDeliveredState extends PostState {
   final DeliveryPost deliveryPost;
 
   const PostDeliveredState(this.deliveryPost);
 }
 
-class PostErrorState extends PostState{
+class PostErrorState extends PostState {
   final String errorMessage;
 
- const PostErrorState(this.errorMessage);
+  const PostErrorState(this.errorMessage);
 }
 
-class PostLoadState extends PostState{
-  final PostModel postModel;
+class PostLoadState extends PostState {
+  final NormalPost postModel;
 
   const PostLoadState(this.postModel);
 }
 
-class DeliveryPostLoadState extends PostState{
+class DeliveryPostLoadState extends PostState {
   final DeliveryPost deliveryPost;
 
   const DeliveryPostLoadState(this.deliveryPost);

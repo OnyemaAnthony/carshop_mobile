@@ -1,16 +1,15 @@
 import 'dart:core';
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/swipe_posts/swipe_bloc.dart';
-import 'package:carshop_mobile/models/post/delivery_post.dart';
-import 'package:carshop_mobile/models/post/post_model.dart';
 import 'package:carshop_mobile/widgets/swipe_module/models_extender.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostSwipeScreen extends StatelessWidget {
-  final List<PostModel> posts;
+  final List<NormalPost> posts;
 
   const PostSwipeScreen({
     super.key,
@@ -35,7 +34,8 @@ class PostSwipeScreen extends StatelessWidget {
                         return (state.posts[index] as DeliveryPost)
                             .getSwipeItem();
                       }
-                      return state.posts[index].getSwipeItem();
+                      return Text("hii");
+                      //return state.posts[index].getSwipeItem();
                     },
                     indicatorLayout: PageIndicatorLayout.COLOR,
                     loop: false,

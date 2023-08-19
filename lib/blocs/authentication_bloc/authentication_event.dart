@@ -5,33 +5,29 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object?> get props => [];
   const AuthenticationEvent();
 }
+
 class SignUpEvent extends AuthenticationEvent {
-  final UserRequest userModel;
+  final AuthenticateBodyDto authDto;
 
-  const SignUpEvent(this.userModel);
+  const SignUpEvent(this.authDto);
 }
 
-class SignInWithGoogleEvent extends AuthenticationEvent{
+class SignInWithGoogleEvent extends AuthenticationEvent {
+  final AuthenticateBodyDto authDto;
 
+  const SignInWithGoogleEvent(this.authDto);
 }
 
-class AppStartedEvent extends AuthenticationEvent{
+class AppStartedEvent extends AuthenticationEvent {}
 
+class SignOutEvent extends AuthenticationEvent {}
+
+class DeactivateEvent extends AuthenticationEvent {}
+
+class UpdateUserEvent extends AuthenticationEvent {
+  final UserUpdateBodyDto userUpdateDto;
+
+  const UpdateUserEvent(this.userUpdateDto);
 }
 
-class SignOutEvent extends AuthenticationEvent{
-}
-
-class DeactivateEvent extends AuthenticationEvent{
-
-}
-
-class UpdateUserEvent extends AuthenticationEvent{
-  final UserRequest userRequest;
-
-  const UpdateUserEvent(this.userRequest);
-}
-
-class GetUserEvent extends AuthenticationEvent{
-
-}
+class GetUserEvent extends AuthenticationEvent {}

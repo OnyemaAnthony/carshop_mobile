@@ -54,7 +54,16 @@ dependencies:
   card_swiper: ^2.0.4
   google_maps_flutter: ^2.3.1
   http: ^1.1.0
-  
+  persistent_bottom_nav_bar: ^5.0.2
+  jwt_decode: ^0.3.1
+  intl: ^0.17.0
+  carshop_clientsdk:
+    git:
+      url: https://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@github.com/Hasankanso/carshop_client_sdk.git
+      ref: ce634fc1039c222df6b0bfdb43f24a37070ba1e6
+  flutter_speed_dial: ^7.0.0
+#      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

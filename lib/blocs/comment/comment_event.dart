@@ -7,33 +7,33 @@ abstract class CommentEvent extends Equatable {
   const CommentEvent();
 }
 
-class GetAllPostEvent extends CommentEvent{
-  final CommentResponse comment;
+class GetAllPostEvent extends CommentEvent {
+  final dynamic comment;
 
   const GetAllPostEvent(this.comment);
-
 }
 
-class GetCommentHistoryEvent extends CommentEvent{
-  final CommentResponse comment;
+class GetCommentHistoryEvent extends CommentEvent {
+  final dynamic comment;
 
- const GetCommentHistoryEvent(this.comment);
+  const GetCommentHistoryEvent(this.comment);
 }
 
-class DeleteCommentEvent extends CommentEvent{
+class DeleteCommentEvent extends CommentEvent {
   final String commentId;
 
   const DeleteCommentEvent(this.commentId);
-
 }
 
-class UpdateCommentEvent extends CommentEvent{
-  final CommentRequest comment;
+
+class UpdateCommentEvent extends CommentEvent {
+  final dynamic comment;
 
   const UpdateCommentEvent(this.comment);
 }
-class SaveComment extends CommentEvent{
-  final CommentRequest comment;
+
+class SaveComment extends CommentEvent {
+  final dynamic comment;
 
   const SaveComment(this.comment);
 }
