@@ -1,13 +1,33 @@
+import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:carshop_mobile/screens/login_screen.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Account"),
-        centerTitle: true,
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (state is SignedOutState) {
+          UiUtilities.navBarReplacement(
+              context, const LoginScreen(), false);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Account"),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context.read<AuthenticationBloc>().add(SignOutEventTest());
+                },
+                icon: const Icon(Icons.logout))
+          ],
+        ),
       ),
     );
   }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-class UiUtilities{
-  static void showToast({required String message, required Toast toast}){
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../widgets/shared_widgets/build_text.dart';
+import 'colors.dart';
+
+class UiUtilities {
+  static void showToast({required String message, required Toast toast}) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: toast,
@@ -10,27 +14,51 @@ class UiUtilities{
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.black,
-        fontSize: 16.0
+        fontSize: 16.0);
+  }
+
+  static void showSnackBar(
+      {required String txt, required BuildContext context}) {
+    SnackBar snackBar = SnackBar(
+      content: BuildText(
+        text: txt,
+        fontSize: 13.5,
+        color: AppColors.thirdLightColor,
+      ),
+      backgroundColor: AppColors.primaryColor,
     );
-
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-
-  static void push(BuildContext context,Widget screen){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>screen));
+  static void push(BuildContext context, Widget screen) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => screen));
   }
-  static void pop(BuildContext context){
+
+  static void pop(BuildContext context) {
     Navigator.of(context).pop();
   }
-  static void pushReplacement(BuildContext context,Widget screen){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>screen));
-  }
- static showLoader(){
-    return const Center(child: CircularProgressIndicator(),);
- }
 
-  static  Widget showMainLoader(){
-    return  const Scaffold(
+  static void pushReplacement(BuildContext context, Widget screen) {
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => screen));
+  }
+
+  static void navBarReplacement(
+      BuildContext context, Widget screen, bool withNavBar) {
+    PersistentNavBarNavigator.pushNewScreen(context,
+        screen: screen, withNavBar: withNavBar);
+  }
+
+  static showLoader() {
+    return const Center(
+      child: CircularProgressIndicator(
+        color: AppColors.thirdLightColor,
+      ),
+    );
+  }
+
+  static Widget showMainLoader() {
+    return const Scaffold(
       body: Center(child: CircularProgressIndicator()),
     );
   }
