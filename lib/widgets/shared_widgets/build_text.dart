@@ -1,7 +1,6 @@
+import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:flutter/material.dart';
-
-import '../../utilities/colors.dart';
 
 class BuildText extends StatelessWidget {
   final String text;

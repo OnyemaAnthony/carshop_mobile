@@ -1,12 +1,11 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/widgets/login_screen/bottom_curve_custom_paint.dart';
+import 'package:carshop_mobile/widgets/login_screen/login_ways_column.dart';
 import 'package:carshop_mobile/widgets/login_screen/top_curves_custom_paint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../widgets/login_screen/bottom_curve_custom_paint.dart';
-import '../widgets/login_screen/login_ways_column.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

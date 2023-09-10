@@ -14,7 +14,8 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc() : super(AuthenticationInitial()) {
+  final String accessToken;
+  AuthenticationBloc(this.accessToken) : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
     on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
     on<SignInWithFacebookEvent>(_mapSignInWithFacebookEventToState);
@@ -44,9 +45,9 @@ class AuthenticationBloc
   FutureOr<void> _mapSignInWithGoogleEventToState(
       SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async {
     final logger = Logger();
-    emit(AuthenticationLoadingState());
     String? code = await FirebaseService().signInWithGoogle();
     if (code != null) {
+      emit(AuthenticationLoadingState());
       AuthenticateBodyDto auth = AuthenticateBodyDto(
         code: code,
       );
@@ -69,20 +70,13 @@ class AuthenticationBloc
   FutureOr<void> _mapSignInWithFacebookEventToState(
       SignInWithFacebookEvent event, Emitter<AuthenticationState> emit) async {
     String? code = await FirebaseService().signInWithFacebook();
-    emit(AuthenticationLoadingState());
     if (code != null) {
-      AuthenticateBodyDto auth = AuthenticateBodyDto(
-        code: code,
-      );
+      emit(AuthenticationLoadingState());
       var client = CarshopSDK().client;
-      /// here we need edit to facebook end point
-      final response = await client.authOauthGoogleDevPost(body: auth);
+      final response =
+          await client.authFacebookSignInWithFacebookGet(code: code);
       if (response.statusCode == 200) {
-        LocalStorage.saveString(
-            key: 'cached_user',
-            googleAuthResponse: response.body,
-            isCached: true);
-        LocalStorage.saveString(
+        await LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
         emit(Authenticated(response.body));
       } else {
@@ -96,9 +90,20 @@ class AuthenticationBloc
 
   FutureOr<void> _mapSignInWithMicrosoftEventToState(
       SignInWithMicrosoftEvent event, Emitter<AuthenticationState> emit) async {
-    String? token = await FirebaseService().signInWithMicrosoft();
-    print('token');
-    print(token);
+    String? code = await FirebaseService().signInWithMicrosoft();
+    if (code != null) {
+      emit(AuthenticationLoadingState());
+      var client = CarshopSDK().client;
+      final response =
+          await client.authMicrosoftSignInWithMicrosoftGet(code: code);
+      if (response.statusCode == 200) {
+        await LocalStorage.saveString(
+            key: "access_token", value: response.body!.data.auth!.accessToken!);
+        emit(Authenticated(response.body));
+      } else {
+        emit(AuthenticationErrorState(response.error.toString()));
+      }
+    }
   }
 
   FutureOr<void> _mapAppStartedEventToState(
@@ -106,10 +111,8 @@ class AuthenticationBloc
     emit(AuthenticationLoadingState());
     Logger logger = Logger();
     FirebaseAuth auth = FirebaseAuth.instance;
-
-    String token = await LocalStorage.getString('access_token');
     bool isLoggedIn =
-        token.isNotEmpty && !Jwt.isExpired(token) && auth.currentUser != null;
+        accessToken.isNotEmpty && !Jwt.isExpired(accessToken) && auth.currentUser != null;
     if (isLoggedIn) {
       GoogleAuthResponse? user = await LocalStorage.fetchCachedUser();
       emit(Authenticated(user));
@@ -132,7 +135,7 @@ class AuthenticationBloc
   /// test
   FutureOr<void> _mapSignOutEventTest(
       SignOutEventTest event, Emitter<AuthenticationState> emit) async {
-    await FirebaseAuth.instance.signOut();
+    await LocalStorage.removeString("access_token");
     emit(SignedOutState());
   }
 

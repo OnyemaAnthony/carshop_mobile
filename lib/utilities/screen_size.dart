@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-abstract class ScreenSize {
+class ScreenSize {
   static double getStatusBarHeight(BuildContext context) {
     return MediaQuery.of(context).padding.top;
   }

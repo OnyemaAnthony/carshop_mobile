@@ -1,7 +1,6 @@
 import 'package:carshop_mobile/utilities/extensions.dart';
+import 'package:carshop_mobile/widgets/login_screen/bottom_curve_custom_paint/bottom_fsm_custom_painter.dart';
 import 'package:flutter/material.dart';
-
-import 'bottom_curve_custom_paint/bottom_fsm_custom_painter.dart';
 
 class BottomCurveCustomPaint extends StatelessWidget {
   const BottomCurveCustomPaint({super.key});

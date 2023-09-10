@@ -1,8 +1,8 @@
 import 'package:carshop_mobile/utilities/colors.dart';
+import 'package:carshop_mobile/utilities/extensions.dart';
+import 'package:carshop_mobile/widgets/shared_widgets/build_icon.dart';
+import 'package:carshop_mobile/widgets/shared_widgets/build_text.dart';
 import 'package:flutter/material.dart';
-import '../../../../utilities/extensions.dart';
-import '../../../shared_widgets/build_icon.dart';
-import '../../../shared_widgets/build_text.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final Function() onPressed;

@@ -70,7 +70,7 @@ class FirebaseService {
   Future<String?> signInWithMicrosoft() async {
     try {
       final Config config = Config(
-          tenant: '14d69258-573e-4946-a3da-dcd6cba7a3af',
+          tenant: 'common',
           clientId: '2e8c51f3-96d1-485b-aefe-29140a70af45',
           scope: 'User.Read',
           redirectUri:

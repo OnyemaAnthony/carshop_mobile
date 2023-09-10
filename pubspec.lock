@@ -101,8 +101,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: ce634fc1039c222df6b0bfdb43f24a37070ba1e6
-      resolved-ref: ce634fc1039c222df6b0bfdb43f24a37070ba1e6
+      ref: "2e3499c31710ffdde72cebfcf43adfcb6520073f"
+      resolved-ref: "2e3499c31710ffdde72cebfcf43adfcb6520073f"
       url: "https://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@github.com/Hasankanso/carshop_client_sdk.git"
     source: git
     version: "1.0.0"

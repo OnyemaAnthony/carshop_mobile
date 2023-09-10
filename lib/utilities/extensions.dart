@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
-
-import 'screen_size.dart';
+import 'package:carshop_mobile/utilities/screen_size.dart';
+import 'package:flutter/material.dart';
 
 extension SizedBoxExtentions on num {
   SizedBox sizedBox({num? width}) => SizedBox(
