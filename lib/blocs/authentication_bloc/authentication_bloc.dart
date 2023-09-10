@@ -110,9 +110,8 @@ class AuthenticationBloc
       AppStartedEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     Logger logger = Logger();
-    FirebaseAuth auth = FirebaseAuth.instance;
     bool isLoggedIn =
-        accessToken.isNotEmpty && !Jwt.isExpired(accessToken) && auth.currentUser != null;
+        accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
     if (isLoggedIn) {
       GoogleAuthResponse? user = await LocalStorage.fetchCachedUser();
       emit(Authenticated(user));
