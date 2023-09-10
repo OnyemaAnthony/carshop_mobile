@@ -12,11 +12,13 @@ class SignUpEvent extends AuthenticationEvent {
   const SignUpEvent(this.authDto);
 }
 
-class SignInWithGoogleEvent extends AuthenticationEvent {
-  final AuthenticateBodyDto authDto;
+class SignInWithGoogleEvent extends AuthenticationEvent {}
 
-  const SignInWithGoogleEvent(this.authDto);
-}
+class SignInWithFacebookEvent extends AuthenticationEvent {}
+
+class SignInWithAppleEvent extends AuthenticationEvent {}
+
+class SignInWithMicrosoftEvent extends AuthenticationEvent {}
 
 class AppStartedEvent extends AuthenticationEvent {}
 
@@ -31,3 +33,5 @@ class UpdateUserEvent extends AuthenticationEvent {
 }
 
 class GetUserEvent extends AuthenticationEvent {}
+
+class SignOutEventTest extends AuthenticationEvent {}
