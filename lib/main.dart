@@ -6,6 +6,8 @@ import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
+import 'package:carshop_mobile/utilities/store.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,13 +16,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  String accessToken = await LocalStorage.getString('access_token');
-  runApp(MyApp(accessToken: accessToken));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String accessToken;
-  const MyApp({super.key, required this.accessToken});
+  const MyApp();
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (BuildContext context) =>
-                AuthenticationBloc(accessToken)..add(AppStartedEvent()),
+                AuthenticationBloc()..add(AppStartedEvent()),
           ),
         ],
         child: MaterialApp(
@@ -43,10 +43,20 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData(
               scaffoldBackgroundColor: AppColors.scaffoldColor,
               brightness: Brightness.dark),
-          home: accessToken.isEmpty
-              ? const LoginScreen()
-              : const BottomNavigationBarScreen(),
-          navigatorKey: NavigatorKeys.loginNavigatorKey,
+          home:  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if(state is AuthenticationLoadingState){
+            return UiUtilities.showMainLoader();
+          }else if(state is Authenticated){
+            Store.user = state.userModel;
+            return const BottomNavigationBarScreen();
+          }else if(state is UnAuthenticated){
+            return const  LoginScreen();
+          }
+          ///TODO implement splash screen later
+        return Container();
+  },
+), navigatorKey: NavigatorKeys.loginNavigatorKey,
         ),
       ),
     );
