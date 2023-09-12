@@ -14,8 +14,7 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final String accessToken;
-  AuthenticationBloc(this.accessToken) : super(AuthenticationInitial()) {
+  AuthenticationBloc() : super(AuthenticationInitial()) {
     on<SignUpEvent>(_mapSignUpEventToState);
     on<SignInWithGoogleEvent>(_mapSignInWithGoogleEventToState);
     on<SignInWithFacebookEvent>(_mapSignInWithFacebookEventToState);
@@ -108,10 +107,9 @@ class AuthenticationBloc
 
   FutureOr<void> _mapAppStartedEventToState(
       AppStartedEvent event, Emitter<AuthenticationState> emit) async {
+    String accessToken = await LocalStorage.getString('access_token');
     emit(AuthenticationLoadingState());
-    Logger logger = Logger();
-    bool isLoggedIn =
-        accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
+    bool isLoggedIn = accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
     if (isLoggedIn) {
       GoogleAuthResponse? user = await LocalStorage.fetchCachedUser();
       emit(Authenticated(user));
