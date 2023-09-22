@@ -38,6 +38,12 @@ class UpdatePostEvent extends PostEvent {
 }
 
 class FetchPostsEvent extends PostEvent {}
+class FetchMyPostsEvent extends PostEvent {
+ final GetManyPostsDto getManyPostsDto ;
+
+  const FetchMyPostsEvent(this.getManyPostsDto);
+
+}
 
 class PostDeletedState extends PostState {}
 

@@ -20,7 +20,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<GetMyDeliveryPostEvent>(_mapGetMyDeliveryPostEventToState);
     on<GetSingleDeliveryPostEvent>(_mapGetSingleDeliveryPostEventToState);
     on<UpdateDeliveryPostEvent>(_mapUpdateDeliveryPostEventToState);
-    on<DeleteDeliveryPostEvent>(_mapDeleteDeliveryPostEventToState);
+    on<FetchMyPostsEvent>(_mapFetchMyPostsEventToState);
   }
 
   FutureOr<void> _mapFetchPostsEventToState(
@@ -126,11 +126,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     emit(DeliveryPostLoadingState());
 
     CarshopClientSdk client = CarshopSDK().client;
-    print('the response is }');
-
     final response = await client.deliveryPostsMyGet();
-    print('the response is ${response.body}');
-    print('the response is ${response.statusCode}');
     if (response.statusCode == 200) {
       emit(DeliveryPostLoadedState(response.body!));
     } else {
@@ -173,6 +169,17 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
     if (response.statusCode == 200) {
       emit(PostedState());
+    } else {
+      emit(PostErrorState(response.error.toString()));
+    }
+  }
+
+  FutureOr<void> _mapFetchMyPostsEventToState(FetchMyPostsEvent event, Emitter<PostState> emit)async {
+    emit(PostLoadingState());
+    CarshopClientSdk client = CarshopSDK().client;
+    final response = await client.normalPostsGet(body: event.getManyPostsDto);
+    if (response.statusCode == 200) {
+      emit(PostLoadedState(response.body!));
     } else {
       emit(PostErrorState(response.error.toString()));
     }
