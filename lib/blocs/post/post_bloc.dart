@@ -89,9 +89,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     final response = await client.normalPostsPost(
       body: event.createDto,
     );
-    logger.d(response);
-
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       emit(PostedState());
     } else {
       emit(PostErrorState(response.error.toString()));
@@ -128,7 +126,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     emit(DeliveryPostLoadingState());
 
     CarshopClientSdk client = CarshopSDK().client;
+    print('the response is }');
+
     final response = await client.deliveryPostsMyGet();
+    print('the response is ${response.body}');
+    print('the response is ${response.statusCode}');
     if (response.statusCode == 200) {
       emit(DeliveryPostLoadedState(response.body!));
     } else {
