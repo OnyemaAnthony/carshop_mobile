@@ -1,6 +1,6 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
-import 'package:carshop_mobile/screens/my_delivery_post_screen.dart';
+import 'package:carshop_mobile/screens/my_activities_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
@@ -35,14 +35,11 @@ class AccountScreen extends StatelessWidget {
             children: [
               SubmitButton(
                 text: "MyActivites",
-              ),
-             const SizedBox(height: 10,),
-              SubmitButton(
-                text: "My normal post",
-                onPress: (){
-                  UiUtilities.push(context, MyDeliveryPostScreen());
+                onPress: () {
+                  UiUtilities.navBarReplacement(
+                      context, const MyActivitiesScreen(), false);
                 },
-              ),
+              )
             ],
           ),
         ),
