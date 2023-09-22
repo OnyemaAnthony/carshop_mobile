@@ -17,15 +17,15 @@ class _MyNormalPostScreen extends State<MyNormalPostScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('My Normal post'), centerTitle: true,),
       body: BlocProvider(
-        create: (BuildContext context) => PostBloc()..add(const GetMyDeliveryPostEvent()),
+        create: (BuildContext context) => PostBloc()..add( FetchMyPostsEvent()),
         child: Builder(
             builder: (BuildContext context) {
               return BlocBuilder<PostBloc, PostState>(
                 builder: (context, state) {
-                  if(state is DeliveryPostLoadingState){
+                  if(state is PostLoadingState){
                     return UiUtilities.showMainLoader();
-                  }else if(state is DeliveryPostLoadedState){
-                    return _buildDeliveryPostList(state.deliveryPost);
+                  }else if(state is PostLoadedState){
+                    return _buildDeliveryPostList(state.posts);
                   }
                   return Container();
                 },
@@ -36,14 +36,14 @@ class _MyNormalPostScreen extends State<MyNormalPostScreen> {
 
     );
   }
-  Widget _buildDeliveryPostList(List<DeliveryPost> deliveryPosts){
+  Widget _buildDeliveryPostList(List<NormalPost> normalPosts){
     return ListView.builder(
-      itemCount: deliveryPosts.length,
+      itemCount: normalPosts.length,
       itemBuilder:(context, index) {
-        DeliveryPost deliveryPost = deliveryPosts[index];
+        NormalPost normalPost = normalPosts[index];
         return Card(
-          child: ListTile(title: Text(deliveryPost.postContent!.title),
-            subtitle:Text(deliveryPost.postContent!.content) ,),
+          child: ListTile(title: Text(normalPost.content!.title),
+            subtitle:Text(normalPost.content!.content) ,),
         );
       },
     );

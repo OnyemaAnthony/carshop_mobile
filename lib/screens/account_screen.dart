@@ -50,6 +50,8 @@ class AccountScreen extends StatelessWidget {
                   UiUtilities.push(context, MyDeliveryPostScreen());
                 },
               ),
+              const SizedBox(height: 10,),
+
               SubmitButton(
                 text: "Get my normal post",
                 onPress: (){

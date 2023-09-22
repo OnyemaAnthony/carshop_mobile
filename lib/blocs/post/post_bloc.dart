@@ -3,7 +3,10 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:logger/logger.dart';
+
+import '../../utilities/local_storage.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
@@ -177,7 +180,12 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   FutureOr<void> _mapFetchMyPostsEventToState(FetchMyPostsEvent event, Emitter<PostState> emit)async {
     emit(PostLoadingState());
     CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.normalPostsGet(body: event.getManyPostsDto);
+    String accessToken = await LocalStorage.getString('access_token');
+    Map<String,dynamic> userTokenMap = Jwt.parseJwt(accessToken);
+    String userId = userTokenMap['data']['userId'];///Todo: change the way we get userId
+    GetManyPostsDto getManyPostsDto = GetManyPostsDto(ownerIds: [userId]);
+    final response = await client.normalPostsGet(body: getManyPostsDto);
+
     if (response.statusCode == 200) {
       emit(PostLoadedState(response.body!));
     } else {
