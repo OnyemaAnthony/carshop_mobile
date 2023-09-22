@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,8 +13,7 @@ class AccountScreen extends StatelessWidget {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is SignedOutState) {
-          UiUtilities.navBarReplacement(
-              context, const LoginScreen(), false);
+          UiUtilities.navBarReplacement(context, const LoginScreen(), false);
         }
       },
       child: Scaffold(
@@ -27,6 +27,16 @@ class AccountScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.logout))
           ],
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SubmitButton(
+                text: "MyActivites",
+              )
+            ],
+          ),
         ),
       ),
     );
