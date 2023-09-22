@@ -5,6 +5,7 @@ import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({Key? key}) : super(key: key);
@@ -29,7 +30,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         ),
         body: Builder(builder: (BuildContext context) {
           postBloc = BlocProvider.of<PostBloc>(context);
-          return BlocBuilder<PostBloc, PostState>(
+          return BlocConsumer<PostBloc, PostState>(
+            listener: (context,state){
+                if(state is PostedState){
+                  UiUtilities.showToast(message: "Your normal post is saved", toast: Toast.LENGTH_LONG);
+                  UiUtilities.pop(context);
+                }
+            },
+
             builder: (context, state) {
               if (state is PostLoadingState) {
                 return UiUtilities.showLoader();
