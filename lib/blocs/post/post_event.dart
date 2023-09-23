@@ -38,6 +38,9 @@ class UpdatePostEvent extends PostEvent {
 }
 
 class FetchPostsEvent extends PostEvent {}
+class FetchMyPostsEvent extends PostEvent {
+
+}
 
 class PostDeletedState extends PostState {}
 
