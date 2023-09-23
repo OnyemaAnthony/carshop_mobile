@@ -30,6 +30,11 @@ class MapScreen extends StatelessWidget {
         if (state is LocationLoading) {
           bloc.add(GetCurrentLocationEvent(after: _goToLocation));
         }
+
+        if (state is NotPostsFound) {
+          UiUtilities.showToast(
+              message: 'No posts found', toast: Toast.LENGTH_LONG);
+        }
         if (state is PostsReady) {
           UiUtilities.push(
               context,
@@ -37,15 +42,16 @@ class MapScreen extends StatelessWidget {
                 posts: state.posts!,
               ));
           UiUtilities.showToast(
-              message: 'coordinates copied', toast: Toast.LENGTH_LONG);
+              message: 'loading posts', toast: Toast.LENGTH_LONG);
         }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
           case LocationLoading:
           case CurrLocationUpdated:
+          case NotPostsFound:
+          case PostsReady:
             return Scaffold(
-
               body: GoogleMap(
                 onTap: (position) {
                   bloc.add(FetchPostsEvent(
@@ -66,10 +72,8 @@ class MapScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 20),
                     child: FloatingActionButton.extended(
                         label: const Text('Go to my location'),
-
-                        onPressed: (){
+                        onPressed: () {
                           _goToLocation(state.currentLocation!);
-
                         }),
                   ),
                   SpeedDial(
@@ -77,32 +81,17 @@ class MapScreen extends StatelessWidget {
                     children: [
                       SpeedDialChild(
                         label: "Create normal post",
-                        onTap: ()=>UiUtilities.push(context, const CreatePostScreen()),
+                        onTap: () =>
+                            UiUtilities.push(context, const CreatePostScreen()),
                       ),
                       SpeedDialChild(
                         label: "Create Delivery post",
-                        onTap: ()=>UiUtilities.push(context, const CreateDeliveryPostScreen()),
-
+                        onTap: () => UiUtilities.push(
+                            context, const CreateDeliveryPostScreen()),
                       ),
-
                     ],
                   ),
-
                 ],
-              ),
-              // floatingActionButton: FloatingActionButton.extended(
-              //   onPressed: () {
-              //     _goToLocation(state.currentLocation!);
-              //   },
-              //   // onPressed: _goToTheLake,
-              //   label: const Text('Go to my location'),
-              //   icon: const Icon(Icons.add),
-              // ),
-            );
-          case PostsReady:
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
               ),
             );
           default:

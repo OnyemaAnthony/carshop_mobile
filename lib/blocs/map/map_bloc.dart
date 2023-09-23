@@ -15,19 +15,25 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<GetCurrentLocationEvent>(_getCurrentLocationEventToState);
   }
 
-  FutureOr<void> _mapFetchPostsEventToState(FetchPostsEvent event, Emitter<MapState> emit) async {
-    final logger = Logger();
+  FutureOr<void> _mapFetchPostsEventToState(
+      FetchPostsEvent event, Emitter<MapState> emit) async {
     var client = CarshopSDK().client;
     var posts = await client.normalPostsGet(
-        body: GetManyPostsDto(location: state.currentLocation));
+        body: GetManyPostsDto(location: event.location));
 
     if (posts.body != null) {
-      emit(PostsReady(
-          posts: posts.body!,
-          currentLocation: event.location,
-          markers: state.markers!));
+      if (posts.body!.isEmpty) {
+        emit(NotPostsFound(
+            currentLocation: state.currentLocation!,
+            posts: [],
+            markers: state.markers!));
+      } else {
+        emit(PostsReady(
+            posts: posts.body!,
+            currentLocation: state.currentLocation!,
+            markers: state.markers!));
+      }
     } else {
-      final logger = Logger();
       emit(CurrLocationUpdated(
           currentLocation: state.currentLocation!, markers: state.markers!));
     }
