@@ -30,3 +30,10 @@ class CurrLocationUpdated extends MapState {
 class LocationLoading extends MapState {
   LocationLoading() : super(currentLocation: null, posts: null, markers: null);
 }
+
+class NotPostsFound extends MapState {
+  NotPostsFound(
+      {required super.currentLocation,
+      required super.posts,
+      required super.markers});
+}
