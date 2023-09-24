@@ -1,3 +1,5 @@
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/widgets/textfield_form.dart';
 import 'package:flutter/material.dart';
 
 class CommentScreen extends StatefulWidget {
@@ -12,6 +14,26 @@ class _CommentScreenState extends State<CommentScreen> {
 
   @override
   Widget build(BuildContext context) {
-  return Container();
+  return Scaffold(
+    appBar: AppBar(
+      centerTitle: true,
+      title: const Text("Comments"),),
+    body: SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildCommentList([]),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TextFieldForm(hintText: "Enter a comment", ),
+          )
+
+        ],
+      )
+    ),
+  );
+  }
+
+  Widget _buildCommentList(List<Comment> comments){
+    return Container();
   }
 }

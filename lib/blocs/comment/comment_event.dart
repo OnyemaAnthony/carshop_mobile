@@ -32,8 +32,9 @@ class UpdateCommentEvent extends CommentEvent {
   const UpdateCommentEvent(this.comment);
 }
 
-class SaveComment extends CommentEvent {
-  final dynamic comment;
+class CreateCommentEvent extends CommentEvent {
+  final CreateCommentDto commentDto;
 
-  const SaveComment(this.comment);
+  const CreateCommentEvent(this.commentDto);
+
 }
