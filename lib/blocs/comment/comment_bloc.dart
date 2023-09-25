@@ -18,7 +18,6 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     var client = CarshopSDK().client;
     
    final response = await client.commentsPost(body: event.commentDto);
-   print('the response is ${response.body}');
    if(response.statusCode == 201){
      emit(CommentedState());
    }else{

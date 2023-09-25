@@ -4,12 +4,16 @@ class TextFieldForm extends StatelessWidget {
   String? hintText;
   int? maxLine;
   bool? isPassword;
+  Function? onTap;
   TextEditingController? controller;
-   TextFieldForm({Key? key,this.validateError,this.controller,this.hintText,this.maxLine=1,this.isPassword = false}) : super(key: key);
+   TextFieldForm({Key? key,this.validateError,this.controller,this.hintText,this.maxLine=1,this.isPassword = false,this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+
+      onSaved: (input)=>onTap,
+
       validator: (input)=> input!.isEmpty?validateError:null,
       controller: controller,
       maxLines:maxLine ,
