@@ -32,6 +32,8 @@ class UpdateUserEvent extends AuthenticationEvent {
   const UpdateUserEvent(this.userUpdateDto);
 }
 
+class SignInForDevEvent extends AuthenticationEvent {}
+
 class GetUserEvent extends AuthenticationEvent {}
 
 class SignOutEventTest extends AuthenticationEvent {}
