@@ -26,6 +26,7 @@ class AuthenticationBloc
     on<AppStartedEvent>(_mapAppStartedEventToState);
     on<SignOutEvent>(_mapSignOutEventToState);
     on<SignOutEventTest>(_mapSignOutEventTest);
+    on<SignInForDevEvent>(_mapSignInForDevEventToState);
   }
 
   FutureOr<void> _mapSignUpEventToState(
@@ -170,6 +171,22 @@ class AuthenticationBloc
 
     if (response.statusCode == 200) {
       emit(UnAuthenticated());
+    } else {
+      emit(AuthenticationErrorState(response.error.toString()));
+    }
+  }
+
+  FutureOr<void> _mapSignInForDevEventToState(
+      SignInForDevEvent event, Emitter<AuthenticationState> emit) async {
+    emit(AuthenticationLoadingState());
+    var client = CarshopSDK().client;
+    final response = await client.authOauthGoogleDevPost(
+        body:
+            AuthenticateBodyDto(code: "eorwanbrpwoaineraoknrbaosmbfoksdbmos"));
+    if (response.statusCode == 200) {
+      await LocalStorage.saveString(
+          key: "access_token", value: response.body!.data.auth!.accessToken!);
+      emit(Authenticated(response.body));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }

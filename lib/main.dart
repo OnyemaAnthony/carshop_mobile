@@ -52,21 +52,23 @@ class MyApp extends StatelessWidget {
                       message: state.errorMessage, toast: Toast.LENGTH_SHORT)
                 }
             },
-        builder: (context, state) {
-          if(state is AuthenticationLoadingState){
-            return UiUtilities.showMainLoader();
-          }else if(state is Authenticated){
-            Store.user = state.userModel;
-            return const BottomNavigationBarScreen();
-          }else if(state is UnAuthenticated){
-            return const  LoginScreen();
-          }  else if (state is AuthenticationErrorState) {
-            return const LoginScreen();
-          }
-          ///TODO implement splash screen later
-        return Container();
-  },
-), navigatorKey: NavigatorKeys.loginNavigatorKey,
+            builder: (context, state) {
+              if (state is AuthenticationLoadingState) {
+                return UiUtilities.showMainLoader();
+              } else if (state is Authenticated) {
+                Store.user = state.userModel;
+                return const BottomNavigationBarScreen();
+              } else if (state is UnAuthenticated) {
+                return const LoginScreen();
+              } else if (state is AuthenticationErrorState) {
+                return const LoginScreen();
+              }
+
+              ///TODO implement splash screen later
+              return Container();
+            },
+          ),
+          navigatorKey: NavigatorKeys.loginNavigatorKey,
         ),
       ),
     );
