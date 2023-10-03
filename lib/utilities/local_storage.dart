@@ -33,13 +33,13 @@ class LocalStorage {
     preferences.clear();
   }
 
-  static Future<GoogleAuthResponse> fetchCachedUser() async {
+  static Future<GoogleAuthResponse?> fetchCachedUser() async {
     String? cacheUser = await getString('cached_user');
     if (cacheUser.isNotEmpty) {
       GoogleAuthResponse user =
           GoogleAuthResponse.fromJson(jsonDecode(cacheUser));
       return user;
     }
-    return ({} as GoogleAuthResponse);
+    return null;
   }
 }
