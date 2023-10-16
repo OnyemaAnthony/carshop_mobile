@@ -22,9 +22,8 @@ class PostSwiperItem extends StatelessWidget {
               Text(post.content?.content ?? "No content"),
               const Spacer(),
               GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     UiUtilities.push(context, CommentScreen());
-
                   },
                   child: const Icon(Icons.comment))
             ],
@@ -43,23 +42,27 @@ class DeliverySwiperItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Card(
-            color: Colors.amber,
-            child: SizedBox(
-                width: 300,
-                height: 150,
-                child: Column(children: [
-                  Text(
-                      "Title: ${deliveryPost.postContent?.title ?? "No title"}"),
-                  Text(
-                      "Content: ${deliveryPost.postContent?.content ?? "No content"}"),
-                  Text(
-                      "product name:${deliveryPost.deliveryPostContent?.productName}"),
-                  Text("reward:${deliveryPost.deliveryPostContent?.reward}"),
-                  Text(
-                      "startDate:${deliveryPost.deliveryPostContent?.deliveryStartDate}"),
-                  Text(
-                      "endDate:${deliveryPost.deliveryPostContent?.deliveryEndDate}"),
-                ]))));
+      child: Card(
+        color: Colors.amber,
+        child: SizedBox(
+          width: 300,
+          height: 150,
+          child: Column(
+            children: [
+              Text("Title: ${deliveryPost.postContent?.title ?? "No title"}"),
+              Text(
+                  "Content: ${deliveryPost.postContent?.content ?? "No content"}"),
+              Text(
+                  "product name:${deliveryPost.deliveryPostContent?.productName}"),
+              Text("reward:${deliveryPost.deliveryPostContent?.reward}"),
+              Text(
+                  "startDate:${deliveryPost.deliveryPostContent?.deliveryStartDate}"),
+              Text(
+                  "endDate:${deliveryPost.deliveryPostContent?.deliveryEndDate}"),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

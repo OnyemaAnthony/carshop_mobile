@@ -12,6 +12,7 @@ part 'comment_state.dart';
 class CommentBloc extends Bloc<CommentEvent, CommentState> {
   CommentBloc() : super(CommentInitial()) {
     on<CreateCommentEvent>(_mapCreateCommentEventToState);
+    on<GetAllCommentsEvent>(_mapGetAllCommentsEventToState);
   }
 
   FutureOr<void> _mapCreateCommentEventToState(CreateCommentEvent event, Emitter<CommentState> emit) async{
@@ -24,5 +25,15 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
      emit(CommentErrorState(response.error.toString()));
    }
 
+  }
+
+  FutureOr<void> _mapGetAllCommentsEventToState(GetAllCommentsEvent event, Emitter<CommentState> emit) async{
+    var client = CarshopSDK().client;
+    final response = await client.commentsGet(body: event.getManyCommentsDto);
+    if(response.statusCode ==200){
+      // emit();
+    }else{
+      // emit();
+    }
   }
 }

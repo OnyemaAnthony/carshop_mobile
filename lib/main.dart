@@ -6,7 +6,6 @@ import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
-import 'package:carshop_mobile/utilities/store.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,31 +43,19 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData(
               scaffoldBackgroundColor: AppColors.scaffoldColor,
               brightness: Brightness.dark),
-          home: BlocConsumer<AuthenticationBloc, AuthenticationState>(
-            listener: (context, state) => {
-              if (state is AuthenticationErrorState)
-                {
-                  UiUtilities.showToast(
-                      message: state.errorMessage, toast: Toast.LENGTH_SHORT)
-                }
-            },
-            builder: (context, state) {
-              if (state is AuthenticationLoadingState) {
-                return UiUtilities.showMainLoader();
-              } else if (state is Authenticated) {
-                Store.user = state.userModel;
-                return const BottomNavigationBarScreen();
-              } else if (state is UnAuthenticated) {
-                return const LoginScreen();
-              } else if (state is AuthenticationErrorState) {
-                return const LoginScreen();
-              }
-
-              ///TODO implement splash screen later
-              return Container();
-            },
-          ),
-          navigatorKey: NavigatorKeys.loginNavigatorKey,
+          home:  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if(state is AuthenticationLoadingState){
+            return UiUtilities.showMainLoader();
+          }else if(state is Authenticated){
+            return const BottomNavigationBarScreen();
+          }else if(state is UnAuthenticated){
+            return const  LoginScreen();
+          }
+          ///TODO implement splash screen later
+        return Container();
+  },
+), navigatorKey: NavigatorKeys.loginNavigatorKey,
         ),
       ),
     );

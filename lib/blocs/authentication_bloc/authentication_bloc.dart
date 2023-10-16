@@ -36,7 +36,7 @@ class AuthenticationBloc
     final response = await client.authOauthGooglePost(body: event.authDto);
 
     if (response.statusCode == 200) {
-      emit(Authenticated(response.body));
+      emit(Authenticated(response.body!));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
@@ -60,7 +60,7 @@ class AuthenticationBloc
             isCached: true);
         LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body));
+        emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -78,7 +78,7 @@ class AuthenticationBloc
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body));
+        emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -99,7 +99,7 @@ class AuthenticationBloc
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body));
+        emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -113,7 +113,7 @@ class AuthenticationBloc
     bool isLoggedIn = accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
     if (isLoggedIn) {
       GoogleAuthResponse? user = await LocalStorage.fetchCachedUser();
-      emit(Authenticated(user));
+      emit(Authenticated(user!));
     } else {
       emit(UnAuthenticated());
     }
@@ -144,7 +144,7 @@ class AuthenticationBloc
     final response = await client.usersGet();
 
     if (response.statusCode == 200) {
-      emit(UserLoadedState(response.body));
+      emit(UserLoadedState());
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
@@ -157,7 +157,7 @@ class AuthenticationBloc
     final response = await client.usersPatch(body: event.userUpdateDto);
 
     if (response.statusCode == 200) {
-      emit(UserLoadedState(response.body));
+      emit(UserLoadedState());
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
@@ -186,7 +186,7 @@ class AuthenticationBloc
     if (response.statusCode == 200) {
       await LocalStorage.saveString(
           key: "access_token", value: response.body!.data.auth!.accessToken!);
-      emit(Authenticated(response.body));
+      emit(Authenticated(response.body!));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }

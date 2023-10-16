@@ -1,3 +1,4 @@
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/screens/my_activities_screen.dart';

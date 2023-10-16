@@ -4,11 +4,7 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  static Future<void> saveString(
-      {required String key,
-      String? value,
-      bool isCached = false,
-      GoogleAuthResponse? googleAuthResponse}) async {
+  static Future<void> saveString({required String key, String? value, bool isCached = false,GoogleAuthResponse? googleAuthResponse}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     if (isCached) {
       String cacheUser = jsonEncode(googleAuthResponse);
@@ -36,8 +32,7 @@ class LocalStorage {
   static Future<GoogleAuthResponse?> fetchCachedUser() async {
     String? cacheUser = await getString('cached_user');
     if (cacheUser.isNotEmpty) {
-      GoogleAuthResponse user =
-          GoogleAuthResponse.fromJson(jsonDecode(cacheUser));
+      GoogleAuthResponse user = GoogleAuthResponse.fromJson(jsonDecode(cacheUser));
       return user;
     }
     return null;
