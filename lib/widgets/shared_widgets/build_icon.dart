@@ -13,7 +13,7 @@ class BuildIcon extends StatelessWidget {
     return Icon(
       icon,
       size: (size ?? 20).scaledPixels(),
-      color: color ?? AppColors.primaryColor,
+      color: color ?? AppColors.primaryColorLight,
     );
   }
 }

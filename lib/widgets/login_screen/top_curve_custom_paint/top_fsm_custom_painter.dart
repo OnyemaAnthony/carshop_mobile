@@ -39,7 +39,7 @@ class TopFSMCustomPainter extends CustomPainter {
     // Layer 1
 
     Paint paintFill1 = Paint()
-      ..color = AppColors.primaryColor
+      ..color = AppColors.primaryColorLight
       ..style = PaintingStyle.fill
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.butt
