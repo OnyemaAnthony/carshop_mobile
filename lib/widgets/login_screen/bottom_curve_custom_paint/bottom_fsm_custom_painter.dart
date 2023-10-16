@@ -6,7 +6,7 @@ class BottomFSMCustomPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // Layer 1
     Paint paintFill0 = Paint()
-      ..color = AppColors.primaryColor
+      ..color = AppColors.primaryColorLight
       ..style = PaintingStyle.fill
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.butt

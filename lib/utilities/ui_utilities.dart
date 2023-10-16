@@ -25,7 +25,7 @@ class UiUtilities {
         fontSize: 13.5,
         color: AppColors.thirdLightColor,
       ),
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

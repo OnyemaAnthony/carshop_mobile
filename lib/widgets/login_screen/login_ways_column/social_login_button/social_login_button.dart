@@ -41,7 +41,7 @@ class SocialLoginButton extends StatelessWidget {
             ),
           ),
           elevation: MaterialStateProperty.all(0),
-          backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
+          backgroundColor: MaterialStateProperty.all(AppColors.primaryColorLight),
           foregroundColor: MaterialStateProperty.all(AppColors.thirdLightColor),
         ),
         onPressed: onPressed,

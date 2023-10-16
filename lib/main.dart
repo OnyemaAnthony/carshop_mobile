@@ -6,6 +6,7 @@ import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
+import 'package:carshop_mobile/utilities/theme.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +51,8 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.dark,
-          darkTheme: ThemeData(
-              scaffoldBackgroundColor: AppColors.scaffoldColor,
-              brightness: Brightness.dark),
+          themeMode: ThemeMode.light,
+          darkTheme: CarShopTheme.getLightTheme(context),
           home:  BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if(state is AuthenticationLoadingState){
