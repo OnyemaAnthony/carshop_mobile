@@ -7,6 +7,7 @@ import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+if(kIsWeb){
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyCDGETeImjV37jyjyhpHImYg3I53r7GzDg",
+      appId: "1:884863427065:web:e08a73b179e7939bbb1d28",
+      messagingSenderId: "884863427065",
+      projectId: "carshop-eee10",
+    ),
+  );
+}
+
+  await Firebase.initializeApp( );
   runApp(const MyApp());
 }
 
