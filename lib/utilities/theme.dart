@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class CarShopTheme {
   static ThemeData getLightTheme(BuildContext context) {
     return ThemeData(
@@ -18,16 +19,13 @@ class CarShopTheme {
         800: Color(0xff333333),
         900: Color(0xff191919),
       }),
-
       brightness: Brightness.light,
       primaryColor: AppColors.primaryColorLight,
       primaryColorLight: Colors.white,
       primaryColorDark: Colors.white,
       bottomAppBarTheme: const BottomAppBarTheme(color: Colors.white),
-
       dividerColor: Colors.white,
       highlightColor: Colors.white,
-
       appBarTheme: const AppBarTheme(
         elevation: 0,
         color: Colors.white,
@@ -36,30 +34,27 @@ class CarShopTheme {
         ),
         foregroundColor: Colors.black,
       ),
-
       scaffoldBackgroundColor: AppColors.scaffoldColorLight,
       canvasColor: Colors.white,
       cardTheme: const CardTheme(color: Colors.white),
       textSelectionTheme: const TextSelectionThemeData(
-        cursorColor:AppColors.primaryColorLight,
+        cursorColor: AppColors.primaryColorLight,
       ),
       cardColor: Colors.white,
-
       primaryTextTheme: const TextTheme(
           titleLarge: TextStyle(
-            color: Colors.black,
-          )),
-
-      textTheme:  TextTheme(
+        color: Colors.black,
+      )),
+      textTheme: TextTheme(
         displayLarge: const TextStyle(
           fontSize: 26.0,
           fontWeight: FontWeight.bold,
           color: Colors.black,
         ),
         titleLarge: GoogleFonts.inter(
-        fontSize: 30,
-        fontWeight: FontWeight.w900,
-      ),
+          fontSize: 30,
+          fontWeight: FontWeight.w900,
+        ),
         bodyMedium: TextStyle(fontSize: 14.0, color: Colors.black),
       ),
       textButtonTheme: TextButtonThemeData(

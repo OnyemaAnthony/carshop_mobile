@@ -2,6 +2,7 @@ import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dar
 import 'package:carshop_mobile/blocs/map/map_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
+import 'package:carshop_mobile/screens/comment_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
           if(state is AuthenticationLoadingState){
             return UiUtilities.showMainLoader();
           }else if(state is Authenticated){
-            return const BottomNavigationBarScreen();
+            return  CommentScreen();
           }else if(state is UnAuthenticated){
             return const  LoginScreen();
           }
