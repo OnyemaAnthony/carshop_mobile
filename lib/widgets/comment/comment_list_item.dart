@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommentListItem extends StatelessWidget {
   String? imageUrl;
@@ -22,65 +23,86 @@ class CommentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //width: MediaQuery.of(context).size.width*0.8,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            backgroundImage: NetworkImage(image),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CircleAvatar(
+          backgroundImage: NetworkImage(image),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(userName!),
-                  const Icon(Icons.more_horiz_outlined),
-
-                ],
-              ),
-              const SizedBox(height: 5,),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: Text(
-                  commentText!,
-                  maxLines: 8,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              const Row(
-                children: [
-                  Icon(Icons.thumb_up),
-                  Text('22'),
-                  SizedBox(
-                    width: 5,
+                  Text(
+                    '$userName $timeAgo',
+                    style: GoogleFonts.inter(
+                      color: const Color(
+                        0xff808080,
+                      ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                  Icon(Icons.comment),
+                  const Spacer(),
+                  const Icon(
+                    Icons.more_horiz_outlined,
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Text(
+                commentText!,
+                style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: Colors.black),
               ),
-              Text(
-                '4 REPLY',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const Row(
+              children: [
+                ImageIcon(
+                  AssetImage('assets/images/like.png'),
+                  size: 30,
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
+                Text('22'),
+                SizedBox(
+                  width: 5,
+                ),
+                ImageIcon(
+                  AssetImage('assets/images/comment.png'),
+                  size: 50,
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              '4 REPLY',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
