@@ -76,21 +76,6 @@ class MapScreen extends StatelessWidget {
                           _goToLocation(state.currentLocation!);
                         }),
                   ),
-                  SpeedDial(
-                    icon: Icons.add,
-                    children: [
-                      SpeedDialChild(
-                        label: "Create normal post",
-                        onTap: () =>
-                            UiUtilities.push(context, const CreatePostScreen()),
-                      ),
-                      SpeedDialChild(
-                        label: "Create Delivery post",
-                        onTap: () => UiUtilities.push(
-                            context, const CreateDeliveryPostScreen()),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             );

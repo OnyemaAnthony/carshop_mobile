@@ -185,6 +185,11 @@ class AuthenticationBloc
             AuthenticateBodyDto(code: "eorwanbrpwoaineraoknrbaosmbfoksdbmos"));
     if (response.statusCode == 200) {
       await LocalStorage.saveString(
+          key: 'cached_user',
+          googleAuthResponse: response.body,
+          isCached: true);
+
+      await LocalStorage.saveString(
           key: "access_token", value: response.body!.data.auth!.accessToken!);
       emit(Authenticated(response.body!));
     } else {
