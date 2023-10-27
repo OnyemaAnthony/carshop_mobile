@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:carshop_mobile/repositories/firebase_services.dart';
@@ -36,7 +37,7 @@ class AuthenticationBloc
     final response = await client.authOauthGooglePost(body: event.authDto);
 
     if (response.statusCode == 200) {
-      emit(Authenticated(response.body!));
+      emit(Authenticated(response.body!.data.user!));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
@@ -54,13 +55,10 @@ class AuthenticationBloc
       var client = CarshopSDK().client;
       final response = await client.authOauthGooglePost(body: auth);
       if (response.statusCode == 200) {
-        LocalStorage.saveString(
-            key: 'cached_user',
-            googleAuthResponse: response.body,
-            isCached: true);
-        LocalStorage.saveString(
+        await LocalStorage.saveUser(user: response.body!.data.user!);
+        await LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body!));
+        emit(Authenticated(response.body!.data.user!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -78,7 +76,7 @@ class AuthenticationBloc
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body!));
+        emit(Authenticated(response.body!.data.user!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -99,7 +97,7 @@ class AuthenticationBloc
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
             key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body!));
+        emit(Authenticated(response.body!.data.user!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -112,8 +110,13 @@ class AuthenticationBloc
     emit(AuthenticationLoadingState());
     bool isLoggedIn = accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
     if (isLoggedIn) {
-      GoogleAuthResponse? user = await LocalStorage.fetchCachedUser();
-      emit(Authenticated(user!));
+      GoogleAuthResponse$Data$User? user = await LocalStorage.fetchCachedUser();
+      print(user);
+     if (user==null){
+       emit(const AuthenticationErrorState('error user is null'));
+     }else {
+       emit(Authenticated(user));
+     }
     } else {
       emit(UnAuthenticated());
     }
@@ -186,7 +189,9 @@ class AuthenticationBloc
     if (response.statusCode == 200) {
       await LocalStorage.saveString(
           key: "access_token", value: response.body!.data.auth!.accessToken!);
-      emit(Authenticated(response.body!));
+     await LocalStorage.saveUser(user: response.body!.data.user!);
+
+      emit(Authenticated(response.body!.data.user!));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
