@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../repositories/carhsop_sdk.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'comment_event.dart';
 part 'comment_state.dart';
@@ -15,24 +14,26 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     on<GetAllCommentsEvent>(_mapGetAllCommentsEventToState);
   }
 
-  FutureOr<void> _mapCreateCommentEventToState(CreateCommentEvent event, Emitter<CommentState> emit) async{
+  FutureOr<void> _mapCreateCommentEventToState(
+      CreateCommentEvent event, Emitter<CommentState> emit) async {
     var client = CarshopSDK().client;
-    
-   final response = await client.commentsPost(body: event.commentDto);
-   if(response.statusCode == 201){
-     emit(CommentedState());
-   }else{
-     emit(CommentErrorState(response.error.toString()));
-   }
 
+    final response = await client.commentsPost(body: event.commentDto);
+    if (response.statusCode == 201) {
+      emit(CommentedState());
+    } else {
+      emit(CommentErrorState(response.error.toString()));
+    }
   }
 
-  FutureOr<void> _mapGetAllCommentsEventToState(GetAllCommentsEvent event, Emitter<CommentState> emit) async{
+  FutureOr<void> _mapGetAllCommentsEventToState(
+      GetAllCommentsEvent event, Emitter<CommentState> emit) async {
     var client = CarshopSDK().client;
-    final response = await client.commentsGet(body: event.getManyCommentsDto);
-    if(response.statusCode ==200){
+    final response =
+        await client.commentsUnderParentParentIdGet(parentId: event.parentId);
+    if (response.statusCode == 200) {
       // emit();
-    }else{
+    } else {
       // emit();
     }
   }

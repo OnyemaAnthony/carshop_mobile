@@ -6,22 +6,18 @@ abstract class CommentState extends Equatable {
   const CommentState();
 }
 
-class CommentInitial extends CommentState {
+class CommentInitial extends CommentState {}
 
-}
-
-class CommentLoadedState extends CommentState{
-  final List<Comment>comments;
+class CommentLoadedState extends CommentState {
+  final List<CommentDescriptor> comments;
 
   const CommentLoadedState(this.comments);
-
-}
-class CommentedState extends CommentState{
 }
 
-class CommentErrorState extends CommentState{
+class CommentedState extends CommentState {}
+
+class CommentErrorState extends CommentState {
   final String errorMessage;
 
   const CommentErrorState(this.errorMessage);
-
 }

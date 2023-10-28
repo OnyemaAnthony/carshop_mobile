@@ -7,9 +7,9 @@ abstract class AuthenticationEvent extends Equatable {
 }
 
 class SignUpEvent extends AuthenticationEvent {
-  final AuthenticateBodyDto authDto;
+  final String code;
 
-  const SignUpEvent(this.authDto);
+  const SignUpEvent(this.code);
 }
 
 class SignInWithGoogleEvent extends AuthenticationEvent {}

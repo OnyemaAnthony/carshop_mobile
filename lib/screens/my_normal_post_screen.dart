@@ -42,8 +42,8 @@ class _MyNormalPostScreen extends State<MyNormalPostScreen> {
       itemBuilder:(context, index) {
         NormalPost normalPost = normalPosts[index];
         return Card(
-          child: ListTile(title: Text(normalPost.content!.title),
-            subtitle:Text(normalPost.content!.content) ,),
+          child: ListTile(title: Text(normalPost.latestContent.title),
+            subtitle:Text(normalPost.latestContent.content) ,),
         );
       },
     );

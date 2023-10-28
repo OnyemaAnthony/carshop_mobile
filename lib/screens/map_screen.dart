@@ -54,9 +54,14 @@ class MapScreen extends StatelessWidget {
             return Scaffold(
               body: GoogleMap(
                 onTap: (position) {
-                  bloc.add(FetchPostsEvent(
+                  bloc.add(
+                    FetchPostsEvent(
                       location: Coordination(
-                          lat: position.latitude, lng: position.longitude)));
+                        lat: position.latitude,
+                        lng: position.longitude,
+                      ),
+                    ),
+                  );
                 },
                 mapToolbarEnabled: true,
                 mapType: MapType.normal,

@@ -1,5 +1,6 @@
 import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 class CarShopTheme {
   static ThemeData getLightTheme(BuildContext context) {
     return ThemeData(
@@ -49,17 +50,16 @@ class CarShopTheme {
             color: Colors.black,
           )),
 
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
+      textTheme:  TextTheme(
+        displayLarge: const TextStyle(
           fontSize: 26.0,
           fontWeight: FontWeight.bold,
           color: Colors.black,
         ),
-        titleLarge: TextStyle(
-          fontSize: 18.0,
-          fontStyle: FontStyle.normal,
-          color: Colors.black,
-        ),
+        titleLarge: GoogleFonts.inter(
+        fontSize: 30,
+        fontWeight: FontWeight.w900,
+      ),
         bodyMedium: TextStyle(fontSize: 14.0, color: Colors.black),
       ),
       textButtonTheme: TextButtonThemeData(

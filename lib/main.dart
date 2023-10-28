@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.light,
-          darkTheme: CarShopTheme.getLightTheme(context),
+          theme:CarShopTheme.getLightTheme(context) ,
           home:  BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if(state is AuthenticationLoadingState){
