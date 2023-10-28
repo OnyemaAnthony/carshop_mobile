@@ -31,60 +31,61 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     emit(PostLoadingState());
 
     //TODO: pass location to the body
-    GetManyPostsDto body = GetManyPostsDto();
+    // GetManyPostsDto body = GetManyPostsDto();
 
-    var client = CarshopSDK().client;
-    final response = await client.normalPostsGet(body: body);
-    var result = response.body;
-    if (result != null) {
-      emit(PostLoadedState(result));
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    // var client = CarshopSDK().client;
+    // final response = await client.normalPostsIdGet(id: body);
+    // var result = response.body;
+    // if (result != null) {
+    //   emit(PostLoadedState(result));
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
   FutureOr<void> _mapDeletePostEventToState(
       DeletePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
     CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.normalPostsIdDelete(id: event.postId);
+    // final response = await client.normalPostsIdDelete(id: event.postId);
 
-    if (response.statusCode == 200) {
-      emit(PostDeletedState());
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    // if (response.statusCode == 200) {
+    //   emit(PostDeletedState());
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
   FutureOr<void> _mapLikePostEventToState(
       LikePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
     CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.likesAggTotalTypeGet(
-        type: LikesAggTotalTypeGetType.post, contentIds: event.postId);
+    // final response = await client.likesAggTotalTypeGet(
+    //     type: LikesAggTotalTypeGetType.post, contentIds: event.postId);
 
-    if (response.statusCode == 200) {
-      emit(PostedState());
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    // if (response.statusCode == 200) {
+    //   emit(PostedState());
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
   FutureOr<void> _mapUnlikePostEventToState(
       UnlikePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
     CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.likesTypeContentIdDelete(
-        contentId: event.postId, type: LikesTypeContentIdDeleteType.post);
+    // final response = await client.likesTypeContentIdDelete(
+    //     contentId: event.postId, type: LikesTypeContentIdDeleteType.post);
 
-    if (response.statusCode == 200) {
-      emit(PostedState());
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    // if (response.statusCode == 200) {
+    //   emit(PostedState());
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
-  FutureOr<void> _mapSavePostEventToState(SavePostEvent event, Emitter<PostState> emit) async {
+  FutureOr<void> _mapSavePostEventToState(
+      SavePostEvent event, Emitter<PostState> emit) async {
     final logger = Logger();
     emit(PostLoadingState());
 
@@ -103,13 +104,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       UpdatePostEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
     CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.normalPostsIdPatch(
-        id: event.id, body: event.updatePostDto);
-    if (response.statusCode == 200) {
-      emit(PostedState());
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    // final response = await client.normalPostsIdPatch(
+    //     id: event.id, body: event.updatePostDto);
+    // if (response.statusCode == 200) {
+    //   emit(PostedState());
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
   FutureOr<void> _mapSaveDeliveryPostEventToState(
@@ -143,24 +144,24 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     CarshopClientSdk client = CarshopSDK().client;
     final response = await client.deliveryPostsIdGet(id: event.deliveryPostId);
 
-    if (response.statusCode == 200) {
-      emit(PostDeliveredState(response.body!));
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    // if (response.statusCode == 200) {
+    //   emit(PostDeliveredState(response.body!));
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
   FutureOr<void> _mapUpdateDeliveryPostEventToState(
       UpdateDeliveryPostEvent event, Emitter<PostState> emit) async {
     emit(DeliveryPostLoadingState());
-    CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.deliveryPostsIdPatch(
-        id: event.id, body: event.updateDPDto);
-    if (response.statusCode == 200) {
-      emit(DeliveryPostLoadState(response.body!));
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    //CarshopClientSdk client = CarshopSDK().client;
+    //final response =
+    //     await client.deliverypo(id: event.id, body: event.updateDPDto);
+    // if (response.statusCode == 200) {
+    //   emit(DeliveryPostLoadState(response.body!));
+    // } else {
+    //   emit(PostErrorState(response.error.toString()));
+    // }
   }
 
   FutureOr<void> _mapDeleteDeliveryPostEventToState(
@@ -177,19 +178,22 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     }
   }
 
-  FutureOr<void> _mapFetchMyPostsEventToState(FetchMyPostsEvent event, Emitter<PostState> emit)async {
+  FutureOr<void> _mapFetchMyPostsEventToState(
+      FetchMyPostsEvent event, Emitter<PostState> emit) async {
     emit(PostLoadingState());
     CarshopClientSdk client = CarshopSDK().client;
     String accessToken = await LocalStorage.getString('access_token');
-    Map<String,dynamic> userTokenMap = Jwt.parseJwt(accessToken);
-    String userId = userTokenMap['data']['userId'];///Todo: change the way we get userId
-    GetManyPostsDto getManyPostsDto = GetManyPostsDto(ownerIds: [userId]);
-    final response = await client.normalPostsGet(body: getManyPostsDto);
+    Map<String, dynamic> userTokenMap = Jwt.parseJwt(accessToken);
+    String userId = userTokenMap['data']['userId'];
 
-    if (response.statusCode == 200) {
-      emit(PostLoadedState(response.body!));
-    } else {
-      emit(PostErrorState(response.error.toString()));
-    }
+    ///Todo: change the way we get userId
+    //   GetManyPostsDto getManyPostsDto = GetManyPostsDto(ownerIds: [userId]);
+    //   final response = await client.normalPostsGet(body: getManyPostsDto);
+
+    //   if (response.statusCode == 200) {
+    //     emit(PostLoadedState(response.body!));
+    //   } else {
+    //     emit(PostErrorState(response.error.toString()));
+    //   }
   }
 }

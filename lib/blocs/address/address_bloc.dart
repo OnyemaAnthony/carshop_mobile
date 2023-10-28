@@ -34,7 +34,8 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     emit(AddressLoadingState());
 
     var client = CarshopSDK().client;
-    final response = await client.addressesIdDelete(id: event.addressId);
+    final response =
+        await client.addressesAddressIdDelete(addressId: event.addressId);
 
     if (response.statusCode == 200) {
       emit(AddressDeletedState());
@@ -48,8 +49,8 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     emit(AddressLoadingState());
 
     var client = CarshopSDK().client;
-    final response = await client.addressesIdPatch(
-        id: event.id, body: event.updateAddressDto);
+    final response = await client.addressesAddressIdPatch(
+        addressId: event.id, body: event.updateAddressDto);
 
     if (response.statusCode == 200) {
       emit(AddressLoadState(response.body!));
@@ -63,7 +64,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     emit(AddressLoadingState());
 
     var client = CarshopSDK().client;
-    final response = await client.addressesIdGet(id: event.id);
+    final response = await client.addressesAddressIdGet(addressId: event.id);
 
     if (response.statusCode == 200) {
       emit(AddressLoadState(response.body!));

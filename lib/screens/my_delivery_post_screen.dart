@@ -44,8 +44,8 @@ class _MyDeliveryPostScreenState extends State<MyDeliveryPostScreen> {
       itemBuilder:(context, index) {
         DeliveryPost deliveryPost = deliveryPosts[index];
         return Card(
-          child: ListTile(title: Text(deliveryPost.postContent!.title),
-          subtitle:Text(deliveryPost.postContent!.content) ,),
+          child: ListTile(title: Text(deliveryPost.latestDeliveryPostContent.productName),
+          subtitle:Text(deliveryPost.latestDeliveryPostContent.productName) ,),
         );
       },
     );

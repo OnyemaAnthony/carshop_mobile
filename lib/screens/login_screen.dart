@@ -36,10 +36,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Text(
                     '\t\t\t\t Your deliveries.\n Our shared journey.',
-                    style: GoogleFonts.inter(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900,
-                   ),
+                   style: Theme.of(context).textTheme.titleLarge,
                   ),
 
                   const SizedBox(height: 50,),

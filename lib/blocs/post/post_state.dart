@@ -27,7 +27,7 @@ class DeliveryPostLoadingState extends PostState {}
 class PostedState extends PostState {}
 
 class PostDeliveredState extends PostState {
-  final DeliveryPost deliveryPost;
+  final DeliveryPostLatestDescriptor deliveryPost;
 
   const PostDeliveredState(this.deliveryPost);
 }

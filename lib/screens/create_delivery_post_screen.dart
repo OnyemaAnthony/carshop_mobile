@@ -39,13 +39,14 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
           title: const Text('Create Delivery post'),
           centerTitle: true,
         ),
-
         body: Builder(builder: (BuildContext context) {
           postBloc = BlocProvider.of<PostBloc>(context);
           return BlocConsumer<PostBloc, PostState>(
-            listener: (context,state){
-              if(state is PostDeliveredState){
-                UiUtilities.showToast(message: "Your delivery post is saved", toast: Toast.LENGTH_LONG);
+            listener: (context, state) {
+              if (state is PostDeliveredState) {
+                UiUtilities.showToast(
+                    message: "Your delivery post is saved",
+                    toast: Toast.LENGTH_LONG);
                 UiUtilities.pop(context);
               }
             },
@@ -134,16 +135,21 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
 
   void submit() {
     if (_formKey.currentState!.validate()) {
-      CreateDeliveryPostDto deliveryPost = CreateDeliveryPostDto(
-          title: titleController.text,
-          content: contentController.text,
-          location: Coordination(lat: 10, lng: 10),
-          productName: productNameController.text,
-          reward: int.parse(rewardController.text).toDouble(),
-          startDate: startDate,
-          endDate: endDate,
-          destination: Coordination(lat: 10, lng: 10),
-          startLocation: Coordination(lat: 10, lng: 10));
+      CreateDeliveryPost deliveryPost = CreateDeliveryPost(
+        rewardInCents: int.parse(rewardController.text).toDouble(),
+        post: CreatePostDto(
+            title: titleController.text,
+            content: contentController.text,
+            location: Coordination(lat: 0, lng: 0)),
+        deliveryStartDate: startDate,
+        deliveryEndDate: endDate,
+        productName: productNameController.text,
+        destination: Coordination(lat: 10, lng: 10),
+        startLocation: Coordination(
+          lat: 10,
+          lng: 10,
+        ),
+      );
       postBloc.add(SaveDeliveryPostEvent(deliveryPost));
       clear();
     }
@@ -160,7 +166,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
     setState(() {
       if (picked != null && picked != dateTime) {
         dateTime = picked;
-        controller.text =dateFormatter.format(dateTime).toString();
+        controller.text = dateFormatter.format(dateTime).toString();
       }
     });
   }
@@ -192,7 +198,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
     );
   }
 
-  void clear(){
+  void clear() {
     productNameController.clear();
     startDateController.clear();
     endDateController.clear();

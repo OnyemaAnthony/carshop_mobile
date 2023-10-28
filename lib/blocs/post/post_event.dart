@@ -32,20 +32,19 @@ class SavePostEvent extends PostEvent {
 
 class UpdatePostEvent extends PostEvent {
   final String id;
-  final UpdatePostDto updatePostDto;
+  // final UpdatePostDto updatePostDto;
 
-  const UpdatePostEvent(this.updatePostDto, this.id);
+  const UpdatePostEvent(this.id);
 }
 
 class FetchPostsEvent extends PostEvent {}
-class FetchMyPostsEvent extends PostEvent {
 
-}
+class FetchMyPostsEvent extends PostEvent {}
 
 class PostDeletedState extends PostState {}
 
 class SaveDeliveryPostEvent extends PostEvent {
-  final CreateDeliveryPostDto createDPDto;
+  final CreateDeliveryPost createDPDto;
 
   const SaveDeliveryPostEvent(this.createDPDto);
 }
@@ -61,10 +60,10 @@ class GetSingleDeliveryPostEvent extends PostEvent {
 }
 
 class UpdateDeliveryPostEvent extends PostEvent {
-  final UpdateDeliveryPostDto updateDPDto;
+  //final UpdateDeliveryPostDto updateDPDto;
   final String id;
 
-  const UpdateDeliveryPostEvent(this.updateDPDto, this.id);
+  const UpdateDeliveryPostEvent(this.id);
 }
 
 class DeleteDeliveryPostEvent extends PostEvent {

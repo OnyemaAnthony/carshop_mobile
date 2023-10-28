@@ -12,9 +12,9 @@ class MyActivitiesBloc extends Bloc<MyActivitiesEvent, MyActivitiesState> {
 
     on<GetMyActivitiesEvent>((event, emit) async {
       final client = CarshopSDK().client;
-      final activityDTO = await client.userActivitiesGet(limit: 20, offset: 0);
-      emit(MyActivitiesState(
-          activities: activityDTO.body?.data.activities ?? []));
+      // final activityDTO = await client.userActivitiesGet(limit: 20, offset: 0);
+      // emit(MyActivitiesState(
+      //      activities: activityDTO.body?.data.activities ?? []));
     });
   }
 }

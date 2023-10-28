@@ -21,13 +21,12 @@ class MyActivitiesScreen extends StatelessWidget {
               centerTitle: true,
             ),
             body: ListView.builder(
-              itemCount: state.activities.length,
+              itemCount: 0, //state.activities.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                      "You created a ${state.activities[index].typeValue.toString().toLowerCase()} with id:"),
-                  subtitle:
-                      Text(state.activities[index].postOrCommentId.toString()),
+                return const ListTile(
+                  title: Text("You created a activity with id:"),
+                  subtitle: Text(
+                      "doesn't exist lol"), //state.activities[index].postOrCommentId.toString()),
                 );
               },
             ),

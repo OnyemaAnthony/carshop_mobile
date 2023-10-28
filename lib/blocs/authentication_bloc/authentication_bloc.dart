@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:carshop_mobile/repositories/firebase_services.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:logger/logger.dart';
@@ -34,10 +32,10 @@ class AuthenticationBloc
       SignUpEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
-    final response = await client.authOauthGooglePost(body: event.authDto);
+    final response = await client.authOauthGooglePost(code: event.code);
 
     if (response.statusCode == 200) {
-      emit(Authenticated(response.body!.data.user!));
+      emit(Authenticated(response.body!));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
@@ -49,16 +47,15 @@ class AuthenticationBloc
     String? code = await FirebaseService().signInWithGoogle();
     if (code != null) {
       emit(AuthenticationLoadingState());
-      AuthenticateBodyDto auth = AuthenticateBodyDto(
+      var client = CarshopSDK().client;
+      final response = await client.authOauthGooglePost(
         code: code,
       );
-      var client = CarshopSDK().client;
-      final response = await client.authOauthGooglePost(body: auth);
       if (response.statusCode == 200) {
-        await LocalStorage.saveUser(user: response.body!.data.user!);
+        await LocalStorage.saveUser(user: response.body!);
         await LocalStorage.saveString(
-            key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body!.data.user!));
+            key: "access_token", value: response.body!.token.accessToken);
+        emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -75,8 +72,8 @@ class AuthenticationBloc
           await client.authFacebookSignInWithFacebookGet(code: code);
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
-            key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body!.data.user!));
+            key: "access_token", value: response.body!.token.accessToken);
+        emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -96,8 +93,8 @@ class AuthenticationBloc
           await client.authMicrosoftSignInWithMicrosoftGet(code: code);
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
-            key: "access_token", value: response.body!.data.auth!.accessToken!);
-        emit(Authenticated(response.body!.data.user!));
+            key: "access_token", value: response.body!.token.accessToken);
+        emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
       }
@@ -110,13 +107,13 @@ class AuthenticationBloc
     emit(AuthenticationLoadingState());
     bool isLoggedIn = accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
     if (isLoggedIn) {
-      GoogleAuthResponse$Data$User? user = await LocalStorage.fetchCachedUser();
-      print(user);
-     if (user==null){
-       emit(const AuthenticationErrorState('error user is null'));
-     }else {
-       emit(Authenticated(user));
-     }
+      AuthenticatedUserDescriptor? user = await LocalStorage.fetchCachedUser();
+
+      if (user == null) {
+        emit(const AuthenticationErrorState('error user is null'));
+      } else {
+        emit(Authenticated(user));
+      }
     } else {
       emit(UnAuthenticated());
     }
@@ -144,7 +141,7 @@ class AuthenticationBloc
       GetUserEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
-    final response = await client.usersGet();
+    final response = await client.authMeGet();
 
     if (response.statusCode == 200) {
       emit(UserLoadedState());
@@ -157,7 +154,7 @@ class AuthenticationBloc
       UpdateUserEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
-    final response = await client.usersPatch(body: event.userUpdateDto);
+    final response = await client.mePatch(body: event.userUpdateDto);
 
     if (response.statusCode == 200) {
       emit(UserLoadedState());
@@ -183,20 +180,16 @@ class AuthenticationBloc
       SignInForDevEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
-    final response = await client.authOauthGoogleDevPost(
-        body:
-            AuthenticateBodyDto(code: "eorwanbrpwoaineraoknrbaosmbfoksdbmos"));
+    final response = await client.authOauthGooglePost(
+        code:
+            "eorwanbrpwoaineraoknrbaosmbfoksdbmos___email___dev@carshop.com___firstName___Dev___lastName___Carshop");
+    print(response);
     if (response.statusCode == 200) {
       await LocalStorage.saveString(
-          key: 'cached_user',
-          googleAuthResponse: response.body,
-          isCached: true);
+          key: "access_token", value: response.body!.token.accessToken);
+      await LocalStorage.saveUser(user: response.body!);
 
-      await LocalStorage.saveString(
-          key: "access_token", value: response.body!.data.auth!.accessToken!);
-     await LocalStorage.saveUser(user: response.body!.data.user!);
-
-      emit(Authenticated(response.body!.data.user!));
+      emit(Authenticated(response.body!));
     } else {
       emit(AuthenticationErrorState(response.error.toString()));
     }
