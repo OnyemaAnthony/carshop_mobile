@@ -1,7 +1,7 @@
 part of 'authentication_bloc.dart';
 
 abstract class AuthenticationState extends Equatable {
-  final GoogleAuthResponse? userModel;
+  final GoogleAuthResponse$Data$User? userModel;
 
 
   @override
@@ -13,7 +13,7 @@ class AuthenticationInitial extends AuthenticationState {}
 
 class Authenticated extends AuthenticationState {
 
-  const Authenticated(GoogleAuthResponse userModel):super(userModel: userModel);
+  const Authenticated(GoogleAuthResponse$Data$User? userModel):super(userModel: userModel);
 }
 
 class UserLoadedState extends AuthenticationState {

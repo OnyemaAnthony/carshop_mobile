@@ -64,6 +64,7 @@ dependencies:
       url: https://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@github.com/Hasankanso/carshop_client_sdk.git
       ref: 2e3499c31710ffdde72cebfcf43adfcb6520073f
   flutter_speed_dial: ^7.0.0
+  google_fonts: ^4.0.4
 #      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
 
 dev_dependencies:
