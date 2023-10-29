@@ -51,10 +51,12 @@ class AuthenticationBloc
       final response = await client.authOauthGooglePost(
         code: code,
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 &&
+          response.body != null &&
+          response.body!.token != null) {
         await LocalStorage.saveUser(user: response.body!);
         await LocalStorage.saveString(
-            key: "access_token", value: response.body!.token.accessToken);
+            key: "access_token", value: response.body!.token!.accessToken);
         emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
@@ -72,7 +74,7 @@ class AuthenticationBloc
           await client.authFacebookSignInWithFacebookGet(code: code);
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
-            key: "access_token", value: response.body!.token.accessToken);
+            key: "access_token", value: response.body!.token!.accessToken);
         emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
@@ -93,7 +95,7 @@ class AuthenticationBloc
           await client.authMicrosoftSignInWithMicrosoftGet(code: code);
       if (response.statusCode == 200) {
         await LocalStorage.saveString(
-            key: "access_token", value: response.body!.token.accessToken);
+            key: "access_token", value: response.body!.token!.accessToken);
         emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
@@ -183,10 +185,10 @@ class AuthenticationBloc
     final response = await client.authOauthGooglePost(
         code:
             "eorwanbrpwoaineraoknrbaosmbfoksdbmos___email___dev@carshop.com___firstName___Dev___lastName___Carshop");
-    print(response);
+
     if (response.statusCode == 200) {
       await LocalStorage.saveString(
-          key: "access_token", value: response.body!.token.accessToken);
+          key: "access_token", value: response.body!.token!.accessToken);
       await LocalStorage.saveUser(user: response.body!);
 
       emit(Authenticated(response.body!));

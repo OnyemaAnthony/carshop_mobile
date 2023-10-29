@@ -15,38 +15,40 @@ class _MyNormalPostScreen extends State<MyNormalPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Normal post'), centerTitle: true,),
-      body: BlocProvider(
-        create: (BuildContext context) => PostBloc()..add( FetchMyPostsEvent()),
-        child: Builder(
-            builder: (BuildContext context) {
-              return BlocBuilder<PostBloc, PostState>(
-                builder: (context, state) {
-                  if(state is PostLoadingState){
-                    return UiUtilities.showMainLoader();
-                  }else if(state is PostLoadedState){
-                    return _buildDeliveryPostList(state.posts);
-                  }
-                  return Container();
-                },
-              );
-            }
-        ),
+      appBar: AppBar(
+        title: const Text('My Normal post'),
+        centerTitle: true,
       ),
-
+      body: BlocProvider(
+        create: (BuildContext context) => PostBloc()..add(FetchMyPostsEvent()),
+        child: Builder(builder: (BuildContext context) {
+          return BlocBuilder<PostBloc, PostState>(
+            builder: (context, state) {
+              if (state is PostLoadingState) {
+                return UiUtilities.showMainLoader();
+              } else if (state is PostLoadedState) {
+                return _buildDeliveryPostList(state.posts);
+              }
+              return Container();
+            },
+          );
+        }),
+      ),
     );
   }
-  Widget _buildDeliveryPostList(List<NormalPost> normalPosts){
+
+  Widget _buildDeliveryPostList(List<NormalPost> normalPosts) {
     return ListView.builder(
       itemCount: normalPosts.length,
-      itemBuilder:(context, index) {
+      itemBuilder: (context, index) {
         NormalPost normalPost = normalPosts[index];
         return Card(
-          child: ListTile(title: Text(normalPost.latestContent.title),
-            subtitle:Text(normalPost.latestContent.content) ,),
+          child: ListTile(
+            title: Text(normalPost.latestContent?.title ?? ""),
+            subtitle: Text(normalPost.latestContent?.content ?? ""),
+          ),
         );
       },
     );
-
   }
 }

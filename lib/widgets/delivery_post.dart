@@ -28,7 +28,7 @@ class DeliveryPostPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                post.latestDeliveryPostContent.productName ?? 'No title',
+                post.latestDeliveryPostContent?.productName ?? 'No title',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -43,7 +43,7 @@ class DeliveryPostPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Product Name: ${post.latestDeliveryPostContent.productName}',
+                      'Product Name: ${post.latestDeliveryPostContent?.productName}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -52,7 +52,7 @@ class DeliveryPostPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Reward: ${post.latestDeliveryPostContent.reward}',
+                      'Reward: ${post.latestDeliveryPostContent?.reward}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -61,7 +61,7 @@ class DeliveryPostPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Start Date: ${post.latestDeliveryPostContent.deliveryStartDate}',
+                      'Start Date: ${post.latestDeliveryPostContent?.deliveryStartDate}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -70,7 +70,7 @@ class DeliveryPostPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'End Date: ${post.latestDeliveryPostContent.deliveryEndDate}',
+                      'End Date: ${post.latestDeliveryPostContent?.deliveryEndDate}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -79,7 +79,7 @@ class DeliveryPostPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Destination: ${post.latestDeliveryPostContent.destination}',
+                      'Destination: ${post.latestDeliveryPostContent?.destination}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -87,9 +87,9 @@ class DeliveryPostPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    if (post.latestDeliveryPostContent.startLocation != null)
+                    if (post.latestDeliveryPostContent?.startLocation != null)
                       Text(
-                        'Start Location: ${post.latestDeliveryPostContent.startLocation}',
+                        'Start Location: ${post.latestDeliveryPostContent?.startLocation}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,

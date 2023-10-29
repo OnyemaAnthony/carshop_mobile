@@ -18,8 +18,8 @@ class PostSwiperItem extends StatelessWidget {
           height: 80,
           child: Column(
             children: [
-              Text(post.latestContent.title ?? "No title"),
-              Text(post.latestContent.content ?? "No content"),
+              Text(post.latestContent?.title ?? "No title"),
+              Text(post.latestContent?.content ?? "No content"),
               const Spacer(),
               GestureDetector(
                   onTap: () {
@@ -49,16 +49,16 @@ class DeliverySwiperItem extends StatelessWidget {
           height: 150,
           child: Column(
             children: [
-              Text("Title: ${deliveryPost.latestContent.title ?? "No title"}"),
+              Text("Title: ${deliveryPost.latestContent?.title ?? "No title"}"),
               Text(
-                  "Content: ${deliveryPost.latestContent.content ?? "No content"}"),
+                  "Content: ${deliveryPost.latestContent?.content ?? "No content"}"),
               Text(
-                  "product name:${deliveryPost.latestDeliveryPostContent.productName}"),
-              Text("reward:${deliveryPost.latestDeliveryPostContent.reward}"),
+                  "product name:${deliveryPost.latestDeliveryPostContent?.productName}"),
+              Text("reward:${deliveryPost.latestDeliveryPostContent?.reward}"),
               Text(
-                  "startDate:${deliveryPost.latestDeliveryPostContent.deliveryStartDate}"),
+                  "startDate:${deliveryPost.latestDeliveryPostContent?.deliveryStartDate}"),
               Text(
-                  "endDate:${deliveryPost.latestDeliveryPostContent.deliveryEndDate}"),
+                  "endDate:${deliveryPost.latestDeliveryPostContent?.deliveryEndDate}"),
             ],
           ),
         ),

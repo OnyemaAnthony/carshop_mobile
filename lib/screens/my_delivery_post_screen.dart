@@ -15,40 +15,43 @@ class _MyDeliveryPostScreenState extends State<MyDeliveryPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My delivery post'), centerTitle: true,),
+      appBar: AppBar(
+        title: const Text('My delivery post'),
+        centerTitle: true,
+      ),
       body: BlocProvider(
         create: (BuildContext context) =>
-        PostBloc()
-          ..add(const GetMyDeliveryPostEvent()),
-        child: Builder(
-            builder: (BuildContext context) {
-              return BlocBuilder<PostBloc, PostState>(
-                builder: (context, state) {
-                  if(state is DeliveryPostLoadingState){
-                    return UiUtilities.showMainLoader();
-                  }else if(state is DeliveryPostLoadedState){
-                    return _buildDeliveryPostList(state.deliveryPost);
-                  }
-                  return Container();
-                },
-              );
-            }
-        ),
+            PostBloc()..add(const GetMyDeliveryPostEvent()),
+        child: Builder(builder: (BuildContext context) {
+          return BlocBuilder<PostBloc, PostState>(
+            builder: (context, state) {
+              if (state is DeliveryPostLoadingState) {
+                return UiUtilities.showMainLoader();
+              } else if (state is DeliveryPostLoadedState) {
+                return _buildDeliveryPostList(state.deliveryPost);
+              }
+              return Container();
+            },
+          );
+        }),
       ),
-
     );
   }
-  Widget _buildDeliveryPostList(List<DeliveryPost> deliveryPosts){
+
+  Widget _buildDeliveryPostList(List<DeliveryPost> deliveryPosts) {
     return ListView.builder(
       itemCount: deliveryPosts.length,
-      itemBuilder:(context, index) {
+      itemBuilder: (context, index) {
         DeliveryPost deliveryPost = deliveryPosts[index];
         return Card(
-          child: ListTile(title: Text(deliveryPost.latestDeliveryPostContent.productName),
-          subtitle:Text(deliveryPost.latestDeliveryPostContent.productName) ,),
+          child: ListTile(
+            title:
+                Text(deliveryPost.latestDeliveryPostContent?.productName ?? ""),
+            subtitle:
+                Text(deliveryPost.latestDeliveryPostContent?.productName ?? ""),
+          ),
         );
       },
     );
-
   }
 }
