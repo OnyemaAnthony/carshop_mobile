@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
@@ -28,16 +29,29 @@ class LocalStorage {
   }
 
   static Future<AuthenticatedUserDescriptor?> fetchCachedUser() async {
-    String? cacheUser = await getString('cached_user');
-    if (cacheUser.isNotEmpty) {
-      dynamic newCachedUser = cacheUser.substring(1, cacheUser.length - 1);
-      newCachedUser = jsonDecode(newCachedUser.replaceAllMapped(
-          RegExp(r'(\w+):\s*([^,}\s]+)'),
-          (match) => '"${match.group(1)}": "${match.group(2)}"'));
+    SharedPreferences preferences = await SharedPreferences.getInstance();
 
-      AuthenticatedUserDescriptor? user =
-          AuthenticatedUserDescriptor?.fromJson(newCachedUser);
-      return user;
+    String? firstName = preferences.getString('user_firstname');
+    String? lastName = preferences.getString('user_lastname');
+    String? userId = preferences.getString('user_id');
+    String? email = preferences.getString('user_email');
+    String? accessToken = preferences.getString('access_token');
+
+    if (firstName != null &&
+        lastName != null &&
+        userId != null &&
+        email != null &&
+        accessToken != null) {
+      DateTime? expireDate = Jwt.getExpiryDate(accessToken);
+      if (expireDate != null && !Jwt.isExpired(accessToken)) {
+        AuthenticatedUserDescriptor? user = AuthenticatedUserDescriptor(
+            firstName: firstName,
+            lastName: lastName,
+            userId: userId,
+            email: email,
+            token: Token(accessToken: accessToken, expiresAt: expireDate));
+        return user;
+      }
     }
     return null;
   }
@@ -46,6 +60,21 @@ class LocalStorage {
     required AuthenticatedUserDescriptor user,
   }) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString('cached_user', jsonEncode(user.toJson().toString()));
+    Future.wait([
+      preferences.setString('user_firstname', user.firstName),
+      preferences.setString('user_lastname', user.lastName),
+      preferences.setString('user_id', user.userId),
+      preferences.setString('user_email', user.email),
+      preferences.setString('access_token', user.token!.accessToken)
+    ]);
+  }
+
+  static signOut() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('user_firstname');
+    preferences.remove('user_lastname');
+    preferences.remove('user_id');
+    preferences.remove('user_email');
+    preferences.remove('access_token');
   }
 }

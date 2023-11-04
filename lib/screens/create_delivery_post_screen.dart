@@ -43,7 +43,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
           postBloc = BlocProvider.of<PostBloc>(context);
           return BlocConsumer<PostBloc, PostState>(
             listener: (context, state) {
-              if (state is PostDeliveredState) {
+              if (state is CreatedState) {
                 UiUtilities.showToast(
                     message: "Your delivery post is saved",
                     toast: Toast.LENGTH_LONG);
@@ -51,7 +51,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
               }
             },
             builder: (context, state) {
-              if (state is PostLoadingState) {
+              if (state is DataLoadingState) {
                 return UiUtilities.showLoader();
               }
               return SafeArea(

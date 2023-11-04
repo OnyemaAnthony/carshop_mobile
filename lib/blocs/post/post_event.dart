@@ -41,8 +41,6 @@ class FetchPostsEvent extends PostEvent {}
 
 class FetchMyPostsEvent extends PostEvent {}
 
-class PostDeletedState extends PostState {}
-
 class SaveDeliveryPostEvent extends PostEvent {
   final CreateDeliveryPost createDPDto;
 
@@ -70,4 +68,10 @@ class DeleteDeliveryPostEvent extends PostEvent {
   final String deliveryPostId;
 
   const DeleteDeliveryPostEvent(this.deliveryPostId);
+}
+
+class AcceptDeliveryPostEvent extends PostEvent {
+  final String deliveryPostId;
+
+  const AcceptDeliveryPostEvent(this.deliveryPostId);
 }

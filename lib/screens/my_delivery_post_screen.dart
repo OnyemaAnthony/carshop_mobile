@@ -25,10 +25,10 @@ class _MyDeliveryPostScreenState extends State<MyDeliveryPostScreen> {
         child: Builder(builder: (BuildContext context) {
           return BlocBuilder<PostBloc, PostState>(
             builder: (context, state) {
-              if (state is DeliveryPostLoadingState) {
+              if (state is DataLoadingState) {
                 return UiUtilities.showMainLoader();
-              } else if (state is DeliveryPostLoadedState) {
-                return _buildDeliveryPostList(state.deliveryPost);
+              } else if (state is DataReadyState) {
+                return _buildDeliveryPostList(state.deliveryPosts);
               }
               return Container();
             },
