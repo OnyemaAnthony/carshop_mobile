@@ -24,9 +24,9 @@ class _MyNormalPostScreen extends State<MyNormalPostScreen> {
         child: Builder(builder: (BuildContext context) {
           return BlocBuilder<PostBloc, PostState>(
             builder: (context, state) {
-              if (state is PostLoadingState) {
+              if (state is DataLoadingState) {
                 return UiUtilities.showMainLoader();
-              } else if (state is PostLoadedState) {
+              } else if (state is DataReadyState) {
                 return _buildDeliveryPostList(state.posts);
               }
               return Container();

@@ -31,15 +31,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         body: Builder(builder: (BuildContext context) {
           postBloc = BlocProvider.of<PostBloc>(context);
           return BlocConsumer<PostBloc, PostState>(
-            listener: (context,state){
-                if(state is PostedState){
-                  UiUtilities.showToast(message: "Your normal post is saved", toast: Toast.LENGTH_LONG);
-                  UiUtilities.pop(context);
-                }
+            listener: (context, state) {
+              if (state is CreatedState) {
+                UiUtilities.showToast(
+                    message: "Your normal post is saved",
+                    toast: Toast.LENGTH_LONG);
+                UiUtilities.pop(context);
+              }
             },
-
             builder: (context, state) {
-              if (state is PostLoadingState) {
+              if (state is DataLoadingState) {
                 return UiUtilities.showLoader();
               } else if (state is PostErrorState) {
                 return const Center(

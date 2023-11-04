@@ -55,8 +55,6 @@ class AuthenticationBloc
           response.body != null &&
           response.body!.token != null) {
         await LocalStorage.saveUser(user: response.body!);
-        await LocalStorage.saveString(
-            key: "access_token", value: response.body!.token!.accessToken);
         emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
@@ -73,8 +71,7 @@ class AuthenticationBloc
       final response =
           await client.authFacebookSignInWithFacebookGet(code: code);
       if (response.statusCode == 200) {
-        await LocalStorage.saveString(
-            key: "access_token", value: response.body!.token!.accessToken);
+        await LocalStorage.saveUser(user: response.body!);
         emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
@@ -94,8 +91,7 @@ class AuthenticationBloc
       final response =
           await client.authMicrosoftSignInWithMicrosoftGet(code: code);
       if (response.statusCode == 200) {
-        await LocalStorage.saveString(
-            key: "access_token", value: response.body!.token!.accessToken);
+        await LocalStorage.saveUser(user: response.body!);
         emit(Authenticated(response.body!));
       } else {
         emit(AuthenticationErrorState(response.error.toString()));
@@ -105,18 +101,15 @@ class AuthenticationBloc
 
   FutureOr<void> _mapAppStartedEventToState(
       AppStartedEvent event, Emitter<AuthenticationState> emit) async {
-    String accessToken = await LocalStorage.getString('access_token');
     emit(AuthenticationLoadingState());
-    bool isLoggedIn = accessToken.isNotEmpty && !Jwt.isExpired(accessToken);
+    AuthenticatedUserDescriptor? user = await LocalStorage.fetchCachedUser();
+    bool isLoggedIn = user != null &&
+        user.token!.accessToken.isNotEmpty &&
+        !Jwt.isExpired(user.token!.accessToken);
     if (isLoggedIn) {
-      AuthenticatedUserDescriptor? user = await LocalStorage.fetchCachedUser();
-
-      if (user == null) {
-        emit(const AuthenticationErrorState('error user is null'));
-      } else {
-        emit(Authenticated(user));
-      }
+      emit(Authenticated(user));
     } else {
+      LocalStorage.signOut();
       emit(UnAuthenticated());
     }
   }
@@ -135,7 +128,7 @@ class AuthenticationBloc
   /// test
   FutureOr<void> _mapSignOutEventTest(
       SignOutEventTest event, Emitter<AuthenticationState> emit) async {
-    await LocalStorage.removeString("access_token");
+    await LocalStorage.signOut();
     emit(SignedOutState());
   }
 
@@ -187,8 +180,6 @@ class AuthenticationBloc
             "eorwanbrpwoaineraoknrbaosmbfoksdbmos___email___dev@carshop.com___firstName___Dev___lastName___Carshop");
 
     if (response.statusCode == 200) {
-      await LocalStorage.saveString(
-          key: "access_token", value: response.body!.token!.accessToken);
       await LocalStorage.saveUser(user: response.body!);
 
       emit(Authenticated(response.body!));

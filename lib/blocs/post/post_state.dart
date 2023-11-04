@@ -1,51 +1,34 @@
 part of 'post_bloc.dart';
 
 abstract class PostState extends Equatable {
-  const PostState();
+  final List<DeliveryPost> deliveryPosts;
+  final List<NormalPost> posts;
+  final int normalIndex = 0;
+  final int deliveryIndex = 0;
+
+  const PostState(this.deliveryPosts, this.posts);
   @override
   List<Object> get props => [];
 }
 
-class PostInitial extends PostState {}
-
-class PostLoadingState extends PostState {}
-
-class PostLoadedState extends PostState {
-  final List<NormalPost> posts;
-
-  const PostLoadedState(this.posts);
+class InitialState extends PostState {
+  const InitialState() : super(const [], const []);
 }
 
-class DeliveryPostLoadedState extends PostState {
-  final List<DeliveryPost> deliveryPost;
-
-  const DeliveryPostLoadedState(this.deliveryPost);
+class DataLoadingState extends PostState {
+  const DataLoadingState(super.deliveryPosts, super.posts);
 }
 
-class DeliveryPostLoadingState extends PostState {}
+class DataReadyState extends PostState {
+  const DataReadyState(super.posts, super.deliveryPosts);
+}
 
-class PostedState extends PostState {}
-
-class PostDeliveredState extends PostState {
-  final DeliveryPostLatestDescriptor deliveryPost;
-
-  const PostDeliveredState(this.deliveryPost);
+class CreatedState extends PostState {
+  const CreatedState(super.deliveryPosts, super.posts);
 }
 
 class PostErrorState extends PostState {
   final String errorMessage;
 
-  const PostErrorState(this.errorMessage);
-}
-
-class PostLoadState extends PostState {
-  final NormalPost postModel;
-
-  const PostLoadState(this.postModel);
-}
-
-class DeliveryPostLoadState extends PostState {
-  final DeliveryPost deliveryPost;
-
-  const DeliveryPostLoadState(this.deliveryPost);
+  const PostErrorState(this.errorMessage, super.deliveryPosts, super.posts);
 }
