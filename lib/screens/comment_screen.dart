@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/comment/comment_bloc.dart';
 
 class CommentScreen extends StatefulWidget {
-  const CommentScreen({super.key});
-
   @override
   State<CommentScreen> createState() => _CommentScreenState();
 }

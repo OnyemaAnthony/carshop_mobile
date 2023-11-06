@@ -69,4 +69,54 @@ class CarShopTheme {
       ),
     );
   }
+
+  static ThemeData getDarkTheme(BuildContext context) {
+    return ThemeData(
+      useMaterial3: true,
+      primarySwatch: MaterialColor(AppColors.primaryColorLight.value, const {
+        50: Color(0xfff2f2f2),
+        100: Color(0xffe6e6e6),
+        200: Color(0xffcccccc),
+        300: Color(0xffb3b3b3),
+        400: Color(0xff999999),
+        500: Color(0xff808080),
+        600: Color(0xff666666),
+        700: Color(0xff4d4d4d),
+        800: Color(0xff333333),
+        900: Color(0xff191919)
+      }),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.white,
+      ),
+      brightness: Brightness.dark,
+      primaryColor: AppColors.primaryColorDark,
+      canvasColor: Colors.black,
+      scaffoldBackgroundColor: AppColors.scaffoldColorDark,
+      dividerColor: Colors.grey,
+      unselectedWidgetColor: Colors.grey,
+      textTheme: TextTheme(
+        displayLarge: const TextStyle(
+          fontSize: 26.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+        titleLarge: GoogleFonts.inter(
+          fontSize: 30,
+          fontWeight: FontWeight.w900,
+        ),
+        bodyMedium: const TextStyle(fontSize: 14.0, color: Colors.black),
+      ),
+      secondaryHeaderColor: Colors.black,
+      hintColor: Colors.grey,
+      dialogTheme: const DialogTheme(
+          shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Color(0xff000000),
+          width: 0,
+          style: BorderStyle.none,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+      )),
+    );
+  }
 }
