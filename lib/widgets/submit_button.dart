@@ -12,6 +12,7 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        // color: Colors.black,
         gradient: LinearGradient(
           colors: [
             Colors.purple.shade400,
@@ -41,14 +42,7 @@ class SubmitButton extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8.0),
             child: logo,
           ),
-          Text(
-            text,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          Text(text, style: Theme.of(context).textTheme.titleMedium),
         ]),
       ),
     );

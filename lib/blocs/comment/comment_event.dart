@@ -9,7 +9,7 @@ abstract class CommentEvent extends Equatable {
 
 class GetAllCommentsEvent extends CommentEvent {
   final String parentId;
-//final GetManyCommentsDto getManyCommentsDto;
+
   const GetAllCommentsEvent(this.parentId);
 }
 
