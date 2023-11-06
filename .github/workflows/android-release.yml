@@ -1,7 +1,7 @@
 name: Android Release
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "release" ]
 jobs:
 
   build-bundle:
