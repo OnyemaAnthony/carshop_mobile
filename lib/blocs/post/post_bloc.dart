@@ -175,7 +175,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     CarshopClientSdk client = CarshopSDK().client;
     final response =
         await client.deliveryPostsIdDelete(id: event.deliveryPostId);
-
     if (response.statusCode == 200) {
       emit(CreatedState(state.deliveryPosts, state.posts));
     } else {

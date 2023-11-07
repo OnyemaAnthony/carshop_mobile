@@ -46,7 +46,7 @@ class CarShopTheme {
         color: Colors.black,
       )),
       textTheme: TextTheme(
-        displayLarge: const TextStyle(
+        displayLarge: GoogleFonts.inter(
           fontSize: 26.0,
           fontWeight: FontWeight.bold,
           color: Colors.black,
@@ -55,14 +55,18 @@ class CarShopTheme {
           fontSize: 30,
           fontWeight: FontWeight.w900,
         ),
+        titleMedium: GoogleFonts.inter(
+          fontSize: 16,
+          fontWeight: FontWeight.w900,
+        ),
         titleSmall: GoogleFonts.inter(
           color: const Color(
             0xff808080,
           ),
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
+          fontSize: 14,
+          fontWeight: FontWeight.w900,
         ),
-        bodyMedium: TextStyle(fontSize: 14.0, color: Colors.black),
+        bodyMedium: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(

@@ -42,3 +42,8 @@ class OpenCommentsEvent extends SwipePostEvent {
   final String postId;
   const OpenCommentsEvent(this.postId);
 }
+
+class DeleteDeliveryPost extends SwipePostEvent {
+  final String postId;
+  const DeleteDeliveryPost(this.postId);
+}
