@@ -23,88 +23,7 @@ class _CommentScreenState extends State<CommentScreen> {
     fetchComments();
   }
 
-  void fetchComments() {
-    List<CommentListItem> fetchedComments = [
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like thatWhat exactly are you doing with your family in such a dangerous place like that?What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like thatWhat exactly are you doing with your family in such a dangerous place like that?What exactly are you doing with your family in such a dangerous place like that?,,,,,,',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like thatWhat exactly are you doing with your family in such a dangerous place like that?What exactly are you doing with your family in such a dangerous place like that?,,,,,,',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-      // CommentListItem(
-      //   userName: "Anthony",
-      //   timeAgo: '20hr ago',
-      //   commentText:
-      //       'What exactly are you doing with your family in such a dangerous place like that What exactly are you doing with your family in such a dangerous place like that?',
-      // ),
-    ];
-  }
+  void fetchComments() {}
 
   void addComment(String text) {
     CreateCommentDto commentDto = const CreateCommentDto(
@@ -114,12 +33,6 @@ class _CommentScreenState extends State<CommentScreen> {
         commentType: CreateCommentDtoCommentType.onComment);
 
     commentBloc.add(CreateCommentEvent(commentDto));
-    // setState(() {});
-    // _scrollController.animateTo(
-    //   _scrollController.position.maxScrollExtent,
-    //   duration: const Duration(milliseconds: 300),
-    //   curve: Curves.easeOut,
-    // );
 
     _textController.clear();
   }
