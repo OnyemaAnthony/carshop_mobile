@@ -16,9 +16,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
 
   FutureOr<void> _mapCreateCommentEventToState(
       CreateCommentEvent event, Emitter<CommentState> emit) async {
+    emit(CommentLoadingState());
     var client = CarshopSDK().client;
-
-    final response = await client.commentsPost(body: event.commentDto);
+    final response = await client.commentsPost(body: event.comment);
     if (response.statusCode == 201) {
       emit(CommentedState());
     } else {
@@ -28,13 +28,16 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
 
   FutureOr<void> _mapGetAllCommentsEventToState(
       GetAllCommentsEvent event, Emitter<CommentState> emit) async {
+    emit(CommentLoadingState());
     var client = CarshopSDK().client;
     final response =
         await client.commentsUnderParentParentIdGet(parentId: event.parentId);
     if (response.statusCode == 200) {
-      // emit();
+      emit(
+        CommentLoadedState(response.body!),
+      );
     } else {
-      // emit();
+      emit(CommentErrorState(response.error.toString()));
     }
   }
 }
