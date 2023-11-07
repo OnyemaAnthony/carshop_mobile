@@ -62,4 +62,13 @@ class UiUtilities {
       body: Center(child: CircularProgressIndicator()),
     );
   }
+
+  static Widget showErrorMessage(String message) {
+    return Center(
+      child: Text(
+        message,
+        style: TextStyle(color: Colors.black),
+      ),
+    );
+  }
 }

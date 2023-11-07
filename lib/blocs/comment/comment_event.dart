@@ -14,7 +14,7 @@ class GetAllCommentsEvent extends CommentEvent {
 }
 
 class GetCommentHistoryEvent extends CommentEvent {
-  final dynamic comment;
+  final CommentDescriptor comment;
 
   const GetCommentHistoryEvent(this.comment);
 }
@@ -26,13 +26,13 @@ class DeleteCommentEvent extends CommentEvent {
 }
 
 class UpdateCommentEvent extends CommentEvent {
-  final dynamic comment;
+  final CommentDescriptor comment;
 
   const UpdateCommentEvent(this.comment);
 }
 
 class CreateCommentEvent extends CommentEvent {
-  final CreateCommentDto commentDto;
+  final CreateCommentDto comment;
 
-  const CreateCommentEvent(this.commentDto);
+  const CreateCommentEvent(this.comment);
 }

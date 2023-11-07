@@ -40,16 +40,8 @@ class CommentListItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
-                    '$userName $timeAgo',
-                    style: GoogleFonts.inter(
-                      color: const Color(
-                        0xff808080,
-                      ),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
+                  Text('$userName $timeAgo',
+                      style: Theme.of(context).textTheme.titleSmall),
                   const Spacer(),
                   const Icon(
                     Icons.more_horiz_outlined,
