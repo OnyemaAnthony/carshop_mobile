@@ -65,6 +65,7 @@ dependencies:
       ref: 8af906a6aec62f81dcb743ac99e7657c5bd49283
   flutter_speed_dial: ^7.0.0
   google_fonts: ^4.0.4
+  timeago: ^3.3.0
 #      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
 
 dev_dependencies:
