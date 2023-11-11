@@ -12,6 +12,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
   CommentBloc() : super(CommentInitial()) {
     on<CreateCommentEvent>(_mapCreateCommentEventToState);
     on<GetAllCommentsEvent>(_mapGetAllCommentsEventToState);
+    on<DeleteCommentEvent>(_mapDeleteCommentEventToState);
   }
 
   FutureOr<void> _mapCreateCommentEventToState(
@@ -40,6 +41,20 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       emit(
         CommentLoadedState(response.body!),
       );
+    } else {
+      emit(CommentErrorState(response.error.toString()));
+    }
+  }
+
+  FutureOr<void> _mapDeleteCommentEventToState(
+      DeleteCommentEvent event, Emitter<CommentState> emit) async {
+    emit(CommentLoadingState());
+    var client = CarshopSDK().client;
+    final response = await client.commentsIdDelete(id: event.commentId);
+    if (response.statusCode == 200) {
+      event.comments.comments
+          .removeWhere((element) => element.commentId == event.commentId);
+      emit(CommentLoadedState(event.comments));
     } else {
       emit(CommentErrorState(response.error.toString()));
     }

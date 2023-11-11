@@ -20,9 +20,10 @@ class GetCommentHistoryEvent extends CommentEvent {
 }
 
 class DeleteCommentEvent extends CommentEvent {
+  final CommentsDescriptor comments;
   final String commentId;
 
-  const DeleteCommentEvent(this.commentId);
+  const DeleteCommentEvent(this.commentId, this.comments);
 }
 
 class UpdateCommentEvent extends CommentEvent {

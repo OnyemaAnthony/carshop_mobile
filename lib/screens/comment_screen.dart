@@ -123,6 +123,45 @@ class CommentScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 CommentDescriptor comment = comments!.comments[index];
                 return CommentListItem(
+                  onAction: () {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: GestureDetector(
+                                  onTap: () {
+                                    commentBloc.add(
+                                      DeleteCommentEvent(
+                                          comment.commentId, comments),
+                                    );
+                                    UiUtilities.pop(context);
+                                  },
+                                  child: Text(
+                                    "Delete",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ),
+                                leading: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(.1),
+                                      shape: BoxShape.circle),
+                                  padding: const EdgeInsets.all(10),
+                                  child: const ImageIcon(
+                                      AssetImage('assets/icons/delete.png')),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
                   commentText: comment.content,
                   userName: "Anthony",
                   timeAgo: timeago.format(comment.createdAt),

@@ -25,54 +25,58 @@ class BottomNavigationBarScreen extends StatelessWidget {
               if (value == 1)
                 {
                   showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          height: 200,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      child: const Text('Delivery Post'),
-                                      onPressed: () => UiUtilities.push(
-                                        context,
-                                        const CreateDeliveryPostScreen(),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      child: const Text('Normal Post'),
-                                      onPressed: () => UiUtilities.push(
-                                          context, const CreatePostScreen()),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 200,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    child: const Text('Delivery Post'),
+                                    onPressed: () => UiUtilities.push(
+                                      context,
+                                      const CreateDeliveryPostScreen(),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      })
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    child: const Text('Normal Post'),
+                                    onPressed: () => UiUtilities.push(
+                                        context, const CreatePostScreen()),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  )
                 }
             },
             confineInSafeArea: true,
-            backgroundColor: Colors.white, // Default is Colors.white.
-            handleAndroidBackButtonPress: true, // Default is true.
-            resizeToAvoidBottomInset:
-                false, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-            stateManagement: true, // Default is true.
-            hideNavigationBarWhenKeyboardShows:
-                true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+            backgroundColor: Colors.white,
+            // Default is Colors.white.
+            handleAndroidBackButtonPress: true,
+            // Default is true.
+            resizeToAvoidBottomInset: false,
+            // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+            stateManagement: true,
+            // Default is true.
+            hideNavigationBarWhenKeyboardShows: true,
+            // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
             decoration: NavBarDecoration(
               borderRadius: BorderRadius.circular(10.0),
               colorBehindNavBar: Colors.white,

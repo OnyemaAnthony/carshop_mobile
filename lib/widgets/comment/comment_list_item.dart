@@ -9,6 +9,7 @@ class CommentListItem extends StatelessWidget {
   String? likes;
   String? comments;
   Function()? reply;
+  Function()? onAction;
 
   CommentListItem(
       {Key? key,
@@ -18,6 +19,7 @@ class CommentListItem extends StatelessWidget {
       this.likes = '0',
       this.timeAgo,
       this.userName,
+      this.onAction,
       this.reply})
       : super(key: key);
   String image =
@@ -45,8 +47,11 @@ class CommentListItem extends StatelessWidget {
                   Text('$userName $timeAgo',
                       style: Theme.of(context).textTheme.titleSmall),
                   const Spacer(),
-                  const Icon(
-                    Icons.more_horiz_outlined,
+                  GestureDetector(
+                    onTap: onAction,
+                    child: const Icon(
+                      Icons.more_horiz_outlined,
+                    ),
                   ),
                 ],
               ),

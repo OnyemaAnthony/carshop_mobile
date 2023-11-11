@@ -100,11 +100,9 @@ packages:
   carshop_clientsdk:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "8af906a6aec62f81dcb743ac99e7657c5bd49283"
-      resolved-ref: "8af906a6aec62f81dcb743ac99e7657c5bd49283"
-      url: "https://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@github.com/Hasankanso/carshop_client_sdk.git"
-    source: git
+      path: "../carshop_client_sdk"
+      relative: true
+    source: path
     version: "0.0.27"
   characters:
     dependency: transitive

@@ -60,9 +60,10 @@ dependencies:
   flutter_screenutil: ^5.8.4
   aad_oauth: ^0.4.4
   carshop_clientsdk:
-    git:
-      url: https://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@github.com/Hasankanso/carshop_client_sdk.git
-      ref: 8af906a6aec62f81dcb743ac99e7657c5bd49283
+    #    git:
+    #      url: https://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@github.com/Hasankanso/carshop_client_sdk.git
+    #      ref: 8af906a6aec62f81dcb743ac99e7657c5bd49283
+    path: ../carshop_client_sdk
   flutter_speed_dial: ^7.0.0
   google_fonts: ^4.0.4
   timeago: ^3.3.0
@@ -71,11 +72,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-#  google_maps_flutter:
-#    git:
-#      url: https://github.com/flutter/packages.git
-#      ref: google-maps-heatmaps
-#      path: packages/google_maps_flutter/google_maps_flutter
+  #  google_maps_flutter:
+  #    git:
+  #      url: https://github.com/flutter/packages.git
+  #      ref: google-maps-heatmaps
+  #      path: packages/google_maps_flutter/google_maps_flutter
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -100,8 +101,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/
-     - assets/
+    - assets/images/
+    - assets/icons/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
