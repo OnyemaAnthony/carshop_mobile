@@ -103,9 +103,9 @@ class AuthenticationBloc
       AppStartedEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     AuthenticatedUserDescriptor? user = await LocalStorage.fetchCachedUser();
-    bool isLoggedIn = user != null &&
-        user.token.accessToken.isNotEmpty &&
-        !Jwt.isExpired(user.token.accessToken);
+    bool isLoggedIn = user?.token != null &&
+        user!.token!.accessToken.isNotEmpty &&
+        !Jwt.isExpired(user.token!.accessToken);
     if (isLoggedIn) {
       emit(Authenticated(user));
     } else {
