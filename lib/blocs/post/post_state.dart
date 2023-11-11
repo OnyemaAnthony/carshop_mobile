@@ -1,12 +1,13 @@
 part of 'post_bloc.dart';
 
 abstract class PostState extends Equatable {
-  final List<DeliveryPost> deliveryPosts;
+  final List<PrivateDeliveryPostDesc> deliveryPosts;
   final List<NormalPost> posts;
   final int normalIndex = 0;
   final int deliveryIndex = 0;
 
   const PostState(this.deliveryPosts, this.posts);
+
   @override
   List<Object> get props => [];
 }

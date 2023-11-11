@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,7 +47,10 @@ class LocalStorage {
             lastName: lastName,
             userId: userId,
             email: email,
-            token: Token(accessToken: accessToken, expiresAt: expireDate));
+            token: Token(
+                accessToken: accessToken,
+                expiresAt: expireDate,
+                userId: UserId(id: userId)));
         return user;
       }
     }

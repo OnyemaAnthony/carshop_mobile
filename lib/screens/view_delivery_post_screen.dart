@@ -19,14 +19,15 @@ class ViewDeliveryPost extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          DeliveryPost deliveryPost = state.deliveryPosts[state.deliveryIndex];
+          PrivateDeliveryPostDesc deliveryPost =
+              state.deliveryPosts[state.deliveryIndex];
 
           return Column(
             children: [
               UserCard(
                   user: context.read<AuthenticationBloc>().state.userModel!),
-              Text(deliveryPost.latestContent?.title ?? ""),
-              Text(deliveryPost.latestContent?.content ?? ""),
+              Text(deliveryPost.title),
+              Text(deliveryPost.content),
               ElevatedButton(
                   onPressed: () {
                     context.read<PostBloc>().add(

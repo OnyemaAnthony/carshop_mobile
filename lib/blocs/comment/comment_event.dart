@@ -14,20 +14,20 @@ class GetAllCommentsEvent extends CommentEvent {
 }
 
 class GetCommentHistoryEvent extends CommentEvent {
-  final CommentDescriptor comment;
+  final PublicCommentsDescriptor comment;
 
   const GetCommentHistoryEvent(this.comment);
 }
 
 class DeleteCommentEvent extends CommentEvent {
-  final CommentsDescriptor comments;
+  final PublicCommentsDescriptor comments;
   final String commentId;
 
   const DeleteCommentEvent(this.commentId, this.comments);
 }
 
 class UpdateCommentEvent extends CommentEvent {
-  final CommentDescriptor comment;
+  final PublicCommentsDescriptor comment;
 
   const UpdateCommentEvent(this.comment);
 }

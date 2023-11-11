@@ -19,10 +19,10 @@ class CommentScreen extends StatelessWidget {
 
   void addComment(String text) {
     CreateCommentDto commentDto = CreateCommentDto(
-        parentId: temp,
-        content: text,
-        location: const Coordination(lng: 12.0, lat: 8.0),
-        commentType: CreateCommentDtoCommentType.onComment);
+      parentCommentId: temp,
+      content: text,
+      location: const Coordination(lng: 12.0, lat: 8.0),
+    );
 
     commentBloc.add(CreateCommentEvent(commentDto));
 
@@ -111,7 +111,7 @@ class CommentScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildComments(CommentsDescriptor? comments) {
+  Widget _buildComments(PublicCommentsDescriptor? comments) {
     return Container(
       margin: const EdgeInsets.all(20),
       child: Column(
@@ -119,9 +119,9 @@ class CommentScreen extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
-              itemCount: comments?.comments.length,
+              itemCount: comments!.comments.length,
               itemBuilder: (context, index) {
-                CommentDescriptor comment = comments!.comments[index];
+                PublicCommentDescriptor comment = comments.comments[index];
                 return CommentListItem(
                   onAction: () {
                     showModalBottomSheet<void>(

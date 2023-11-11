@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:carshop_mobile/repositories/firebase_services.dart';
@@ -6,7 +7,6 @@ import 'package:carshop_mobile/utilities/local_storage.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:logger/logger.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -32,8 +32,9 @@ class AuthenticationBloc
       SignUpEvent event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
-    final response = await client.authOauthGooglePost(code: event.code);
-
+    final response = await client.authOauthGooglePost(
+      body: AuthenticateBodyDto(code: event.code),
+    );
     if (response.statusCode == 200) {
       emit(Authenticated(response.body!));
     } else {
@@ -43,13 +44,12 @@ class AuthenticationBloc
 
   FutureOr<void> _mapSignInWithGoogleEventToState(
       SignInWithGoogleEvent event, Emitter<AuthenticationState> emit) async {
-    final logger = Logger();
     String? code = await FirebaseService().signInWithGoogle();
     if (code != null) {
       emit(AuthenticationLoadingState());
       var client = CarshopSDK().client;
       final response = await client.authOauthGooglePost(
-        code: code,
+        body: AuthenticateBodyDto(code: code),
       );
       if (response.statusCode == 200 &&
           response.body != null &&
@@ -104,8 +104,8 @@ class AuthenticationBloc
     emit(AuthenticationLoadingState());
     AuthenticatedUserDescriptor? user = await LocalStorage.fetchCachedUser();
     bool isLoggedIn = user != null &&
-        user.token!.accessToken.isNotEmpty &&
-        !Jwt.isExpired(user.token!.accessToken);
+        user.token.accessToken.isNotEmpty &&
+        !Jwt.isExpired(user.token.accessToken);
     if (isLoggedIn) {
       emit(Authenticated(user));
     } else {
@@ -176,9 +176,9 @@ class AuthenticationBloc
     emit(AuthenticationLoadingState());
     var client = CarshopSDK().client;
     final response = await client.authOauthGooglePost(
-        code:
-            "eorwanbrpwoaineraoknrbaosmbfoksdbmos___email___dev@carshop.com___firstName___Dev___lastName___Carshop");
-
+        body: const AuthenticateBodyDto(
+            code:
+                "eorwanbrpwoaineraoknrbaosmbfoksdbmos___email___dev@carshop.com___firstName___Dev___lastName___Carshop"));
     if (response.statusCode == 200) {
       await LocalStorage.saveUser(user: response.body!);
 
