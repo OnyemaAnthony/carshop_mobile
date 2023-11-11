@@ -8,6 +8,8 @@ class CommentListItem extends StatelessWidget {
   String? commentText;
   String? likes;
   String? comments;
+  Function()? reply;
+  Function()? onAction;
 
   CommentListItem(
       {Key? key,
@@ -16,7 +18,9 @@ class CommentListItem extends StatelessWidget {
       this.commentText,
       this.likes = '0',
       this.timeAgo,
-      this.userName})
+      this.userName,
+      this.onAction,
+      this.reply})
       : super(key: key);
   String image =
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=3087&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
@@ -43,8 +47,11 @@ class CommentListItem extends StatelessWidget {
                   Text('$userName $timeAgo',
                       style: Theme.of(context).textTheme.titleSmall),
                   const Spacer(),
-                  const Icon(
-                    Icons.more_horiz_outlined,
+                  GestureDetector(
+                    onTap: onAction,
+                    child: const Icon(
+                      Icons.more_horiz_outlined,
+                    ),
                   ),
                 ],
               ),
@@ -84,12 +91,15 @@ class CommentListItem extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Text(
-              '4 REPLY',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+            GestureDetector(
+              onTap: reply,
+              child: Text(
+                '4 REPLY',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             )
           ],

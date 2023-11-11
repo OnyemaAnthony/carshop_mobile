@@ -100,11 +100,9 @@ packages:
   carshop_clientsdk:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "8af906a6aec62f81dcb743ac99e7657c5bd49283"
-      resolved-ref: "8af906a6aec62f81dcb743ac99e7657c5bd49283"
-      url: "https://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@github.com/Hasankanso/carshop_client_sdk.git"
-    source: git
+      path: "../carshop_client_sdk"
+      relative: true
+    source: path
     version: "0.0.27"
   characters:
     dependency: transitive
@@ -1046,6 +1044,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  timeago:
+    dependency: "direct main"
+    description:
+      name: timeago
+      sha256: "46c128312ab0ea144b146c0ac6426ddd96810efec2de3fccc425d00179cd8254"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
   turf:
     dependency: transitive
     description:

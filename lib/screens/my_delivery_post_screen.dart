@@ -38,17 +38,15 @@ class _MyDeliveryPostScreenState extends State<MyDeliveryPostScreen> {
     );
   }
 
-  Widget _buildDeliveryPostList(List<DeliveryPost> deliveryPosts) {
+  Widget _buildDeliveryPostList(List<PrivateDeliveryPostDesc> deliveryPosts) {
     return ListView.builder(
       itemCount: deliveryPosts.length,
       itemBuilder: (context, index) {
-        DeliveryPost deliveryPost = deliveryPosts[index];
+        PrivateDeliveryPostDesc deliveryPost = deliveryPosts[index];
         return Card(
           child: ListTile(
-            title:
-                Text(deliveryPost.latestDeliveryPostContent?.productName ?? ""),
-            subtitle:
-                Text(deliveryPost.latestDeliveryPostContent?.productName ?? ""),
+            title: Text(deliveryPost.productName),
+            subtitle: Text(deliveryPost.productName),
           ),
         );
       },

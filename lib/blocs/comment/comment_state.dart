@@ -12,7 +12,7 @@ class CommentInitial extends CommentState {}
 class CommentLoadingState extends CommentState {}
 
 class CommentLoadedState extends CommentState {
-  final CommentsDescriptor comments;
+  final PublicCommentsDescriptor comments;
 
   const CommentLoadedState(this.comments);
 }
