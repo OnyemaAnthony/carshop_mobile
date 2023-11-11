@@ -1,12 +1,12 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/widgets/date_picker.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 
 class CreateDeliveryPostScreen extends StatefulWidget {
   const CreateDeliveryPostScreen({Key? key}) : super(key: key);
@@ -16,8 +16,6 @@ class CreateDeliveryPostScreen extends StatefulWidget {
 }
 
 class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
-  final DateFormat dateFormatter = DateFormat('yMMMEd');
-
   TextEditingController productNameController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
@@ -25,9 +23,9 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
   TextEditingController endLocationController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
+  DateTime startDate = DateTime.now().add(const Duration(days: 1));
+  DateTime endDate = DateTime.now().add(const Duration(days: 2));
 
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
   late PostBloc postBloc;
   @override
@@ -97,13 +95,23 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          selectDate('Select Start Date', startDateController,
-                              startDate),
+                          DatePicker(
+                            label: 'Select Start Date',
+                            initialDate: startDate,
+                            onValueChanged: (DateTime start) {
+                              startDate = start;
+                            },
+                          ),
                           const SizedBox(
                             height: 20,
                           ),
-                          selectDate(
-                              'Select End Date', endDateController, endDate),
+                          DatePicker(
+                            label: 'Select End Date',
+                            initialDate: endDate,
+                            onValueChanged: (DateTime end) {
+                              endDate = end;
+                            },
+                          ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -140,62 +148,19 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
         post: CreatePostDto(
             title: titleController.text,
             content: contentController.text,
-            location: Coordination(lat: 0, lng: 0)),
+            location:
+                const Coordination(lat: 33.8982255746, lng: 35.8474055659)),
         deliveryStartDate: startDate,
         deliveryEndDate: endDate,
         productName: productNameController.text,
-        destination: Coordination(lat: 10, lng: 10),
-        startLocation: Coordination(
+        destination: const Coordination(lat: 10, lng: 10),
+        startLocation: const Coordination(
           lat: 10,
           lng: 10,
         ),
       );
       postBloc.add(SaveDeliveryPostEvent(deliveryPost));
-      clear();
     }
-  }
-
-  Future<void> _selectDate(BuildContext context,
-      TextEditingController controller, DateTime dateTime) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1900, 1),
-        lastDate: DateTime(2100));
-
-    setState(() {
-      if (picked != null && picked != dateTime) {
-        dateTime = picked;
-        controller.text = dateFormatter.format(dateTime).toString();
-      }
-    });
-  }
-
-  Container selectDate(
-      String hint, TextEditingController controller, DateTime dateTime) {
-    return Container(
-      padding: const EdgeInsets.only(top: 5, bottom: 5),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: Colors.grey)),
-      child: GestureDetector(
-        onTap: () => _selectDate(context, controller, dateTime),
-        child: AbsorbPointer(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: hint,
-                suffixIcon: const Icon(Icons.arrow_drop_down),
-              ),
-              controller: controller,
-              keyboardType: TextInputType.datetime,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   void clear() {

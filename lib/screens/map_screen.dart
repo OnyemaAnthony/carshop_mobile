@@ -3,13 +3,10 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
-import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
-import 'package:carshop_mobile/screens/create_post_screen.dart';
 import 'package:carshop_mobile/screens/post_swipe_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -35,11 +32,12 @@ class MapScreen extends StatelessWidget {
           UiUtilities.showToast(
               message: 'No posts found', toast: Toast.LENGTH_LONG);
         }
-        if (state is PostsReady) {
+        if (state is DataReady) {
           UiUtilities.push(
               context,
               PostSwipeScreen(
                 posts: state.posts!,
+                deliveryPosts: state.deliveryPosts!,
               ));
           UiUtilities.showToast(
               message: 'loading posts', toast: Toast.LENGTH_LONG);
@@ -50,7 +48,7 @@ class MapScreen extends StatelessWidget {
           case LocationLoading:
           case CurrLocationUpdated:
           case NotPostsFound:
-          case PostsReady:
+          case DataReady:
             return Scaffold(
               body: GoogleMap(
                 onTap: (position) {

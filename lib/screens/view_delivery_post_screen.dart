@@ -1,7 +1,6 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
-import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
-import 'package:carshop_mobile/widgets/user_card.dart';
+import 'package:carshop_mobile/widgets/change_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +11,7 @@ class ViewDeliveryPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Screen'),
+        title: const Text('My Screen'),
       ),
       body: BlocConsumer<PostBloc, PostState>(
         listener: (context, state) {
@@ -24,8 +23,15 @@ class ViewDeliveryPost extends StatelessWidget {
 
           return Column(
             children: [
-              UserCard(
-                  user: context.read<AuthenticationBloc>().state.userModel!),
+              Row(
+                children: [
+                  ChangeBottomSheet(
+                    onDelete: (sheetContext) {},
+                  )
+                ],
+              ),
+              //   UserCard(
+              //       user: context.read<AuthenticationBloc>().state.userModel!),
               Text(deliveryPost.title),
               Text(deliveryPost.content),
               ElevatedButton(
