@@ -80,5 +80,5 @@ class PlaceSearchBox extends StatelessWidget {
     );
   }
 
-  // "https://api.mapbox.com/search/searchbox/v1/suggest?q=Michigan%20Stadium?language=en&limit=1&session_token=[GENERATED-UUID]&proximity=-83.748708,42.265837&country=US&access_token=pk.eyJ1IjoiaGthMTQiLCJhIjoiY2xodDEyMGU2MDFjdTNqcGJvbzM2aWs5eiJ9.w0JOpd7FH5Na4d9_8BuVMA"
+// "https://api.mapbox.com/search/searchbox/v1/suggest?q=Michigan%20Stadium?language=en&limit=1&session_token=[GENERATED-UUID]&proximity=-83.748708,42.265837&country=US&access_token=pk.eyJ1IjoiaGthMTQiLCJhIjoiY2xodDEyMGU2MDFjdTNqcGJvbzM2aWs5eiJ9.w0JOpd7FH5Na4d9_8BuVMA"
 }

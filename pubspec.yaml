@@ -60,6 +60,12 @@ dependencies:
   carshop_clientsdk:
     git:
       url: https://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@github.com/Hasankanso/carshop_client_sdk.git
+    #    #    path: ../typescript-carshop/devops/clientsdk-generator/dart_generator
+    #    path: ../../WebstormProjects/typescript-carshop/devops/clientsdk-generator/dart_generator
+
+    # git:
+    #   url: https://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@github.com/Hasankanso/carshop_client_sdk.git
+    #   ref: 8abef0d306bf0b53a05d7b72e69a567ee0015c1c
   flutter_speed_dial: ^7.0.0
   google_fonts: ^4.0.4
   timeago: ^3.3.0
@@ -67,6 +73,7 @@ dependencies:
   extended_image: ^8.0.0
   http: ^0.13.6
   uuid: ^4.2.1
+  flutter_stripe: ^9.5.0+1
 #      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
 
 dev_dependencies:
