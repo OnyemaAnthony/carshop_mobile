@@ -10,3 +10,11 @@ class WalletEvent extends Equatable {
 class GetWalletEvent extends WalletEvent {
   const GetWalletEvent();
 }
+
+class GetWalletBalanceEvent extends WalletEvent {}
+
+class GetTransactionHistoryEvent extends WalletEvent {}
+
+class InitializeFundingEvent extends WalletEvent {}
+
+class InitializeWithdrawalEvent extends WalletEvent {}

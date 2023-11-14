@@ -30,8 +30,25 @@ class WalletState extends Equatable {
   List<Object> get props => [page, size, wallet ?? [], transactions ?? []];
 }
 
-class WalletInitial extends WalletState {
-  const WalletInitial(
+class WalletInitial extends WalletState {}
+
+class WalletLoadingState extends WalletState {}
+
+class WalletFundingState extends WalletState {
+  final String paymentIntentId;
+  final String clientSecrete;
+
+  const WalletFundingState(this.paymentIntentId, this.clientSecrete);
+}
+
+class WalletTransactionLoadedState extends WalletState {
+  final TransactionsInDescendingOrderDescriptor? transaction;
+
+  const WalletTransactionLoadedState(this.transaction);
+}
+
+class WalletLoadedState extends WalletState {
+  const WalletLoadedState(
       {super.wallet, super.transactions, super.page, super.size});
 }
 

@@ -1,6 +1,8 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/utilities/constants.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/comment/comment_list_item.dart';
+import 'package:carshop_mobile/widgets/icon_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -156,29 +158,24 @@ class CommentScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               ListTile(
-                                title: GestureDetector(
-                                  onTap: () {
-                                    commentBloc.add(
-                                      DeleteCommentEvent(
-                                          comment.commentId, comments),
-                                    );
-                                    UiUtilities.pop(context);
-                                  },
-                                  child: Text(
-                                    "Delete",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
+                                  title: GestureDetector(
+                                    onTap: () {
+                                      commentBloc.add(
+                                        DeleteCommentEvent(
+                                            comment.commentId, comments),
+                                      );
+                                      UiUtilities.pop(context);
+                                    },
+                                    child: Text(
+                                      "Delete",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
                                   ),
-                                ),
-                                leading: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(.1),
-                                      shape: BoxShape.circle),
-                                  padding: const EdgeInsets.all(10),
-                                  child: const ImageIcon(
-                                      AssetImage('assets/icons/delete.png')),
-                                ),
-                              ),
+                                  leading: const IconTile(
+                                    iconPath: Constants.deleteIconPath,
+                                  )),
                             ],
                           ),
                         );

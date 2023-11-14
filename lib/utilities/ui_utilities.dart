@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widgets/shared_widgets/build_text.dart';
+import '../widgets/shimmer_loader.dart';
 import 'colors.dart';
 
 class UiUtilities {
@@ -57,26 +60,69 @@ class UiUtilities {
     );
   }
 
-  static Widget showMainLoader() {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 26,
-            ),
-            Image.asset(
-              "assets/images/loader.gif",
-              height: 300,
-              width: 300,
-            ),
-          ],
+  static showShimmerLoader(BuildContext context) {
+    return SizedBox(
+      width: 200.0,
+      height: 100.0,
+      child: Shimmer.fromColors(
+        baseColor: Colors.red,
+        highlightColor: Colors.yellow,
+        child: const Text(
+          'Shimmer',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 40.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
+  }
+
+  static Widget showMainLoader() {
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  static accountShimmer() {
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                height: 200,
+                margin: const EdgeInsets.all(8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                child: const CarShopShimmer(
+                  cornerRadius: 8,
+                  height: 160,
+                  width: double.infinity,
+                  highlightColor: Colors.grey,
+                ),
+              ),
+              Container(
+                height: 700,
+                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                child: const CarShopShimmer(
+                  cornerRadius: 8,
+                  height: 300,
+                  width: double.infinity,
+                  highlightColor: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static translate(BuildContext context, String text) {
+    return context.tr(text);
   }
 
   static Widget showErrorMessage(String message) {

@@ -1,109 +1,110 @@
-import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/blocs/wallet/wallet_bloc.dart';
-import 'package:carshop_mobile/screens/comment_screen.dart';
-import 'package:carshop_mobile/screens/login_screen.dart';
-import 'package:carshop_mobile/screens/my_normal_post_screen.dart';
-import 'package:carshop_mobile/utilities/ui_utilities.dart';
-import 'package:carshop_mobile/widgets/submit_button.dart';
+import 'package:carshop_mobile/widgets/transaction_dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:carshop_mobile/blocs/wallet/wallet_extension.dart';
-import 'my_delivery_post_screen.dart';
+
+import '../blocs/authentication_bloc/authentication_bloc.dart';
+import '../utilities/constants.dart';
+import '../utilities/ui_utilities.dart';
+import '../widgets/account_list.dart';
+import '../widgets/image_to_icon.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  AccountScreen({Key? key}) : super(key: key);
+  late WalletBloc walletBloc;
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthenticationBloc, AuthenticationState>(
-      listener: (context, state) {
-        if (state is SignedOutState) {
-          UiUtilities.navBarReplacement(context, const LoginScreen(), false);
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Account"),
-          centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  context.read<AuthenticationBloc>().add(SignOutEventTest());
-                },
-                icon: const Icon(Icons.logout))
-          ],
-        ),
-        body: BlocProvider(
-          create: (context) => WalletBloc()..add(const GetWalletEvent()),
-          child: BlocConsumer<WalletBloc, WalletState>(
-            listener: (context, state) {
-              if (state is WalletErrorState) {
-                UiUtilities.showToast(
-                    message: "You don't have a wallet",
-                    toast: Toast.LENGTH_SHORT);
-              }
-            },
-            builder: (context, state) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Card(
-                                color: Theme.of(context).primaryColor,
-                                child: Column(
-                                  children: [
-                                    const Text("Wallet Balance"),
-                                    Text(
-                                      state.wallet?.getBalance ?? "0",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                    ),
-                                  ],
-                                )),
-                          ),
-                        ],
-                      ),
+    const toolBar = SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    );
+
+    SystemChrome.setSystemUIOverlayStyle(toolBar);
+    return BlocProvider(
+      create: (BuildContext context) =>
+          WalletBloc()..add(GetWalletBalanceEvent()),
+      child: SafeArea(
+        child: BlocListener<WalletBloc, WalletState>(
+          listener: (context, state) {},
+          child: Builder(builder: (BuildContext context) {
+            walletBloc = BlocProvider.of<WalletBloc>(context);
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(UiUtilities.translate(context, 'account')),
+                centerTitle: false,
+                actions: const [
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ImageToIcon(
+                      color: Colors.black,
+                      width: 40,
+                      height: 40,
+                      imagePath: Constants.settingsIconPath,
                     ),
-                    Expanded(flex: 2, child: Container()),
-                    Expanded(
-                      flex: 2,
+                  ),
+                ],
+              ),
+              body: BlocBuilder<WalletBloc, WalletState>(
+                builder: (context, state) {
+                  if (state is WalletLoadingState) {
+                    return UiUtilities.accountShimmer();
+                  } else if (state is WalletErrorState) {
+                    return UiUtilities.showErrorMessage(
+                        state.errorMessage.toString());
+                  }
+
+                  if (state is WalletLoadedState) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 12),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SubmitButton(
-                            text: "MyActivites",
-                            onPress: () {
-                              UiUtilities.navBarReplacement(
-                                  context, CommentScreen(), false);
-                            },
+                          TransactionDashboard(
+                            context: context,
+                            state: state,
                           ),
-                          SubmitButton(
-                            text: "Get my Delivery post",
-                            onPress: () {
-                              UiUtilities.push(context, MyDeliveryPostScreen());
-                            },
+                          const SizedBox(
+                            height: 50,
                           ),
-                          SubmitButton(
-                            text: "Get my normal post",
-                            onPress: () {
-                              UiUtilities.push(context, MyNormalPostScreen());
-                            },
-                          ),
+                          AccountList(
+                              UiUtilities.translate(
+                                  context, 'personal_information'),
+                              Constants.personIconPath,
+                              Colors.white,
+                              context),
+                          AccountList('Activities', Constants.activityIconPath,
+                              Colors.white, context),
+                          AccountList(
+                              UiUtilities.translate(context, 'activities'),
+                              Constants.paymentIconPath,
+                              Colors.white,
+                              context),
+                          AccountList(
+                              UiUtilities.translate(context, 'address_mgt'),
+                              Constants.locationIconPath,
+                              Colors.white,
+                              context),
+                          AccountList(
+                              UiUtilities.translate(context, 'logout'),
+                              Constants.logoutIconPath,
+                              Colors.white,
+                              context, onTap: () {
+                            context
+                                .read<AuthenticationBloc>()
+                                .add(SignOutEventTest());
+                          }),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                    );
+                  }
+                  return Container();
+                },
+              ),
+            );
+          }),
         ),
       ),
     );
