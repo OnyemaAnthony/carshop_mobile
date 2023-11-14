@@ -19,7 +19,7 @@ class CarshopSDK {
   void init() async {
     client = CarshopClientSdk.create(
         baseUrl: Uri.parse(
-            'http://192.168.178.40:8080'), //'https://carshop-app.azurewebsites.net'),
+            'http://localhost:8080'), //'https://carshop-app.azurewebsites.net'),
         interceptors: [
           (Request request) async => request.copyWith(headers: {
                 'Accept': "application/json",
