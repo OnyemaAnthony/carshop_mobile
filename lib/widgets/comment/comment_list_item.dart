@@ -1,29 +1,15 @@
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class CommentListItem extends StatelessWidget {
-  String? imageUrl;
-  String? userName;
-  String? timeAgo;
-  String? commentText;
-  String? likes;
-  String? comments;
+  PublicCommentDescriptor? comment;
   Function()? reply;
   Function()? onAction;
 
-  CommentListItem(
-      {Key? key,
-      this.imageUrl,
-      this.comments = '0',
-      this.commentText,
-      this.likes = '0',
-      this.timeAgo,
-      this.userName,
-      this.onAction,
-      this.reply})
+  CommentListItem({Key? key, this.comment, this.onAction, this.reply})
       : super(key: key);
-  String image =
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=3087&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +17,7 @@ class CommentListItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage(image),
+          child: Text(comment!.creator.lastName[0]),
         ),
         const SizedBox(
           width: 20,
@@ -44,7 +30,8 @@ class CommentListItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('$userName $timeAgo',
+                  Text(
+                      '${comment!.creator.lastName} ${comment!.creator.firstName} ${timeago.format(comment!.createdAt)}',
                       style: Theme.of(context).textTheme.titleSmall),
                   const Spacer(),
                   GestureDetector(
@@ -62,7 +49,7 @@ class CommentListItem extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.7,
               child: Text(
-                commentText!,
+                comment!.content,
                 style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
@@ -72,36 +59,38 @@ class CommentListItem extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            const Row(
+            Row(
               children: [
-                ImageIcon(
+                const ImageIcon(
                   AssetImage('assets/images/like.png'),
                   size: 30,
                 ),
-                Text('22'),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                ImageIcon(
+                const ImageIcon(
                   AssetImage('assets/images/comment.png'),
                   size: 50,
-                )
+                ),
+                Text(comment!.noOfReplies.toInt().toString()),
               ],
             ),
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              onTap: reply,
-              child: Text(
-                '4 REPLY',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            )
+            comment!.noOfReplies.toInt() > 0
+                ? GestureDetector(
+                    onTap: reply,
+                    child: Text(
+                      '${comment!.noOfReplies.toInt().toString()} REPLY',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ],

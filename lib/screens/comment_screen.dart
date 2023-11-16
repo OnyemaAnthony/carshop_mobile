@@ -3,23 +3,25 @@ import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/comment/comment_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 import '../blocs/comment/comment_bloc.dart';
 
 class CommentScreen extends StatelessWidget {
-  CommentScreen({super.key});
+  String? id;
+
+  CommentScreen({super.key, this.id});
 
   final _textController = TextEditingController();
 
   final _scrollController = ScrollController();
 
   late CommentBloc commentBloc;
-  String temp = 'b1476c87-0b10-47ba-956a-22041d994707';
+
+  String normalPost = "fa45d7aa-e0aa-4dff-9374-a2084cf9d869";
 
   void addComment(String text) {
     CreateCommentDto commentDto = CreateCommentDto(
-      parentCommentId: temp,
+      normalPostId: normalPost,
       content: text,
       location: const Coordination(lng: 12.0, lat: 8.0),
     );
@@ -32,8 +34,8 @@ class CommentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          CommentBloc()..add(GetAllCommentsEvent(temp)),
+      create: (BuildContext context) => CommentBloc()
+        ..add(GetAllCommentsEvent(normalPostId: normalPost, commentId: id)),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Comments"),
@@ -162,11 +164,14 @@ class CommentScreen extends StatelessWidget {
                       },
                     );
                   },
-                  commentText: comment.content,
-                  userName: "Anthony",
-                  timeAgo: timeago.format(comment.createdAt),
+                  comment: comment,
                   reply: () {
-                    UiUtilities.push(context, CommentScreen());
+                    UiUtilities.push(
+                      context,
+                      CommentScreen(
+                        id: comment.commentId,
+                      ),
+                    );
                   },
                 );
               },
