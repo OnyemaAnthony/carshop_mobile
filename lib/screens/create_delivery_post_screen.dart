@@ -2,6 +2,7 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/date_picker.dart';
+import 'package:carshop_mobile/widgets/place_search_box.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class CreateDeliveryPostScreen extends StatefulWidget {
-  const CreateDeliveryPostScreen({Key? key}) : super(key: key);
+  const CreateDeliveryPostScreen({Key? key, required this.currLocation})
+      : super(key: key);
+
+  final Coordination currLocation;
 
   @override
   State<CreateDeliveryPostScreen> createState() => _CreateDeliveryPostScreen();
@@ -20,6 +24,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController rewardController = TextEditingController();
+  TextEditingController startLocationController = TextEditingController();
   TextEditingController endLocationController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
@@ -87,10 +92,19 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          TextFieldForm(
-                            validateError: 'End Location is required',
-                            hintText: 'End Location',
-                            controller: endLocationController,
+                          PlaceSearchBox(
+                            onSuggestionsSelected: (dynamic suggestion) {
+                              startLocationController.text =
+                                  suggestion["full_address"];
+                            },
+                            currLocation: widget.currLocation,
+                          ),
+                          PlaceSearchBox(
+                            onSuggestionsSelected: (dynamic suggestion) {
+                              endLocationController.text =
+                                  suggestion["full_address"];
+                            },
+                            currLocation: widget.currLocation,
                           ),
                           const SizedBox(
                             height: 20,
@@ -148,8 +162,7 @@ class _CreateDeliveryPostScreen extends State<CreateDeliveryPostScreen> {
         post: CreatePostDto(
             title: titleController.text,
             content: contentController.text,
-            location:
-                const Coordination(lat: 33.8982255746, lng: 35.8474055659)),
+            location: widget.currLocation),
         deliveryStartDate: startDate,
         deliveryEndDate: endDate,
         productName: productNameController.text,
