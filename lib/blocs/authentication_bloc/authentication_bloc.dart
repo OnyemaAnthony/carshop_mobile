@@ -51,9 +51,7 @@ class AuthenticationBloc
       final response = await client.authOauthGooglePost(
         body: AuthenticateBodyDto(code: code),
       );
-      if (response.statusCode == 200 &&
-          response.body != null &&
-          response.body!.token != null) {
+      if (response.statusCode == 200 && response.body != null) {
         await LocalStorage.saveUser(user: response.body!);
         emit(Authenticated(response.body!));
       } else {
@@ -104,8 +102,8 @@ class AuthenticationBloc
     emit(AuthenticationLoadingState());
     AuthenticatedUserDescriptor? user = await LocalStorage.fetchCachedUser();
     bool isLoggedIn = user?.token != null &&
-        user!.token!.accessToken.isNotEmpty &&
-        !Jwt.isExpired(user.token!.accessToken);
+        user!.token.accessToken.isNotEmpty &&
+        !Jwt.isExpired(user.token.accessToken);
     if (isLoggedIn) {
       emit(Authenticated(user));
     } else {

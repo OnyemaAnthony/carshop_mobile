@@ -1,4 +1,3 @@
-import 'package:carshop_mobile/utilities/colors.dart';
 import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +6,14 @@ class BuildText extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final Color? color;
+  final TextAlign? textAlign;
   const BuildText(
       {super.key,
       required this.text,
       this.fontSize,
       this.fontWeight,
-      this.color});
+      this.color,
+      this.textAlign});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,10 @@ class BuildText extends StatelessWidget {
       text,
       style: TextStyle(
         fontWeight: fontWeight ?? FontWeight.normal,
-        color: color ?? AppColors.thirdLightColor,
+        color: color,
         fontSize: (fontSize ?? 14).scaledPixels(),
       ),
+      textAlign: textAlign,
     );
   }
 }

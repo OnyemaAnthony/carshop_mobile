@@ -33,7 +33,7 @@ class TransactionDashboard extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    UiUtilities.navBarReplacement(
+                    UiUtilities.pushNavBar(
                         context, const TransactionHistoryScreen(), false);
                   },
                   child: Text(

@@ -1,6 +1,4 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:carshop_mobile/blocs/map/map_bloc.dart';
-import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
@@ -42,7 +40,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +50,6 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, __) => MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => MapBloc()..add(GetCurrentLocationEvent()),
-          ),
           BlocProvider(
             create: (BuildContext context) =>
                 AuthenticationBloc()..add(AppStartedEvent()),
@@ -72,7 +67,7 @@ class MyApp extends StatelessWidget {
               if (state is AuthenticationLoadingState) {
                 return UiUtilities.showMainLoader();
               } else if (state is Authenticated) {
-                return BottomNavigationBarScreen();
+                return const BottomNavigationBarScreen();
               } else if (state is UnAuthenticated) {
                 return const LoginScreen();
               }
