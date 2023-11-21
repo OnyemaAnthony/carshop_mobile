@@ -1,7 +1,8 @@
+import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:geolocator/geolocator.dart';
 
-class Services{
-   Future<Position> getUserCoordinate() async {
+class Services {
+  Future<Position> getUserCoordinate() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -23,7 +24,10 @@ class Services{
     }
 
     return await Geolocator.getCurrentPosition();
-
   }
 
+  Future<Coordination> getUserCoordination() async {
+    var position = await getUserCoordinate();
+    return Coordination(lat: position.latitude, lng: position.longitude);
+  }
 }

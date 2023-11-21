@@ -13,20 +13,17 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (_, state) {
         if (state is Authenticated) {
-          UiUtilities.pushReplacement(
-              context, const BottomNavigationBarScreen());
+          UiUtilities.pushReplacement(context, BottomNavigationBarScreen());
         } else if (state is AuthenticationErrorState) {
           UiUtilities.showSnackBar(txt: state.errorMessage, context: context);
         }
       },
       builder: (_, state) => Stack(
         children: [
-           Scaffold(
-
-           body:
-           Padding(
-             padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
-             child: Column(
+          Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
@@ -36,21 +33,27 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Text(
                     '\t\t\t\t Your deliveries.\n Our shared journey.',
-                   style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-
-                  const SizedBox(height: 50,),
-                  Text('Log in or Signup',
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    'Log in or Signup',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(fontSize:17,
-                    fontWeight: FontWeight.bold,),
+                    style: GoogleFonts.inter(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                 const LoginButtonList(),
-                  const Text('By signing up you agree to ToC & PP',
-                    textAlign: TextAlign.center,),
+                  const LoginButtonList(),
+                  const Text(
+                    'By signing up you agree to ToC & PP',
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
-           ),
+            ),
           ),
           if (state is AuthenticationLoadingState) UiUtilities.showLoader()
         ],
