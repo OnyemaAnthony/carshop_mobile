@@ -5,7 +5,11 @@ import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'comment_event.dart';er(CommentInitial()) {
+part 'comment_event.dart';
+part 'comment_state.dart';
+
+class CommentBloc extends Bloc<CommentEvent, CommentState> {
+  CommentBloc() : super(CommentInitial()) {
     on<CreateCommentEvent>(_mapCreateCommentEventToState);
     on<GetAllCommentsEvent>(_mapGetAllCommentsEventToState);
     on<DeleteCommentEvent>(_mapDeleteCommentEventToState);
