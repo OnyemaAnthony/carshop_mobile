@@ -1,6 +1,4 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
-import 'package:carshop_mobile/blocs/map/map_bloc.dart';
-import 'package:carshop_mobile/blocs/post/post_bloc.dart';
 import 'package:carshop_mobile/blocs/swipe_posts/swipe_bloc.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/change_bottom_sheet.dart';
@@ -30,6 +28,7 @@ class PublicDeliverypostCard extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          SwipeBloc swipeBlock = context.read<SwipeBloc>();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -73,6 +72,9 @@ class PublicDeliverypostCard extends StatelessWidget {
                   title: "Budget",
                   icon: Icons.attach_money_outlined),
               Row(
+                children: [Text("${deliveryPost.status()}")],
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
@@ -81,9 +83,8 @@ class PublicDeliverypostCard extends StatelessWidget {
                       onPressed:
                           deliveryPost.status() != DeliveryPostStatus.ENDED
                               ? () {
-                                  context.read<PostBloc>().add(
-                                      AcceptDeliveryPostEvent(
-                                          deliveryPost.deliveryPostId));
+                                  swipeBlock.add(AcceptDeliveryPostEvent(
+                                      deliveryPost.deliveryPostId));
                                 }
                               : null,
                       child: Text(
@@ -92,7 +93,36 @@ class PublicDeliverypostCard extends StatelessWidget {
                             color: Theme.of(context).primaryColorLight),
                       )),
                 ],
-              )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            swipeBlock.add(LikeDeliveryPostEvent(
+                                deliveryPost.deliveryPostId));
+                          },
+                          icon: Icon(
+                            Icons.thumb_up,
+                            color: deliveryPost.isLiked
+                                ? Colors.blue
+                                : Colors.grey.shade800,
+                          )),
+                      Text("${deliveryPost.likesCount.toInt()}"),
+                    ],
+                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+                  Column(
+                    children: [
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.comment)),
+                      Text("${deliveryPost.commentsCount.toInt()}"),
+                    ],
+                  )
+                ],
+              ),
             ],
           );
         },
