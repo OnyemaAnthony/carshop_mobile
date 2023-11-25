@@ -2,15 +2,10 @@ import 'dart:async';
 
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
-import 'package:carshop_mobile/utilities/logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'comment_event.dart';
-part 'comment_state.dart';
-
-class CommentBloc extends Bloc<CommentEvent, CommentState> {
-  CommentBloc() : super(CommentInitial()) {
+part 'comment_event.dart';er(CommentInitial()) {
     on<CreateCommentEvent>(_mapCreateCommentEventToState);
     on<GetAllCommentsEvent>(_mapGetAllCommentsEventToState);
     on<DeleteCommentEvent>(_mapDeleteCommentEventToState);
@@ -28,7 +23,6 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         pageSize: 30,
       );
       if (res.statusCode == 200) {
-        Log.d('the comment ${res.body}');
         emit(CommentLoadedState(res.body!));
       }
     } else {
