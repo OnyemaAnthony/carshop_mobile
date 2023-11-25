@@ -47,3 +47,13 @@ class DeleteDeliveryPost extends SwipePostEvent {
   final String postId;
   const DeleteDeliveryPost(this.postId);
 }
+
+class AcceptDeliveryPostEvent extends SwipePostEvent {
+  final String deliveryPostId;
+  const AcceptDeliveryPostEvent(this.deliveryPostId);
+}
+
+class LikeDeliveryPostEvent extends SwipePostEvent {
+  final String deliveryPostId;
+  const LikeDeliveryPostEvent(this.deliveryPostId);
+}

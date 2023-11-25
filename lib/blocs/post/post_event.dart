@@ -69,9 +69,3 @@ class DeleteDeliveryPostEvent extends PostEvent {
 
   const DeleteDeliveryPostEvent(this.deliveryPostId);
 }
-
-class AcceptDeliveryPostEvent extends PostEvent {
-  final String deliveryPostId;
-
-  const AcceptDeliveryPostEvent(this.deliveryPostId);
-}

@@ -19,8 +19,9 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
     on<SwipeRight>(
         (event, state) => _mapSwipeEventToState(event, state, left: false));
 
-    on<DeleteDeliveryPost>(
-        (event, state) => _mapDeleteDeliveryPostEventToState(event, state));
+    on<DeleteDeliveryPost>(_mapDeleteDeliveryPostEventToState);
+    on<AcceptDeliveryPostEvent>(_mapAcceptDeliveryPostEventToState);
+    on<LikeDeliveryPostEvent>(_mapLikeDeliveryPostEventToState);
   }
 
   FutureOr<void> _mapSwipeEventToState(
@@ -42,6 +43,45 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
     if (response.statusCode == 200) {
       emit(ActionDoneState(state.posts, state.deliveryPosts, state.selectedPost,
           state.swiperController));
+    } else {
+      emit(ActionFailedState(
+          state.posts,
+          state.deliveryPosts,
+          state.selectedPost,
+          state.swiperController,
+          response.error.toString()));
+    }
+  }
+
+  FutureOr<void> _mapAcceptDeliveryPostEventToState(
+      AcceptDeliveryPostEvent event, Emitter<SwipePostState> emit) async {
+    CarshopClientSdk client = CarshopSDK().client;
+    Response<Delivery?> response =
+        await client.deliveryPostsAcceptDeliveryPostIdPost(
+            deliveryPostId: event.deliveryPostId);
+
+    if (response.statusCode == 200) {
+      emit(ActionDoneState(state.posts, state.deliveryPosts, state.selectedPost,
+          state.swiperController));
+    } else {
+      emit(ActionFailedState(
+          state.posts,
+          state.deliveryPosts,
+          state.selectedPost,
+          state.swiperController,
+          response.error.toString()));
+    }
+  }
+
+  FutureOr<void> _mapLikeDeliveryPostEventToState(
+      LikeDeliveryPostEvent event, Emitter<SwipePostState> emit) async {
+    CarshopClientSdk client = CarshopSDK().client;
+    var response = await client.likesTypeContentIdPost(
+        targetId: event.deliveryPostId, targetType: "DELIVERY_POST");
+
+    if (response.statusCode == 200) {
+      emit(SwipePostLoadedState(state.posts, state.deliveryPosts,
+          state.selectedPost, state.swiperController));
     } else {
       emit(ActionFailedState(
           state.posts,
