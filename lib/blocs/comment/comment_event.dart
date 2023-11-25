@@ -8,9 +8,16 @@ abstract class CommentEvent extends Equatable {
 }
 
 class GetAllCommentsEvent extends CommentEvent {
-  final String parentId;
+  final String? normalPostId;
+  final String? deliveryPostId;
+  final String? parentCommentId;
+  final String? commentId;
 
-  const GetAllCommentsEvent(this.parentId);
+  const GetAllCommentsEvent(
+      {this.parentCommentId,
+      this.deliveryPostId,
+      this.normalPostId,
+      this.commentId});
 }
 
 class GetCommentHistoryEvent extends CommentEvent {

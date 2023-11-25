@@ -21,10 +21,10 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     var client = CarshopSDK().client;
     final response = await client.commentsPost(body: event.comment);
     if (response.statusCode == 201) {
-      final res = await client.commentsCommentRepliesCommentIdGet(
-        commentId: event.comment.parentCommentId,
+      final res = await client.commentsNormalPostCommentsNormalPostIdGet(
+        normalPostId: event.comment.normalPostId,
         pageNumber: 1,
-        pageSize: 20,
+        pageSize: 30,
       );
       if (res.statusCode == 200) {
         emit(CommentLoadedState(res.body!));
@@ -38,8 +38,18 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       GetAllCommentsEvent event, Emitter<CommentState> emit) async {
     emit(CommentLoadingState());
     var client = CarshopSDK().client;
-    final response = await client.commentsCommentRepliesCommentIdGet(
-        commentId: event.parentId, pageSize: 10, pageNumber: 1);
+
+    final response = event.commentId == null
+        ? await client.commentsNormalPostCommentsNormalPostIdGet(
+            normalPostId: event.normalPostId,
+            pageNumber: 1,
+            pageSize: 30,
+          )
+        : await client.commentsCommentRepliesCommentIdGet(
+            commentId: event.commentId,
+            pageNumber: 1,
+            pageSize: 30,
+          );
     if (response.statusCode == 200) {
       emit(
         CommentLoadedState(response.body!),
