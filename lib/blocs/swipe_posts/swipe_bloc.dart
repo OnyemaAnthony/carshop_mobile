@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:appinio_swiper/controllers.dart';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
@@ -9,29 +8,16 @@ part 'swipe_event.dart';
 part 'swipe_state.dart';
 
 class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
-  SwipeBloc(
-      {required List<NormalPost> normalPosts,
-      required List<PublicDeliveryPostDesc> deliveryPosts})
-      : super(SwipePostLoadedState(
-            normalPosts, deliveryPosts, 0, AppinioSwiperController())) {
-    on<SwipeLeft>(
-        (event, state) => _mapSwipeEventToState(event, state, left: true));
-    on<SwipeRight>(
-        (event, state) => _mapSwipeEventToState(event, state, left: false));
-
+  SwipeBloc({
+    required List<NormalPost> normalPosts,
+    required List<PublicDeliveryPostDesc> deliveryPosts,
+  }) : super(SwipePostLoadedState(
+            normalPosts, deliveryPosts, 0, AppinioSwiperController(),
+            selectedDeliveryPost: deliveryPosts[0])) {
     on<DeleteDeliveryPost>(_mapDeleteDeliveryPostEventToState);
     on<AcceptDeliveryPostEvent>(_mapAcceptDeliveryPostEventToState);
     on<LikeDeliveryPostEvent>(_mapLikeDeliveryPostEventToState);
-  }
-
-  FutureOr<void> _mapSwipeEventToState(
-      SwipePostEvent event, Emitter<SwipePostState> emit,
-      {bool left = false}) async {
-    int selectedPost = state.selectedPost;
-    selectedPost = max(
-        0, min(state.posts.length, left ? selectedPost + 1 : selectedPost - 1));
-    emit(SwipePostLoadedState(state.posts, state.deliveryPosts,
-        state.selectedPost, state.swiperController));
+    on<PostSwipedEvent>(_mapPostSwipedEventToState);
   }
 
   _mapDeleteDeliveryPostEventToState(
@@ -42,14 +28,12 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
     final response = await client.deliveryPostsIdDelete(id: event.postId);
     if (response.statusCode == 200) {
       emit(ActionDoneState(state.posts, state.deliveryPosts, state.selectedPost,
-          state.swiperController));
-    } else {
-      emit(ActionFailedState(
-          state.posts,
-          state.deliveryPosts,
-          state.selectedPost,
           state.swiperController,
-          response.error.toString()));
+          selectedDeliveryPost: state.selectedDeliveryPost));
+    } else {
+      emit(ActionFailedState(state.posts, state.deliveryPosts,
+          state.selectedPost, state.swiperController, response.error.toString(),
+          selectedDeliveryPost: state.selectedDeliveryPost));
     }
   }
 
@@ -62,33 +46,52 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
 
     if (response.statusCode == 200) {
       emit(ActionDoneState(state.posts, state.deliveryPosts, state.selectedPost,
-          state.swiperController));
-    } else {
-      emit(ActionFailedState(
-          state.posts,
-          state.deliveryPosts,
-          state.selectedPost,
           state.swiperController,
-          response.error.toString()));
+          selectedDeliveryPost: state.selectedDeliveryPost));
+    } else {
+      emit(ActionFailedState(state.posts, state.deliveryPosts,
+          state.selectedPost, state.swiperController, response.error.toString(),
+          selectedDeliveryPost: state.selectedDeliveryPost));
     }
   }
 
   FutureOr<void> _mapLikeDeliveryPostEventToState(
       LikeDeliveryPostEvent event, Emitter<SwipePostState> emit) async {
     CarshopClientSdk client = CarshopSDK().client;
-    var response = await client.likesTypeContentIdPost(
-        targetId: event.deliveryPostId, targetType: "DELIVERY_POST");
 
+    Response<Object> response;
+    PublicDeliveryPostDesc? newDPost;
+
+    if (state.selectedDeliveryPost != null) {
+      newDPost = state.selectedDeliveryPost!.copyWith(
+          isLiked: !event.isLiked,
+          likesCount: event.isLiked
+              ? state.selectedDeliveryPost!.likesCount - 1
+              : state.selectedDeliveryPost!.likesCount + 1);
+    }
+
+    if (event.isLiked) {
+      response = await client.likesTypeContentIdDelete(
+          contentId: event.deliveryPostId, contentType: "DELIVERY_POST");
+    } else {
+      response = await client.likesTypeContentIdPost(
+          contentId: event.deliveryPostId, contentType: "DELIVERY_POST");
+    }
     if (response.statusCode == 200) {
       emit(SwipePostLoadedState(state.posts, state.deliveryPosts,
-          state.selectedPost, state.swiperController));
+          state.selectedPost, state.swiperController,
+          selectedDeliveryPost: newDPost));
     } else {
-      emit(ActionFailedState(
-          state.posts,
-          state.deliveryPosts,
-          state.selectedPost,
-          state.swiperController,
-          response.error.toString()));
+      emit(ActionFailedState(state.posts, state.deliveryPosts,
+          state.selectedPost, state.swiperController, response.error.toString(),
+          selectedDeliveryPost: state.selectedDeliveryPost));
     }
+  }
+
+  FutureOr<void> _mapPostSwipedEventToState(
+      PostSwipedEvent event, Emitter<SwipePostState> emit) {
+    emit(SwipePostLoadedState(state.posts, state.deliveryPosts,
+        state.selectedPost, state.swiperController,
+        selectedDeliveryPost: state.deliveryPosts[event.index]));
   }
 }

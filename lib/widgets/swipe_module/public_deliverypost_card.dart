@@ -102,7 +102,8 @@ class PublicDeliverypostCard extends StatelessWidget {
                       IconButton(
                           onPressed: () {
                             swipeBlock.add(LikeDeliveryPostEvent(
-                                deliveryPost.deliveryPostId));
+                                deliveryPost.deliveryPostId,
+                                deliveryPost.isLiked));
                           },
                           icon: Icon(
                             Icons.thumb_up,

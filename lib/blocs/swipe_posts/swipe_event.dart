@@ -6,14 +6,6 @@ abstract class SwipePostEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class SwipeLeft extends SwipePostEvent {
-  const SwipeLeft();
-}
-
-class SwipeRight extends SwipePostEvent {
-  const SwipeRight();
-}
-
 class LikePostEvent extends SwipePostEvent {
   final String postId;
   const LikePostEvent(this.postId);
@@ -55,5 +47,12 @@ class AcceptDeliveryPostEvent extends SwipePostEvent {
 
 class LikeDeliveryPostEvent extends SwipePostEvent {
   final String deliveryPostId;
-  const LikeDeliveryPostEvent(this.deliveryPostId);
+  final bool isLiked;
+
+  const LikeDeliveryPostEvent(this.deliveryPostId, this.isLiked);
+}
+
+class PostSwipedEvent extends SwipePostEvent {
+  final int index;
+  const PostSwipedEvent({required this.index});
 }
