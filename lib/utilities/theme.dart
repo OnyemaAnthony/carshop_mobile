@@ -64,7 +64,6 @@ class CarShopTheme {
             0xff808080,
           ),
           fontSize: 14,
-          fontWeight: FontWeight.w900,
         ),
         bodyMedium: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
       ),

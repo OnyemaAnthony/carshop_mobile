@@ -108,7 +108,7 @@ packages:
   carshop_clientsdk:
     dependency: "direct main"
     description:
-      path: "../typescript-carshop/devops/clientsdk-generator/dart_generator"
+      path: "../../WebstormProjects/typescript-carshop/devops/clientsdk-generator/dart_generator"
       relative: true
     source: path
     version: "0.0.27"
