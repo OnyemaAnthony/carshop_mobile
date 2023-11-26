@@ -24,14 +24,18 @@ class PostSwipeScreen extends StatelessWidget {
             SwipeBloc(normalPosts: posts, deliveryPosts: deliveryPosts),
         child:
             BlocBuilder<SwipeBloc, SwipePostState>(builder: (context, state) {
+          SwipeBloc swipeBloc = BlocProvider.of<SwipeBloc>(context);
           return CupertinoPageScaffold(
             navigationBar: const CupertinoNavigationBar(
               middle: Text('Swipe'),
             ),
             child: Swiper(
+              onIndexChanged: (index) {
+                swipeBloc.add(PostSwipedEvent(index: index));
+              },
               itemBuilder: (context, index) {
                 return PublicDeliverypostCard(
-                  deliveryPost: state.deliveryPosts[index],
+                  deliveryPost: state.selectedDeliveryPost!,
                 );
               },
               indicatorLayout: PageIndicatorLayout.COLOR,
@@ -41,20 +45,4 @@ class PostSwipeScreen extends StatelessWidget {
           );
         }));
   }
-
-  void _swipe(
-      int index, AppinioSwiperDirection direction, BuildContext context) {
-    if (direction == AppinioSwiperDirection.left) {
-      BlocProvider.of<SwipeBloc>(context).add(const SwipeLeft());
-    } else {
-      BlocProvider.of<SwipeBloc>(context).add(const SwipeRight());
-    }
-  }
-
-  void _unswipe(bool unswiped) {
-    if (unswiped) {
-    } else {}
-  }
-
-  void _onEnd() {}
 }
