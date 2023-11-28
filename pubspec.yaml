@@ -68,6 +68,7 @@ dependencies:
   google_fonts: ^4.0.4
   timeago: ^3.3.0
   flutter_typeahead: ^4.8.0
+  extended_image: ^8.0.0
   http: ^0.13.6
   uuid: ^4.2.1
 #      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9

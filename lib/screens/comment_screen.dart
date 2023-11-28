@@ -37,7 +37,6 @@ class CommentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('delivery is ${parentCommentId}');
     return BlocProvider(
       create: (BuildContext context) => CommentBloc()
         ..add(normalPostId != null

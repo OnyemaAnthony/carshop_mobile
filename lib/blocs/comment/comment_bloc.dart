@@ -20,7 +20,6 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       CreateCommentEvent event, Emitter<CommentState> emit) async {
     emit(CommentLoadingState());
     var client = CarshopSDK().client;
-    print('the json is ${event.comment}');
     final response = await client.commentsPost(body: event.comment);
     if (response.statusCode == 201) {
       if (event.comment.normalPostId != null) {

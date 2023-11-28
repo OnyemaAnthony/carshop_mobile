@@ -57,9 +57,41 @@ class UiUtilities {
     );
   }
 
-  static Widget showMainLoader() {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+  static Widget showMainLoader({
+    double height = 260,
+    double imageHeight = 160,
+    double loaderHeight = 60,
+    double loaderWidth = 60,
+    bool addSpacer = false,
+  }) {
+    return Container(
+      color: Colors.white,
+      height: height,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 26,
+            ),
+            Image.asset(
+              "assets/images/loader.gif",
+              height: 100,
+              width: 100,
+            ),
+            const Text(
+              "Loading",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -67,7 +99,7 @@ class UiUtilities {
     return Center(
       child: Text(
         message,
-        style: TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.black),
       ),
     );
   }
