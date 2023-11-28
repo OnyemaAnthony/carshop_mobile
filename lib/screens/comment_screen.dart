@@ -37,6 +37,7 @@ class CommentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('delivery is ${parentCommentId}');
     return BlocProvider(
       create: (BuildContext context) => CommentBloc()
         ..add(normalPostId != null
@@ -44,7 +45,7 @@ class CommentScreen extends StatelessWidget {
                 normalPostId: parentCommentId == null ? normalPostId : null,
                 commentId: parentCommentId)
             : GetAllDeliveryPostsEvent(
-                deliveryPostId: deliveryPostId,
+                deliveryPostId: parentCommentId == null ? deliveryPostId : null,
                 parentCommentId: parentCommentId,
               )),
       child: Scaffold(
@@ -191,7 +192,7 @@ class CommentScreen extends StatelessWidget {
                       context,
                       CommentScreen(
                         parentCommentId: comment.commentId,
-                        // deliveryPostId: deliveryPostId,
+                        deliveryPostId: deliveryPostId,
                         // normalPostId: normalPostId,
                       ),
                     );

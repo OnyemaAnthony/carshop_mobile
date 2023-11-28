@@ -120,8 +120,6 @@ class PublicDeliverypostCard extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            print(
-                                'iddddd ${state.selectedDeliveryPost!.deliveryPostId}');
                             UiUtilities.push(
                               context,
                               CommentScreen(

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
-import 'package:carshop_mobile/utilities/logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,10 +20,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       CreateCommentEvent event, Emitter<CommentState> emit) async {
     emit(CommentLoadingState());
     var client = CarshopSDK().client;
-    Log.d('resssss ${event.comment.toJson()}');
-
+    print('the json is ${event.comment}');
     final response = await client.commentsPost(body: event.comment);
-    Log.d('the comment ${response.body}');
     if (response.statusCode == 201) {
       if (event.comment.normalPostId != null) {
         final res = await client.commentsNormalPostCommentsNormalPostIdGet(
@@ -36,14 +33,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           emit(CommentLoadedState(res.body!));
         }
       } else {
-        final res = await client.commentsDeliveryPostCommentsDeliveryPostIdGet(
-          deliveryPostId: event.comment.deliveryPostId,
-          pageNumber: 1,
-          pageSize: 30,
-        );
-        if (res.statusCode == 200) {
-          emit(CommentLoadedState(res.body!));
-        }
+        final res = await getComment(
+            event.comment.parentCommentId, event.comment.deliveryPostId);
+        emit(CommentLoadedState(res!));
       }
     } else {
       emit(CommentErrorState(response.error.toString()));
@@ -93,20 +85,17 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       GetAllDeliveryPostsEvent event, Emitter<CommentState> emit) async {
     emit(CommentLoadingState());
     var client = CarshopSDK().client;
-    Log.d('icomiong ${event.commentId}');
-
-    final response = event.commentId == null
+    final response = event.parentCommentId == null
         ? await client.commentsDeliveryPostCommentsDeliveryPostIdGet(
             deliveryPostId: event.deliveryPostId,
             pageNumber: 1,
             pageSize: 30,
           )
         : await client.commentsCommentRepliesCommentIdGet(
-            commentId: event.commentId,
+            commentId: event.parentCommentId,
             pageNumber: 1,
             pageSize: 30,
           );
-    print('the bodu ${response.body}');
     if (response.statusCode == 200) {
       emit(
         CommentLoadedState(response.body!),
@@ -114,5 +103,28 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     } else {
       emit(CommentErrorState(response.error.toString()));
     }
+  }
+
+  Future<PublicCommentsDescriptor?> getComment(
+      String? parentCommentId, String? deliveryPostId) async {
+    final PublicCommentsDescriptor? comments;
+
+    var client = CarshopSDK().client;
+    final response = parentCommentId == null
+        ? await client.commentsDeliveryPostCommentsDeliveryPostIdGet(
+            deliveryPostId: deliveryPostId,
+            pageNumber: 1,
+            pageSize: 30,
+          )
+        : await client.commentsCommentRepliesCommentIdGet(
+            commentId: parentCommentId,
+            pageNumber: 1,
+            pageSize: 30,
+          );
+    if (response.statusCode == 200) {
+      comments = response.body;
+      return comments;
+    }
+    return null;
   }
 }
