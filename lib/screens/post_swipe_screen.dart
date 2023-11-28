@@ -1,5 +1,5 @@
 import 'dart:core';
-import 'package:appinio_swiper/appinio_swiper.dart';
+
 import 'package:card_swiper/card_swiper.dart';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/swipe_posts/swipe_bloc.dart';

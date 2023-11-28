@@ -59,7 +59,8 @@ dependencies:
   flutter_screenutil: ^5.8.4
   aad_oauth: ^0.4.4
   carshop_clientsdk:
-    path: ../typescript-carshop/devops/clientsdk-generator/dart_generator
+    #    path: ../typescript-carshop/devops/clientsdk-generator/dart_generator
+    path: ../../WebstormProjects/typescript-carshop/devops/clientsdk-generator/dart_generator
     # git:
     #   url: https://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@github.com/Hasankanso/carshop_client_sdk.git
     #   ref: 8abef0d306bf0b53a05d7b72e69a567ee0015c1c

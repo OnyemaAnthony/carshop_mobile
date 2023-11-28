@@ -7,13 +7,26 @@ abstract class CommentEvent extends Equatable {
   const CommentEvent();
 }
 
-class GetAllCommentsEvent extends CommentEvent {
+class GetAllNormalPostsEvent extends CommentEvent {
   final String? normalPostId;
   final String? deliveryPostId;
   final String? parentCommentId;
   final String? commentId;
 
-  const GetAllCommentsEvent(
+  const GetAllNormalPostsEvent(
+      {this.parentCommentId,
+      this.deliveryPostId,
+      this.normalPostId,
+      this.commentId});
+}
+
+class GetAllDeliveryPostsEvent extends CommentEvent {
+  final String? normalPostId;
+  final String? deliveryPostId;
+  final String? parentCommentId;
+  final String? commentId;
+
+  const GetAllDeliveryPostsEvent(
       {this.parentCommentId,
       this.deliveryPostId,
       this.normalPostId,

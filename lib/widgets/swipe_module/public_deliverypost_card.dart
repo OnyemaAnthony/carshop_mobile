@@ -1,12 +1,13 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/swipe_posts/swipe_bloc.dart';
+import 'package:carshop_mobile/extensions/public_delivery_post_desc_extension.dart';
+import 'package:carshop_mobile/screens/comment_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/change_bottom_sheet.dart';
 import 'package:carshop_mobile/widgets/swipe_module/info_item.dart';
 import 'package:carshop_mobile/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:carshop_mobile/extensions/public_delivery_post_desc_extension.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class PublicDeliverypostCard extends StatelessWidget {
@@ -118,7 +119,18 @@ class PublicDeliverypostCard extends StatelessWidget {
                   Column(
                     children: [
                       IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.comment)),
+                          onPressed: () {
+                            print(
+                                'iddddd ${state.selectedDeliveryPost!.deliveryPostId}');
+                            UiUtilities.push(
+                              context,
+                              CommentScreen(
+                                deliveryPostId:
+                                    state.selectedDeliveryPost!.deliveryPostId,
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.comment)),
                       Text("${deliveryPost.commentsCount.toInt()}"),
                     ],
                   )

@@ -7,9 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/comment/comment_bloc.dart';
 
 class CommentScreen extends StatelessWidget {
-  String? id;
+  final String? deliveryPostId;
+  final String? normalPostId;
+  final String? parentCommentId;
 
-  CommentScreen({super.key, this.id});
+  CommentScreen(
+      {super.key,
+      this.parentCommentId,
+      this.normalPostId,
+      this.deliveryPostId});
 
   final _textController = TextEditingController();
 
@@ -17,17 +23,15 @@ class CommentScreen extends StatelessWidget {
 
   late CommentBloc commentBloc;
 
-  String normalPost = "fa45d7aa-e0aa-4dff-9374-a2084cf9d869";
-
   void addComment(String text) {
     CreateCommentDto commentDto = CreateCommentDto(
-      normalPostId: normalPost,
+      deliveryPostId: deliveryPostId,
+      parentCommentId: parentCommentId,
       content: text,
       location: const Coordination(lng: 12.0, lat: 8.0),
     );
 
     commentBloc.add(CreateCommentEvent(commentDto));
-
     _textController.clear();
   }
 
@@ -35,7 +39,14 @@ class CommentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => CommentBloc()
-        ..add(GetAllCommentsEvent(normalPostId: normalPost, commentId: id)),
+        ..add(normalPostId != null
+            ? GetAllNormalPostsEvent(
+                normalPostId: parentCommentId == null ? normalPostId : null,
+                commentId: parentCommentId)
+            : GetAllDeliveryPostsEvent(
+                deliveryPostId: deliveryPostId,
+                parentCommentId: parentCommentId,
+              )),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Comments"),
@@ -125,6 +136,16 @@ class CommentScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 PublicCommentDescriptor comment = comments.comments[index];
                 return CommentListItem(
+                  onTap: () {
+                    UiUtilities.push(
+                      context,
+                      CommentScreen(
+                        parentCommentId: comment.commentId,
+                        deliveryPostId: deliveryPostId,
+                        normalPostId: normalPostId,
+                      ),
+                    );
+                  },
                   onAction: () {
                     showModalBottomSheet<void>(
                       context: context,
@@ -169,7 +190,9 @@ class CommentScreen extends StatelessWidget {
                     UiUtilities.push(
                       context,
                       CommentScreen(
-                        id: comment.commentId,
+                        parentCommentId: comment.commentId,
+                        // deliveryPostId: deliveryPostId,
+                        // normalPostId: normalPostId,
                       ),
                     );
                   },

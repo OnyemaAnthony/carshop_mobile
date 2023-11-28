@@ -40,7 +40,11 @@ class AccountScreen extends StatelessWidget {
                 text: "MyActivites",
                 onPress: () {
                   UiUtilities.navBarReplacement(
-                      context, CommentScreen(), false);
+                      context,
+                      CommentScreen(
+                        deliveryPostId: '3fca7354-8308-43d3-8a4f-b6c0784d6315',
+                      ),
+                      false);
                 },
               ),
               const SizedBox(
