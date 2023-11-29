@@ -57,16 +57,9 @@ class UiUtilities {
     );
   }
 
-  static Widget showMainLoader({
-    double height = 260,
-    double imageHeight = 160,
-    double loaderHeight = 60,
-    double loaderWidth = 60,
-    bool addSpacer = false,
-  }) {
+  static Widget showMainLoader() {
     return Container(
       color: Colors.white,
-      height: height,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -77,17 +70,8 @@ class UiUtilities {
             ),
             Image.asset(
               "assets/images/loader.gif",
-              height: 100,
-              width: 100,
-            ),
-            const Text(
-              "Loading",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
-              ),
+              height: 300,
+              width: 300,
             ),
           ],
         ),
