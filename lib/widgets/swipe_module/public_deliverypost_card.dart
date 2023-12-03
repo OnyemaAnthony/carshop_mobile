@@ -120,13 +120,13 @@ class PublicDeliverypostCard extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            UiUtilities.push(
-                              context,
-                              CommentScreen(
-                                deliveryPostId:
-                                    state.selectedDeliveryPost!.deliveryPostId,
-                              ),
-                            );
+                            UiUtilities.navBarReplacement(
+                                context,
+                                CommentScreen(
+                                  deliveryPostId: state
+                                      .selectedDeliveryPost!.deliveryPostId,
+                                ),
+                                false);
                           },
                           icon: const Icon(Icons.comment)),
                       Text("${deliveryPost.commentsCount.toInt()}"),
