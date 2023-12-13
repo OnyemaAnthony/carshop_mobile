@@ -7,18 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen({Key? key}) : super(key: key);
+class CreatePostScreen extends StatelessWidget {
+  CreatePostScreen({Key? key}) : super(key: key);
 
-  @override
-  State<CreatePostScreen> createState() => _CreatePostScreenState();
-}
-
-class _CreatePostScreenState extends State<CreatePostScreen> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController contentController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController contentController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late PostBloc postBloc;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -29,7 +24,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           centerTitle: true,
         ),
         body: Builder(builder: (BuildContext context) {
-          postBloc = BlocProvider.of<PostBloc>(context);
           return BlocConsumer<PostBloc, PostState>(
             listener: (context, state) {
               if (state is CreatedState) {
@@ -77,7 +71,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                           SubmitButton(
                             text: "createPost",
-                            onPress: () => submit(state),
+                            onPress: () => submit(state, context),
                           ),
                         ],
                       ),
@@ -92,19 +86,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    titleController.dispose();
-    contentController.dispose();
-    super.dispose();
-  }
-
-  submit(PostState state) {
+  submit(PostState state, BuildContext context) {
     if (_formKey.currentState!.validate()) {
       CreatePostDto post = CreatePostDto(
           title: titleController.text,
           content: contentController.text,
-          location: Coordination(lat: 10, lng: 10));
+          location: const Coordination(lat: 33.834180, lng: 35.817790));
+      PostBloc postBloc = BlocProvider.of<PostBloc>(context);
       postBloc.add(SavePostEvent(post));
     }
   }

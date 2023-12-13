@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:appinio_swiper/controllers.dart';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
@@ -9,11 +8,13 @@ part 'swipe_state.dart';
 
 class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
   SwipeBloc({
-    required List<NormalPost> normalPosts,
+    required List<PublicNormalPostDescriptor> normalPosts,
     required List<PublicDeliveryPostDesc> deliveryPosts,
-  }) : super(SwipePostLoadedState(
-            normalPosts, deliveryPosts, 0, AppinioSwiperController(),
-            selectedDeliveryPost: deliveryPosts[0])) {
+  }) : super(SwipePostLoadedState(normalPosts, deliveryPosts, 0,
+            selectedDeliveryPost:
+                deliveryPosts.isNotEmpty ? deliveryPosts[0] : null,
+            selectedNormalPost:
+                normalPosts.isNotEmpty ? normalPosts[0] : null)) {
     on<DeleteDeliveryPost>(_mapDeleteDeliveryPostEventToState);
     on<AcceptDeliveryPostEvent>(_mapAcceptDeliveryPostEventToState);
     on<LikeDeliveryPostEvent>(_mapLikeDeliveryPostEventToState);
@@ -22,17 +23,17 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
 
   _mapDeleteDeliveryPostEventToState(
       DeleteDeliveryPost event, Emitter<SwipePostState> emit) async {
-    emit(ActionOnGoingState(state.posts, state.deliveryPosts,
-        state.selectedPost, state.swiperController));
+    emit(ActionOnGoingState(
+        state.normalPosts, state.deliveryPosts, state.selectedPost));
     CarshopClientSdk client = CarshopSDK().client;
     final response = await client.deliveryPostsIdDelete(id: event.postId);
     if (response.statusCode == 200) {
-      emit(ActionDoneState(state.posts, state.deliveryPosts, state.selectedPost,
-          state.swiperController,
+      emit(ActionDoneState(
+          state.normalPosts, state.deliveryPosts, state.selectedPost,
           selectedDeliveryPost: state.selectedDeliveryPost));
     } else {
-      emit(ActionFailedState(state.posts, state.deliveryPosts,
-          state.selectedPost, state.swiperController, response.error.toString(),
+      emit(ActionFailedState(state.normalPosts, state.deliveryPosts,
+          state.selectedPost, response.error.toString(),
           selectedDeliveryPost: state.selectedDeliveryPost));
     }
   }
@@ -45,12 +46,12 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
             deliveryPostId: event.deliveryPostId);
 
     if (response.statusCode == 200) {
-      emit(ActionDoneState(state.posts, state.deliveryPosts, state.selectedPost,
-          state.swiperController,
+      emit(ActionDoneState(
+          state.normalPosts, state.deliveryPosts, state.selectedPost,
           selectedDeliveryPost: state.selectedDeliveryPost));
     } else {
-      emit(ActionFailedState(state.posts, state.deliveryPosts,
-          state.selectedPost, state.swiperController, response.error.toString(),
+      emit(ActionFailedState(state.normalPosts, state.deliveryPosts,
+          state.selectedPost, response.error.toString(),
           selectedDeliveryPost: state.selectedDeliveryPost));
     }
   }
@@ -78,20 +79,20 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
           contentId: event.deliveryPostId, contentType: "DELIVERY_POST");
     }
     if (response.statusCode == 200) {
-      emit(SwipePostLoadedState(state.posts, state.deliveryPosts,
-          state.selectedPost, state.swiperController,
+      emit(SwipePostLoadedState(
+          state.normalPosts, state.deliveryPosts, state.selectedPost,
           selectedDeliveryPost: newDPost));
     } else {
-      emit(ActionFailedState(state.posts, state.deliveryPosts,
-          state.selectedPost, state.swiperController, response.error.toString(),
+      emit(ActionFailedState(state.normalPosts, state.deliveryPosts,
+          state.selectedPost, response.error.toString(),
           selectedDeliveryPost: state.selectedDeliveryPost));
     }
   }
 
   FutureOr<void> _mapPostSwipedEventToState(
       PostSwipedEvent event, Emitter<SwipePostState> emit) {
-    emit(SwipePostLoadedState(state.posts, state.deliveryPosts,
-        state.selectedPost, state.swiperController,
-        selectedDeliveryPost: state.deliveryPosts[event.index]));
+    emit(SwipePostLoadedState(
+        state.normalPosts, state.deliveryPosts, event.index,
+        selectedNormalPost: state.normalPosts[event.index]));
   }
 }

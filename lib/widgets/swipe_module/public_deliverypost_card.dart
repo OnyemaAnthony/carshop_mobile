@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class PublicDeliverypostCard extends StatelessWidget {
+class PublicDeliveryPostCard extends StatelessWidget {
   final PublicDeliveryPostDesc deliveryPost;
 
-  const PublicDeliverypostCard({super.key, required this.deliveryPost});
+  const PublicDeliveryPostCard({super.key, required this.deliveryPost});
 
   @override
   Widget build(BuildContext context) {
