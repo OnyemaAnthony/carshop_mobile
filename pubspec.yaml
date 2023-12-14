@@ -50,7 +50,6 @@ dependencies:
   flutter_facebook_auth: ^5.0.11
   connectivity_plus: ^4.0.0
   geolocator: ^9.0.2
-  appinio_swiper: ^2.0.0
   card_swiper: ^2.0.4
   google_maps_flutter: ^2.3.1
   persistent_bottom_nav_bar: ^5.0.2
@@ -59,11 +58,8 @@ dependencies:
   flutter_screenutil: ^5.8.4
   aad_oauth: ^0.4.4
   carshop_clientsdk:
-    #    path: ../typescript-carshop/devops/clientsdk-generator/dart_generator
-    path: ../../WebstormProjects/typescript-carshop/devops/clientsdk-generator/dart_generator
-    # git:
-    #   url: https://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@github.com/Hasankanso/carshop_client_sdk.git
-    #   ref: 8abef0d306bf0b53a05d7b72e69a567ee0015c1c
+    git:
+      url: https://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@github.com/Hasankanso/carshop_client_sdk.git
   flutter_speed_dial: ^7.0.0
   google_fonts: ^4.0.4
   timeago: ^3.3.0

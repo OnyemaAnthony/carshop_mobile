@@ -66,8 +66,8 @@ class BottomNavigationBarScreen extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               child: const Text('Normal Post'),
-                              onPressed: () => UiUtilities.push(
-                                  context, const CreatePostScreen()),
+                              onPressed: () =>
+                                  UiUtilities.push(context, CreatePostScreen()),
                             ),
                           ),
                         ],

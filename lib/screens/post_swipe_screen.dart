@@ -4,11 +4,13 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/swipe_posts/swipe_bloc.dart';
 import 'package:carshop_mobile/widgets/swipe_module/public_deliverypost_card.dart';
+import 'package:carshop_mobile/widgets/swipe_module/public_normalpost_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 
 class PostSwipeScreen extends StatelessWidget {
-  final List<NormalPost> posts;
+  final List<PublicNormalPostDescriptor> posts;
   final List<PublicDeliveryPostDesc> deliveryPosts;
 
   const PostSwipeScreen({
@@ -34,13 +36,13 @@ class PostSwipeScreen extends StatelessWidget {
                 swipeBloc.add(PostSwipedEvent(index: index));
               },
               itemBuilder: (context, index) {
-                return PublicDeliverypostCard(
-                  deliveryPost: state.selectedDeliveryPost!,
+                return PublicNormalPostCard(
+                  normalPost: state.selectedNormalPost!,
                 );
               },
               indicatorLayout: PageIndicatorLayout.COLOR,
               loop: false,
-              itemCount: state.deliveryPosts.length,
+              itemCount: state.normalPosts.length,
             ),
           );
         }));
