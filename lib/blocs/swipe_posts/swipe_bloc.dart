@@ -1,8 +1,10 @@
 import 'dart:async';
+
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'swipe_event.dart';
 part 'swipe_state.dart';
 

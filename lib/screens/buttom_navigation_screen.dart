@@ -1,4 +1,3 @@
-import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/screens/account_screen.dart';
 import 'package:carshop_mobile/screens/create_delivery_post_screen.dart';
 import 'package:carshop_mobile/screens/create_post_screen.dart';
@@ -18,7 +17,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
     screens = <Widget>[
       MapScreen(),
       MapScreen(),
-      const AccountScreen(),
+      AccountScreen(),
     ];
   }
 
