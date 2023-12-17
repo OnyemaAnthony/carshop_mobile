@@ -127,7 +127,7 @@ class AuthenticationBloc
   FutureOr<void> _mapSignOutEventTest(
       SignOutEventTest event, Emitter<AuthenticationState> emit) async {
     await LocalStorage.signOut();
-    emit(SignedOutState());
+    emit(UnAuthenticated());
   }
 
   FutureOr<void> _mapGetUserEventToState(

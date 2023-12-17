@@ -46,8 +46,7 @@ class UiUtilities {
         .pushReplacement(MaterialPageRoute(builder: (context) => screen));
   }
 
-  static void pushNavBar(
-      BuildContext context, Widget screen, bool withNavBar) {
+  static void pushNavBar(BuildContext context, Widget screen, bool withNavBar) {
     PersistentNavBarNavigator.pushNewScreen(context,
         screen: screen, withNavBar: withNavBar);
   }
@@ -80,7 +79,7 @@ class UiUtilities {
   }
 
   static Widget showMainLoader() {
-    return const Center(child: CircularProgressIndicator());
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 
   static accountShimmer() {
