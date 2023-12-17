@@ -5,4 +5,5 @@
     <string name="fb_login_protocol_scheme">fb664246525623510</string>
     <string name="facebook_client_token">2ee62ab3109fa785056b8940f305820f</string>
     <string name="google_api_key2">AIzaSyDZ-RIkzqnwqK403BN7sxWUqdgCqMBMLWQ</string>
+    <string name="application_name">Dayno</string>
 </resources>
