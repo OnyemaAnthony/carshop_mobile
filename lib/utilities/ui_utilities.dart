@@ -46,7 +46,7 @@ class UiUtilities {
         .pushReplacement(MaterialPageRoute(builder: (context) => screen));
   }
 
-  static void navBarReplacement(
+  static void pushNavBar(
       BuildContext context, Widget screen, bool withNavBar) {
     PersistentNavBarNavigator.pushNewScreen(context,
         screen: screen, withNavBar: withNavBar);

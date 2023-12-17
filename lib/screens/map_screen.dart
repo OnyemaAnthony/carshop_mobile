@@ -1,105 +1,58 @@
-import 'dart:async';
-
-import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
+import 'package:carshop_mobile/repositories/map_repository.dart';
+import 'package:carshop_mobile/screens/block_app_screen.dart';
 import 'package:carshop_mobile/screens/post_swipe_screen.dart';
+import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:logger/logger.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 class MapScreen extends StatelessWidget {
-  MapScreen({Key? key}) : super(key: key);
-
-  GoogleMapController? _controller;
-  final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.4219983, -122.084),
-    zoom: 14,
-  );
+  const MapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    MapBloc bloc = context.read<MapBloc>();
-    return BlocConsumer<MapBloc, MapState>(
-      listener: (context, state) {
-        if (state is LocationLoading) {
-          bloc.add(GetCurrentLocationEvent(after: _goToLocation));
-        }
-
-        if (state is NotPostsFound) {
-          UiUtilities.showToast(
-              message: 'No posts found', toast: Toast.LENGTH_LONG);
-        }
-        if (state is DataReady) {
-          UiUtilities.push(
-              context,
-              PostSwipeScreen(
-                posts: state.posts!,
-                deliveryPosts: state.deliveryPosts!,
-              ));
-          UiUtilities.showToast(
-              message: 'loading posts', toast: Toast.LENGTH_LONG);
-        }
-      },
-      builder: (context, state) {
-        switch (state.runtimeType) {
-          case LocationLoading:
-          case CurrLocationUpdated:
-          case NotPostsFound:
-          case DataReady:
-            return Scaffold(
-              body: GoogleMap(
-                onTap: (position) {
-                  bloc.add(
-                    FetchPostsEvent(
-                      location: Coordination(
-                        lat: position.latitude,
-                        lng: position.longitude,
-                      ),
-                    ),
-                  );
-                },
-                mapToolbarEnabled: true,
-                mapType: MapType.normal,
-                initialCameraPosition: _kGooglePlex,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller = controller;
-                },
-              ),
-              floatingActionButton: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: FloatingActionButton.extended(
-                        label: const Text('Go to my location'),
-                        onPressed: () {
-                          _goToLocation(state.currentLocation!);
-                        }),
-                  ),
-                ],
-              ),
-            );
-          default:
-            return const Center(
-              child: Text('Something went wrong'),
-            );
-        }
-      },
+    return BlocProvider(
+      create: (context) => MapBloc()..add(GetCurrentLocationEvent()),
+      child: BlocConsumer<MapBloc, MapState>(
+        builder: (context, state) {
+          MapBloc mapBloc = BlocProvider.of<MapBloc>(context);
+          return SafeArea(
+            child: MapWidget(
+                styleUri: MapboxStyles.MAPBOX_STREETS,
+                resourceOptions: ResourceOptions(
+                  accessToken: ApiKeys.mapBoxAccessToken,
+                ),
+                onMapCreated: (mapbox) => mapBloc.mapboxMap = mapbox,
+                onTapListener: (coordinate) async {
+                  if (mapBloc.mapboxMap == null) return;
+                  var coord = await MapRepository.screenCoord2LatLng(
+                      mapBloc.mapboxMap!, coordinate);
+                  Logger().d(coord);
+                  mapBloc.add(FetchPostsEvent(location: coord));
+                }),
+          );
+        },
+        listener: (BuildContext context, MapState state) {
+          if (state is GetUserLocationError) {
+            UiUtilities.pushNavBar(context, const BlockAppScreen(), false);
+          } else if (state is GetUserLocationSuccess) {
+            context.read<MapBloc>().add(GetMapFeedEvent());
+          } else if (state is DataReady) {
+            UiUtilities.pushNavBar(
+                context,
+                PostSwipeScreen(
+                  posts: state.posts ?? [],
+                  deliveryPosts: state.deliveryPosts ?? [],
+                ),
+                false);
+          }
+        },
+      ),
     );
-  }
-
-  Future<void> _goToLocation(Coordination location) async {
-    final CameraPosition camerPos = CameraPosition(
-        bearing: 192.8334901395799,
-        target: LatLng(location.lat, location.lng),
-        tilt: 59.440717697143555,
-        zoom: 14);
-
-    _controller!.animateCamera(CameraUpdate.newCameraPosition(camerPos));
   }
 }

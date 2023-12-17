@@ -66,7 +66,7 @@ class LocalStorage {
       preferences.setString('user_lastname', user.lastName),
       preferences.setString('user_id', user.userId),
       preferences.setString('user_email', user.email),
-      preferences.setString('access_token', user.token!.accessToken)
+      preferences.setString('access_token', user.token.accessToken)
     ]);
   }
 

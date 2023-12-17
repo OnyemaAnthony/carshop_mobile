@@ -56,12 +56,12 @@ class PublicDeliveryPostCard extends StatelessWidget {
               Text(deliveryPost.content),
               CustomListItem(
                   info:
-                      '${deliveryPost.startLocation!.lat}  ${deliveryPost.startLocation!.lng}',
+                      '${deliveryPost.startLocation.lat}  ${deliveryPost.startLocation.lng}',
                   title: "Pick Up",
                   icon: Icons.location_on_outlined),
               CustomListItem(
                   info:
-                      '${deliveryPost.destination?.lat}  ${deliveryPost.destination?.lng}',
+                      '${deliveryPost.destination.lat}  ${deliveryPost.destination.lng}',
                   title: "Drop Off",
                   icon: Icons.location_on_outlined),
               CustomListItem(
@@ -120,7 +120,7 @@ class PublicDeliveryPostCard extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            UiUtilities.navBarReplacement(
+                            UiUtilities.pushNavBar(
                                 context,
                                 CommentScreen(
                                   deliveryPostId: state

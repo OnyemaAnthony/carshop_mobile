@@ -1,18 +1,16 @@
+import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/blocs/wallet/wallet_bloc.dart';
+import 'package:carshop_mobile/utilities/constants.dart';
+import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/widgets/account_list.dart';
+import 'package:carshop_mobile/widgets/image_to_icon.dart';
 import 'package:carshop_mobile/widgets/transaction_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/authentication_bloc/authentication_bloc.dart';
-import '../utilities/constants.dart';
-import '../utilities/ui_utilities.dart';
-import '../widgets/account_list.dart';
-import '../widgets/image_to_icon.dart';
-
 class AccountScreen extends StatelessWidget {
-  AccountScreen({Key? key}) : super(key: key);
-  late WalletBloc walletBloc;
+  const AccountScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,6 @@ class AccountScreen extends StatelessWidget {
         child: BlocListener<WalletBloc, WalletState>(
           listener: (context, state) {},
           child: Builder(builder: (BuildContext context) {
-            walletBloc = BlocProvider.of<WalletBloc>(context);
             return Scaffold(
               appBar: AppBar(
                 title: Text(UiUtilities.translate(context, 'account')),

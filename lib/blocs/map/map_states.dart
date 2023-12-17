@@ -3,8 +3,8 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 class MapState {
   final List<PublicNormalPostDescriptor>? posts;
   final List<PublicDeliveryPostDesc>? deliveryPosts;
-
   final Coordination? currentLocation;
+
   copyWith({
     Coordination? currentLocation,
     List<PublicNormalPostDescriptor>? posts,
@@ -31,20 +31,25 @@ class DataReady extends MapState {
             deliveryPosts: deliveryPosts);
 }
 
-class CurrLocationUpdated extends MapState {
-  CurrLocationUpdated({required Coordination currentLocation})
-      : super(
-            currentLocation: currentLocation, posts: null, deliveryPosts: null);
-}
-
-class LocationLoading extends MapState {
-  LocationLoading()
-      : super(currentLocation: null, posts: null, deliveryPosts: null);
-}
+class LocationLoading extends MapState {}
 
 class NotPostsFound extends MapState {
   NotPostsFound(
       {required super.currentLocation,
       required super.posts,
       required super.deliveryPosts});
+}
+
+class GetUserLocationSuccess extends MapState {
+  GetUserLocationSuccess(
+      {super.currentLocation, super.posts, super.deliveryPosts});
+}
+
+class GetUserLocationError extends MapState {
+  GetUserLocationError(
+      {super.currentLocation, super.posts, super.deliveryPosts});
+}
+
+class GetMapFeedSuccess extends MapState {
+  GetMapFeedSuccess({super.currentLocation, super.posts, super.deliveryPosts});
 }

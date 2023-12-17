@@ -3,16 +3,19 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
-import 'package:carshop_mobile/utilities/services.dart';
+import 'package:carshop_mobile/repositories/map_repository.dart';
+import 'package:carshop_mobile/utilities/api_keys.dart';
+import 'package:carshop_mobile/utilities/location_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
+import 'package:geolocator/geolocator.dart' as location;
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mapbox;
+import 'package:turf/turf.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc() : super(LocationLoading()) {
     on<FetchPostsEvent>(_mapFetchPostsEventToState);
     on<GetCurrentLocationEvent>(_getCurrentLocationEventToState);
+    on<GetMapFeedEvent>(_getMapFeedEventToState);
   }
 
   FutureOr<void> _mapFetchPostsEventToState(
@@ -43,48 +46,76 @@ class MapBloc extends Bloc<MapEvent, MapState> {
             deliveryPosts: []));
       } else {
         emit(DataReady(
-          posts: normalPosts.body!.normalPosts,
-          deliveryPosts: deliveryPosts.body!,
-          currentLocation:
-              state.currentLocation ?? const Coordination(lat: 0, lng: 0),
+          posts: normalPosts.body?.normalPosts ?? [],
+          deliveryPosts: deliveryPosts.body ?? [],
+          currentLocation: state.currentLocation!,
         ));
       }
-    } else {
-      emit(CurrLocationUpdated(currentLocation: state.currentLocation!));
     }
   }
 
-  FutureOr<void> _getCurrentLocationEventToState(
+  mapbox.MapboxMap? mapboxMap;
+  void _getCurrentLocationEventToState(
       GetCurrentLocationEvent event, Emitter<MapState> emit) async {
-    Position position = await Services().getUserCoordinate();
-    var coordination =
-        Coordination(lat: position.latitude, lng: position.longitude);
-    var latlng = LatLng(coordination.lat, coordination.lng);
-
-    final marker = Marker(
-      markerId: const MarkerId('place_name'),
-      position: latlng,
-      infoWindow: const InfoWindow(
-        title: 'This is your current location',
-        snippet: 'address',
-      ),
-    );
-
-    Map<MarkerId, Marker>? markers = {};
-    markers[const MarkerId('place_name')] = marker;
-
-    if (state is LocationLoading) {
-      emit(CurrLocationUpdated(currentLocation: coordination));
-      if (event.after != null) {
-        event.after!(coordination);
+    try {
+      location.Position? userLocation = await LocationService.getLocation();
+      if (userLocation == null) {
+        emit(GetUserLocationError());
+      } else {
+        _showUserLocation(userLocation);
+        emit(GetUserLocationSuccess(
+            currentLocation: Coordination(
+                lat: userLocation.latitude, lng: userLocation.longitude)));
       }
-    } else if (state.posts == null) {
-      emit(CurrLocationUpdated(currentLocation: coordination));
-    } else {
-      emit(DataReady(
-          currentLocation: coordination,
-          posts: state.posts!,
-          deliveryPosts: state.deliveryPosts!));
+    } catch (e) {
+      emit(GetUserLocationError());
     }
+  }
+
+  Future<void> _showUserLocation(location.Position userLocation) async {
+    await MapRepository.moveToSpecificLocation(mapboxMap, userLocation);
+    await MapRepository.createMarker(mapboxMap, 'marker.png',
+        Position(userLocation.longitude, userLocation.latitude));
+  }
+
+  Future<void> _addRouteLines(List<MapRoad> mapFeed) async {
+    for (var element in mapFeed) {
+      var points = await MapRepository.fetchRouteCoordinates(
+          mapbox.Position(element.start.lng, element.start.lat),
+          mapbox.Position(element.end.lng, element.end.lat),
+          ApiKeys.mapBoxAccessToken);
+      await MapRepository.createRouteLine(mapboxMap, points);
+      await MapRepository.createMarker(
+          mapboxMap, 'start_marker.png', points.first);
+      await MapRepository.createMarker(
+          mapboxMap, 'end_marker.png', points.last);
+    }
+  }
+
+  Future<void> _showHeatmap(
+      List<mapbox.Position> heatmapList, String heatmapId) async {
+    await MapRepository.createHeatmap(mapboxMap, heatmapList, heatmapId);
+  }
+
+  FutureOr<void> _getMapFeedEventToState(
+      GetMapFeedEvent event, Emitter<MapState> emit) async {
+    var client = CarshopSDK().client;
+
+    /// normal posts
+    var normalPostsResponse = await client.normalPostsMapFeedGet();
+    List<MapPosition>? normalPostsFeedList = normalPostsResponse.body;
+    List<mapbox.Position> normalPostsHeatMap = [];
+    normalPostsFeedList?.forEach((element) {
+      normalPostsHeatMap.add(mapbox.Position(element.lng, element.lat));
+    });
+    _showHeatmap(normalPostsHeatMap, 'normalPostsHeatMap');
+
+    /// delivery posts
+    var mapFeedResponse = await client.deliveryPostsMapFeedGet(
+        lat: state.currentLocation?.lat,
+        lng: state.currentLocation?.lng /*lat: 34.689039, lng: 33.018344*/);
+    List<MapRoad>? mapFeedList = mapFeedResponse.body;
+    _addRouteLines(mapFeedList ?? []);
+    emit(GetMapFeedSuccess());
   }
 }

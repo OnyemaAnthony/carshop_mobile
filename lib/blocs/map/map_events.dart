@@ -7,8 +7,6 @@ class FetchPostsEvent extends MapEvent {
   FetchPostsEvent({required this.location});
 }
 
-class GetCurrentLocationEvent extends MapEvent {
-  Function(Coordination location)? after;
+class GetCurrentLocationEvent extends MapEvent {}
 
-  GetCurrentLocationEvent({this.after});
-}
+class GetMapFeedEvent extends MapEvent {}
