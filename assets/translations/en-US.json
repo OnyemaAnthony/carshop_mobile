@@ -10,5 +10,6 @@
   "withdraw": "Withdraw",
   "account": "Account",
   "transaction_history": "Transaction history",
-  "no_transactions": "You do not have any transaction yet"
+  "no_transactions": "You do not have any transaction yet",
+  "delivery_status": "Delivery Status"
 }

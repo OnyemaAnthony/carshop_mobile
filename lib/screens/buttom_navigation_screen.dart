@@ -1,5 +1,6 @@
 import 'package:carshop_mobile/blocs/nav_bar_bloc/nav_bar_bloc.dart';
 import 'package:carshop_mobile/screens/account_screen.dart';
+import 'package:carshop_mobile/screens/delivery_status_screen.dart';
 import 'package:carshop_mobile/screens/map_screen.dart';
 import 'package:carshop_mobile/widgets/bottom_navigation_screen/create_post_widget.dart';
 import 'package:carshop_mobile/widgets/bottom_navigation_screen/custom_nav_bar_widget.dart';
@@ -25,6 +26,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
             controller: navBarBloc.controller,
             screens: const [
               MapScreen(),
+              DeliveryStatusScreen(),
               SizedBox.shrink(),
               AccountScreen(),
             ],
@@ -32,16 +34,17 @@ class BottomNavigationBarScreen extends StatelessWidget {
               navBarBloc.add(UpdateNavBarIndexEvent(0));
               return true;
             },
-            itemCount: 3,
+            itemCount: 4,
             customWidget: CustomNavBarWidget(
                 selectedIndex: state.index,
                 items: [
                   _navBarItem(title: 'Home', icon: CupertinoIcons.home),
+                  _navBarItem(title: 'Delivery', icon: Icons.delivery_dining),
                   _navBarItem(title: 'Create', icon: Icons.add_box_outlined),
                   _navBarItem(title: 'Account', icon: CupertinoIcons.person),
                 ],
                 onItemSelected: (value) {
-                  if (value == 1) {
+                  if (value == 2) {
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (_) => const CreatePostWidget(),

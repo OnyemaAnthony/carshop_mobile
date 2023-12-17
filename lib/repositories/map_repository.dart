@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/services.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:turf/distance.dart';
 import 'package:turf/polyline.dart';
 import 'package:geolocator/geolocator.dart' as location;
 
@@ -27,8 +27,8 @@ class MapRepository {
     );
   }
 
-  static Future<void> createMarker(MapboxMap? mapboxMap, String markerImage,
-      Position position) async {
+  static Future<void> createMarker(
+      MapboxMap? mapboxMap, String markerImage, Position position) async {
     PointAnnotationManager? pointAnnotationManager =
         await mapboxMap?.annotations.createPointAnnotationManager();
     final ByteData bytes = await rootBundle.load('assets/images/$markerImage');
@@ -100,10 +100,20 @@ class MapRepository {
     return json.encode(map);
   }
 
-  static Future<Coordination> screenCoord2LatLng(
-      MapboxMap mapboxMap, ScreenCoordinate screenCoordinate) async {
-    var coordin = await mapboxMap.coordinateForPixel(screenCoordinate);
-    List<dynamic> coordinates = (coordin["coordinates"] as List<dynamic>);
-    return Coordination(lat: coordinates[1], lng: coordinates[0]);
+  static Future<num> tapRadiusinMeter(MapboxMap mapboxMap) async {
+    var cameraState = await mapboxMap.getCameraState();
+
+    var coordin = await mapboxMap.coordinateBoundsForCamera(CameraOptions(
+        center: cameraState.center,
+        zoom: cameraState.zoom,
+        bearing: cameraState.bearing,
+        pitch: cameraState.pitch));
+
+    var northeast = coordin.northeast["coordinates"] as List<dynamic>;
+    var southwest = coordin.southwest["coordinates"] as List<dynamic>;
+    var northeastPos = Position.named(lat: northeast[1], lng: northeast[0]);
+    var southwestPos = Position.named(lat: southwest[1], lng: southwest[0]);
+
+    return distanceRaw(northeastPos, southwestPos, Unit.meters) / 4;
   }
 }
