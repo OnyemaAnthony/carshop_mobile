@@ -1,14 +1,12 @@
 import 'package:carshop_mobile/blocs/map/map_bloc.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
-import 'package:carshop_mobile/repositories/map_repository.dart';
 import 'package:carshop_mobile/screens/block_app_screen.dart';
 import 'package:carshop_mobile/screens/post_swipe_screen.dart';
 import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 class MapScreen extends StatelessWidget {
@@ -30,10 +28,8 @@ class MapScreen extends StatelessWidget {
                 onMapCreated: (mapbox) => mapBloc.mapboxMap = mapbox,
                 onTapListener: (coordinate) async {
                   if (mapBloc.mapboxMap == null) return;
-                  var coord = await MapRepository.screenCoord2LatLng(
-                      mapBloc.mapboxMap!, coordinate);
-                  Logger().d(coord);
-                  mapBloc.add(FetchPostsEvent(location: coord));
+
+                  mapBloc.add(FetchPostsEvent(location: coordinate));
                 }),
           );
         },

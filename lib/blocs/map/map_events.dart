@@ -1,9 +1,9 @@
-import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
 class MapEvent {}
 
 class FetchPostsEvent extends MapEvent {
-  Coordination location;
+  ScreenCoordinate location;
   FetchPostsEvent({required this.location});
 }
 

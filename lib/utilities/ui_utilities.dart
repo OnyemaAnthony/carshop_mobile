@@ -120,7 +120,7 @@ class UiUtilities {
     );
   }
 
-  static translate(BuildContext context, String text) {
+  static String translate(BuildContext context, String text) {
     return context.tr(text);
   }
 

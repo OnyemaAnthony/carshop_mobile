@@ -22,7 +22,7 @@ class MapState {
 
 class DataReady extends MapState {
   DataReady({
-    required Coordination currentLocation,
+    required Coordination? currentLocation,
     required List<PublicNormalPostDescriptor> posts,
     required List<PublicDeliveryPostDesc> deliveryPosts,
   }) : super(

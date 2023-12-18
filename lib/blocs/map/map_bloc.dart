@@ -22,23 +22,44 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       FetchPostsEvent event, Emitter<MapState> emit) async {
     var client = CarshopSDK().client;
 
-    var deliveryPostsFuture = client.deliveryPostsGet(
-        locationLat: event.location.lat,
-        locationLng: event.location.lng,
-        radiusMeter: 5000);
+    double deliveryRadius = 50000;
+    var radius = await MapRepository.tapRadiusinMeter(mapboxMap!);
+    List<Future<dynamic>> futures = [];
+
+    if (state.currentLocation != null) {
+      Coordination currentLocation = state.currentLocation!;
+
+      var deliveryPostsFuture = client.deliveryPostsGet(
+          locationLat: currentLocation.lat,
+          locationLng: currentLocation.lng,
+          radiusMeter: deliveryRadius);
+      futures.add(deliveryPostsFuture);
+    }
 
     var normalPostsFuture = client.normalPostsGet(
-        locationLat: event.location.lat,
-        locationLng: event.location.lng,
-        radiusMeter: 100000);
+        locationLat: event.location.x,
+        locationLng: event.location.y,
+        radiusMeter: radius);
 
-    var responses = await Future.wait([deliveryPostsFuture, normalPostsFuture]);
-    var deliveryPosts = responses[0] as Response<List<PublicDeliveryPostDesc>>;
-    var normalPosts = responses[1] as Response<PublicNormalPostsDesc>;
+    futures.add(normalPostsFuture);
+    var responses = await Future.wait(futures);
 
-    if (deliveryPosts.body != null && normalPosts.body != null) {
-      if (deliveryPosts.body!.isEmpty &&
-          normalPosts.body!.normalPosts.isEmpty) {
+    Response<List<PublicDeliveryPostDesc>>? deliveryPosts;
+    Response<PublicNormalPostsDesc>? normalPosts;
+
+    if (futures.length == 1) {
+      normalPosts = responses[0] as Response<PublicNormalPostsDesc>;
+    } else if (futures.length == 2) {
+      deliveryPosts = responses[0] as Response<List<PublicDeliveryPostDesc>>;
+      normalPosts = responses[1] as Response<PublicNormalPostsDesc>;
+    }
+
+    if (deliveryPosts?.body != null && normalPosts?.body != null) {
+      List<PublicDeliveryPostDesc> deliveryPostsList = deliveryPosts!.body!;
+      List<PublicNormalPostDescriptor> normalPostsList =
+          normalPosts!.body!.normalPosts;
+
+      if (deliveryPostsList.isEmpty && normalPostsList.isEmpty) {
         emit(NotPostsFound(
             currentLocation:
                 state.currentLocation ?? const Coordination(lat: 0, lng: 0),
@@ -46,9 +67,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
             deliveryPosts: []));
       } else {
         emit(DataReady(
-          posts: normalPosts.body?.normalPosts ?? [],
-          deliveryPosts: deliveryPosts.body ?? [],
-          currentLocation: state.currentLocation!,
+          posts: normalPostsList,
+          deliveryPosts: deliveryPostsList,
+          currentLocation: state.currentLocation,
         ));
       }
     }
@@ -116,6 +137,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         lng: state.currentLocation?.lng /*lat: 34.689039, lng: 33.018344*/);
     List<MapRoad>? mapFeedList = mapFeedResponse.body;
     _addRouteLines(mapFeedList ?? []);
-    emit(GetMapFeedSuccess());
+    emit(GetMapFeedSuccess(
+        currentLocation: state.currentLocation,
+        posts: state.posts,
+        deliveryPosts: state.deliveryPosts));
   }
 }

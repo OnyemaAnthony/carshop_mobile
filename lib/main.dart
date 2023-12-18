@@ -40,7 +40,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
               if (state is AuthenticationLoadingState) {
                 return UiUtilities.showMainLoader();
               } else if (state is Authenticated) {
-                return const BottomNavigationBarScreen();
+                return BottomNavigationBarScreen();
               } else if (state is UnAuthenticated) {
                 return const LoginScreen();
               }

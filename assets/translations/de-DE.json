@@ -1,3 +1,15 @@
 {
-  "personal_information": "Testing"
+  "personal_information": "Persönliche Informationen",
+  "activities": "Aktivitäten",
+  "payment_method": "Zahlungsmethode",
+  "address_mgt": "Adressverwaltung",
+  "logout": "Ausloggen",
+  "total_balance": "Gesamtguthaben",
+  "add_money": "Geld hinzufügen",
+  "transfer": "Überweisen",
+  "withdraw": "Abheben",
+  "account": "Konto",
+  "transaction_history": "Transaktionsverlauf",
+  "no_transactions": "Sie haben noch keine Transaktionen",
+  "delivery_status": "Lieferung Status"
 }
