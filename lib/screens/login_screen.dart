@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../utilities/constants.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -25,12 +27,13 @@ class LoginScreen extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/dev-icon.png',
-                    width: 24,
-                    height: 24,
+                    Constants.logoImagePath,
+                    width: 100,
+                    height: 100,
                   ),
                   Text(
                     '\t\t\t\t Your deliveries.\n Our shared journey.',

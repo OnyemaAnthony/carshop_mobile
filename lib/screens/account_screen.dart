@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/blocs/wallet/wallet_bloc.dart';
 import 'package:carshop_mobile/utilities/constants.dart';
+import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/account_list.dart';
 import 'package:carshop_mobile/widgets/image_to_icon.dart';
@@ -30,7 +31,7 @@ class AccountScreen extends StatelessWidget {
           child: Builder(builder: (BuildContext context) {
             return Scaffold(
               appBar: AppBar(
-                title: Text(UiUtilities.translate(context, 'account')),
+                title: Text('account'.trans(context)),
                 centerTitle: false,
                 actions: const [
                   Padding(
@@ -57,43 +58,47 @@ class AccountScreen extends StatelessWidget {
                     return Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 12),
-                      child: Column(
-                        children: [
-                          TransactionDashboard(
-                            context: context,
-                            state: state,
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          AccountList(
-                              UiUtilities.translate(
-                                  context, 'personal_information'),
-                              Constants.personIconPath,
-                              Colors.white,
-                              context),
-                          AccountList('Activities', Constants.activityIconPath,
-                              Colors.white, context),
-                          AccountList(
-                              UiUtilities.translate(context, 'activities'),
-                              Constants.paymentIconPath,
-                              Colors.white,
-                              context),
-                          AccountList(
-                              UiUtilities.translate(context, 'address_mgt'),
-                              Constants.locationIconPath,
-                              Colors.white,
-                              context),
-                          AccountList(
-                              UiUtilities.translate(context, 'logout'),
-                              Constants.logoutIconPath,
-                              Colors.white,
-                              context, onTap: () {
-                            context
-                                .read<AuthenticationBloc>()
-                                .add(SignOutEventTest());
-                          }),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            TransactionDashboard(
+                              context: context,
+                              state: state,
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            AccountList(
+                                'personal_information'.trans(context),
+                                Constants.personIconPath,
+                                Colors.white,
+                                context),
+                            AccountList(
+                                'Activities',
+                                Constants.activityIconPath,
+                                Colors.white,
+                                context),
+                            AccountList(
+                                'activities'.trans(context),
+                                Constants.paymentIconPath,
+                                Colors.white,
+                                context),
+                            AccountList(
+                                'address_mgt'.trans(context),
+                                Constants.locationIconPath,
+                                Colors.white,
+                                context),
+                            AccountList(
+                                'logout'.trans(context),
+                                Constants.logoutIconPath,
+                                Colors.white,
+                                context, onTap: () {
+                              context
+                                  .read<AuthenticationBloc>()
+                                  .add(SignOutEventTest());
+                            }),
+                          ],
+                        ),
                       ),
                     );
                   }

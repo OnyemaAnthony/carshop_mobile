@@ -1,3 +1,4 @@
+import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../blocs/wallet/wallet_bloc.dart';
@@ -28,7 +29,7 @@ class TransactionDashboard extends StatelessWidget {
             padding: const EdgeInsets.only(right: 7),
             child: Row(
               children: [
-                Text(UiUtilities.translate(context, 'total_balance'),
+                Text('total_balance'.trans(context),
                     style: Theme.of(context).textTheme.bodySmall),
                 const Spacer(),
                 GestureDetector(
@@ -36,8 +37,7 @@ class TransactionDashboard extends StatelessWidget {
                     UiUtilities.pushNavBar(
                         context, const TransactionHistoryScreen(), false);
                   },
-                  child: Text(
-                      "${UiUtilities.translate(context, 'transaction_history')} >",
+                  child: Text("${'transaction_history'.trans(context)} >",
                       style: Theme.of(context).textTheme.bodySmall),
                 ),
               ],
@@ -63,7 +63,7 @@ class TransactionDashboard extends StatelessWidget {
                         height: 40,
                         imagePath: Constants.addIconPath,
                       ),
-                      Text(UiUtilities.translate(context, 'add_money'),
+                      Text('add_money'.trans(context),
                           style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
@@ -80,7 +80,7 @@ class TransactionDashboard extends StatelessWidget {
                         imagePath: Constants.transferIconPath,
                       ),
                       Text(
-                        UiUtilities.translate(context, 'transfer'),
+                        'transfer'.trans(context),
                         style: Theme.of(context).textTheme.bodySmall,
                       )
                     ],
@@ -94,7 +94,7 @@ class TransactionDashboard extends StatelessWidget {
                       height: 40,
                       imagePath: Constants.downArrowIconPath,
                     ),
-                    Text(UiUtilities.translate(context, 'withdraw'),
+                    Text('withdraw'.trans(context),
                         style: Theme.of(context).textTheme.bodySmall),
                   ],
                 )

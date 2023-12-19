@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -118,10 +117,6 @@ class UiUtilities {
         ),
       ),
     );
-  }
-
-  static String translate(BuildContext context, String text) {
-    return context.tr(text);
   }
 
   static Widget showErrorMessage(String message) {

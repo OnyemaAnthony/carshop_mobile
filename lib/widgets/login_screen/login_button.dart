@@ -75,26 +75,29 @@ class SignInButton extends StatelessWidget {
           backgroundColor: const MaterialStatePropertyAll(Colors.white),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
+                borderRadius: BorderRadius.circular(30),
                 side: const BorderSide(color: Colors.black)),
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset(
-              imagePath,
-              width: 24,
-              height: 24,
-            ),
-            Expanded(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.black, fontSize: 16),
+        child: Container(
+          padding: const EdgeInsets.only(top: 15, bottom: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 24,
+                height: 24,
               ),
-            ),
-          ],
+              Expanded(
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

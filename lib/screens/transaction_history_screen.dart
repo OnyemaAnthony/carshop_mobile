@@ -1,4 +1,7 @@
+import 'package:carshop_mobile/utilities/constants.dart';
+import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/widgets/image_to_icon.dart';
 import 'package:carshop_mobile/widgets/transaction_history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +18,19 @@ class TransactionHistoryScreen extends StatelessWidget {
           WalletBloc()..add(GetTransactionHistoryEvent()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Transaction"),
+          leading: GestureDetector(
+            onTap: () {
+              UiUtilities.pop(context);
+            },
+            child: const ImageToIcon(
+              imagePath: Constants.lessThanArrowIconPath,
+            ),
+          ),
+          title: Text(
+            "Transactions",
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w500, fontSize: 16, color: Colors.black),
+          ),
           centerTitle: true,
         ),
         body: BlocBuilder<WalletBloc, WalletState>(
@@ -28,8 +43,7 @@ class TransactionHistoryScreen extends StatelessWidget {
             } else if (state is WalletTransactionLoadedState) {
               return state.transaction!.transactions.isEmpty
                   ? Center(
-                      child: Text(
-                          UiUtilities.translate(context, 'no_transactions')),
+                      child: Text('no_transactions'.trans(context)),
                     )
                   : TransactionHistoryList(
                       transactions: state.transaction,
