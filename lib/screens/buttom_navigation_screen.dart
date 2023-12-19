@@ -15,6 +15,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
   const BottomNavigationBarScreen({super.key});
 
   @override
+
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NavBarBloc(),
