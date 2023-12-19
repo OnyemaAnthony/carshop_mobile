@@ -12,6 +12,7 @@ class NavBarBloc extends Bloc<NavBarEvent, NavBarState> {
   }
 
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
+
   void _updateNavIndex(
       UpdateNavBarIndexEvent event, Emitter<NavBarState> emit) {
     controller.index = event.index;

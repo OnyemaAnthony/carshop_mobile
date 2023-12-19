@@ -2,8 +2,10 @@ import 'package:carshop_mobile/blocs/nav_bar_bloc/nav_bar_bloc.dart';
 import 'package:carshop_mobile/screens/account_screen.dart';
 import 'package:carshop_mobile/screens/delivery_status_screen.dart';
 import 'package:carshop_mobile/screens/map_screen.dart';
+import 'package:carshop_mobile/utilities/constants.dart';
 import 'package:carshop_mobile/widgets/bottom_navigation_screen/create_post_widget.dart';
 import 'package:carshop_mobile/widgets/bottom_navigation_screen/custom_nav_bar_widget.dart';
+import 'package:carshop_mobile/widgets/image_to_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,10 +40,34 @@ class BottomNavigationBarScreen extends StatelessWidget {
             customWidget: CustomNavBarWidget(
                 selectedIndex: state.index,
                 items: [
-                  _navBarItem(title: 'Home', icon: CupertinoIcons.home),
-                  _navBarItem(title: 'Delivery', icon: Icons.delivery_dining),
-                  _navBarItem(title: 'Create', icon: Icons.add_box_outlined),
-                  _navBarItem(title: 'Account', icon: CupertinoIcons.person),
+                  _navBarItem(
+                      title: 'Home',
+                      icon: ImageToIcon(
+                        imagePath: Constants.homeIconPath,
+                        color: getColor(state.index, 0, context),
+                      ),
+                      context: context),
+                  _navBarItem(
+                      title: 'Delivery',
+                      icon: ImageToIcon(
+                        imagePath: Constants.deliveryIconPath,
+                        color: getColor(state.index, 1, context),
+                      ),
+                      context: context),
+                  _navBarItem(
+                      title: 'Create',
+                      icon: ImageToIcon(
+                        imagePath: Constants.createIconPath,
+                        color: getColor(state.index, 2, context),
+                      ),
+                      context: context),
+                  _navBarItem(
+                      title: 'Account',
+                      icon: ImageToIcon(
+                        imagePath: Constants.profileIconPath,
+                        color: getColor(state.index, 3, context),
+                      ),
+                      context: context),
                 ],
                 onItemSelected: (value) {
                   if (value == 2) {
@@ -59,11 +85,20 @@ class BottomNavigationBarScreen extends StatelessWidget {
     );
   }
 
-  _navBarItem({required String title, required IconData icon}) =>
+  Color getColor(int currentIndex, int index, BuildContext context) {
+    return currentIndex == index
+        ? Theme.of(context).primaryColor
+        : Colors.black;
+  }
+
+  _navBarItem(
+          {required String title,
+          required Widget icon,
+          required BuildContext context}) =>
       PersistentBottomNavBarItem(
-        icon: Icon(icon),
+        icon: icon,
         title: title,
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: Theme.of(context).primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       );
 }

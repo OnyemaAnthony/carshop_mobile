@@ -1,7 +1,8 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
-import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
-import 'package:carshop_mobile/utilities/ui_utilities.dart';
+import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:flutter/material.dart';
+
+import '../repositories/carhsop_sdk.dart';
 
 class DeliveryStatusScreen extends StatelessWidget {
   const DeliveryStatusScreen({super.key});
@@ -10,7 +11,7 @@ class DeliveryStatusScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(UiUtilities.translate(context, "delivery_status")),
+        title: Text("delivery_status".trans(context)),
       ),
       body: Column(
         children: [
@@ -19,9 +20,7 @@ class DeliveryStatusScreen extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 CarshopClientSdk client = CarshopSDK().client;
-                client.deliveryPostsMyGet().then((value) {
-                  print(value);
-                });
+                client.deliveryPostsMyGet().then((value) {});
               }
               return Center(
                 child: Text(

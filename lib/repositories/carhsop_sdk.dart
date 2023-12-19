@@ -1,4 +1,5 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/utilities/api_keys.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
 
 class CarshopSDK {
@@ -18,9 +19,7 @@ class CarshopSDK {
 
   void init() async {
     client = CarshopClientSdk.create(
-        baseUrl: Uri.parse('https://carshop-app.azurewebsites.net'),
-        //http://10.0.2.2:8080 //use this for localhost
-        //https://carshop-app.azurewebsites.net
+        baseUrl: Uri.parse(ApiKeys.serverURL),
         interceptors: [
           (Request request) async => request.copyWith(headers: {
                 'Accept': "application/json",
