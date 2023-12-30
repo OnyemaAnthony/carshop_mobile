@@ -3,11 +3,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/textfield_form.dart';
+//import '../widgets/textfield_form.dart';
 
-class DeliveryLocation extends StatelessWidget {
+class DeliveryLocation extends StatefulWidget {
+  @override
+  State<DeliveryLocation> createState() => _DeliveryLocationState();
+}
+
+class _DeliveryLocationState extends State<DeliveryLocation> {
+  bool pickup = false ;
+  bool dropoff = false ;
   String pageName = 'Delivery Location';
+
   double pageNum = 1/2;
+
+  final _pickUp = TextEditingController() ;
+
+  final _dropOff = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -49,16 +62,18 @@ class DeliveryLocation extends StatelessWidget {
                     border: Border.all(color: Colors.grey,
                         width: 2.0),
                   ),
-                  child:  TextFieldForm(
-                  //  controller: taskTitleController ,
-                    hintText: 'Address details',
+                  child:  TextField(
+                   controller: _pickUp  ,
+                    decoration: const  InputDecoration(
+                        hintText: 'What would you need help with?'),
+                    style: TextStyle(fontSize: 10),
 
 
                   ),
                 ),
-                const SizedBox(height: 16),
 
-                const SizedBox(height: 32),
+
+                const SizedBox(height: 48),
                 const Text(
                   'Drop-off*',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -69,9 +84,11 @@ class DeliveryLocation extends StatelessWidget {
                     border: Border.all(color: Colors.grey,
                         width: 2.0),
                   ),
-                  child:  TextFieldForm(
-                    //  controller: taskTitleController ,
-                    hintText: 'Address details',
+                  child:  TextField(
+                      controller: _dropOff ,
+                    decoration: const  InputDecoration(
+                        hintText: 'What would you need help with?'),
+                    style: TextStyle(fontSize: 10),
 
 
                   ),
@@ -79,7 +96,7 @@ class DeliveryLocation extends StatelessWidget {
                const SizedBox(height: 10,),
               const  Text('Adding your exact location on the map helps find you faster',
                 style: TextStyle(color: Colors.grey,fontSize: 12.5), ),
-                const SizedBox(height: 40),
+
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,10 +106,15 @@ class DeliveryLocation extends StatelessWidget {
                       style: TextStyle(fontSize: 16),
                     ),
                     Switch(
-                      value: true, // Set initial value based on user preference
+
+                      value: pickup,
                       onChanged: (value) {
-                        // Handle switch change
-                        // You can implement logic to use or not use the user's address
+                        setState(() {
+
+                         pickup= value ;
+                         _pickUp.clear();
+                         _pickUp.text = "from the data";
+                        });
                       },
                     ),
                   ],
@@ -107,13 +129,18 @@ class DeliveryLocation extends StatelessWidget {
                       'Use My Address as Drop-off Location',
                       style: TextStyle(fontSize: 16),
                     ),
-                    Switch(
-                      value: false, // Set initial value based on user preference
-                      onChanged: (bool value) {
-                        // Handle switch change
-                        // You can implement logic to use or not use the user's address
+
+                      Switch(
+                      value: dropoff,
+                      
+                      onChanged: (value) {
+                        setState(() {
+                          dropoff = value ;
+                          _dropOff.text = "get from data base";
+                        });
                       },
                     ),
+
                   ],
                 ),
 

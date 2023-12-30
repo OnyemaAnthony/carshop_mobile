@@ -15,9 +15,11 @@ const OpenNextPageEvent({this.pageNum=1/4});
 }
 
 class PushDeliveryEvent extends CreateDeliveryPostEvent{
+  final String taskTitle   ;
+  final String taskDesc ;
   final BuildContext context;
 
-   PushDeliveryEvent(this.context);
+   PushDeliveryEvent(this.context,this.taskTitle,this.taskDesc);
 }
 class PushTimeEvent extends CreateDeliveryPostEvent{
   final BuildContext context;

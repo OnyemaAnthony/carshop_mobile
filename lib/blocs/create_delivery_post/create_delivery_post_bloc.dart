@@ -16,20 +16,21 @@ part 'create_delivery_post_state.dart';
 
 class CreateDeliveryPostBloc extends Bloc<CreateDeliveryPostEvent, CreateDeliveryPostState> {
 
-  CreateDeliveryPostBloc() : super(InitialState(pageNum: 1/4)){
-on<PushTimeEvent>(_openTimeScreen);
-  on<OpenNextPageEvent>(_IncresePageNum) ;
+  CreateDeliveryPostBloc() : super(CreateDeliveryPostState(title: "", description: "",pageNum: 1/4)){
+  on<PushTimeEvent>(_openTimeScreen);
+  on<OpenNextPageEvent>(_increasePageNum);
   on<PushDeliveryEvent>(_openDeliveryScreen);
+
  }
- FutureOr<void>_IncresePageNum(
-     OpenNextPageEvent event, Emitter<CreateDeliveryPostState>emit )async{
-       emit(InitialState(pageNum: state.pageNum + 0.25 ));
-}
+ FutureOr<void>_increasePageNum(
+     OpenNextPageEvent event, Emitter<CreateDeliveryPostState>emit)async{
+    emit(state.copyWith(pageNum: state.pageNum + 0.25));
+
+ }
 
   void _openDeliveryScreen(
 PushDeliveryEvent event, Emitter<CreateDeliveryPostState>emit){
-    emit(deliveryLocationState());
-
+emit(state.copyWith(pageNum: 2/4));
     UiUtilities.push(event.context , BlocProvider.value(
       value: this ,
       child: DeliveryLocation(),
@@ -37,11 +38,14 @@ PushDeliveryEvent event, Emitter<CreateDeliveryPostState>emit){
 }
 void _openTimeScreen(
     PushTimeEvent event , Emitter<CreateDeliveryPostState>emit){
-      emit(timeState());
       UiUtilities.push(event.context, BlocProvider.value(
       value : this ,
           child : SetTimeScreen(),
       ));
+}
+Future<void>_MapTaskTitle(
+    PushDeliveryEvent event, Emitter<CreateDeliveryPostState>emit)async{
+    emit(state.copyWith(title: event.taskTitle,description: event.taskDesc,pageNum:1/4 ));
 }
 
 
