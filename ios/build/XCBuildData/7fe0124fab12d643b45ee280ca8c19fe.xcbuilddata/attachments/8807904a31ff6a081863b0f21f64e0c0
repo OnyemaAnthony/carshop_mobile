@@ -1,0 +1,208 @@
+{
+  "" : {
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/mapbox_maps_flutter-master.dia",
+    "emit-module-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/mapbox_maps_flutter-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/mapbox_maps_flutter-master-emit-module.dia",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/mapbox_maps_flutter-master.swiftdeps"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/AnimationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnimationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/AnnotationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AnnotationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/AttributionController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/AttributionController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/CameraController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CameraController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/CircleAnnotationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CircleAnnotationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/CompassController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/CompassController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/Extensions.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/Extensions~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/GesturesController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/GesturesController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/LocationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LocationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/LogoController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/LogoController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/MapboxMapController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/MapboxMapFactory.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapboxMapFactory~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/MapInterfaceController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapInterfaceController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/MapProjectionController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/MapProjectionController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/PointAnnotationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PointAnnotationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/PolygonAnnotationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolygonAnnotationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/PolylineAnnotationController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/PolylineAnnotationController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/ScalebarController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/ScalebarController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/StyleController.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/StyleController~partial.swiftmodule"
+  },
+  "/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/SwiftMapboxMapsPlugin.swift" : {
+    "const-values" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.swiftconstvalues",
+    "dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.d",
+    "diagnostics" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.o",
+    "llvm-bc" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.bc",
+    "object" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.o",
+    "swift-dependencies" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin.swiftdeps",
+    "swiftmodule" : "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/arm64/SwiftMapboxMapsPlugin~partial.swiftmodule"
+  }
+}

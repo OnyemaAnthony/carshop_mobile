@@ -1,0 +1,18 @@
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Geometries/MultiPolygon.swift":
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/MultiPolygon.swiftdeps"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/MultiPolygon.o"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/MultiPolygon.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/MultiPolygon.dia"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/MultiPolygon.swiftconstvalues"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Geometries/Polygon.swift":
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Polygon.o"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Polygon.swiftdeps"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Polygon.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Polygon.dia"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Polygon.swiftconstvalues"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Geometries/Point.swift":
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Point.o"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Point.d"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Point.swiftdeps"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Point.dia"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Point.swiftconstvalues"

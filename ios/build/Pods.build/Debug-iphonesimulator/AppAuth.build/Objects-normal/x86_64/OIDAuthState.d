@@ -1,0 +1,21 @@
+dependencies: \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/AppAuth.build/module.modulemap \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthState.m \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Target\ Support\ Files/AppAuth/AppAuth-prefix.pch \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthState.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthStateChangeDelegate.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthStateErrorDelegate.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthorizationRequest.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDExternalUserAgentRequest.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDResponseTypes.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDScopes.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthorizationResponse.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthorizationService.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDDefines.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDError.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDErrorUtilities.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDRegistrationResponse.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDTokenRequest.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDGrantTypes.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDTokenResponse.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/AppAuth/Source/AppAuthCore/OIDTokenUtilities.h

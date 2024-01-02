@@ -1,0 +1,49 @@
+dependencies: \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/FirebaseAuth.build/module.modulemap \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/AuthProvider/OAuth/FIROAuthProvider.m \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIROAuthProvider.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRFederatedAuthProvider.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthUIDelegate.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/FirebaseAppCheckInterop.build/module.modulemap \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Target\ Support\ Files/FirebaseAppCheckInterop/FirebaseAppCheckInterop-umbrella.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAppCheckInterop/FirebaseAppCheck/Interop/Public/FirebaseAppCheckInterop/FIRAppCheckInterop.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAppCheckInterop/FirebaseAppCheck/Interop/Public/FirebaseAppCheckInterop/FIRAppCheckProtocol.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAppCheckInterop/FirebaseAppCheck/Interop/Public/FirebaseAppCheckInterop/FIRAppCheckTokenResultInterop.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAppCheckInterop/FirebaseAppCheck/Interop/Public/FirebaseAppCheckInterop/FirebaseAppCheckInterop.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRFacebookAuthProvider.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIROAuthCredential.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthCredential.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FirebaseCoreInternal.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCore.build/module.modulemap \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Target\ Support\ Files/FirebaseCore/FirebaseCore-umbrella.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRApp.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRConfiguration.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRLoggerLevel.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FirebaseCore.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIROptions.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRVersion.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRAppInternal.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponent.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentContainer.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentType.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRDependency.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRHeartbeatLogger.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLibrary.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLogger.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIROptionsInternal.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuthGlobalWorkQueue.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuth_Internal.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Interop/FIRAuthInterop.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthBackend.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRPCRequest.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRPCResponse.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuth.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthAPNSTokenType.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthErrors.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/AuthProvider/OAuth/FIROAuthCredential_Internal.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRequestConfiguration.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthErrorUtils.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRMultiFactorInfo.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthInternalErrors.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthWebUtils.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthURLPresenter.h

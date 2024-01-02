@@ -1,0 +1,8 @@
+dependencies: \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/PromisesObjC.build/module.modulemap \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/PromisesObjC/Sources/FBLPromises/FBLPromise+Always.m \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromise+Always.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromise.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromiseError.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromisePrivate.h \
+  /Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromise+Testing.h

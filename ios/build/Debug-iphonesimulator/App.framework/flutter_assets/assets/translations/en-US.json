@@ -1,0 +1,15 @@
+{
+  "personal_information": "Personal information",
+  "activities": "Activities",
+  "payment_method": "Payment Method",
+  "address_mgt": "Address Management",
+  "logout": "Log out",
+  "total_balance": "Total Balance",
+  "add_money": "Add Money",
+  "transfer": "Transfer",
+  "withdraw": "Withdraw",
+  "account": "Account",
+  "transaction_history": "Transaction history",
+  "no_transactions": "You do not have any transaction yet",
+  "delivery_status": "Delivery Status"
+}
