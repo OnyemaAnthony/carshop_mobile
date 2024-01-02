@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -126,5 +127,10 @@ class UiUtilities {
         style: const TextStyle(color: Colors.black),
       ),
     );
+  }
+
+  static String formatDate(DateTime dateTime) {
+    DateFormat formattedDate = DateFormat("MMM d 'at' HH:mm:ss");
+    return formattedDate.format(dateTime);
   }
 }

@@ -23,16 +23,11 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     final response = await client.commentsPost(body: event.comment);
     if (response.statusCode == 201) {
       if (event.comment.normalPostId != null) {
-        final res = await client.commentsNormalPostCommentsNormalPostIdGet(
-          normalPostId: event.comment.normalPostId,
-          pageNumber: 1,
-          pageSize: 30,
-        );
-        if (res.statusCode == 200) {
-          emit(CommentLoadedState(res.body!));
-        }
+        final res = await getNormalComment(
+            event.comment.parentCommentId, event.comment.normalPostId);
+        emit(CommentLoadedState(res!));
       } else {
-        final res = await getComment(
+        final res = await getDeliveryPost(
             event.comment.parentCommentId, event.comment.deliveryPostId);
         emit(CommentLoadedState(res!));
       }
@@ -104,7 +99,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     }
   }
 
-  Future<PublicCommentsDescriptor?> getComment(
+  Future<PublicCommentsDescriptor?> getDeliveryPost(
       String? parentCommentId, String? deliveryPostId) async {
     final PublicCommentsDescriptor? comments;
 
@@ -112,6 +107,29 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     final response = parentCommentId == null
         ? await client.commentsDeliveryPostCommentsDeliveryPostIdGet(
             deliveryPostId: deliveryPostId,
+            pageNumber: 1,
+            pageSize: 30,
+          )
+        : await client.commentsCommentRepliesCommentIdGet(
+            commentId: parentCommentId,
+            pageNumber: 1,
+            pageSize: 30,
+          );
+    if (response.statusCode == 200) {
+      comments = response.body;
+      return comments;
+    }
+    return null;
+  }
+
+  Future<PublicCommentsDescriptor?> getNormalComment(
+      String? parentCommentId, String? deliveryPostId) async {
+    final PublicCommentsDescriptor? comments;
+
+    var client = CarshopSDK().client;
+    final response = parentCommentId == null
+        ? await client.commentsNormalPostCommentsNormalPostIdGet(
+            normalPostId: deliveryPostId,
             pageNumber: 1,
             pageSize: 30,
           )
