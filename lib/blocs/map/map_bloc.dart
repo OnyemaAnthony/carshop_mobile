@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/map/map_events.dart';
 import 'package:carshop_mobile/blocs/map/map_states.dart';
@@ -76,6 +77,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   mapbox.MapboxMap? mapboxMap;
+
   void _getCurrentLocationEventToState(
       GetCurrentLocationEvent event, Emitter<MapState> emit) async {
     try {
