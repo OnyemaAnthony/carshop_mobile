@@ -29,6 +29,7 @@ class CommentScreen extends StatelessWidget {
     CreateCommentDto commentDto = CreateCommentDto(
       deliveryPostId: deliveryPostId,
       parentCommentId: parentCommentId,
+      normalPostId: normalPostId,
       content: text,
       location: const Coordination(lng: 12.0, lat: 8.0),
     );
@@ -189,7 +190,7 @@ class CommentScreen extends StatelessWidget {
                       CommentScreen(
                         parentCommentId: comment.commentId,
                         deliveryPostId: deliveryPostId,
-                        // normalPostId: normalPostId,
+                        normalPostId: normalPostId,
                       ),
                     );
                   },

@@ -1,5 +1,6 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/swipe_posts/swipe_bloc.dart';
+import 'package:carshop_mobile/screens/comment_screen.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/change_bottom_sheet.dart';
 import 'package:carshop_mobile/widgets/user_card.dart';
@@ -55,6 +56,17 @@ class PublicNormalPostCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(normalPost.content),
+                  const SizedBox(height: 10),
+                  GestureDetector(
+                      onTap: () {
+                        UiUtilities.pushNavBar(
+                            context,
+                            CommentScreen(
+                              normalPostId: normalPost.normalPostId,
+                            ),
+                            false);
+                      },
+                      child: const Icon(Icons.comment))
                 ],
               ),
             ],
