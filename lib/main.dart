@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
               if (state is AuthenticationLoadingState) {
                 return UiUtilities.showMainLoader();
               } else if (state is Authenticated) {
-                return BottomNavigationBarScreen();
+                return const BottomNavigationBarScreen();
               } else if (state is UnAuthenticated) {
                 return const LoginScreen();
               }

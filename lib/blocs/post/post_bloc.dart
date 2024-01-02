@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:equatable/equatable.dart';
@@ -95,6 +96,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     final response = await client.normalPostsPost(
       body: event.createDto,
     );
+
     if (response.statusCode == 201) {
       emit(CreatedState(state.deliveryPosts, state.posts));
     } else {
