@@ -5,5 +5,5 @@ class ApiKeys {
       'sk.eyJ1IjoiaGthMTQiLCJhIjoiY2xxNDUwZjNmMDFjdTJtbnZ0cm9vdDRndyJ9.APg_iCFo5aF1MMTB-ZLtdQ';
 
   static const mapBoxAccessToken =
-      'pk.eyJ1IjoiaGthMTQiLCJhIjoiY2xxNDR4a3Z3MDFiOTJsbnZjdG14NjMxZyJ9.PQAVzQ7R4y0BFHDNpBDAgg';
+      "pk.eyJ1IjoiaGthMTQiLCJhIjoiY2xxNDR4a3Z3MDFiOTJsbnZjdG14NjMxZyJ9.PQAVzQ7R4y0BFHDNpBDAgg";
 }

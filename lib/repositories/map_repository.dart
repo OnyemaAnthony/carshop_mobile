@@ -57,16 +57,6 @@ class MapRepository {
     polylineAnnotationManager?.create(options);
   }
 
-  static Future<void> createHeatmap(
-      MapboxMap? mapboxMap, List<Position> points, String heatmapId) async {
-    if (points.length > 1) {
-      await mapboxMap?.style.addSource(
-          GeoJsonSource(id: heatmapId, data: _createGeoJson(points)));
-      await mapboxMap?.style.addLayer(
-          HeatmapLayer(id: '${heatmapId}_layer', sourceId: heatmapId));
-    }
-  }
-
   static Future<List<Position>> fetchRouteCoordinates(
       Position start, Position end, String accessToken) async {
     final response = await _fetchDirectionRoute(start, end);
