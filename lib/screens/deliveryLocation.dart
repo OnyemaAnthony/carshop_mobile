@@ -11,8 +11,8 @@ class DeliveryLocation extends StatefulWidget {
 }
 
 class _DeliveryLocationState extends State<DeliveryLocation> {
-  bool pickup = false ;
-  bool dropoff = false ;
+  bool myAdressPick = false;
+  bool myAdressDrop= false ;
   String pageName = 'Delivery Location';
 
   double pageNum = 1/2;
@@ -25,17 +25,19 @@ class _DeliveryLocationState extends State<DeliveryLocation> {
   Widget build(BuildContext context) {
     return BlocProvider(
   create: (context) => CreateDeliveryPostBloc(),
-  child: Scaffold(appBar: AppBar(centerTitle: true,
+  child: Scaffold(  appBar: AppBar(centerTitle: true,
     forceMaterialTransparency: true,
     title: const Column(
       children: [
-         Text('Delivery Location',
+         Text('Delivery Locations',
           style: TextStyle(fontSize: 20,),
         ),
+          SizedBox(height: 20,),
         Column(
           children: [
             LinearProgressIndicator(
               value: 2/4,
+              color: Colors.lightBlue,
 
             ),
           ],
@@ -107,13 +109,17 @@ class _DeliveryLocationState extends State<DeliveryLocation> {
                     ),
                     Switch(
 
-                      value: pickup,
+                      value: myAdressPick,
                       onChanged: (value) {
                         setState(() {
+                         if(value==true) {
 
-                         pickup= value ;
-                         _pickUp.clear();
+                          myAdressPick= value ;
+
                          _pickUp.text = "from the data";
+                         }else{myAdressPick=value ;
+                           _pickUp.clear();}
+
                         });
                       },
                     ),
@@ -131,12 +137,19 @@ class _DeliveryLocationState extends State<DeliveryLocation> {
                     ),
 
                       Switch(
-                      value: dropoff,
+                      value: myAdressDrop,
+
                       
                       onChanged: (value) {
                         setState(() {
-                          dropoff = value ;
-                          _dropOff.text = "get from data base";
+
+                          if(value==true) {
+
+                            myAdressDrop= value ;
+
+                            _dropOff.text = "from the data";
+                          }else{myAdressDrop=value ;
+                          _dropOff.clear();}
                         });
                       },
                     ),
@@ -148,7 +161,7 @@ class _DeliveryLocationState extends State<DeliveryLocation> {
               ],
             ),
           ),
-          const SizedBox(height: 100,),
+          const SizedBox(height: 125,),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -162,6 +175,7 @@ class _DeliveryLocationState extends State<DeliveryLocation> {
                   style: ButtonStyle(
                       backgroundColor: const MaterialStatePropertyAll(
                           Colors.grey),
+                      fixedSize:MaterialStatePropertyAll(Size(300, 50)) ,
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
@@ -172,8 +186,10 @@ class _DeliveryLocationState extends State<DeliveryLocation> {
 
 
                   onPressed: () {
-                  //  BlocProvider.of<CreateDeliveryPostBloc>(context).add(OpenNextPageEvent(pageNum: 1/4));
+
                     BlocProvider.of<CreateDeliveryPostBloc>(context).add(PushTimeEvent(context));
+                  final  String pickUpAdress = _pickUp.text ;
+                  final  String dropOffAdress= _dropOff.text;
                   },
                   child: const Text('Select a time',style: TextStyle(color: Colors.white),),
                 ),

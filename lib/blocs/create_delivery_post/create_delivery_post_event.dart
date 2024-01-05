@@ -21,7 +21,12 @@ class PushDeliveryEvent extends CreateDeliveryPostEvent{
 
    PushDeliveryEvent(this.context,this.taskTitle,this.taskDesc);
 }
+
 class PushTimeEvent extends CreateDeliveryPostEvent{
   final BuildContext context;
   PushTimeEvent(this.context);
+}
+class PushBudgetEvent extends CreateDeliveryPostEvent{
+  final BuildContext context;
+  PushBudgetEvent(this.context);
 }

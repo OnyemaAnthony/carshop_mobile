@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
+import '../../screens/budget_screen.dart';
 import '../../screens/deliveryLocation.dart';
 import '../../screens/setTimeScreen.dart';
 
@@ -20,7 +20,7 @@ class CreateDeliveryPostBloc extends Bloc<CreateDeliveryPostEvent, CreateDeliver
   on<PushTimeEvent>(_openTimeScreen);
   on<OpenNextPageEvent>(_increasePageNum);
   on<PushDeliveryEvent>(_openDeliveryScreen);
-
+on<PushBudgetEvent>(_openBudgetScreen);
  }
  FutureOr<void>_increasePageNum(
      OpenNextPageEvent event, Emitter<CreateDeliveryPostState>emit)async{
@@ -43,6 +43,13 @@ void _openTimeScreen(
           child : SetTimeScreen(),
       ));
 }
+void _openBudgetScreen(
+    PushBudgetEvent event , Emitter<CreateDeliveryPostState>emit){
+    UiUtilities.push(event.context, BlocProvider.value(
+    value : this ,
+        child : BudgetScreen(),
+    ));
+  }
 Future<void>_MapTaskTitle(
     PushDeliveryEvent event, Emitter<CreateDeliveryPostState>emit)async{
     emit(state.copyWith(title: event.taskTitle,description: event.taskDesc,pageNum:1/4 ));

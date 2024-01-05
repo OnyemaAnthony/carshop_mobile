@@ -106,40 +106,38 @@ final _taskDescription = TextEditingController();
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    width: double.infinity,
 
 
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(30,8,30,8),
-                      child: ElevatedButton(
 
-                        style: ButtonStyle(
-                            backgroundColor: const MaterialStatePropertyAll(
-                                Colors.grey),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
+                    child: ElevatedButton(
 
-                                )
-                            )
-                        ),
+                      style: ButtonStyle(
+                          backgroundColor: const MaterialStatePropertyAll(
+                              Colors.grey),
+                          fixedSize:MaterialStatePropertyAll(Size(350, 50)) ,
+                          shape: MaterialStateProperty.all<
+                              RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
 
-
-                        onPressed: () {
-                        String  taskTitle = _taskTitle.text ;
-                          String taskDescription= _taskDescription.text;
-                          BlocProvider.of<CreateDeliveryPostBloc>(context)
-                              .add(
-                              const OpenNextPageEvent(pageNum: 1 / 4));
-                          BlocProvider.of<CreateDeliveryPostBloc>(context)
-                              .add(
-                              PushDeliveryEvent(context,taskTitle,taskDescription));
-
-                        },
-                        child: const Text('Add delivery location',
-                          style: TextStyle(color: Colors.white),),
+                              )
+                          )
                       ),
+
+
+                      onPressed: () {
+                      String  taskTitle = _taskTitle.text ;
+                        String taskDescription= _taskDescription.text;
+                        BlocProvider.of<CreateDeliveryPostBloc>(context)
+                            .add(
+                            const OpenNextPageEvent(pageNum: 1 / 4));
+                        BlocProvider.of<CreateDeliveryPostBloc>(context)
+                            .add(
+                            PushDeliveryEvent(context,taskTitle,taskDescription));
+
+                      },
+                      child: const Text('Add delivery location',
+                        style: TextStyle(color: Colors.white),),
                     ),
                   ),
                 ),
