@@ -25,11 +25,11 @@ class CreatePostWidget extends StatelessWidget {
                       Services()
                           .getUserCoordination()
                           .then((location) => UiUtilities.push(
-                                context,
-                                CreateDeliveryPostScreen(
-                                  currLocation: location,
-                                ),
-                              ));
+                        context,
+                        CreateDeliveryPostScreen(
+                          //   currLocation: location,
+                        ),
+                      ));
                     }),
               )
             ],

@@ -4,9 +4,7 @@ import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
 import 'package:carshop_mobile/utilities/logger.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 part 'wallet_event.dart';
 part 'wallet_state.dart';
@@ -82,27 +80,27 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
 Future<void> makePayment(
     String paymentIntentClientSecret, String clientSecrete) async {
   try {
-    var gpay = const PaymentSheetGooglePay(
-        merchantCountryCode: "USA",
-        currencyCode: "USD",
-        testEnv: true,
-        amount: '1000');
-
-    final response = await Stripe.instance.initPaymentSheet(
-      paymentSheetParameters: SetupPaymentSheetParameters(
-        paymentIntentClientSecret: paymentIntentClientSecret,
-        customFlow: true,
-        style: ThemeMode.light,
-        merchantDisplayName: 'Anthony',
-        googlePay: gpay,
-      ),
-    );
+    // var gpay = const PaymentSheetGooglePay(
+    //     merchantCountryCode: "USA",
+    //     currencyCode: "USD",
+    //     testEnv: true,
+    //     amount: '1000');
+    //
+    // final response = await Stripe.instance.initPaymentSheet(
+    //   paymentSheetParameters: SetupPaymentSheetParameters(
+    //     paymentIntentClientSecret: paymentIntentClientSecret,
+    //     customFlow: true,
+    //     style: ThemeMode.light,
+    //     merchantDisplayName: 'Anthony',
+    //     googlePay: gpay,
+    //   ),
+    // );
   } catch (err) {}
 }
 
 displayPaymentSheet() async {
   try {
-    await Stripe.instance.presentPaymentSheet().then((value) {});
+    // await Stripe.instance.presentPaymentSheet().then((value) {});
   } catch (e) {
     throw Exception(e);
   }
