@@ -21,7 +21,7 @@ class MapScreen extends StatelessWidget {
           MapBloc mapBloc = BlocProvider.of<MapBloc>(context);
           return SafeArea(
             child: MapWidget(
-                styleUri: MapboxStyles.MAPBOX_STREETS,
+                styleUri: state.mapboxUrl!,
                 resourceOptions: ResourceOptions(
                   accessToken: ApiKeys.mapBoxAccessToken,
                 ),

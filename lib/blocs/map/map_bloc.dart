@@ -13,7 +13,9 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mapbox;
 import 'package:turf/turf.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
-  MapBloc() : super(LocationLoading()) {
+  MapBloc()
+      : super(LocationLoading(
+            mapboxUrl: "mapbox://styles/hka14/clr1fm2af01bf01qr8ksm8wpk")) {
     on<FetchPostsEvent>(_mapFetchPostsEventToState);
     on<GetCurrentLocationEvent>(_getCurrentLocationEventToState);
     on<GetMapFeedEvent>(_getMapFeedEventToState);
@@ -62,12 +64,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
       if (deliveryPostsList.isEmpty && normalPostsList.isEmpty) {
         emit(NotPostsFound(
+            mapboxUrl: state.mapboxUrl,
             currentLocation:
                 state.currentLocation ?? const Coordination(lat: 0, lng: 0),
             posts: [],
             deliveryPosts: []));
       } else {
         emit(DataReady(
+          mapboxUrl: state.mapboxUrl,
           posts: normalPostsList,
           deliveryPosts: deliveryPostsList,
           currentLocation: state.currentLocation,
@@ -83,15 +87,20 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     try {
       location.Position? userLocation = await LocationService.getLocation();
       if (userLocation == null) {
-        emit(GetUserLocationError());
+        emit(GetUserLocationError(
+          mapboxUrl: state.mapboxUrl,
+        ));
       } else {
         _showUserLocation(userLocation);
         emit(GetUserLocationSuccess(
+            mapboxUrl: state.mapboxUrl,
             currentLocation: Coordination(
                 lat: userLocation.latitude, lng: userLocation.longitude)));
       }
     } catch (e) {
-      emit(GetUserLocationError());
+      emit(GetUserLocationError(
+        mapboxUrl: state.mapboxUrl,
+      ));
     }
   }
 
@@ -115,23 +124,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     }
   }
 
-  Future<void> _showHeatmap(
-      List<mapbox.Position> heatmapList, String heatmapId) async {
-    await MapRepository.createHeatmap(mapboxMap, heatmapList, heatmapId);
-  }
-
   FutureOr<void> _getMapFeedEventToState(
       GetMapFeedEvent event, Emitter<MapState> emit) async {
     var client = CarshopSDK().client;
-
-    /// normal posts
-    var normalPostsResponse = await client.normalPostsMapFeedGet();
-    List<MapPosition>? normalPostsFeedList = normalPostsResponse.body;
-    List<mapbox.Position> normalPostsHeatMap = [];
-    normalPostsFeedList?.forEach((element) {
-      normalPostsHeatMap.add(mapbox.Position(element.lng, element.lat));
-    });
-    _showHeatmap(normalPostsHeatMap, 'normalPostsHeatMap');
 
     /// delivery posts
     var mapFeedResponse = await client.deliveryPostsMapFeedGet(
@@ -140,6 +135,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     List<MapRoad>? mapFeedList = mapFeedResponse.body;
     _addRouteLines(mapFeedList ?? []);
     emit(GetMapFeedSuccess(
+        mapboxUrl: state.mapboxUrl,
         currentLocation: state.currentLocation,
         posts: state.posts,
         deliveryPosts: state.deliveryPosts));
