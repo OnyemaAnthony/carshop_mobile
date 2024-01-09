@@ -11,9 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'flavours_config.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  F.appFlavor = Flavor.dev;
+
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
