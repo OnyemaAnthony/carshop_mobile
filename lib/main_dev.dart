@@ -17,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   F.appFlavor = Flavor.dev;
-  print('the url is ${F.appUrl}');
 
   if (kIsWeb) {
     await Firebase.initializeApp(
