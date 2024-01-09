@@ -1,0 +1,18 @@
+"/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/Extensions.swift":
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/Extensions.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/Extensions.dia"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/Extensions.swiftconstvalues"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/Extensions.swiftdeps"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/Extensions.o"
+"/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/GesturesController.swift":
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/GesturesController.swiftconstvalues"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/GesturesController.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/GesturesController.dia"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/GesturesController.o"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/GesturesController.swiftdeps"
+"/Users/onyemaanthony/.pub-cache/hosted/pub.dev/mapbox_maps_flutter-0.5.0/ios/Classes/LocationController.swift":
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/LocationController.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/LocationController.dia"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/LocationController.o"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/LocationController.swiftconstvalues"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/mapbox_maps_flutter.build/Objects-normal/x86_64/LocationController.swiftdeps"

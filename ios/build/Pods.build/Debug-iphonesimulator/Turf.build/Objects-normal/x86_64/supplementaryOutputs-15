@@ -1,0 +1,18 @@
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Ring.swift":
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Ring.swiftdeps"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Ring.o"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Ring.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Ring.dia"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Ring.swiftconstvalues"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Simplifier.swift":
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Simplifier.swiftconstvalues"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Simplifier.o"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Simplifier.d"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Simplifier.swiftdeps"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/Simplifier.dia"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/RadianCoordinate2D.swift":
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/RadianCoordinate2D.o"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/RadianCoordinate2D.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/RadianCoordinate2D.dia"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/RadianCoordinate2D.swiftdeps"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/x86_64/RadianCoordinate2D.swiftconstvalues"

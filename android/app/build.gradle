@@ -71,6 +71,24 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+    flavorDimensions "app"
+
+    productFlavors {
+
+        prod {
+            dimension "app"
+            applicationId "com.carshop.carshop"
+            versionCode 1
+            versionName "1.0"
+        }
+
+        dev {
+            dimension "app"
+            applicationId "com.carshop.carshop.dev"
+            versionCode 1
+            versionName "1.0"
+        }
+    }
     buildTypes {
         release {
             signingConfig signingConfigs.release

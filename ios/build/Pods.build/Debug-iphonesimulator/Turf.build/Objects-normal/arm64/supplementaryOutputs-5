@@ -1,0 +1,18 @@
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Codable.swift":
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Codable.dia"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Codable.d"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Codable.swiftconstvalues"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Codable.swiftdeps"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Codable.o"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/Consumer/Consumer.swift":
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Consumer.o"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Consumer.dia"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Consumer.swiftconstvalues"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Consumer.swiftdeps"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/Consumer.d"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/BoundingBox.swift":
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/BoundingBox.d"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/BoundingBox.swiftconstvalues"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/BoundingBox.o"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/BoundingBox.swiftdeps"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/BoundingBox.dia"

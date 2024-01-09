@@ -1,0 +1,18 @@
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/FeatureIdentifier.swift":
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureIdentifier.o"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureIdentifier.swiftconstvalues"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureIdentifier.swiftdeps"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureIdentifier.d"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureIdentifier.dia"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/GeoJSON.swift":
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/GeoJSON.o"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/GeoJSON.swiftdeps"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/GeoJSON.d"
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/GeoJSON.swiftconstvalues"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/GeoJSON.dia"
+"/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/Pods/Turf/Sources/Turf/FeatureCollection.swift":
+  const-values: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureCollection.swiftconstvalues"
+  dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureCollection.d"
+  swift-dependencies: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureCollection.swiftdeps"
+  object: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureCollection.o"
+  diagnostics: "/Users/onyemaanthony/StudioProjects/carshop_mobile/ios/build/Pods.build/Debug-iphonesimulator/Turf.build/Objects-normal/arm64/FeatureCollection.dia"
