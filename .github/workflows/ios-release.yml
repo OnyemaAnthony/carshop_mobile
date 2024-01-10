@@ -1,0 +1,18 @@
+name: IOS Publish
+on:
+  push:
+    branches: [ "release" ]
+jobs:
+
+  build-ios-release:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        architecture: x64
+    - run: flutter pub get
+    - run: flutter build ipa
+    - run: export API_PRIVATE_KEYS_DIR=${{ secrets.IOS_API_PRIVATE_KEY }} 
+    - run: xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey ${{ vars.API_KEY }} --apiIssuer ${{ vars.API_ISSUER }}
