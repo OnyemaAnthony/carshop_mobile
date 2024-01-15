@@ -8,9 +8,9 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.person),
-      title: Text('${user?.firstName}  ${user?.lastName}'),
-    );
+    return Row(children: [
+      const Icon(Icons.person),
+      Text('${user?.firstName}  ${user?.lastName}'),
+    ]);
   }
 }

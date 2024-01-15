@@ -20,7 +20,8 @@ class PostSwipeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (BuildContext context) =>
-            SwipeBloc(normalPosts: posts, deliveryPosts: deliveryPosts),
+            SwipeBloc(normalPosts: posts, deliveryPosts: deliveryPosts)
+              ..add(const InitializePageEvent()),
         child:
             BlocBuilder<SwipeBloc, SwipePostState>(builder: (context, state) {
           SwipeBloc swipeBloc = BlocProvider.of<SwipeBloc>(context);

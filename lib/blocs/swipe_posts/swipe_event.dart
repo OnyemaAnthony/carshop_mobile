@@ -6,14 +6,11 @@ abstract class SwipePostEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LikePostEvent extends SwipePostEvent {
-  final String postId;
-  const LikePostEvent(this.postId);
-}
+class LikeNormalPostEvent extends SwipePostEvent {
+  final String normalPost;
+  final bool isLiked;
 
-class UnlikePostEvent extends SwipePostEvent {
-  final String postId;
-  const UnlikePostEvent(this.postId);
+  const LikeNormalPostEvent(this.normalPost, this.isLiked);
 }
 
 class SavePostEvent extends SwipePostEvent {
@@ -55,4 +52,17 @@ class LikeDeliveryPostEvent extends SwipePostEvent {
 class PostSwipedEvent extends SwipePostEvent {
   final int index;
   const PostSwipedEvent({required this.index});
+}
+
+class BookmarkNormalPost extends SwipePostEvent {
+  final String postId;
+  const BookmarkNormalPost(this.postId);
+}
+
+class PageIsReadyEvent extends SwipePostEvent {
+  const PageIsReadyEvent();
+}
+
+class InitializePageEvent extends SwipePostEvent {
+  const InitializePageEvent();
 }
