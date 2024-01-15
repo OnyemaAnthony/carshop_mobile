@@ -11,6 +11,10 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Dayno</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string> Dayno needs access to location when open.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Dayno needs access to location when in the background.</string>
 	<key>UIInterfaceOrientation</key>
 	<string>UIInterfaceOrientationPortrait</string>
 	<key>CFBundleExecutable</key>
