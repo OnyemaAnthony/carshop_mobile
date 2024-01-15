@@ -45,16 +45,16 @@ class AccountScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              body: BlocBuilder<WalletBloc, WalletState>(
+              body: BlocConsumer<WalletBloc, WalletState>(
+                listener: (context, state) {
+                  if (state is WalletErrorState) {
+                    UiUtilities.showErrorMessage(state.errorMessage);
+                  }
+                },
                 builder: (context, state) {
                   if (state is WalletLoadingState) {
                     return UiUtilities.accountShimmer();
-                  } else if (state is WalletErrorState) {
-                    return UiUtilities.showErrorMessage(
-                        state.errorMessage.toString());
-                  }
-
-                  if (state is WalletLoadedState) {
+                  } else {
                     return Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 12),

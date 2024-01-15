@@ -30,8 +30,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -64,8 +62,7 @@ dependencies:
   carshop_clientsdk:
     git:
       url: https://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@github.com/Hasankanso/carshop_client_sdk.git
-    #    path: ../../WebstormProjects/typescript-carshop/devops/clientsdk-generator/dart_generator
-
+      #ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
   flutter_speed_dial: ^7.0.0
   google_fonts: ^4.0.4
   timeago: ^3.3.0
@@ -75,7 +72,7 @@ dependencies:
   uuid: ^4.2.1
   #  flutter_stripe: 9.5.0+1
   flutter_launcher_icons: ^0.13.1
-#      ref: 3d3cdff61e287b5bb2e4301a9818656ff592fec9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
