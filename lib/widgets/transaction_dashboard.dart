@@ -9,7 +9,7 @@ import 'image_to_icon.dart';
 
 class TransactionDashboard extends StatelessWidget {
   final BuildContext? context;
-  final WalletLoadedState? state;
+  final WalletState? state;
 
   const TransactionDashboard({super.key, this.state, this.context});
 
@@ -44,7 +44,7 @@ class TransactionDashboard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text("\$ ${state!.wallet!.balance.value}",
+          Text("\$ ${state?.wallet?.balance.value}",
               style: Theme.of(context).textTheme.bodyLarge),
           const Spacer(),
           Padding(

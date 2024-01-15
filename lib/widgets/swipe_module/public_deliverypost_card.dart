@@ -20,12 +20,11 @@ class PublicDeliveryPostCard extends StatelessWidget {
     return Card(
       child: BlocConsumer<SwipeBloc, SwipePostState>(
         listener: (context, state) {
-          if (state is ActionDoneState) {
+          if (state.successfulAction != null) {
             UiUtilities.showToast(
                 message: "Action Done", toast: Toast.LENGTH_SHORT);
-            UiUtilities.pop(context);
-          } else if (state is ActionFailedState) {
-            UiUtilities.showErrorMessage(state.errorMessage);
+          } else if (state.pageStatus == PageStatus.error) {
+            UiUtilities.showErrorMessage(state.errorMessage!);
           }
         },
         builder: (context, state) {

@@ -12,7 +12,11 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
   SwipeBloc({
     required List<PublicNormalPostDescriptor> normalPosts,
     required List<PublicDeliveryPostDesc> deliveryPosts,
-  }) : super(SwipePostLoadedState(normalPosts, deliveryPosts, 0,
+  }) : super(SwipePostState(
+            pageStatus: PageStatus.initial,
+            normalPosts: normalPosts,
+            deliveryPosts: deliveryPosts,
+            selectedPost: 0,
             selectedDeliveryPost:
                 deliveryPosts.isNotEmpty ? deliveryPosts[0] : null,
             selectedNormalPost:
@@ -20,24 +24,16 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
     on<DeleteDeliveryPost>(_mapDeleteDeliveryPostEventToState);
     on<AcceptDeliveryPostEvent>(_mapAcceptDeliveryPostEventToState);
     on<LikeDeliveryPostEvent>(_mapLikeDeliveryPostEventToState);
+    on<LikeNormalPostEvent>(_mapLikeNormalPostEventToState);
     on<PostSwipedEvent>(_mapPostSwipedEventToState);
+    on<PageIsReadyEvent>(_mapPageIsReadyEventToState);
+    on<InitializePageEvent>(_mapInitializePageEventToState);
   }
 
   _mapDeleteDeliveryPostEventToState(
       DeleteDeliveryPost event, Emitter<SwipePostState> emit) async {
-    emit(ActionOnGoingState(
-        state.normalPosts, state.deliveryPosts, state.selectedPost));
     CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.deliveryPostsIdDelete(id: event.postId);
-    if (response.statusCode == 200) {
-      emit(ActionDoneState(
-          state.normalPosts, state.deliveryPosts, state.selectedPost,
-          selectedDeliveryPost: state.selectedDeliveryPost));
-    } else {
-      emit(ActionFailedState(state.normalPosts, state.deliveryPosts,
-          state.selectedPost, response.error.toString(),
-          selectedDeliveryPost: state.selectedDeliveryPost));
-    }
+    await client.deliveryPostsIdDelete(id: event.postId);
   }
 
   FutureOr<void> _mapAcceptDeliveryPostEventToState(
@@ -48,13 +44,12 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
             deliveryPostId: event.deliveryPostId);
 
     if (response.statusCode == 200) {
-      emit(ActionDoneState(
-          state.normalPosts, state.deliveryPosts, state.selectedPost,
-          selectedDeliveryPost: state.selectedDeliveryPost));
+      emit(state.copyWith(successfulAction: event));
     } else {
-      emit(ActionFailedState(state.normalPosts, state.deliveryPosts,
-          state.selectedPost, response.error.toString(),
-          selectedDeliveryPost: state.selectedDeliveryPost));
+      emit(state.copyWith(
+          successfulAction: null,
+          errorMessage: response.error.toString(),
+          pageStatus: PageStatus.error));
     }
   }
 
@@ -75,26 +70,69 @@ class SwipeBloc extends Bloc<SwipePostEvent, SwipePostState> {
 
     if (event.isLiked) {
       response = await client.likesTypeContentIdDelete(
-          contentId: event.deliveryPostId, contentType: "DELIVERY_POST");
+          contentId: event.deliveryPostId, type: "DELIVERY_POST");
     } else {
       response = await client.likesTypeContentIdPost(
-          contentId: event.deliveryPostId, contentType: "DELIVERY_POST");
+          contentId: event.deliveryPostId, type: "DELIVERY_POST");
     }
     if (response.statusCode == 200) {
-      emit(SwipePostLoadedState(
-          state.normalPosts, state.deliveryPosts, state.selectedPost,
-          selectedDeliveryPost: newDPost));
+      emit(state.copyWith(
+          successfulAction: event, selectedDeliveryPost: newDPost));
     } else {
-      emit(ActionFailedState(state.normalPosts, state.deliveryPosts,
-          state.selectedPost, response.error.toString(),
-          selectedDeliveryPost: state.selectedDeliveryPost));
+      emit(state.copyWith(
+          successfulAction: null,
+          errorMessage: response.error.toString(),
+          pageStatus: PageStatus.error));
     }
   }
 
   FutureOr<void> _mapPostSwipedEventToState(
       PostSwipedEvent event, Emitter<SwipePostState> emit) {
-    emit(SwipePostLoadedState(
-        state.normalPosts, state.deliveryPosts, event.index,
+    emit(state.copyWith(
+        selectedPost: event.index,
         selectedNormalPost: state.normalPosts[event.index]));
+  }
+
+  FutureOr<void> _mapLikeNormalPostEventToState(
+      LikeNormalPostEvent event, Emitter<SwipePostState> emit) async {
+    CarshopClientSdk client = CarshopSDK().client;
+
+    Response<Object> response;
+    PublicNormalPostDescriptor? newNPost;
+
+    if (state.selectedNormalPost != null) {
+      newNPost = state.selectedNormalPost!.copyWith(
+          isLiked: !event.isLiked,
+          likesCount: event.isLiked
+              ? state.selectedNormalPost!.likesCount - 1
+              : state.selectedNormalPost!.likesCount + 1);
+    }
+
+    if (event.isLiked) {
+      response = await client.likesTypeContentIdDelete(
+          contentId: event.normalPost, type: "NORMAL_POST");
+    } else {
+      response = await client.likesTypeContentIdPost(
+          contentId: event.normalPost, type: "NORMAL_POST");
+    }
+    if (response.statusCode == 200) {
+      emit(state.copyWith(
+          successfulAction: event, selectedNormalPost: newNPost));
+    } else {
+      emit(state.copyWith(
+          successfulAction: null,
+          errorMessage: response.error.toString(),
+          pageStatus: PageStatus.error));
+    }
+  }
+
+  FutureOr<void> _mapPageIsReadyEventToState(
+      PageIsReadyEvent event, Emitter<SwipePostState> emit) {
+    emit(state.copyWith(pageStatus: PageStatus.ready));
+  }
+
+  FutureOr<void> _mapInitializePageEventToState(
+      InitializePageEvent event, Emitter<SwipePostState> emit) {
+    emit(state.copyWith(pageStatus: PageStatus.initializing));
   }
 }

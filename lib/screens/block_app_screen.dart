@@ -33,7 +33,7 @@ class BlockAppScreen extends StatelessWidget {
               30.sizedBox(),
               const BuildText(
                 text:
-                    'Hello,\n You have to give us the permission to access your location to be able to continue using Our Application. \nif you refused the location permission several times, you will need to allow it from application settings manually',
+                    'Hello,\n We require your permission to access your location to be able to continue using Our Application. \nif you refused the location permission several times, you will need to allow it from application settings manually',
                 textAlign: TextAlign.center,
                 fontWeight: FontWeight.bold,
               ),

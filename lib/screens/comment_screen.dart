@@ -25,6 +25,21 @@ class CommentScreen extends StatelessWidget {
 
   late CommentBloc commentBloc;
 
+  static openCommenScreenAsSheet(BuildContext context,
+      {String? parentCommentId, String? deliveryPostId, String? normalPostId}) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (BuildContext context) {
+        return CommentScreen(
+          parentCommentId: parentCommentId,
+          deliveryPostId: deliveryPostId,
+          normalPostId: normalPostId,
+        );
+      },
+    );
+  }
+
   void addComment(String text) {
     CreateCommentDto commentDto = CreateCommentDto(
       deliveryPostId: deliveryPostId,
@@ -140,13 +155,11 @@ class CommentScreen extends StatelessWidget {
                 PublicCommentDescriptor comment = comments.comments[index];
                 return CommentListItem(
                   onTap: () {
-                    UiUtilities.push(
+                    openCommenScreenAsSheet(
                       context,
-                      CommentScreen(
-                        parentCommentId: comment.commentId,
-                        deliveryPostId: deliveryPostId,
-                        normalPostId: normalPostId,
-                      ),
+                      parentCommentId: comment.commentId,
+                      deliveryPostId: deliveryPostId,
+                      normalPostId: normalPostId,
                     );
                   },
                   onAction: () {
@@ -185,13 +198,11 @@ class CommentScreen extends StatelessWidget {
                   },
                   comment: comment,
                   reply: () {
-                    UiUtilities.push(
+                    openCommenScreenAsSheet(
                       context,
-                      CommentScreen(
-                        parentCommentId: comment.commentId,
-                        deliveryPostId: deliveryPostId,
-                        normalPostId: normalPostId,
-                      ),
+                      parentCommentId: comment.commentId,
+                      deliveryPostId: deliveryPostId,
+                      normalPostId: normalPostId,
                     );
                   },
                 );

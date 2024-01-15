@@ -4,12 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CommentListItem extends StatelessWidget {
-  PublicCommentDescriptor? comment;
-  Function()? reply;
-  Function()? onAction;
-  Function()? onTap;
+  final PublicCommentDescriptor? comment;
+  final Function()? reply;
+  final Function()? onAction;
+  final Function()? onTap;
 
-  CommentListItem(
+  const CommentListItem(
       {Key? key, this.comment, this.onAction, this.reply, this.onTap})
       : super(key: key);
 
