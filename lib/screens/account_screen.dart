@@ -102,7 +102,6 @@ class AccountScreen extends StatelessWidget {
                       ),
                     );
                   }
-                  return Container();
                 },
               ),
             );

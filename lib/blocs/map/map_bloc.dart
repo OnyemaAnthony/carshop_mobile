@@ -13,8 +13,15 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mapbox;
 import 'package:turf/turf.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
+  mapbox.MapboxMap? mapboxMap;
+
   MapBloc()
-      : super(LocationLoading(
+      : super(MapState(
+            lockMapTap: false,
+            mapMessage: MapMessage.loading,
+            currentLocation: null,
+            posts: [],
+            deliveryPosts: [],
             mapboxUrl: "mapbox://styles/hka14/clr1fm2af01bf01qr8ksm8wpk")) {
     on<FetchPostsEvent>(_mapFetchPostsEventToState);
     on<GetCurrentLocationEvent>(_getCurrentLocationEventToState);
@@ -23,8 +30,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   FutureOr<void> _mapFetchPostsEventToState(
       FetchPostsEvent event, Emitter<MapState> emit) async {
-    var client = CarshopSDK().client;
+    if (state.lockMapTap) return;
 
+    var client = CarshopSDK().client;
+    emit(state.copyWith(lockMapTap: true));
     double deliveryRadius = 50000;
     var radius = await MapRepository.tapRadiusinMeter(mapboxMap!);
     List<Future<dynamic>> futures = [];
@@ -63,43 +72,42 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           normalPosts!.body!.normalPosts;
 
       if (deliveryPostsList.isEmpty && normalPostsList.isEmpty) {
-        emit(NotPostsFound(
-            mapboxUrl: state.mapboxUrl,
-            currentLocation:
-                state.currentLocation ?? const Coordination(lat: 0, lng: 0),
+        emit(state.copyWith(
+            lockMapTap: false,
+            mapMessage: MapMessage.notFound,
             posts: [],
             deliveryPosts: []));
       } else {
-        emit(DataReady(
-          mapboxUrl: state.mapboxUrl,
+        emit(state.copyWith(
+          lockMapTap: false,
+          mapMessage: MapMessage.dataLoaded,
           posts: normalPostsList,
           deliveryPosts: deliveryPostsList,
-          currentLocation: state.currentLocation,
         ));
       }
     }
   }
-
-  mapbox.MapboxMap? mapboxMap;
 
   void _getCurrentLocationEventToState(
       GetCurrentLocationEvent event, Emitter<MapState> emit) async {
     try {
       location.Position? userLocation = await LocationService.getLocation();
       if (userLocation == null) {
-        emit(GetUserLocationError(
-          mapboxUrl: state.mapboxUrl,
+        emit(state.copyWith(
+          mapMessage: MapMessage.failedToGetLocation,
+          currentLocation: null,
         ));
       } else {
         _showUserLocation(userLocation);
-        emit(GetUserLocationSuccess(
-            mapboxUrl: state.mapboxUrl,
+        emit(state.copyWith(
+            mapMessage: MapMessage.succeededToGetLocation,
             currentLocation: Coordination(
                 lat: userLocation.latitude, lng: userLocation.longitude)));
       }
     } catch (e) {
-      emit(GetUserLocationError(
-        mapboxUrl: state.mapboxUrl,
+      emit(state.copyWith(
+        mapMessage: MapMessage.failedToGetLocation,
+        currentLocation: null,
       ));
     }
   }
@@ -134,10 +142,5 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         lng: state.currentLocation?.lng /*lat: 34.689039, lng: 33.018344*/);
     List<MapRoad>? mapFeedList = mapFeedResponse.body;
     _addRouteLines(mapFeedList ?? []);
-    emit(GetMapFeedSuccess(
-        mapboxUrl: state.mapboxUrl,
-        currentLocation: state.currentLocation,
-        posts: state.posts,
-        deliveryPosts: state.deliveryPosts));
   }
 }

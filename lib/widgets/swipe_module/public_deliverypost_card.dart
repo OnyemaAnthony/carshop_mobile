@@ -8,7 +8,6 @@ import 'package:carshop_mobile/widgets/swipe_module/info_item.dart';
 import 'package:carshop_mobile/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class PublicDeliveryPostCard extends StatelessWidget {
   final PublicDeliveryPostDesc deliveryPost;
@@ -18,15 +17,7 @@ class PublicDeliveryPostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: BlocConsumer<SwipeBloc, SwipePostState>(
-        listener: (context, state) {
-          if (state.successfulAction != null) {
-            UiUtilities.showToast(
-                message: "Action Done", toast: Toast.LENGTH_SHORT);
-          } else if (state.pageStatus == PageStatus.error) {
-            UiUtilities.showErrorMessage(state.errorMessage!);
-          }
-        },
+      child: BlocBuilder<SwipeBloc, SwipePostState>(
         builder: (context, state) {
           SwipeBloc swipeBlock = context.read<SwipeBloc>();
           return Column(
