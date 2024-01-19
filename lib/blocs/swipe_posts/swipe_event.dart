@@ -7,10 +7,7 @@ abstract class SwipePostEvent extends Equatable {
 }
 
 class LikeNormalPostEvent extends SwipePostEvent {
-  final String normalPost;
-  final bool isLiked;
-
-  const LikeNormalPostEvent(this.normalPost, this.isLiked);
+  const LikeNormalPostEvent();
 }
 
 class SavePostEvent extends SwipePostEvent {
@@ -65,4 +62,13 @@ class PageIsReadyEvent extends SwipePostEvent {
 
 class InitializePageEvent extends SwipePostEvent {
   const InitializePageEvent();
+}
+
+class GetNormalPostEvent extends SwipePostEvent {
+  final String id;
+  const GetNormalPostEvent(this.id);
+}
+
+class RefreshNormalPostEvent extends SwipePostEvent {
+  const RefreshNormalPostEvent();
 }

@@ -10,7 +10,8 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       const Icon(Icons.person),
-      Text('${user?.firstName}  ${user?.lastName}'),
+      Text('${user?.firstName}  ${user?.lastName}',
+          style: Theme.of(context).textTheme.titleMedium),
     ]);
   }
 }
