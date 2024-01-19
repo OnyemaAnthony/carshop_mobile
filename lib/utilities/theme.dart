@@ -77,7 +77,11 @@ class CarShopTheme {
             color: AppColors.primaryColorLight,
           ),
         ),
+
       ),
+      elevatedButtonTheme: const ElevatedButtonThemeData (
+          style:ButtonStyle(backgroundColor: MaterialStatePropertyAll(AppColors.primaryColorLight) )
+      )
     );
   }
 
@@ -134,6 +138,9 @@ class CarShopTheme {
         ),
         borderRadius: BorderRadius.all(Radius.circular(0.0)),
       )),
+        elevatedButtonTheme: const ElevatedButtonThemeData (
+            style:ButtonStyle(backgroundColor: MaterialStatePropertyAll(AppColors.primaryColorDark) )
+        )///
     );
   }
 }

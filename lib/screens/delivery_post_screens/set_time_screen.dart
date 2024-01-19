@@ -15,9 +15,8 @@ class _SetTimeScreenState extends State<SetTimeScreen> {
   late Future<DateTime> selectedDate;
   String? initialDate =
   DateFormat('MMMM dd, yyyy').format(DateTime.now()); // Updated format
-
-
   TimeOfDay _timeOfDay = TimeOfDay.now();
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +49,21 @@ class _SetTimeScreenState extends State<SetTimeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'Needed as Soon as Possible',
-                    style: TextStyle(fontSize: 16),
+
                   ),
                   Switch(
                     value: neededAsap,
                     onChanged: (value) {
                       setState(() {
                         neededAsap = value;
+                        _dateController.text= DateFormat('MMMM dd, yyyy').format(DateTime.now());
+                        _timeController.text=DateFormat('jm').format(DateTime.now());
                       });
                     },
                   ),
@@ -80,7 +82,6 @@ class _SetTimeScreenState extends State<SetTimeScreen> {
                     color: Colors.grey[100],
                     width: 150, // Adjust the width as needed
                     child: TextField(
-                      style: TextStyle(fontSize: 10, color: Colors.black),
                       controller: _dateController,
                       readOnly: true,
                       onTap: () {
@@ -103,7 +104,7 @@ class _SetTimeScreenState extends State<SetTimeScreen> {
                     color: Colors.grey[100],
                     width: 150, // Adjust the width as needed
                     child: TextField(
-                      style: const TextStyle(fontSize: 10, color: Colors.black),
+
                       controller: _timeController,
                       readOnly: true,
                       onTap: () {
@@ -113,44 +114,51 @@ class _SetTimeScreenState extends State<SetTimeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 330,),
-              Center(
-                child: ElevatedButton(
-
-                  style: ButtonStyle(
-                      backgroundColor: const MaterialStatePropertyAll(
-
-                          Colors.grey),
-                     fixedSize:MaterialStatePropertyAll(Size(350, 50)) ,
-                      shape: MaterialStateProperty.all<
-                          RoundedRectangleBorder>(
-
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-
-                          )
-                      )
-                  ),
 
 
-                  onPressed: () {
-                    BlocProvider.of<CreateDeliveryPostBloc>(context)
-                        .add(
-                        const OpenNextPageEvent(pageNum: 3 / 4));
-                    BlocProvider.of<CreateDeliveryPostBloc>(context)
-                        .add(
-                        PushBudgetEvent(context));
-                  },
-                  child: const Text('Input your budge',
-                    style: TextStyle(color: Colors.white),),
-                ),
-              ),
 
             ],
 
           ),
+
+
+
+        ),
+      bottomNavigationBar:
+
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15,15,15,30),
+        child: ElevatedButton(
+
+          style: ButtonStyle(
+
+              fixedSize:MaterialStatePropertyAll(Size(350, 50)) ,
+              shape: MaterialStateProperty.all<
+                  RoundedRectangleBorder>(
+
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+
+                  )
+              )
+          ),
+
+
+          onPressed: () {
+            String date = _dateController.text;
+            String time= _timeController.text;
+
+            BlocProvider.of<CreateDeliveryPostBloc>(context)
+                .add(
+                PushBudgetEvent(context,date,time));
+          },
+          child: const Text('Input your budge',
+            style: TextStyle(color: Colors.white),),
         ),
       ),
+      ),
+
+
     );
   }
 

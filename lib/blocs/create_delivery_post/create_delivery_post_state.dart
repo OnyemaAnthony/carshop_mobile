@@ -4,25 +4,63 @@ part of 'create_delivery_post_bloc.dart';
 class CreateDeliveryPostState extends Equatable {
 final String? title ;
 final String? description ;
- double pageNum  = 1/4 ;
 
-  CreateDeliveryPostState({ required this.title, required this.description,required this.pageNum});
+final TextEditingController pickUpAddress ;
+final TextEditingController dropOffAddress ;
+final TextEditingController budget;
+final bool? useMyAddressPickUp;
+final bool ? useMyAddressDropOff;
+
+final String? date ;
+final String? time;
+
+final bool ? openToOffers ;
+
+  const  CreateDeliveryPostState({ required this.title, required this.description,
+
+    required this.pickUpAddress, required this.dropOffAddress,
+  required this.useMyAddressPickUp, required this.useMyAddressDropOff,required this.date,required this.time, required this.openToOffers,required this.budget,
+  });
 
   CreateDeliveryPostState copyWith({
   String? title,
   String? description,
-    required double pageNum,
+  TextEditingController? budget,
+  TextEditingController  ? pickUpAddress ,
+  TextEditingController? dropOffAddress,
+  bool ? useMyAddressPickUp,
+  bool ? useMyAddressDropOff,
+    String ? date,
+    String ? time,
+  bool ? openToOffers ,
+
+
 }) {
+
   return CreateDeliveryPostState(
       title: title ?? this.title,
       description: description ?? this.description,
-      pageNum: pageNum = this.pageNum,
+      pickUpAddress: pickUpAddress ?? this.pickUpAddress,
+      dropOffAddress : dropOffAddress?? this.dropOffAddress,
+      useMyAddressPickUp : useMyAddressPickUp ?? this.useMyAddressPickUp,
+      useMyAddressDropOff : useMyAddressDropOff ?? this.useMyAddressDropOff,
+      date: date ?? this.date,
+      time: time ?? this.time,
+      openToOffers : openToOffers ?? this.openToOffers,
+      budget: budget?? this.budget,
       );
   }
 
   @override
-  List<Object> get props => [pageNum];
+  List<Object?> get props => [useMyAddressDropOff , useMyAddressPickUp, pickUpAddress, dropOffAddress,openToOffers,budget];
+
 }
+// class DataLoadingState extends CreateDeliveryPostState {
+//   const DataLoadingState({required super.title, required super.description, required super.pickUpAddress,
+//     required super.dropOffAddress, required super.useMyAddressPickUp, required super.useMyAddressDropOff,
+//     required super.openToOffers, required super.budget});
+//
+// }
 
 
 
