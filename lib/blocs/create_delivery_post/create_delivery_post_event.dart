@@ -50,9 +50,3 @@ class SaveDeliveryPostEvent extends CreateDeliveryPostEvent {
   const SaveDeliveryPostEvent(this.createDPDto);
 }
 
-/*
-class SharePostEvent extends CreateDeliveryPostEvent{
-  final String budget ;
-  const SharePostEvent(this.budget);
-
-}*/

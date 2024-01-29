@@ -16,10 +16,14 @@ final String? time;
 
 final bool ? openToOffers ;
 
-  const  CreateDeliveryPostState({ required this.title, required this.description,
+ final bool ? isLoading ;
+
+    CreateDeliveryPostState({ required this.title, required this.description,
 
     required this.pickUpAddress, required this.dropOffAddress,
-  required this.useMyAddressPickUp, required this.useMyAddressDropOff,required this.date,required this.time, required this.openToOffers,required this.budget,
+  required this.useMyAddressPickUp, required this.useMyAddressDropOff,
+    required this.date,required this.time, required this.openToOffers,required this.budget,
+    this.isLoading
   });
 
   CreateDeliveryPostState copyWith({
@@ -30,9 +34,10 @@ final bool ? openToOffers ;
   TextEditingController? dropOffAddress,
   bool ? useMyAddressPickUp,
   bool ? useMyAddressDropOff,
-    String ? date,
-    String ? time,
+  String ? date,
+  String ? time,
   bool ? openToOffers ,
+  bool ? isLoading,
 
 
 }) {
@@ -48,6 +53,7 @@ final bool ? openToOffers ;
       time: time ?? this.time,
       openToOffers : openToOffers ?? this.openToOffers,
       budget: budget?? this.budget,
+    isLoading: isLoading ?? this.isLoading,
       );
   }
 
@@ -55,12 +61,7 @@ final bool ? openToOffers ;
   List<Object?> get props => [useMyAddressDropOff , useMyAddressPickUp, pickUpAddress, dropOffAddress,openToOffers,budget];
 
 }
-// class DataLoadingState extends CreateDeliveryPostState {
-//   const DataLoadingState({required super.title, required super.description, required super.pickUpAddress,
-//     required super.dropOffAddress, required super.useMyAddressPickUp, required super.useMyAddressDropOff,
-//     required super.openToOffers, required super.budget});
-//
-// }
+
 
 
 

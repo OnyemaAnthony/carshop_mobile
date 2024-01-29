@@ -88,6 +88,7 @@ class BudgetScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18.0),
                     ))),
                 onPressed: () {
+
                   bloc.add(SaveDeliveryPostEvent(CreateDeliveryPost(taskTitle: state.title, taskDescription: state.description,
                     dropOffAddress: state.dropOffAddress.toString(), pickUpAddress: state.pickUpAddress.toString(),
                       time: state.time,date: state.date,budget: state.budget.toString()

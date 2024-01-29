@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (_, state) {
         if (state is Authenticated) {
-          UiUtilities.pushReplacement(context, BottomNavigationBarScreen());
+          UiUtilities.pushReplacement(context, const BottomNavigationBarScreen());
         } else if (state is AuthenticationErrorState) {
           UiUtilities.showSnackBar(txt: state.errorMessage, context: context);
         }

@@ -20,145 +20,140 @@ class _SetTimeScreenState extends State<SetTimeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CreateDeliveryPostBloc(),
-      child: Scaffold(
-        appBar: AppBar(centerTitle: true,
-          forceMaterialTransparency: true,
-          title: const Column(
-            children: [
-               Text('Schedule',
-                style: TextStyle(fontSize: 20,),
-              ),
-                SizedBox(height: 20,),
-              Column(
-                children: [
-                  LinearProgressIndicator(
-                    value: 3/4,
-                    color: Colors.lightBlue,
+    return Scaffold(
+      appBar: AppBar(centerTitle: true,
+        forceMaterialTransparency: true,
+        title: const Column(
+          children: [
+             Text('Schedule',
+              style: TextStyle(fontSize: 20,),
+            ),
+              SizedBox(height: 20,),
+            Column(
+              children: [
+                LinearProgressIndicator(
+                  value: 3/4,
+                  color: Colors.lightBlue,
 
-                  ),
-                ],
-              )
-            ],
-          ),
-          backgroundColor: Colors.white,
+                ),
+              ],
+            )
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Needed as Soon as Possible',
+        backgroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-                  ),
-                  Switch(
-                    value: neededAsap,
-                    onChanged: (value) {
-                      setState(() {
-                        neededAsap = value;
-                        _dateController.text= DateFormat('MMMM dd, yyyy').format(DateTime.now());
-                        _timeController.text=DateFormat('jm').format(DateTime.now());
-                      });
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Needed as Soon as Possible',
+
+                ),
+                Switch(
+                  value: neededAsap,
+                  onChanged: (value) {
+                    setState(() {
+                      neededAsap = value;
+                      _dateController.text= DateFormat('MMMM dd, yyyy').format(DateTime.now());
+                      _timeController.text=DateFormat('jm').format(DateTime.now());
+                    });
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+              const  Text(
+                  'Date ',
+                  style: TextStyle(fontSize: 16),
+                ),
+               const  Spacer(),
+                Container(
+                  color: Colors.grey[100],
+                  width: 150, // Adjust the width as needed
+                  child: TextField(
+                    controller: _dateController,
+                    readOnly: true,
+                    onTap: () {
+                      _selectDate();
                     },
                   ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                const  Text(
-                    'Date ',
-                    style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+            const    Text(
+                  'time ',
+                  style: TextStyle(fontSize: 16),
+                ),
+              const  Spacer(),
+                Container(
+                  color: Colors.grey[100],
+                  width: 150, // Adjust the width as needed
+                  child: TextField(
+
+                    controller: _timeController,
+                    readOnly: true,
+                    onTap: () {
+                      _selectTime();
+                    },
                   ),
-                 const  Spacer(),
-                  Container(
-                    color: Colors.grey[100],
-                    width: 150, // Adjust the width as needed
-                    child: TextField(
-                      controller: _dateController,
-                      readOnly: true,
-                      onTap: () {
-                        _selectDate();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-              const    Text(
-                    'time ',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                const  Spacer(),
-                  Container(
-                    color: Colors.grey[100],
-                    width: 150, // Adjust the width as needed
-                    child: TextField(
-
-                      controller: _timeController,
-                      readOnly: true,
-                      onTap: () {
-                        _selectTime();
-                      },
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
+            ),
 
 
 
-            ],
-
-          ),
-
-
+          ],
 
         ),
-      bottomNavigationBar:
-
-      Padding(
-        padding: const EdgeInsets.fromLTRB(15,15,15,30),
-        child: ElevatedButton(
-
-          style: ButtonStyle(
-
-              fixedSize:MaterialStatePropertyAll(Size(350, 50)) ,
-              shape: MaterialStateProperty.all<
-                  RoundedRectangleBorder>(
-
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-
-                  )
-              )
-          ),
 
 
-          onPressed: () {
-            String date = _dateController.text;
-            String time= _timeController.text;
 
-            BlocProvider.of<CreateDeliveryPostBloc>(context)
-                .add(
-                PushBudgetEvent(context,date,time));
-          },
-          child: const Text('Input your budge',
-            style: TextStyle(color: Colors.white),),
+      ),
+    bottomNavigationBar:
+
+    Padding(
+      padding: const EdgeInsets.fromLTRB(15,15,15,30),
+      child: ElevatedButton(
+
+        style: ButtonStyle(
+
+            fixedSize:MaterialStatePropertyAll(Size(350, 50)) ,
+            shape: MaterialStateProperty.all<
+                RoundedRectangleBorder>(
+
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+
+                )
+            )
         ),
-      ),
-      ),
 
 
+        onPressed: () {
+          String date = _dateController.text;
+          String time= _timeController.text;
+
+          BlocProvider.of<CreateDeliveryPostBloc>(context)
+              .add(
+              PushBudgetEvent(context,date,time));
+        },
+        child: const Text('Input your budge',
+          style: TextStyle(color: Colors.white),),
+      ),
+    ),
     );
   }
 

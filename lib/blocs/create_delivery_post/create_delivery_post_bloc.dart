@@ -41,8 +41,6 @@ class CreateDeliveryPostBloc extends Bloc<CreateDeliveryPostEvent, CreateDeliver
   }
   void _openTimeScreen(
       PushTimeEvent event , Emitter<CreateDeliveryPostState>emit){
-    emit(state.copyWith());
-
     UiUtilities.push(event.context, BlocProvider.value(
       value : this ,
       child : SetTimeScreen(),
@@ -83,21 +81,21 @@ if (event.newValue){
 emit(state.copyWith(openToOffers: event.newValue));
   }
 
-  /* void _sharePost(
-      SharePostEvent event, Emitter<CreateDeliveryPostState>emit){
-    emit(state.copyWith(budget: event.budget));
-
-  }*/
   FutureOr<void> _mapSaveDeliveryPostEventToState(
+
       SaveDeliveryPostEvent event, Emitter<CreateDeliveryPostState> emit) async {
-    emit(state.copyWith());
-    CarshopClientSdk client = CarshopSDK().client;
-    final response = await client.deliveryPostsPost(body: event.createDPDto);
-    if (response.statusCode == 201) {
-      emit(state.copyWith());
+    if (state.isLoading!) {
+      return;
+    } else {
+      emit(state.copyWith(isLoading: true));
+
+      CarshopClientSdk client = CarshopSDK().client;
+      final response = await client.deliveryPostsPost(body: event.createDPDto);
+      if (response.statusCode == 201) {
+
+      }
     }
   }
-
 }
 
 

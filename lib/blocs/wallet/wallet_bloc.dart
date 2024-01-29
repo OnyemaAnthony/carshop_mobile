@@ -80,27 +80,13 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
 Future<void> makePayment(
     String paymentIntentClientSecret, String clientSecrete) async {
   try {
-    // var gpay = const PaymentSheetGooglePay(
-    //     merchantCountryCode: "USA",
-    //     currencyCode: "USD",
-    //     testEnv: true,
-    //     amount: '1000');
-    //
-    // final response = await Stripe.instance.initPaymentSheet(
-    //   paymentSheetParameters: SetupPaymentSheetParameters(
-    //     paymentIntentClientSecret: paymentIntentClientSecret,
-    //     customFlow: true,
-    //     style: ThemeMode.light,
-    //     merchantDisplayName: 'Anthony',
-    //     googlePay: gpay,
-    //   ),
-    // );
+
   } catch (err) {}
 }
 
 displayPaymentSheet() async {
   try {
-    // await Stripe.instance.presentPaymentSheet().then((value) {});
+   
   } catch (e) {
     throw Exception(e);
   }
