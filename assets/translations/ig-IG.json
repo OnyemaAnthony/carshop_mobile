@@ -11,5 +11,11 @@
     "account": "Akaụntụ",
     "transaction_history": "Akụkọ ụgwọ",
     "no_transactions": "I nweghị ụgwọ ị mere",
-    "delivery_status": "Ọnọdụ mgbe ọ ga-ekwuchakwa"
+    "delivery_status": "Ọnọdụ mgbe ọ ga-ekwuchakwa",
+    "create_post" : "Mepụta post",
+    "content" : "Ọdịnaya",
+    "title" : "Aha",
+    "content_is_required" : "A chọrọ ọdịnaya",
+    "title_is_required" : "A chọrọ aha",
+    "normal_post_saved" : "Ederede gi a chọpụtara"
   }

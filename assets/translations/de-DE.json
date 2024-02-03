@@ -11,5 +11,11 @@
   "account": "Konto",
   "transaction_history": "Transaktionsverlauf",
   "no_transactions": "Sie haben noch keine Transaktionen",
-  "delivery_status": "Lieferung Status"
+  "delivery_status": "Lieferung Status",
+  "create_post" : "Beitrag erstellen",
+  "content" : "Inhalt",
+  "title" : "Titel",
+  "content_is_required" : "Inhalt ist erforderlich",
+  "title_is_required" : "Titel ist erforderlich",
+  "normal_post_saved" : "Ihr Beitrag wurde gespeichert"
 }

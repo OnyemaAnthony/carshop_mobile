@@ -11,5 +11,11 @@
   "account": "Account",
   "transaction_history": "Transaction history",
   "no_transactions": "You do not have any transaction yet",
-  "delivery_status": "Delivery Status"
+  "delivery_status": "Delivery Status",
+  "create_post" : "Create Post",
+  "content" : "Content",
+  "title" : "Title",
+  "content_is_required" : "Content is required",
+  "title_is_required" : "Title is required",
+  "normal_post_saved" : "Your post has been saved"
 }

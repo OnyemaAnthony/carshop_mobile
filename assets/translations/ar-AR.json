@@ -11,5 +11,11 @@
     "account": "الحساب",
     "transaction_history": "تاريخ المعاملة",
     "no_transactions": "ليس لديك أي معاملة بعد",
-    "delivery_status": "حالة التوصيل"
+    "delivery_status": "حالة التوصيل",
+    "create_post" : "إنشاء منشور",
+    "content" : "المحتوى",
+    "title" : "العنوان",
+    "content_is_required" : "المحتوى مطلوب",
+    "title_is_required" : "العنوان مطلوب",
+    "normal_post_saved" : "تم حفظ المنشور الخاص بك"
   }

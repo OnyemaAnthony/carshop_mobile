@@ -12,6 +12,14 @@ class CarShopTheme {
         cursorColor: AppColors.primaryColorLight,
       ),
       textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
+      dialogTheme: const DialogTheme(
+          shape: RoundedRectangleBorder(
+        side: BorderSide(
+          width: 0,
+          style: BorderStyle.none,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+      )),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           elevation: 0,
@@ -19,6 +27,13 @@ class CarShopTheme {
           textStyle: const TextStyle(
             color: AppColors.primaryColorLight,
           ),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primaryColorLight,
+          foregroundColor: AppColors.white,
+          elevation: 0,
         ),
       ),
     );
@@ -38,6 +53,13 @@ class CarShopTheme {
         ),
         borderRadius: BorderRadius.all(Radius.circular(0.0)),
       )),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primaryColorLight,
+          foregroundColor: AppColors.white,
+          elevation: 0,
+        ),
+      ),
     );
   }
 }
