@@ -1,0 +1,5 @@
+microsoft:
+  tenant: 'common'
+  clientId: '4d4371d9-4bbd-47d4-b7dd-d92d49ab491b'
+  scope: 'User.Read'
+  redirectUri: 'https://dayno.azurewebsites.net/auth/microsoft/callback/sign_in_with_microsoft/'

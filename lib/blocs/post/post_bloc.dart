@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/repositories/carhsop_sdk.dart';
+import 'package:carshop_mobile/utilities/local_storage.dart';
+import 'package:carshop_mobile/utilities/services.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:logger/logger.dart';
-
-import '../../utilities/local_storage.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
@@ -89,12 +88,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   FutureOr<void> _mapSavePostEventToState(
       SavePostEvent event, Emitter<PostState> emit) async {
-    final logger = Logger();
     emit(DataLoadingState(state.deliveryPosts, state.posts));
 
+    Coordination location = await Services().getUserCoordination();
     CarshopClientSdk client = CarshopSDK().client;
     final response = await client.normalPostsPost(
-      body: event.createDto,
+      body: CreatePostDto(
+          title: event.title, content: event.content, location: location),
     );
 
     if (response.statusCode == 201) {

@@ -1,11 +1,11 @@
 import 'package:aad_oauth/aad_oauth.dart';
 import 'package:aad_oauth/model/config.dart';
+import 'package:carshop_mobile/utilities/configs.dart';
 import 'package:carshop_mobile/utilities/local_storage.dart';
+import 'package:carshop_mobile/utilities/navigator_keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import '../utilities/navigator_keys.dart';
 
 class FirebaseService {
   Future<bool?> isSignedIn() async {
@@ -48,6 +48,12 @@ class FirebaseService {
     return null;
   }
 
+  Future<void> signOut() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await GoogleSignIn().disconnect();
+    await auth.signOut();
+  }
+
   Future<String?> signInWithFacebook() async {
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
@@ -70,11 +76,10 @@ class FirebaseService {
   Future<String?> signInWithMicrosoft() async {
     try {
       final Config config = Config(
-          tenant: 'common',
-          clientId: '2e8c51f3-96d1-485b-aefe-29140a70af45',
-          scope: 'User.Read',
-          redirectUri:
-              'https://carshop-app.azurewebsites.net/auth/microsoft/callback/sign_in',
+          tenant: DaynoConfig.get(['microsoft', 'tenant']),
+          clientId: DaynoConfig.get(['microsoft', 'clientId']),
+          scope: DaynoConfig.get(['microsoft', 'scope']),
+          redirectUri: DaynoConfig.get(['microsoft', 'redirectUri']),
           navigatorKey: NavigatorKeys.loginNavigatorKey);
       final AadOAuth auth = AadOAuth(config);
       await auth.login();

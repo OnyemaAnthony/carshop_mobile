@@ -1,7 +1,5 @@
-import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
 import 'package:carshop_mobile/utilities/extensions.dart';
-import 'package:carshop_mobile/utilities/services.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
 import 'package:carshop_mobile/widgets/textfield_form.dart';
@@ -89,14 +87,9 @@ class CreatePostScreen extends StatelessWidget {
 
   void submit(PostState state, BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      Services().getUserCoordination().then((cordination) {
-        CreatePostDto post = CreatePostDto(
-            title: titleController.text,
-            content: contentController.text,
-            location: cordination);
-        PostBloc postBloc = BlocProvider.of<PostBloc>(context);
-        postBloc.add(SavePostEvent(post));
-      });
+      PostBloc postBloc = BlocProvider.of<PostBloc>(context);
+      postBloc.add(SavePostEvent(
+          title: titleController.text, content: contentController.text));
     }
   }
 }

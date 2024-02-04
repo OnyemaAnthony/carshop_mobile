@@ -25,9 +25,10 @@ class UnlikePostEvent extends PostEvent {
 }
 
 class SavePostEvent extends PostEvent {
-  final CreatePostDto createDto;
+  final String title;
+  final String content;
 
-  const SavePostEvent(this.createDto);
+  const SavePostEvent({required this.title, required this.content});
 }
 
 class UpdatePostEvent extends PostEvent {
