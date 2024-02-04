@@ -1,5 +1,6 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
 import 'package:carshop_mobile/blocs/post/post_bloc.dart';
+import 'package:carshop_mobile/utilities/extensions.dart';
 import 'package:carshop_mobile/utilities/services.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:carshop_mobile/widgets/submit_button.dart';
@@ -21,7 +22,7 @@ class CreatePostScreen extends StatelessWidget {
       create: (BuildContext context) => PostBloc(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Create post'),
+          title: Text('create_post'.trans(context)),
           centerTitle: true,
         ),
         body: Builder(builder: (BuildContext context) {
@@ -29,7 +30,7 @@ class CreatePostScreen extends StatelessWidget {
             listener: (context, state) {
               if (state is CreatedState) {
                 UiUtilities.showToast(
-                    message: "Your normal post is saved",
+                    message: "normal_post_saved".trans(context),
                     toast: Toast.LENGTH_LONG);
                 UiUtilities.pop(context);
               }
@@ -54,16 +55,15 @@ class CreatePostScreen extends StatelessWidget {
                             height: 20,
                           ),
                           TextFieldForm(
-                            validateError: 'Title is required',
-                            hintText: 'Title',
+                            hintText: 'title'.trans(context),
                             controller: titleController,
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           TextFieldForm(
-                            validateError: 'Content is required',
-                            hintText: 'Content',
+                            validateError: 'content_is_required'.trans(context),
+                            hintText: 'content'.trans(context),
                             controller: contentController,
                             maxLine: 10,
                           ),
@@ -71,7 +71,7 @@ class CreatePostScreen extends StatelessWidget {
                             height: 20,
                           ),
                           SubmitButton(
-                            text: "createPost",
+                            text: "create_post".trans(context),
                             onPress: () => submit(state, context),
                           ),
                         ],
@@ -87,15 +87,16 @@ class CreatePostScreen extends StatelessWidget {
     );
   }
 
-  submit(PostState state, BuildContext context) async {
-    final cordination = await Services().getUserCoordination();
+  void submit(PostState state, BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      CreatePostDto post = CreatePostDto(
-          title: titleController.text,
-          content: contentController.text,
-          location: cordination);
-      PostBloc postBloc = BlocProvider.of<PostBloc>(context);
-      postBloc.add(SavePostEvent(post));
+      Services().getUserCoordination().then((cordination) {
+        CreatePostDto post = CreatePostDto(
+            title: titleController.text,
+            content: contentController.text,
+            location: cordination);
+        PostBloc postBloc = BlocProvider.of<PostBloc>(context);
+        postBloc.add(SavePostEvent(post));
+      });
     }
   }
 }
