@@ -1,3 +1,7 @@
+import 'package:carshop_mobile/utilities/language.dart';
+
+import 'local_storage.dart';
+
 class Constants {
   ///icons path
   static const String deleteIconPath = 'assets/icons/delete.png';
@@ -26,4 +30,44 @@ class Constants {
   static const String logoImagePath = 'assets/images/logo.png';
 
   static const String configPath = 'assets/config.yaml';
+
+  ///others
+  static List<Language> countriesFlag = [
+    const Language(
+        name: "English",
+        code: "en",
+        imagePath: 'assets/flags/gb.png',
+        countryCode: 'UK'),
+    const Language(
+        name: "German",
+        code: "de",
+        imagePath: 'assets/flags/de.png',
+        countryCode: 'DE'),
+    const Language(
+        name: "Arabic",
+        code: "ar",
+        imagePath: 'assets/flags/sa.png',
+        countryCode: 'SA')
+  ];
+
+  static Language getStoredLanguage() {
+    String? locale;
+
+    Language language = countriesFlag[0];
+
+    LocalStorage.getString(Constants.locale).then((value) {
+      locale = value;
+      if (locale!.isNotEmpty) {
+        language = Constants.countriesFlag
+            .where((lang) => lang.locale.languageCode == locale)
+            .first;
+        return language;
+      }
+    });
+
+    return language;
+  }
+
+  static const isDarkTheme = 'isDarkTheme';
+  static const locale = 'local';
 }

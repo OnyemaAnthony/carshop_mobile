@@ -1,9 +1,10 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:carshop_mobile/blocs/setting/setting_bloc.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
 import 'package:carshop_mobile/utilities/configs.dart';
+import 'package:carshop_mobile/utilities/constants.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
-import 'package:carshop_mobile/utilities/theme.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,13 +37,11 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     EasyLocalization(
-        supportedLocales: const [
-          Locale('en', 'US'),
-          Locale('de', 'DE'),
-        ],
-        startLocale: const Locale('en', 'US'),
+        supportedLocales:
+            Constants.countriesFlag.map((language) => language.locale).toList(),
+        startLocale: Constants.countriesFlag[0].locale,
         path: 'assets/translations',
-        fallbackLocale: const Locale('en', 'US'),
+        fallbackLocale: Constants.countriesFlag[0].locale,
         child: const MyApp()),
   );
 }
@@ -62,29 +61,34 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) =>
                 AuthenticationBloc()..add(AppStartedEvent()),
           ),
-        ],
-        child: MaterialApp(
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.light,
-          theme: CarShopTheme.getLightTheme(context),
-          home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              if (state is AuthenticationLoadingState) {
-                return UiUtilities.showMainLoader();
-              } else if (state is Authenticated) {
-                return const BottomNavigationBarScreen();
-              } else if (state is UnAuthenticated) {
-                return const LoginScreen();
-              }
-
-              ///TODO implement splash screen later
-              return Container();
-            },
+          BlocProvider(
+            create: (BuildContext context) =>
+                SettingBloc()..add(LoadSettingEvent()),
           ),
-          navigatorKey: NavigatorKeys.loginNavigatorKey,
+        ],
+        child: BlocBuilder<SettingBloc, SettingState>(
+          builder: (context, state) {
+            return MaterialApp(
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: state.language.locale,
+              debugShowCheckedModeBanner: false,
+              theme: state is ThemeState ? state.theme : null,
+              home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, state) {
+                  if (state is AuthenticationLoadingState) {
+                    return UiUtilities.showMainLoader();
+                  } else if (state is Authenticated) {
+                    return const BottomNavigationBarScreen();
+                  } else if (state is UnAuthenticated) {
+                    return const LoginScreen();
+                  }
+                  return Container();
+                },
+              ),
+              navigatorKey: NavigatorKeys.loginNavigatorKey,
+            );
+          },
         ),
       ),
     );

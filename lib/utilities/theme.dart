@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CarShopTheme {
-  static ThemeData getLightTheme(BuildContext context) {
+  static ThemeData getLightTheme() {
     final lightTheme = ThemeData.light().copyWith(
+      scaffoldBackgroundColor: Colors.white,
       useMaterial3: true,
       pageTransitionsTheme: const PageTransitionsTheme(),
       primaryColor: AppColors.primaryColorLight,
@@ -13,13 +14,14 @@ class CarShopTheme {
       ),
       textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
       dialogTheme: const DialogTheme(
-          shape: RoundedRectangleBorder(
-        side: BorderSide(
-          width: 0,
-          style: BorderStyle.none,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            width: 0,
+            style: BorderStyle.none,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(0.0)),
         ),
-        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-      )),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           elevation: 0,
@@ -40,7 +42,7 @@ class CarShopTheme {
     return lightTheme;
   }
 
-  static ThemeData getDarkTheme(BuildContext context) {
+  static ThemeData getDarkTheme() {
     return ThemeData.dark().copyWith(
       useMaterial3: true,
       primaryColor: AppColors.primaryColorDark,
