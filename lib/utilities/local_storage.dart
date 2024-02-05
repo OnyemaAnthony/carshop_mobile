@@ -70,7 +70,7 @@ class LocalStorage {
     ]);
   }
 
-  static signOut() async {
+  static Future<void> signOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove('user_firstname');
     preferences.remove('user_lastname');

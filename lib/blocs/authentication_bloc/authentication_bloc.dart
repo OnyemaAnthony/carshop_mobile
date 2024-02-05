@@ -82,9 +82,9 @@ class AuthenticationBloc
 
   FutureOr<void> _mapSignInWithMicrosoftEventToState(
       SignInWithMicrosoftEvent event, Emitter<AuthenticationState> emit) async {
+    emit(AuthenticationLoadingState());
     String? code = await FirebaseService().signInWithMicrosoft();
     if (code != null) {
-      emit(AuthenticationLoadingState());
       var client = CarshopSDK().client;
       final response =
           await client.authMicrosoftSignInWithMicrosoftGet(code: code);
@@ -123,10 +123,12 @@ class AuthenticationBloc
     }
   }
 
-  /// test
   FutureOr<void> _mapSignOutEventTest(
       SignOutEventTest event, Emitter<AuthenticationState> emit) async {
-    await LocalStorage.signOut();
+    await Future.wait([
+      FirebaseService().signOut(),
+      LocalStorage.signOut(),
+    ]);
     emit(UnAuthenticated());
   }
 

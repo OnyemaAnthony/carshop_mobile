@@ -1,6 +1,7 @@
 import 'package:carshop_mobile/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:carshop_mobile/screens/buttom_navigation_screen.dart';
 import 'package:carshop_mobile/screens/login_screen.dart';
+import 'package:carshop_mobile/utilities/configs.dart';
 import 'package:carshop_mobile/utilities/navigator_keys.dart';
 import 'package:carshop_mobile/utilities/theme.dart';
 import 'package:carshop_mobile/utilities/ui_utilities.dart';
@@ -14,6 +15,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  bool loaded = await DaynoConfig().load();
+
+  if (!loaded) {
+    throw Exception('Failed to load config');
+  }
+
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(

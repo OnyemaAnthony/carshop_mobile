@@ -24,4 +24,6 @@ class Constants {
 
   ///images path
   static const String logoImagePath = 'assets/images/logo.png';
+
+  static const String configPath = 'assets/config.yaml';
 }
