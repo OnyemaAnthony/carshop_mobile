@@ -1,4 +1,5 @@
 import 'package:carshop_clientsdk/carshop_clientsdk.dart';
+import 'package:carshop_mobile/utilities/constants.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,21 @@ class LocalStorage {
   static Future<void> removeString(String key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.remove(key);
+  }
+
+  static Future<void> saveTheme(bool isDarkTheme) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setBool(Constants.isDarkTheme, isDarkTheme);
+  }
+
+  static Future<void> saveLocale(String languageCode) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString(Constants.locale, languageCode);
+  }
+
+  static Future<bool> getAppTheme(String key) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getBool(key) ?? false;
   }
 
   static Future<void> clear() async {

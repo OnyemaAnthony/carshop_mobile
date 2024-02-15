@@ -112,6 +112,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/translations/
+    - assets/flags/
     - assets/
     - assets/config.yaml
 

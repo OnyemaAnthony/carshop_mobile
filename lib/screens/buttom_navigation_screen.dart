@@ -21,64 +21,67 @@ class BottomNavigationBarScreen extends StatelessWidget {
       child: BlocBuilder<NavBarBloc, NavBarState>(
         builder: (context, state) {
           NavBarBloc navBarBloc = context.read<NavBarBloc>();
-          return PersistentTabView.custom(
-            context,
-            confineInSafeArea: true,
-            handleAndroidBackButtonPress: true,
-            controller: navBarBloc.controller,
-            screens: const [
-              MapScreen(),
-              DeliveryStatusScreen(),
-              SizedBox.shrink(),
-              AccountScreen(),
-            ],
-            onWillPop: (context) async {
-              navBarBloc.add(UpdateNavBarIndexEvent(0));
-              return true;
-            },
-            itemCount: 4,
-            customWidget: CustomNavBarWidget(
-                selectedIndex: state.index,
-                items: [
-                  _navBarItem(
-                      title: 'Home',
-                      icon: ImageToIcon(
-                        imagePath: Constants.homeIconPath,
-                        color: getColor(state.index, 0, context),
-                      ),
-                      context: context),
-                  _navBarItem(
-                      title: 'Delivery',
-                      icon: ImageToIcon(
-                        imagePath: Constants.deliveryIconPath,
-                        color: getColor(state.index, 1, context),
-                      ),
-                      context: context),
-                  _navBarItem(
-                      title: 'Create',
-                      icon: ImageToIcon(
-                        imagePath: Constants.createIconPath,
-                        color: getColor(state.index, 2, context),
-                      ),
-                      context: context),
-                  _navBarItem(
-                      title: 'Account',
-                      icon: ImageToIcon(
-                        imagePath: Constants.profileIconPath,
-                        color: getColor(state.index, 3, context),
-                      ),
-                      context: context),
-                ],
-                onItemSelected: (value) {
-                  if (value == 2) {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      builder: (_) => const CreatePostWidget(),
-                    );
-                    return;
-                  }
-                  navBarBloc.add(UpdateNavBarIndexEvent(value));
-                }), // Choose the nav bar style with this property.
+          return Scaffold(
+            // appBar: AppBar(),
+            body: PersistentTabView.custom(
+              context,
+              confineInSafeArea: true,
+              handleAndroidBackButtonPress: true,
+              controller: navBarBloc.controller,
+              screens: const [
+                MapScreen(),
+                DeliveryStatusScreen(),
+                SizedBox.shrink(),
+                AccountScreen(),
+              ],
+              onWillPop: (context) async {
+                navBarBloc.add(UpdateNavBarIndexEvent(0));
+                return true;
+              },
+              itemCount: 4,
+              customWidget: CustomNavBarWidget(
+                  selectedIndex: state.index,
+                  items: [
+                    _navBarItem(
+                        title: 'Home',
+                        icon: ImageToIcon(
+                          imagePath: Constants.homeIconPath,
+                          color: getColor(state.index, 0, context),
+                        ),
+                        context: context),
+                    _navBarItem(
+                        title: 'Delivery',
+                        icon: ImageToIcon(
+                          imagePath: Constants.deliveryIconPath,
+                          color: getColor(state.index, 1, context),
+                        ),
+                        context: context),
+                    _navBarItem(
+                        title: 'Create',
+                        icon: ImageToIcon(
+                          imagePath: Constants.createIconPath,
+                          color: getColor(state.index, 2, context),
+                        ),
+                        context: context),
+                    _navBarItem(
+                        title: 'Account',
+                        icon: ImageToIcon(
+                          imagePath: Constants.profileIconPath,
+                          color: getColor(state.index, 3, context),
+                        ),
+                        context: context),
+                  ],
+                  onItemSelected: (value) {
+                    if (value == 2) {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (_) => const CreatePostWidget(),
+                      );
+                      return;
+                    }
+                    navBarBloc.add(UpdateNavBarIndexEvent(value));
+                  }), // Choose the nav bar style with this property.
+            ),
           );
         },
       ),
